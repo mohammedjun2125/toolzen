@@ -1,9 +1,19 @@
+'use client';
+
+import { useEffect } from 'react';
 import { ToolGrid } from '@/components/tool-grid';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import Script from 'next/script';
 
 export default function Home() {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error('Adsense error:', e);
+    }
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <SiteHeader />
@@ -20,14 +30,11 @@ export default function Home() {
             <div id="ad-header" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                Top Banner Ad
                 <ins className="adsbygoogle"
-                    style={{ display: 'none' }}
+                    style={{ display: 'block' }}
                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
                     data-ad-slot="1234567890"
                     data-ad-format="auto"
                     data-full-width-responsive="true"></ins>
-                <Script id="init-header-ad">
-                    {`try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { console.error('Adsense error:', e); }`}
-                </Script>
             </div>
           </div>
         </section>
