@@ -21,17 +21,35 @@ export default function Home() {
             </p>
             <div id="ad-header" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                Top Banner Ad
-                <ins className="adsbygoogle"
-                    style={{ display: 'block' }}
-                    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                    data-ad-slot="1234567890"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
+                {/*
+                  After approval, paste your ad code here. Example:
+                  <ins className="adsbygoogle"
+                       style={{ display: 'block' }}
+                       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                       data-ad-slot="1234567890"
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
+                */}
             </div>
           </div>
         </section>
         
         <ToolGrid />
+
+        <div className="container mx-auto px-4 md:px-6 my-12">
+            <div id="ad-mid-page" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+               Mid-Page Banner Ad
+                {/*
+                  After approval, paste your ad code here. Example:
+                  <ins className="adsbygoogle"
+                       style={{ display: 'block' }}
+                       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                       data-ad-slot="1234567891"
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
+                */}
+            </div>
+        </div>
 
       </main>
       <SiteFooter />
