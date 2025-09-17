@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { ToolGrid } from '@/components/tool-grid';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
