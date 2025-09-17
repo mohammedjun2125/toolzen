@@ -26,16 +26,16 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                     <p className="text-muted-foreground">{description}</p>
                 </div>
                 
-                <div id="ad-tool-page" className="min-h-[100px] min-w-[300px] mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    {/* <!-- Tool Page - Medium Rectangle --> */}
+                <div id="ad-tool-page" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    Tool Page Ad
                     <ins className="adsbygoogle"
-                         style={{ display: 'block' }}
+                         style={{ display: 'none' }}
                          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
                          data-ad-slot="1234567890"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
                     <Script id="init-tool-ad">
-                        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                        {`try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { console.error('Adsense error:', e); }`}
                     </Script>
                 </div>
                 

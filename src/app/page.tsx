@@ -17,16 +17,16 @@ export default function Home() {
               A suite of free, fast, and privacy-focused online tools to boost your productivity.
               No data is sent to our servers for most tools. Everything happens in your browser.
             </p>
-            <div id="ad-header" className="min-h-[100px] min-w-[300px] mx-auto flex items-center justify-center text-muted-foreground">
-               {/* <!-- Top Banner Ad --> */}
+            <div id="ad-header" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+               Top Banner Ad
                 <ins className="adsbygoogle"
-                    style={{ display: 'block' }}
+                    style={{ display: 'none' }}
                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
                     data-ad-slot="1234567890"
                     data-ad-format="auto"
                     data-full-width-responsive="true"></ins>
                 <Script id="init-header-ad">
-                    {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                    {`try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { console.error('Adsense error:', e); }`}
                 </Script>
             </div>
           </div>
