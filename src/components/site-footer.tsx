@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 
 export function SiteFooter() {
   return (
@@ -23,7 +24,18 @@ export function SiteFooter() {
           </Link>
         </nav>
       </div>
-      <div id="ad-footer" className="min-h-[100px] flex items-center justify-center text-muted-foreground mt-8">AD Placeholder</div>
+      <div id="ad-footer" className="min-h-[100px] flex items-center justify-center text-muted-foreground mt-8">
+        {/* <!-- Footer Banner Ad --> */}
+        <ins className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <Script id="init-footer-ad">
+            {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </Script>
+      </div>
     </footer>
   );
 }

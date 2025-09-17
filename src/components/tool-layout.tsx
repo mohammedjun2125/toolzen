@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -25,7 +26,18 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                     <p className="text-muted-foreground">{description}</p>
                 </div>
                 
-                <div id="ad-tool-page" className="min-h-[100px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">AD Placeholder</div>
+                <div id="ad-tool-page" className="min-h-[100px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    {/* <!-- Tool Page - Medium Rectangle --> */}
+                    <ins className="adsbygoogle"
+                         style={{ display: 'block' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <Script id="init-tool-ad">
+                        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                    </Script>
+                </div>
                 
                 {children}
 

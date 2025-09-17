@@ -1,6 +1,7 @@
 import { ToolGrid } from '@/components/tool-grid';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
+import Script from 'next/script';
 
 export default function Home() {
   return (
@@ -16,7 +17,18 @@ export default function Home() {
               A suite of free, fast, and privacy-focused online tools to boost your productivity.
               No data is sent to our servers for most tools. Everything happens in your browser.
             </p>
-            <div id="ad-header" className="min-h-[100px] flex items-center justify-center text-muted-foreground">AD Placeholder</div>
+            <div id="ad-header" className="min-h-[100px] flex items-center justify-center text-muted-foreground">
+               {/* <!-- Top Banner Ad --> */}
+                <ins className="adsbygoogle"
+                    style={{ display: 'block' }}
+                    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="1234567890"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <Script id="init-header-ad">
+                    {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                </Script>
+            </div>
           </div>
         </section>
         
