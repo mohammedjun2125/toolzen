@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -13,9 +15,34 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
+    const [showAdModal, setShowAdModal] = useState(true);
     
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
+             <Dialog open={showAdModal} onOpenChange={setShowAdModal}>
+                <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>Advertisement</DialogTitle>
+                         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                            <X className="h-4 w-4" />
+                            <span className="sr-only">Close</span>
+                        </DialogClose>
+                    </DialogHeader>
+                    <div className="min-h-[250px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg p-4">
+                        Medium Rectangle Ad (300x250)
+                         {/*
+                            After approval, paste your ad code here. Example:
+                            <ins className="adsbygoogle"
+                                 style={{ display: 'block' }}
+                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                                 data-ad-slot="1234567890"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                        */}
+                    </div>
+                </DialogContent>
+            </Dialog>
+
              <Button asChild variant="ghost" className="mb-4">
                 <Link href="/">
                     <ArrowLeft className="mr-2 h-4 w-4" />
@@ -29,13 +56,16 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                 </div>
                 
                 <div id="ad-tool-page" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    Tool Page Ad
-                    <ins className="adsbygoogle"
-                         style={{ display: 'block' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
+                   Tool Page Ad
+                    {/*
+                      After approval, paste your ad code here. Example:
+                      <ins className="adsbygoogle"
+                           style={{ display: 'block' }}
+                           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                           data-ad-slot="1234567890"
+                           data-ad-format="auto"
+                           data-full-width-responsive="true"></ins>
+                    */}
                 </div>
                 
                 {children}
