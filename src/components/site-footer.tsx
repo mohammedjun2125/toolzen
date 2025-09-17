@@ -24,7 +24,7 @@ export function SiteFooter() {
           </Link>
         </nav>
       </div>
-      <div id="ad-footer" className="min-h-[100px] flex items-center justify-center text-muted-foreground mt-8">
+      <div id="ad-footer" className="min-h-[100px] min-w-[300px] mx-auto flex items-center justify-center text-muted-foreground mt-8">
         {/* <!-- Footer Banner Ad --> */}
         <ins className="adsbygoogle"
             style={{ display: 'block' }}

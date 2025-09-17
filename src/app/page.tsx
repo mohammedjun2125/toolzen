@@ -17,7 +17,7 @@ export default function Home() {
               A suite of free, fast, and privacy-focused online tools to boost your productivity.
               No data is sent to our servers for most tools. Everything happens in your browser.
             </p>
-            <div id="ad-header" className="min-h-[100px] flex items-center justify-center text-muted-foreground">
+            <div id="ad-header" className="min-h-[100px] min-w-[300px] mx-auto flex items-center justify-center text-muted-foreground">
                {/* <!-- Top Banner Ad --> */}
                 <ins className="adsbygoogle"
                     style={{ display: 'block' }}

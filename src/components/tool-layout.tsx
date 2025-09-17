@@ -26,7 +26,7 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                     <p className="text-muted-foreground">{description}</p>
                 </div>
                 
-                <div id="ad-tool-page" className="min-h-[100px] flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-tool-page" className="min-h-[100px] min-w-[300px] mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     {/* <!-- Tool Page - Medium Rectangle --> */}
                     <ins className="adsbygoogle"
                          style={{ display: 'block' }}
