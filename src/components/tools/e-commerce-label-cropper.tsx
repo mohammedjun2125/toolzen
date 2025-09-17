@@ -1,34 +1,37 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { useFlow } from '@genkit-ai/next/client';
-import { autoCropEcommerceLabel } from '@/ai/flows/auto-crop-ecommerce-label';
+import { autoCropEcommerceLabel, AutoCropEcommerceLabelInput } from '@/ai/flows/auto-crop-ecommerce-label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, Scissors, Download, Loader2, FileImage } from 'lucide-react';
+import { Upload, Download, Loader2, FileImage } from 'lucide-react';
 
 export default function LabelCropper() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalPreview, setOriginalPreview] = useState<string | null>(null);
   const [croppedPreview, setCroppedPreview] = useState<string | null>(null);
+  const [isCropping, setIsCropping] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const [cropLabel, isCropping] = useFlow(autoCropEcommerceLabel, {
-    onSuccess: (result) => {
+  const handleCrop = async (input: AutoCropEcommerceLabelInput) => {
+    setIsCropping(true);
+    try {
+      const result = await autoCropEcommerceLabel(input);
       setCroppedPreview(result.croppedLabelDataUri);
       toast({ title: 'Label cropped successfully!' });
-    },
-    onError: (err) => {
+    } catch (err: any) {
       toast({
         variant: 'destructive',
         title: 'Cropping failed',
         description: err?.message || 'An unknown error occurred.',
       });
-    },
-  });
+    } finally {
+      setIsCropping(false);
+    }
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -38,7 +41,7 @@ export default function LabelCropper() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setOriginalPreview(reader.result as string);
-        cropLabel({ labelDataUri: reader.result as string });
+        handleCrop({ labelDataUri: reader.result as string });
       };
       reader.readAsDataURL(file);
     }

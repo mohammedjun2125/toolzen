@@ -117,7 +117,7 @@ export default function PdfMaker() {
             multiple
             className="hidden"
             accept="image/jpeg,image/png"
-            onChange={handleFileFileChange}
+            onChange={handleFileChange}
           />
         </div>
 
