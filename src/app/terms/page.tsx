@@ -1,11 +1,21 @@
+
+'use client';
+
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function TermsPage() {
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString());
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -21,7 +31,7 @@ export default function TermsPage() {
             <CardTitle className="text-3xl">Terms of Use</CardTitle>
           </CardHeader>
           <CardContent className="prose dark:prose-invert max-w-none">
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <p>Last updated: {currentDate}</p>
             <p>
               Please read these terms and conditions carefully before using Our Service.
             </p>

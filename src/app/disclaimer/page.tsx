@@ -1,11 +1,21 @@
+
+'use client';
+
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function DisclaimerPage() {
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString());
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -21,7 +31,7 @@ export default function DisclaimerPage() {
             <CardTitle className="text-3xl">Disclaimer</CardTitle>
           </CardHeader>
           <CardContent className="prose dark:prose-invert max-w-none">
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <p>Last updated: {currentDate}</p>
             <p>
               The information provided by Toolzen ("we," "us," or "our") on this website is for general informational purposes only. All information on the site is provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the site.
             </p>
