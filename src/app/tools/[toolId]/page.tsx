@@ -23,6 +23,10 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'unit-converter': dynamic(() => import('@/components/tools/unit-converter')),
     'url-encoder-decoder': dynamic(() => import('@/components/tools/url-encoder-decoder')),
     'word-counter': dynamic(() => import('@/components/tools/word-counter')),
+    'hash-generator': dynamic(() => import('@/components/tools/hash-generator')),
+    'base64-encoder-decoder': dynamic(() => import('@/components/tools/base64-encoder-decoder')),
+    'lorem-ipsum-generator': dynamic(() => import('@/components/tools/lorem-ipsum-generator')),
+    'timezone-converter': dynamic(() => import('@/components/tools/timezone-converter')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -39,11 +43,14 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Are these passwords secure?', answer: 'Yes, the passwords are generated on your device using a cryptographically secure random number generator. They are never sent over the internet.' },
         { question: 'Can I customize the password?', answer: 'Absolutely. You can control the length and the types of characters included to meet any requirement.' },
     ],
-    'e-commerce-label-cropper': [
-      { question: 'Is my file uploaded to a server?', answer: 'Yes, for the AI to process your label, the file is temporarily sent to a secure cloud service. It is not stored long-term.' },
-      { question: 'What file types are supported?', answer: 'You can upload common image formats (JPG, PNG) and PDF files.' },
-      { question: 'Does it work for all shipping labels?', answer: 'The AI is trained on common e-commerce label formats. While it works for most, some unique or unusual layouts may not be cropped perfectly.' },
-    ]
+    'hash-generator': [
+      { question: 'Is my text sent to a server?', answer: 'No, all hashing is performed in your browser. Your data remains private.' },
+      { question: 'Which hashing algorithms are supported?', answer: 'We support MD5, SHA-1, SHA-256, and SHA-512.' },
+    ],
+    'base64-encoder-decoder': [
+        { question: 'Is my data secure?', answer: 'Yes, all encoding and decoding happens on your device. Nothing is sent to our servers.' },
+        { question: 'What is Base64?', answer: 'Base64 is a way to represent binary data in an ASCII string format. It\'s commonly used for transferring data in text-based formats like email or JSON.' },
+    ],
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

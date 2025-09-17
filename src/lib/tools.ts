@@ -14,6 +14,10 @@ import {
   Lock,
   FileCode,
   Braces,
+  Hash,
+  Binary,
+  BookType,
+  Clock,
 } from 'lucide-react';
 
 export type Tool = {
@@ -122,6 +126,34 @@ export const tools: Tool[] = [
     description: 'Format, validate, and beautify your JSON data.',
     href: '/tools/json-formatter',
     icon: Braces,
+  },
+  {
+    id: 'hash-generator',
+    name: 'Hash Generator',
+    description: 'Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text.',
+    href: '/tools/hash-generator',
+    icon: Hash,
+  },
+  {
+    id: 'base64-encoder-decoder',
+    name: 'Base64 Encoder/Decoder',
+    description: 'Encode and decode data in Base64 format.',
+    href: '/tools/base64-encoder-decoder',
+    icon: Binary,
+  },
+  {
+    id: 'lorem-ipsum-generator',
+    name: 'Lorem Ipsum Generator',
+    description: 'Generate placeholder text with customizable options.',
+    href: '/tools/lorem-ipsum-generator',
+    icon: BookType,
+  },
+  {
+    id: 'timezone-converter',
+    name: 'Time Zone Converter',
+    description: 'Convert times between different global time zones.',
+    href: '/tools/timezone-converter',
+    icon: Clock,
   },
 ];
 
