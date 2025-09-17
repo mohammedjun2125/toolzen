@@ -31,26 +31,31 @@ const toolComponents: { [key: string]: React.ComponentType } = {
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
     'image-compressor': [
-        { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer.' },
-        { question: 'What image formats are supported?', answer: 'You can compress JPG, PNG, WEBP, and GIF images.' },
-        { question: 'Is there a file size limit?', answer: 'There is no hard limit, but performance may vary with very large images on less powerful devices.' },
+        { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
+        { question: 'What image formats can I compress?', answer: 'Our tool supports JPG, PNG, WEBP, and GIF images. You can optimize any of these formats for free.' },
+        { question: 'Is there a file size limit for the image compressor?', answer: 'There is no hard limit. However, performance may vary with very large images (over 20MB) on less powerful devices, as all processing is client-side.' },
     ],
     'pdf-maker': [
-        { question: 'Are my images secure?', answer: 'Yes. The PDF is created entirely in your browser. Your images are not uploaded to any server.' },
-        { question: 'What image formats can I use?', answer: 'You can use JPG and PNG images to create your PDF.' },
+        { question: 'Is this PDF maker tool free to use?', answer: 'Yes, our PDF maker is completely free. You can convert as many images to PDF as you like without any cost.' },
+        { question: 'Are my images secure?', answer: 'Absolutely. The PDF is created entirely in your browser. Your images are never uploaded to any server, guaranteeing your data privacy.' },
+        { question: 'What image formats can I use to create a PDF?', answer: 'You can use JPG and PNG images to create your PDF. Simply drag and drop them to get started.' },
     ],
     'password-generator': [
-        { question: 'Are these passwords secure?', answer: 'Yes, the passwords are generated on your device using a cryptographically secure random number generator. They are never sent over the internet.' },
-        { question: 'Can I customize the password?', answer: 'Absolutely. You can control the length and the types of characters included to meet any requirement.' },
+        { question: 'How secure are the passwords generated?', answer: 'The passwords are highly secure. They are generated on your device using the browser\'s built-in cryptographically secure random number generator. They are never sent over the internet.' },
+        { question: 'Can I customize the generated password?', answer: 'Yes. You can control the length and the types of characters (uppercase, lowercase, numbers, symbols) to meet any security requirement.' },
     ],
     'hash-generator': [
-      { question: 'Is my text sent to a server?', answer: 'No, all hashing is performed in your browser. Your data remains private.' },
-      { question: 'Which hashing algorithms are supported?', answer: 'We support MD5, SHA-1, SHA-256, and SHA-512.' },
+      { question: 'Is my text sent to a server for hashing?', answer: 'No, all hashing is performed in your browser using the Web Crypto API. Your data remains completely private and secure.' },
+      { question: 'Which hashing algorithms are supported?', answer: 'We support the most common and secure hashing algorithms: SHA-1, SHA-256, and SHA-512. MD5 is not supported due to security vulnerabilities.' },
     ],
     'base64-encoder-decoder': [
-        { question: 'Is my data secure?', answer: 'Yes, all encoding and decoding happens on your device. Nothing is sent to our servers.' },
-        { question: 'What is Base64?', answer: 'Base64 is a way to represent binary data in an ASCII string format. It\'s commonly used for transferring data in text-based formats like email or JSON.' },
+        { question: 'Is my data secure when using this tool?', answer: 'Yes, all Base64 encoding and decoding happens on your device. No data is ever sent to our servers, ensuring your information remains private.' },
+        { question: 'What is Base64 encoding used for?', answer: 'Base64 is a method to represent binary data in an ASCII string format. It is commonly used for transferring data in text-based formats like email attachments, JSON web tokens (JWT), or embedding images in CSS/HTML.' },
     ],
+    'word-counter': [
+        { question: 'Does this tool store my text?', answer: 'No, all calculations are done in your browser. Your text is never stored or sent to a server. Your privacy is guaranteed.'},
+        { question: 'What does the word counter tool measure?', answer: 'It provides real-time statistics on the number of words, characters (with and without spaces), sentences, and paragraphs in your text.'}
+    ]
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -62,24 +67,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const toolTitle = `${tool.name} | Toolzen`;
+  const toolDescription = `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
+
   return {
-    title: `${tool.name} - Free Online Tool`,
-    description: tool.description,
+    title: toolTitle,
+    description: toolDescription,
     alternates: {
       canonical: `/tools/${params.toolId}`,
+    },
+    openGraph: {
+        title: toolTitle,
+        description: toolDescription,
+        url: `/tools/${params.toolId}`,
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: toolTitle,
+        description: toolDescription,
     },
     // Structured Data
     other: {
       '@context': 'https://schema.org',
-      '@type': 'HowTo',
-      name: `How to use the ${tool.name} tool`,
+      '@type': 'HowToTool',
+      name: tool.name,
       description: tool.description,
       step: [
         { '@type': 'HowToStep', text: `Open the ${tool.name} tool on Toolzen.` },
-        { '@type': 'HowToStep', text: 'Provide your input (e.g., upload a file, enter text).' },
+        { '@type': 'HowToStep', text: 'Provide your input (e.g., upload a file, enter text, select options).' },
         { '@type': 'HowToStep', text: 'Adjust any available settings to your preference.' },
         { '@type': 'HowToStep', text: 'Click the action button (e.g., "Compress", "Generate", "Calculate").' },
-        { '@type': 'HowToStep', text: 'Get your result instantly on the same page.' }
+        { '@type': 'HowToStep', text: 'Get your result instantly on the same page, ready to copy or download.' }
       ]
     },
   }

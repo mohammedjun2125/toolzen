@@ -5,19 +5,17 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
 import { CookieConsent } from '@/components/cookie-consent';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Toolzen - Your Ultimate Digital Toolkit',
+    default: 'Toolzen - Free, Fast & Private Online Tools for Everyone',
     template: '%s | Toolzen',
   },
-  description: 'A suite of free, fast, and privacy-focused online tools to boost your productivity. Image compressor, PDF maker, password generator, and more.',
-  keywords: ['online tools', 'free tools', 'image compressor', 'pdf maker', 'password generator', 'developer tools', 'productivity', 'seo', 'adsense'],
+  description: 'Discover Toolzen, your ultimate suite of free, fast, and privacy-focused online tools. Compress images, create PDFs, generate passwords, convert units, and more—all within your browser. No uploads, no sign-ups.',
+  keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools'],
   authors: [{ name: 'Toolzen' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
@@ -26,16 +24,16 @@ export const metadata: Metadata = {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'Toolzen - Free Online Tools for Everyone',
-    description: 'A collection of client-side, privacy-first tools to help you with your daily tasks.',
+    title: 'Toolzen - The Ultimate Collection of Free Online Tools',
+    description: 'A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads.',
     siteName: 'Toolzen',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Toolzen - Free Online Tools for Everyone',
-    description: 'A collection of client-side, privacy-first tools to help you with your daily tasks.',
+    title: 'Toolzen - Fast, Free, and Private Online Utilities',
+    description: 'Boost your productivity with a suite of browser-based tools. From image compression to password generation, get it all done without ever leaving your browser.',
   },
   robots: {
     index: true,
