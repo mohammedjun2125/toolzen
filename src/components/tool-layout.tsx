@@ -14,14 +14,7 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
-    useEffect(() => {
-        try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error('Adsense error:', e);
-        }
-      }, []);
-
+    
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
              <Button asChild variant="ghost" className="mb-4">

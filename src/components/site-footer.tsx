@@ -4,13 +4,6 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 
 export function SiteFooter() {
-  useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error('Adsense error:', e);
-    }
-  }, []);
 
   return (
     <footer className="border-t bg-card/60 backdrop-blur-lg py-6 md:py-8">

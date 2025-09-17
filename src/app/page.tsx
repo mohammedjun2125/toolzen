@@ -6,14 +6,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 
 export default function Home() {
-  useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error('Adsense error:', e);
-    }
-  }, []);
-
+  
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <SiteHeader />
