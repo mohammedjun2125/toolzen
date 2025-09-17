@@ -12,6 +12,9 @@ import {
   Link,
   Calendar,
   Calculator,
+  Lock,
+  FileCode,
+  Braces,
 } from 'lucide-react';
 
 export type Tool = {
@@ -93,5 +96,23 @@ export const tools: Tool[] = [
     description: 'Calculate your Body Mass Index (BMI).',
     href: '/tools/bmi-calculator',
     icon: Calculator,
+  },
+  {
+    name: 'Password Generator',
+    description: 'Generate secure, random passwords with customizable options.',
+    href: '/tools/password-generator',
+    icon: Lock,
+  },
+  {
+    name: 'Markdown Preview',
+    description: 'Write and preview Markdown in a live side-by-side editor.',
+    href: '/tools/markdown-preview',
+    icon: FileCode,
+  },
+  {
+    name: 'JSON Formatter',
+    description: 'Format, validate, and beautify your JSON data.',
+    href: '/tools/json-formatter',
+    icon: Braces,
   },
 ];
