@@ -55,7 +55,11 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Are these passwords secure?', answer: 'Yes, the passwords are generated on your device using a cryptographically secure random number generator. They are never sent over the internet.' },
         { question: 'Can I customize the password?', answer: 'Absolutely. You can control the length and the types of characters included to meet any requirement.' },
     ],
-    // Add more FAQs for other tools here
+    'e-commerce-label-cropper': [
+      { question: 'Is my file uploaded to a server?', answer: 'Yes, for the AI to process your label, the file is temporarily sent to a secure cloud service. It is not stored long-term.' },
+      { question: 'What file types are supported?', answer: 'You can upload common image formats (JPG, PNG) and PDF files.' },
+      { question: 'Does it work for all shipping labels?', answer: 'The AI is trained on common e-commerce label formats. While it works for most, some unique or unusual layouts may not be cropped perfectly.' },
+    ]
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

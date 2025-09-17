@@ -1,12 +1,21 @@
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 export default function TermsPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+        <Button asChild variant="ghost" className="mb-4">
+            <Link href="/">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Home
+            </Link>
+        </Button>
         <Card className="max-w-3xl mx-auto bg-card/60 backdrop-blur-lg">
           <CardHeader>
             <CardTitle className="text-3xl">Terms of Use</CardTitle>
