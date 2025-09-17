@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 
 export default function BmiCalculator() {
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
@@ -54,53 +56,51 @@ export default function BmiCalculator() {
   }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">BMI Calculator</CardTitle>
         <CardDescription>Calculate your Body Mass Index.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="flex items-center space-x-2">
-          <Label htmlFor="unit-switch">Imperial</Label>
-          <Switch
-            id="unit-switch"
-            checked={unit === 'metric'}
-            onCheckedChange={(checked) => setUnit(checked ? 'metric' : 'imperial')}
-          />
-          <Label htmlFor="unit-switch">Metric</Label>
-        </div>
-
-        {unit === 'metric' ? (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="height-cm">Height (cm)</Label>
-              <Input id="height-cm" type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight-kg">Weight (kg)</Label>
-              <Input id="weight-kg" type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Height</Label>
-              <div className="flex gap-2">
-                <Input type="number" placeholder="ft" value={height} onChange={(e) => setHeight(e.target.value)} />
-                <Input type="number" placeholder="in" value={heightIn} onChange={(e) => setHeightIn(e.target.value)} />
+        <Tabs defaultValue="metric" onValueChange={(value) => setUnit(value as 'metric' | 'imperial')} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="metric">Metric</TabsTrigger>
+            <TabsTrigger value="imperial">Imperial</TabsTrigger>
+          </TabsList>
+          <TabsContent value="metric" className="mt-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="height-cm">Height (cm)</Label>
+                <Input id="height-cm" type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight-kg">Weight (kg)</Label>
+                <Input id="weight-kg" type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="weight-lb">Weight (lb)</Label>
-              <Input id="weight-lb" type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+          </TabsContent>
+          <TabsContent value="imperial" className="mt-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Height</Label>
+                <div className="flex gap-2">
+                  <Input type="number" placeholder="ft" value={height} onChange={(e) => setHeight(e.target.value)} />
+                  <Input type="number" placeholder="in" value={heightIn} onChange={(e) => setHeightIn(e.target.value)} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="weight-lb">Weight (lb)</Label>
+                <Input id="weight-lb" type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+              </div>
             </div>
-          </div>
-        )}
+          </TabsContent>
+        </Tabs>
+
 
         <Button onClick={calculateBmi} className="w-full">Calculate BMI</Button>
 
         {bmi !== null && (
-          <div className="p-6 bg-muted rounded-lg text-center">
+          <div className="p-6 bg-muted/50 rounded-lg text-center">
             <h3 className="text-lg font-semibold mb-2">Your BMI is</h3>
             <p className="text-5xl font-bold">{bmi.toFixed(1)}</p>
             <p className={`text-xl font-semibold mt-2 ${getCategoryColor()}`}>{category}</p>

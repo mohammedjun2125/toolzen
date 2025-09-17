@@ -28,11 +28,14 @@ function greet() {
 `);
 
   const getHtml = () => {
+    // Note: In a real app, you should sanitize the HTML to prevent XSS attacks.
+    // Libraries like DOMPurify are great for this.
+    // For this example, we trust the markdown source.
     return { __html: marked(markdown) };
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Markdown Preview</CardTitle>
         <CardDescription>Write Markdown on the left and see the rendered HTML on the right.</CardDescription>
@@ -46,7 +49,7 @@ function greet() {
             className="h-full resize-none text-base"
           />
           <div
-            className="prose dark:prose-invert bg-muted rounded-lg p-4 overflow-auto h-full"
+            className="prose dark:prose-invert bg-muted/50 rounded-lg p-4 overflow-auto h-full"
             dangerouslySetInnerHTML={getHtml()}
           />
         </div>

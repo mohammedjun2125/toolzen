@@ -1,44 +1,19 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, Palette, Copy } from 'lucide-react';
 
-type Color = {
-  hex: string;
-  count: number;
-};
-
 export default function ColorPaletteExtractor() {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>('/placeholder-image.jpg');
   const [palette, setPalette] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (!file.type.startsWith('image/')) {
-        toast({
-          variant: 'destructive',
-          title: 'Unsupported file type',
-          description: 'Please upload an image file.',
-        });
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-        extractPalette(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  
   const rgbToHex = (r: number, g: number, b: number) => '#' + [r, g, b].map(x => {
     const hex = x.toString(16);
     return hex.length === 1 ? '0' + hex : hex;
@@ -70,6 +45,7 @@ export default function ColorPaletteExtractor() {
       const colorCounts: { [key: string]: number } = {};
       
       for (let i = 0; i < imageData.length; i += 4) {
+        if(imageData[i+3] < 128) continue; // ignore transparent pixels
         const [r, g, b] = [imageData[i], imageData[i+1], imageData[i+2]];
         const hex = rgbToHex(r,g,b);
         colorCounts[hex] = (colorCounts[hex] || 0) + 1;
@@ -77,7 +53,6 @@ export default function ColorPaletteExtractor() {
       
       const sortedColors = Object.entries(colorCounts).sort(([, a], [, b]) => b - a);
       
-      // Simple clustering to avoid very similar colors
       const dominantColors: string[] = [];
       const colorThreshold = 30;
 
@@ -105,6 +80,33 @@ export default function ColorPaletteExtractor() {
         toast({variant: 'destructive', title: 'Error loading image'});
     }
   }, [toast]);
+
+  useEffect(() => {
+    if(imagePreview) {
+      extractPalette(imagePreview);
+    }
+  }, []);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast({
+          variant: 'destructive',
+          title: 'Unsupported file type',
+          description: 'Please upload an image file.',
+        });
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setImagePreview(result);
+        extractPalette(result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   
   const copyToClipboard = (hex: string) => {
     navigator.clipboard.writeText(hex);
@@ -114,7 +116,7 @@ export default function ColorPaletteExtractor() {
   }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Color Palette Extractor</CardTitle>
         <CardDescription>Upload an image to extract its dominant colors.</CardDescription>

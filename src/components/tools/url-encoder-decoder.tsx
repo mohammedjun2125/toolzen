@@ -20,14 +20,14 @@ export default function UrlEncoderDecoder() {
 
   const handleDecode = () => {
     try {
-      setOutput(decodeURIComponent(input));
+      setOutput(decodeURIComponent(input.replace(/\+/g, ' ')));
     } catch (error) {
       setOutput('Invalid input for decoding.');
     }
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">URL Encoder / Decoder</CardTitle>
         <CardDescription>Encode or decode your text strings for URLs.</CardDescription>

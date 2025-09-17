@@ -41,7 +41,7 @@ export default function CaseConverter() {
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Case Converter</CardTitle>
         <CardDescription>Easily convert text between different case formats.</CardDescription>

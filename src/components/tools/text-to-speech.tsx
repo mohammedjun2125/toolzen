@@ -58,7 +58,10 @@ export default function TextToSpeech() {
     if(voice) utterance.voice = voice;
     utterance.pitch = pitch;
     utterance.rate = rate;
-    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onstart = () => {
+        setIsSpeaking(true);
+        setIsPaused(false);
+    };
     utterance.onend = () => {
       setIsSpeaking(false);
       setIsPaused(false);
@@ -84,7 +87,7 @@ export default function TextToSpeech() {
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Text to Speech</CardTitle>
         <CardDescription>Convert written text into natural-sounding speech.</CardDescription>
@@ -99,7 +102,7 @@ export default function TextToSpeech() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <Label>Voice</Label>
-            <Select value={selectedVoice} onValueChange={setSelectedVoice}>
+            <Select value={selectedVoice} onValueChange={setSelectedVoice} disabled={voices.length === 0}>
               <SelectTrigger>
                 <SelectValue placeholder="Select a voice" />
               </SelectTrigger>
@@ -122,18 +125,15 @@ export default function TextToSpeech() {
           </div>
         </div>
         <div className="flex gap-2">
-          {!isSpeaking ? (
-            <Button onClick={handleSpeak} className="flex-1">
-              <Play className="mr-2 h-4 w-4" /> {isPaused ? 'Resume' : 'Speak'}
+            <Button onClick={handleSpeak} disabled={isSpeaking}>
+              <Play className="mr-2 h-4 w-4" /> {isPaused ? 'Resume' : 'Play'}
             </Button>
-          ) : (
-            <Button onClick={handlePause} className="flex-1">
+            <Button onClick={handlePause} disabled={!isSpeaking || isPaused}>
               <Pause className="mr-2 h-4 w-4" /> Pause
             </Button>
-          )}
-          <Button onClick={handleStop} variant="outline" disabled={!isSpeaking && !isPaused} className="flex-1">
-            <StopCircle className="mr-2 h-4 w-4" /> Stop
-          </Button>
+            <Button onClick={handleStop} variant="outline" disabled={!isSpeaking && !isPaused}>
+                <StopCircle className="mr-2 h-4 w-4" /> Stop
+            </Button>
         </div>
       </CardContent>
     </Card>

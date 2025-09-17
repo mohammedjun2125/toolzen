@@ -5,104 +5,117 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const lengthUnits = { m: 'Meters', km: 'Kilometers', cm: 'Centimeters', mm: 'Millimeters', mi: 'Miles', yd: 'Yards', ft: 'Feet', in: 'Inches' };
+const weightUnits = { kg: 'Kilograms', g: 'Grams', mg: 'Milligrams', lb: 'Pounds', oz: 'Ounces' };
+const tempUnits = { c: 'Celsius', f: 'Fahrenheit', k: 'Kelvin' };
 
 const conversionFactors = {
-  length: {
-    m: 1,
-    km: 1000,
-    cm: 0.01,
-    mm: 0.001,
-    mi: 1609.34,
-    yd: 0.9144,
-    ft: 0.3048,
-    in: 0.0254,
-  },
-  weight: {
-    kg: 1,
-    g: 0.001,
-    mg: 0.000001,
-    lb: 0.453592,
-    oz: 0.0283495,
-  },
+  length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.34, yd: 0.9144, ft: 0.3048, in: 0.0254 },
+  weight: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495 },
 };
 
-type UnitData = { [key: string]: number | string };
+function ConverterTab({ units, conversionFn }: { units: Record<string, string>, conversionFn: (val: number, from: string, to: string) => number }) {
+  const unitKeys = Object.keys(units);
+  const [fromUnit, setFromUnit] = useState(unitKeys[0]);
+  const [toUnit, setToUnit] = useState(unitKeys[1]);
+  const [fromValue, setFromValue] = useState('1');
+  const [toValue, setToValue] = useState(conversionFn(1, unitKeys[0], unitKeys[1]).toString());
 
-const initialUnits = {
-    length: { m: 1, km: 0.001, cm: 100, mm: 1000, mi: 0.000621371, yd: 1.09361, ft: 3.28084, in: 39.3701 },
-    weight: { kg: 1, g: 1000, mg: 1000000, lb: 2.20462, oz: 35.274 },
-    temperature: { c: 0, f: 32, k: 273.15 },
-};
-
-function UnitInput({ unit, value, onChange }: { unit: string, value: number | string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }) {
-    return (
-        <div className="grid grid-cols-2 items-center gap-4">
-            <Label htmlFor={unit} className="text-right">{unit.toUpperCase()}</Label>
-            <Input id={unit} name={unit} value={value} onChange={onChange} type="number" />
-        </div>
-    );
-}
-
-export default function UnitConverter() {
-  const [length, setLength] = useState<UnitData>(initialUnits.length);
-  const [weight, setWeight] = useState<UnitData>(initialUnits.weight);
-  const [temperature, setTemperature] = useState<UnitData>(initialUnits.temperature);
-
-  const handleLengthChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const valueNum = parseFloat(value);
-    if (isNaN(valueNum)) {
-        setLength(Object.keys(length).reduce((acc, key) => ({...acc, [key]: ''}), {}));
-        return;
-    };
-
-    const valueInMeters = valueNum * conversionFactors.length[name as keyof typeof conversionFactors.length];
-    const newLengths: UnitData = {};
-    for (const unit in conversionFactors.length) {
-      newLengths[unit] = valueInMeters / conversionFactors.length[unit as keyof typeof conversionFactors.length];
+  const handleFromChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setFromValue(val);
+    if(val === '' || isNaN(parseFloat(val))) {
+      setToValue('');
+      return;
     }
-    setLength(newLengths);
-  };
-
-  const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const valueNum = parseFloat(value);
-    if (isNaN(valueNum)) {
-        setWeight(Object.keys(weight).reduce((acc, key) => ({...acc, [key]: ''}), {}));
-        return;
-    };
-
-    const valueInKg = valueNum * conversionFactors.weight[name as keyof typeof conversionFactors.weight];
-    const newWeights: UnitData = {};
-    for (const unit in conversionFactors.weight) {
-      newWeights[unit] = valueInKg / conversionFactors.weight[unit as keyof typeof conversionFactors.weight];
-    }
-    setWeight(newWeights);
+    setToValue(conversionFn(parseFloat(val), fromUnit, toUnit).toString());
   };
   
-  const handleTempChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const valueNum = parseFloat(value);
-    if (isNaN(valueNum)) {
-        setTemperature(Object.keys(temperature).reduce((acc, key) => ({...acc, [key]: ''}), {}));
-        return;
+  const handleToChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setToValue(val);
+    if(val === '' || isNaN(parseFloat(val))) {
+      setFromValue('');
+      return;
     }
-    
-    let celsius;
-    if (name === 'c') celsius = valueNum;
-    else if (name === 'f') celsius = (valueNum - 32) * 5/9;
-    else if (name === 'k') celsius = valueNum - 273.15;
-    else return;
+    setFromValue(conversionFn(parseFloat(val), toUnit, fromUnit).toString());
+  };
 
-    setTemperature({
-        c: celsius,
-        f: (celsius * 9/5) + 32,
-        k: celsius + 273.15
-    });
+  const handleFromUnitChange = (unit: string) => {
+    setFromUnit(unit);
+    if(fromValue === '' || isNaN(parseFloat(fromValue))) return;
+    setToValue(conversionFn(parseFloat(fromValue), unit, toUnit).toString());
+  }
+  
+  const handleToUnitChange = (unit: string) => {
+    setToUnit(unit);
+    if(fromValue === '' || isNaN(parseFloat(fromValue))) return;
+    setToValue(conversionFn(parseFloat(fromValue), fromUnit, unit).toString());
   }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+      <div className="space-y-2">
+        <Label>From</Label>
+        <Input type="number" value={fromValue} onChange={handleFromChange} />
+        <UnitSelect units={units} value={fromUnit} onChange={handleFromUnitChange} />
+      </div>
+      <div className="space-y-2">
+        <Label>To</Label>
+        <Input type="number" value={toValue} onChange={handleToChange} />
+        <UnitSelect units={units} value={toUnit} onChange={handleToUnitChange} />
+      </div>
+    </div>
+  );
+}
+
+function UnitSelect({ units, value, onChange }: { units: Record<string, string>, value: string, onChange: (value: string) => void }) {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger>
+        <SelectValue placeholder="Select unit" />
+      </SelectTrigger>
+      <SelectContent>
+        {Object.entries(units).map(([key, name]) => (
+          <SelectItem key={key} value={key}>{name}</SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )
+}
+
+export default function UnitConverter() {
+  
+  const convertLength = (val: number, from: string, to: string) => {
+    const fromFactor = conversionFactors.length[from as keyof typeof conversionFactors.length];
+    const toFactor = conversionFactors.length[to as keyof typeof conversionFactors.length];
+    return val * fromFactor / toFactor;
+  };
+  
+  const convertWeight = (val: number, from: string, to: string) => {
+    const fromFactor = conversionFactors.weight[from as keyof typeof conversionFactors.weight];
+    const toFactor = conversionFactors.weight[to as keyof typeof conversionFactors.weight];
+    return val * fromFactor / toFactor;
+  };
+  
+  const convertTemp = (val: number, from: string, to: string) => {
+    if (from === to) return val;
+    let celsius: number;
+    // Convert input to Celsius
+    if (from === 'f') celsius = (val - 32) * 5/9;
+    else if (from === 'k') celsius = val - 273.15;
+    else celsius = val;
+
+    // Convert Celsius to output unit
+    if (to === 'f') return (celsius * 9/5) + 32;
+    if (to === 'k') return celsius + 273.15;
+    return celsius;
+  }
+
+  return (
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Unit Converter</CardTitle>
         <CardDescription>Real-time conversion for length, weight, and temperature.</CardDescription>
@@ -114,20 +127,14 @@ export default function UnitConverter() {
             <TabsTrigger value="weight">Weight</TabsTrigger>
             <TabsTrigger value="temperature">Temperature</TabsTrigger>
           </TabsList>
-          <TabsContent value="length" className="mt-6 space-y-4">
-            {Object.entries(length).map(([unit, value]) => (
-                <UnitInput key={unit} unit={unit} value={Number(value).toPrecision(6)} onChange={handleLengthChange} />
-            ))}
+          <TabsContent value="length" className="mt-6">
+            <ConverterTab units={lengthUnits} conversionFn={convertLength} />
           </TabsContent>
-          <TabsContent value="weight" className="mt-6 space-y-4">
-            {Object.entries(weight).map(([unit, value]) => (
-                <UnitInput key={unit} unit={unit} value={Number(value).toPrecision(6)} onChange={handleWeightChange} />
-            ))}
+          <TabsContent value="weight" className="mt-6">
+             <ConverterTab units={weightUnits} conversionFn={convertWeight} />
           </TabsContent>
-          <TabsContent value="temperature" className="mt-6 space-y-4">
-            <UnitInput unit="c" value={Number(temperature.c).toFixed(2)} onChange={handleTempChange} />
-            <UnitInput unit="f" value={Number(temperature.f).toFixed(2)} onChange={handleTempChange} />
-            <UnitInput unit="k" value={Number(temperature.k).toFixed(2)} onChange={handleTempChange} />
+          <TabsContent value="temperature" className="mt-6">
+            <ConverterTab units={tempUnits} conversionFn={convertTemp} />
           </TabsContent>
         </Tabs>
       </CardContent>

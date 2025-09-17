@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -43,6 +43,10 @@ export default function PasswordGenerator() {
     }
     setPassword(newPassword);
   };
+  
+  useEffect(() => {
+    generatePassword();
+  }, [length, includeLowercase, includeUppercase, includeNumbers, includeSymbols]);
 
   const copyToClipboard = () => {
     if (password) {
@@ -52,7 +56,7 @@ export default function PasswordGenerator() {
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Password Generator</CardTitle>
         <CardDescription>Create strong and secure passwords.</CardDescription>
@@ -67,7 +71,7 @@ export default function PasswordGenerator() {
         <div className="space-y-4">
           <div>
             <Label>Length: {length}</Label>
-            <Slider value={[length]} onValueChange={(v) => setLength(v[0])} min={4} max={64} step={1} />
+            <Slider value={[length]} onValueChange={(v) => setLength(v[0])} min={6} max={64} step={1} />
           </div>
           <div className="flex items-center justify-between">
             <Label htmlFor="include-uppercase">Include Uppercase (A-Z)</Label>
@@ -89,7 +93,7 @@ export default function PasswordGenerator() {
 
         <Button onClick={generatePassword} className="w-full">
           <RefreshCw className="mr-2 h-4 w-4" />
-          Generate Password
+          Generate New Password
         </Button>
       </CardContent>
     </Card>

@@ -1,18 +1,26 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google'
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/theme-provider';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { CookieConsent } from '@/components/cookie-consent';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Toolzen - A collection of free online tools',
+    default: 'Toolzen - Your Ultimate Digital Toolkit',
     template: '%s | Toolzen',
   },
-  description: 'Toolzen offers a suite of free, fast, and easy-to-use online tools, including image compression, PDF creation, password generation, and more. Boost your productivity with our privacy-focused, client-side utilities.',
-  keywords: ['online tools', 'free tools', 'image compressor', 'pdf maker', 'password generator', 'developer tools', 'productivity', 'seo', 'vercel', 'google adsense'],
+  description: 'A suite of free, fast, and privacy-focused online tools to boost your productivity. Image compressor, PDF maker, password generator, and more.',
+  keywords: ['online tools', 'free tools', 'image compressor', 'pdf maker', 'password generator', 'developer tools', 'productivity', 'seo', 'adsense'],
   authors: [{ name: 'Toolzen' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
+  metadataBase: new URL('https://toolzen.com'), // Replace with your actual domain
   openGraph: {
     title: 'Toolzen - Free Online Tools for Everyone',
     description: 'A collection of client-side, privacy-first tools to help you with your daily tasks.',
@@ -36,8 +44,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  manifest: '/site.webmanifest',
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+}
 
 export default function RootLayout({
   children,
@@ -45,15 +60,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
-      <body className={cn('font-body antialiased')}>
-        {children}
-        <Toaster />
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );

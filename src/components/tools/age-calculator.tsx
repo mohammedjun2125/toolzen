@@ -35,7 +35,7 @@ export default function AgeCalculator() {
   };
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Age Calculator</CardTitle>
         <CardDescription>Find out your exact age in years, months, and days.</CardDescription>
@@ -54,7 +54,7 @@ export default function AgeCalculator() {
         </div>
         <Button onClick={calculateAge} className="w-full">Calculate Age</Button>
         {age && (
-            <div className="p-6 bg-muted rounded-lg text-center">
+            <div className="p-6 bg-muted/50 rounded-lg text-center">
                 <h3 className="text-lg font-semibold mb-2">Your Age is</h3>
                 <div className="flex justify-center items-baseline gap-4">
                     <div>

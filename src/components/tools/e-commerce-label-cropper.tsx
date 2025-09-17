@@ -1,69 +1,108 @@
-'use client';
+'use client'
 
-import { useState, useRef } from 'react';
-import { autoCropEcommerceLabel, AutoCropEcommerceLabelInput } from '@/ai/flows/auto-crop-ecommerce-label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
-import { Upload, Download, Loader2, FileImage } from 'lucide-react';
+import { useState, useRef } from 'react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { useToast } from '@/hooks/use-toast'
+import { Upload, Download, Scissors, Loader2 } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { autoCropEcommerceLabel } from '@/ai/flows/auto-crop-ecommerce-label'
 
 export default function LabelCropper() {
-  const [originalFile, setOriginalFile] = useState<File | null>(null);
-  const [originalPreview, setOriginalPreview] = useState<string | null>(null);
-  const [croppedPreview, setCroppedPreview] = useState<string | null>(null);
-  const [isCropping, setIsCropping] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
-
-  const handleCrop = async (input: AutoCropEcommerceLabelInput) => {
-    setIsCropping(true);
-    try {
-      const result = await autoCropEcommerceLabel(input);
-      setCroppedPreview(result.croppedLabelDataUri);
-      toast({ title: 'Label cropped successfully!' });
-    } catch (err: any) {
-      toast({
-        variant: 'destructive',
-        title: 'Cropping failed',
-        description: err?.message || 'An unknown error occurred.',
-      });
-    } finally {
-      setIsCropping(false);
-    }
-  };
+  const [originalFile, setOriginalFile] = useState<File | null>(null)
+  const [originalPreview, setOriginalPreview] = useState<string | null>(null)
+  const [croppedPreview, setCroppedPreview] = useState<string | null>(null)
+  const [isCropping, setIsCropping] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const { toast } = useToast()
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
-      setOriginalFile(file);
-      setCroppedPreview(null);
+      if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+        toast({
+          variant: 'destructive',
+          title: 'Unsupported file type',
+          description: 'Please upload an image or PDF file.',
+        });
+        return;
+      }
+      setOriginalFile(file)
+      setCroppedPreview(null)
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setOriginalPreview(reader.result as string);
-        handleCrop({ labelDataUri: reader.result as string });
       };
-      reader.readAsDataURL(file);
+      if (file.type.startsWith('image/')) {
+        reader.readAsDataURL(file);
+      } else {
+        setOriginalPreview('/pdf-placeholder.png'); // Or some pdf icon
+      }
     }
-  };
+  }
+
+  const handleCrop = async () => {
+    if (!originalFile || !originalPreview) {
+        toast({ variant: 'destructive', title: 'Please upload a file first.'})
+        return;
+    }
+
+    setIsCropping(true);
+    setCroppedPreview(null);
+    toast({ title: 'AI is cropping your label...', description: 'This might take a moment.' });
+
+    try {
+        const reader = new FileReader();
+        reader.readAsDataURL(originalFile);
+        reader.onload = async (e) => {
+            const labelDataUri = e.target?.result as string;
+            if (!labelDataUri) {
+                toast({ variant: 'destructive', title: 'Could not read file.'})
+                setIsCropping(false);
+                return;
+            }
+            const result = await autoCropEcommerceLabel({ labelDataUri });
+            setCroppedPreview(result.croppedLabelDataUri);
+            toast({ title: 'Label cropped successfully!' });
+        };
+        reader.onerror = () => {
+            toast({ variant: 'destructive', title: 'Error reading file.'})
+        }
+    } catch (error) {
+        console.error(error);
+        toast({ variant: 'destructive', title: 'Cropping Failed', description: 'An unexpected error occurred.'})
+    } finally {
+        setIsCropping(false);
+    }
+  }
 
   const handleDownload = () => {
     if (croppedPreview) {
-      const link = document.createElement('a');
-      link.href = croppedPreview;
-      const extension = croppedPreview.split(';')[0].split('/')[1];
-      link.download = `cropped-label.${extension}`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const link = document.createElement('a')
+      link.href = croppedPreview
+      const extension = croppedPreview.startsWith('data:image/png') ? 'png' : 'jpg';
+      link.download = `cropped-label.${extension}`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
-  };
+  }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">E-commerce Label Cropper</CardTitle>
-        <CardDescription>Our AI will automatically crop your shipping label.</CardDescription>
+        <CardTitle className="text-2xl">AI E-commerce Label Cropper</CardTitle>
+        <CardDescription>
+          Automatically crop e-commerce shipping labels from images or PDFs. Our AI tool removes unnecessary parts for a clean, ready-to-use label.
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div
@@ -81,43 +120,30 @@ export default function LabelCropper() {
             onChange={handleFileChange}
           />
         </div>
+        
+        {originalFile && <p className="text-center text-sm text-muted-foreground">Selected: {originalFile.name}</p>}
 
-        {originalFile && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            <div>
-              <h3 className="font-semibold mb-2 text-center">Original</h3>
-              {originalFile.type.startsWith('image/') ? (
-                <img src={originalPreview!} alt="Original label" className="rounded-lg" />
-              ) : (
-                <div className="rounded-lg bg-muted p-4 text-center">PDF Preview not available</div>
-              )}
+        <Button onClick={handleCrop} disabled={isCropping || !originalFile} className="w-full">
+          {isCropping ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Cropping with AI...</> : <><Scissors className="mr-2 h-4 w-4" /> Crop Label</>}
+        </Button>
+
+        {croppedPreview && (
+          <div className="space-y-4">
+            <h3 className="font-semibold text-center">Cropped Preview</h3>
+            <div className="flex justify-center bg-muted/20 p-4 rounded-lg">
+              <img
+                src={croppedPreview}
+                alt="Cropped label"
+                className="rounded-lg max-w-full h-auto shadow-md"
+              />
             </div>
-            <div>
-              <h3 className="font-semibold mb-2 text-center">Cropped</h3>
-              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                {isCropping ? (
-                  <Loader2 className="h-12 w-12 text-primary animate-spin" />
-                ) : croppedPreview ? (
-                  <img src={croppedPreview} alt="Cropped label" className="rounded-lg" />
-                ) : (
-                  <FileImage className="h-12 w-12 text-muted-foreground" />
-                )}
-              </div>
-            </div>
+            <Button onClick={handleDownload} className="w-full" variant="outline">
+              <Download className="mr-2 h-4 w-4" />
+              Download Cropped Label
+            </Button>
           </div>
         )}
-        
-        <div className="flex gap-4">
-            <Button onClick={() => fileInputRef.current?.click()} variant="outline" className="w-full">
-              <Upload className="mr-2 h-4 w-4" />
-              Upload New
-            </Button>
-            <Button onClick={handleDownload} disabled={!croppedPreview || isCropping} className="w-full">
-              <Download className="mr-2 h-4 w-4" />
-              Download Cropped
-            </Button>
-        </div>
       </CardContent>
     </Card>
-  );
+  )
 }

@@ -49,7 +49,7 @@ export default function JsonFormatter() {
   }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">JSON Formatter & Validator</CardTitle>
         <CardDescription>Paste your JSON data to format and validate it.</CardDescription>

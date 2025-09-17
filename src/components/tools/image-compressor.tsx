@@ -7,13 +7,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, Download, FileImage, X } from 'lucide-react';
+import { Upload, Download, FileImage, X, Percent } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalPreview, setOriginalPreview] = useState<string | null>(null);
+  const [compressedBlob, setCompressedBlob] = useState<Blob | null>(null);
   const [compressedPreview, setCompressedPreview] = useState<string | null>(null);
   const [targetSize, setTargetSize] = useState(500); // in KB
+  const [targetUnit, setTargetUnit] = useState<'KB' | 'MB'>('KB');
   const [isCompressing, setIsCompressing] = useState(false);
   const [compressionProgress, setCompressionProgress] = useState(0);
   const [originalSize, setOriginalSize] = useState(0);
@@ -33,7 +37,8 @@ export default function ImageCompressor() {
         return;
       }
       setOriginalFile(file);
-      setOriginalSize(file.size / 1024);
+      setOriginalSize(file.size);
+      setCompressedBlob(null);
       setCompressedPreview(null);
       setCompressedSize(0);
       const reader = new FileReader();
@@ -57,7 +62,8 @@ export default function ImageCompressor() {
     setIsCompressing(true);
     setCompressionProgress(0);
 
-    const targetSizeBytes = targetSize * 1024;
+    const targetSizeBytes = targetUnit === 'MB' ? targetSize * 1024 * 1024 : targetSize * 1024;
+    
     const image = new Image();
     const reader = new FileReader();
 
@@ -74,53 +80,49 @@ export default function ImageCompressor() {
       canvas.height = image.height;
       ctx.drawImage(image, 0, 0);
 
-      let lowerBound = 0;
-      let upperBound = 1;
-      let bestUrl = '';
-      let bestSize = Infinity;
-      const isWebp = originalFile.type === 'image/webp';
+      let quality = 0.9;
+      let iterations = 0;
+      let currentBlob: Blob | null = null;
+      
+      while(iterations < 10) {
+        iterations++;
+        setCompressionProgress(iterations * 10);
+        const dataUrl = canvas.toDataURL(originalFile.type, quality);
+        currentBlob = await (await fetch(dataUrl)).blob();
 
-      for (let i = 0; i < 10; i++) {
-        setCompressionProgress((i + 1) * 10);
-        const quality = (lowerBound + upperBound) / 2;
-        const dataUrl = canvas.toDataURL(isWebp ? 'image/webp' : 'image/jpeg', quality);
-        const blob = await (await fetch(dataUrl)).blob();
-        
-        if (Math.abs(blob.size - targetSizeBytes) < Math.abs(bestSize - targetSizeBytes)) {
-          bestUrl = dataUrl;
-          bestSize = blob.size;
-        }
-        
-        if (blob.size > targetSizeBytes) {
-          upperBound = quality;
-        } else {
-          lowerBound = quality;
-        }
-
-        if (Math.abs(blob.size - targetSizeBytes) < 1024 * 5) { // within 5KB
+        if (currentBlob.size <= targetSizeBytes) {
           break;
         }
+        quality -= 0.1;
+        if (quality < 0.1) {
+            quality = 0.1;
+            break;
+        };
       }
 
-      setCompressedPreview(bestUrl);
-      setCompressedSize(bestSize / 1024);
+      if(currentBlob){
+        setCompressedBlob(currentBlob);
+        setCompressedPreview(URL.createObjectURL(currentBlob));
+        setCompressedSize(currentBlob.size);
+      }
+      
       setIsCompressing(false);
       setCompressionProgress(100);
       
       toast({
         title: 'Compression complete',
-        description: `Image compressed to ${Math.round(bestSize / 1024)} KB.`,
+        description: `Image compressed to ${Math.round(currentBlob!.size / 1024)} KB.`,
       });
     };
 
     reader.readAsDataURL(originalFile);
-  }, [originalFile, targetSize, toast]);
+  }, [originalFile, targetSize, targetUnit, toast]);
 
   const handleDownload = () => {
-    if (compressedPreview) {
+    if (compressedPreview && compressedBlob) {
       const link = document.createElement('a');
       link.href = compressedPreview;
-      const fileExtension = originalFile?.type.split('/')[1] === 'webp' ? 'webp' : 'jpg';
+      const fileExtension = originalFile?.type.split('/')[1] || 'jpg';
       link.download = `compressed_${originalFile?.name.split('.')[0]}.${fileExtension}`;
       document.body.appendChild(link);
       link.click();
@@ -132,6 +134,7 @@ export default function ImageCompressor() {
       setOriginalFile(null);
       setOriginalPreview(null);
       setCompressedPreview(null);
+      setCompressedBlob(null);
       setOriginalSize(0);
       setCompressedSize(0);
       if(fileInputRef.current) {
@@ -139,8 +142,12 @@ export default function ImageCompressor() {
       }
   }
 
+  const reductionPercentage = originalSize > 0 && compressedSize > 0 
+    ? Math.round(((originalSize - compressedSize) / originalSize) * 100)
+    : 0;
+
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Image Compressor</CardTitle>
         <CardDescription>Reduce the file size of your images without losing quality.</CardDescription>
@@ -166,14 +173,19 @@ export default function ImageCompressor() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="relative">
-                    <p className="text-center font-semibold mb-2">Original ({Math.round(originalSize)} KB)</p>
+                    <p className="text-center font-semibold mb-2">Original ({Math.round(originalSize / 1024)} KB)</p>
                     <img src={originalPreview} alt="Original" className="rounded-lg w-full h-auto" />
                 </div>
                 <div className="relative">
                     <p className="text-center font-semibold mb-2">
-                        {compressedPreview ? `Compressed (${Math.round(compressedSize)} KB)` : 'Compressed'}
+                        {compressedPreview ? `Compressed (${Math.round(compressedSize / 1024)} KB)` : 'Compressed'}
                     </p>
-                    {compressedPreview ? (
+                    {isCompressing ? (
+                      <div className="rounded-lg bg-muted flex flex-col items-center justify-center h-full">
+                        <Progress value={compressionProgress} className="w-3/4" />
+                        <p className="text-sm mt-2">Compressing...</p>
+                      </div>
+                    ) : compressedPreview ? (
                         <img src={compressedPreview} alt="Compressed" className="rounded-lg w-full h-auto" />
                     ) : (
                         <div className="rounded-lg bg-muted flex items-center justify-center h-full">
@@ -182,7 +194,11 @@ export default function ImageCompressor() {
                     )}
                 </div>
             </div>
-            {isCompressing && <Progress value={compressionProgress} className="w-full" />}
+             {reductionPercentage > 0 && (
+                <div className="flex items-center justify-center text-lg font-medium text-green-500">
+                    <Percent className="h-5 w-5 mr-2"/> {reductionPercentage}% size reduction
+                </div>
+             )}
             <div className="flex justify-end">
                 <Button variant="ghost" size="icon" onClick={reset}><X/></Button>
             </div>
@@ -190,24 +206,39 @@ export default function ImageCompressor() {
         )}
         
         <div className="space-y-4">
-          <div>
-            <Label htmlFor="target-size">Target Size (KB): {targetSize} KB</Label>
-            <Input
-              id="target-size"
-              type="number"
-              value={targetSize}
-              onChange={(e) => setTargetSize(Number(e.target.value))}
-              className="w-full"
-              min="10"
-            />
+          <div className="grid grid-cols-3 gap-2">
+            <div className="col-span-2 space-y-2">
+              <Label htmlFor="target-size">Target Size</Label>
+              <Input
+                id="target-size"
+                type="number"
+                value={targetSize}
+                onChange={(e) => setTargetSize(Number(e.target.value))}
+                className="w-full"
+                min="1"
+                disabled={isCompressing}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="unit">Unit</Label>
+              <Select value={targetUnit} onValueChange={(value) => setTargetUnit(value as 'KB' | 'MB')}>
+                <SelectTrigger id="unit">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="KB">KB</SelectItem>
+                  <SelectItem value="MB">MB</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="flex gap-4">
             <Button onClick={handleCompress} disabled={!originalFile || isCompressing} className="w-full">
-              {isCompressing ? 'Compressing...' : 'Compress'}
+              {isCompressing ? 'Compressing...' : 'Compress Image'}
             </Button>
             <Button onClick={handleDownload} disabled={!compressedPreview} className="w-full" variant="outline">
               <Download className="mr-2 h-4 w-4" />
-              Download
+              Download Compressed Image
             </Button>
           </div>
         </div>

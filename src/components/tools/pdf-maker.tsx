@@ -4,14 +4,16 @@ import { useState, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, Download, FileImage, X } from 'lucide-react';
+import { Upload, Download, FileImage, X, Loader2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import Image from 'next/image';
 
 export default function PdfMaker() {
   const [files, setFiles] = useState<File[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,6 +30,7 @@ export default function PdfMaker() {
         });
       }
       setFiles(prev => [...prev, ...newFiles]);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
@@ -42,6 +45,7 @@ export default function PdfMaker() {
     }
 
     setIsGenerating(true);
+    setProgress(0);
     toast({ title: 'Generating PDF...', description: 'This may take a moment.' });
     
     const pdf = new jsPDF();
@@ -57,23 +61,26 @@ export default function PdfMaker() {
                 img.onload = () => {
                     const pdfWidth = pdf.internal.pageSize.getWidth();
                     const pdfHeight = pdf.internal.pageSize.getHeight();
-                    const ratio = img.width / img.height;
+                    let ratio = img.width / img.height;
                     let imgWidth = img.width;
                     let imgHeight = img.height;
                     
-                    if (imgWidth > pdfWidth) {
-                        imgWidth = pdfWidth;
+                    if (imgWidth > pdfWidth - 20) {
+                        imgWidth = pdfWidth - 20;
                         imgHeight = imgWidth / ratio;
                     }
-                    if (imgHeight > pdfHeight) {
-                        imgHeight = pdfHeight;
+                    if (imgHeight > pdfHeight - 20) {
+                        imgHeight = pdfHeight - 20;
                         imgWidth = imgHeight * ratio;
                     }
                     
                     if (i > 0) {
                         pdf.addPage();
                     }
-                    pdf.addImage(img.src, 'PNG', (pdfWidth - imgWidth) / 2, (pdfHeight - imgHeight) / 2, imgWidth, imgHeight);
+                    const x = (pdfWidth - imgWidth) / 2;
+                    const y = (pdfHeight - imgHeight) / 2;
+                    pdf.addImage(img.src, file.type.split('/')[1].toUpperCase(), x, y, imgWidth, imgHeight);
+                    setProgress(Math.round(((i + 1) / files.length) * 100));
                     resolve();
                 };
             };
@@ -98,7 +105,7 @@ export default function PdfMaker() {
   }
 
   return (
-    <Card className="w-full shadow-lg rounded-lg">
+    <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">PDF Maker</CardTitle>
         <CardDescription>Convert your JPG and PNG images into a single PDF file.</CardDescription>
@@ -130,8 +137,8 @@ export default function PdfMaker() {
                   <Image
                     src={URL.createObjectURL(file)}
                     alt={`preview ${index}`}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     className="rounded-md"
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -146,11 +153,13 @@ export default function PdfMaker() {
           </div>
         )}
 
+        {isGenerating && <Progress value={progress} className="w-full"/>}
+
         <Button onClick={handleGeneratePdf} disabled={files.length === 0 || isGenerating} className="w-full">
-          {isGenerating ? 'Generating...' : (
+          {isGenerating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Generating...</> : (
             <>
               <Download className="mr-2 h-4 w-4" />
-              Generate & Download PDF
+              Generate PDF
             </>
           )}
         </Button>
