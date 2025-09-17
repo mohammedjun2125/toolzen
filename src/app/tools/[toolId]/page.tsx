@@ -1,22 +1,7 @@
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
-
-import AgeCalculator from '@/components/tools/age-calculator';
-import BmiCalculator from '@/components/tools/bmi-calculator';
-import CaseConverter from '@/components/tools/case-converter';
-import ColorPaletteExtractor from '@/components/tools/color-palette-extractor';
-import ImageCompressor from '@/components/tools/image-compressor';
-import JsonFormatter from '@/components/tools/json-formatter';
-import MarkdownPreview from '@/components/tools/markdown-preview';
-import PasswordGenerator from '@/components/tools/password-generator';
-import PdfMaker from '@/components/tools/pdf-maker';
-import QrCodeGenerator from '@/components/tools/qr-code-generator';
-import TextToSpeech from '@/components/tools/text-to-speech';
-import UnitConverter from '@/components/tools/unit-converter';
-import UrlEncoderDecoder from '@/components/tools/url-encoder-decoder';
-import WordCounter from '@/components/tools/word-counter';
-import LabelCropper from '@/components/tools/e-commerce-label-cropper';
+import dynamic from 'next/dynamic';
 import { ToolLayout } from '@/components/tool-layout';
 
 type Props = {
@@ -24,21 +9,21 @@ type Props = {
 }
 
 const toolComponents: { [key: string]: React.ComponentType } = {
-    'age-calculator': AgeCalculator,
-    'bmi-calculator': BmiCalculator,
-    'case-converter': CaseConverter,
-    'color-palette-extractor': ColorPaletteExtractor,
-    'image-compressor': ImageCompressor,
-    'json-formatter': JsonFormatter,
-    'markdown-preview': MarkdownPreview,
-    'password-generator': PasswordGenerator,
-    'pdf-maker': PdfMaker,
-    'qr-code-generator': QrCodeGenerator,
-    'text-to-speech': TextToSpeech,
-    'unit-converter': UnitConverter,
-    'url-encoder-decoder': UrlEncoderDecoder,
-    'word-counter': WordCounter,
-    'e-commerce-label-cropper': LabelCropper,
+    'age-calculator': dynamic(() => import('@/components/tools/age-calculator')),
+    'bmi-calculator': dynamic(() => import('@/components/tools/bmi-calculator')),
+    'case-converter': dynamic(() => import('@/components/tools/case-converter')),
+    'color-palette-extractor': dynamic(() => import('@/components/tools/color-palette-extractor')),
+    'image-compressor': dynamic(() => import('@/components/tools/image-compressor')),
+    'json-formatter': dynamic(() => import('@/components/tools/json-formatter')),
+    'markdown-preview': dynamic(() => import('@/components/tools/markdown-preview')),
+    'password-generator': dynamic(() => import('@/components/tools/password-generator')),
+    'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker')),
+    'qr-code-generator': dynamic(() => import('@/components/tools/qr-code-generator')),
+    'text-to-speech': dynamic(() => import('@/components/tools/text-to-speech')),
+    'unit-converter': dynamic(() => import('@/components/tools/unit-converter')),
+    'url-encoder-decoder': dynamic(() => import('@/components/tools/url-encoder-decoder')),
+    'word-counter': dynamic(() => import('@/components/tools/word-counter')),
+    'e-commerce-label-cropper': dynamic(() => import('@/components/tools/e-commerce-label-cropper')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
