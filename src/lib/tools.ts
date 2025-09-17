@@ -4,7 +4,6 @@ import {
   FileText,
   Mic,
   Palette,
-  Scissors,
   Ruler,
   QrCode,
   Sigma,
@@ -53,13 +52,6 @@ export const tools: Tool[] = [
     description: 'Extract a color palette from an uploaded image.',
     href: '/tools/color-palette-extractor',
     icon: Palette,
-  },
-  {
-    id: 'e-commerce-label-cropper',
-    name: 'E-commerce Label Cropper',
-    description: 'Automatically crop e-commerce shipping labels.',
-    href: '/tools/e-commerce-label-cropper',
-    icon: Scissors,
   },
   {
     id: 'unit-converter',

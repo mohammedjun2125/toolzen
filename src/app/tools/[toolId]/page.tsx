@@ -23,7 +23,6 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'unit-converter': dynamic(() => import('@/components/tools/unit-converter')),
     'url-encoder-decoder': dynamic(() => import('@/components/tools/url-encoder-decoder')),
     'word-counter': dynamic(() => import('@/components/tools/word-counter')),
-    'e-commerce-label-cropper': dynamic(() => import('@/components/tools/e-commerce-label-cropper')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
