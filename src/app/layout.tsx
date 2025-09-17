@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   creator: 'Toolzen',
   publisher: 'Toolzen',
   metadataBase: new URL('https://toolzen.com'), // Replace with your actual domain
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'Toolzen - Free Online Tools for Everyone',
     description: 'A collection of client-side, privacy-first tools to help you with your daily tasks.',
