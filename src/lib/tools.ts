@@ -7,7 +7,6 @@ import {
   Scissors,
   Ruler,
   QrCode,
-  Lock,
   Sigma,
   CaseSensitive,
   Link,
@@ -64,12 +63,6 @@ export const tools: Tool[] = [
     description: 'Generate QR codes from text or URLs in real-time.',
     href: '/tools/qr-code-generator',
     icon: QrCode,
-  },
-  {
-    name: 'Password Generator',
-    description: 'Generate strong, secure, and random passwords.',
-    href: '/tools/password-generator',
-icon: Lock,
   },
   {
     name: 'Word Counter',
