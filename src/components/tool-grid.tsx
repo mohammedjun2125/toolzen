@@ -2,17 +2,20 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { tools } from '@/lib/tools';
+import { tools, categories, ToolCategory } from '@/lib/tools';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Button } from './ui/button';
 
 export function ToolGrid() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState<ToolCategory | 'All'>('All');
 
   const filteredTools = tools.filter(
     (tool) =>
-      tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tool.description.toLowerCase().includes(searchTerm.toLowerCase())
+      (activeCategory === 'All' || tool.category === activeCategory) &&
+      (tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tool.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -26,6 +29,23 @@ export function ToolGrid() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+        </div>
+        <div className="flex justify-center flex-wrap gap-2 mb-8">
+            <Button
+                variant={activeCategory === 'All' ? 'default' : 'outline'}
+                onClick={() => setActiveCategory('All')}
+            >
+                All
+            </Button>
+            {categories.map(category => (
+                <Button
+                    key={category}
+                    variant={activeCategory === category ? 'default' : 'outline'}
+                    onClick={() => setActiveCategory(category)}
+                >
+                    {category}
+                </Button>
+            ))}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredTools.map((tool) => (
