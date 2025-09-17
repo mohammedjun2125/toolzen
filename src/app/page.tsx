@@ -1,8 +1,10 @@
+
 'use client';
 
 import { ToolGrid } from '@/components/tool-grid';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
+import { useEffect } from 'react';
 
 export default function Home() {
   
@@ -12,6 +14,18 @@ export default function Home() {
       <main className="flex-1">
         <section className="w-full py-20 md:py-32 lg:py-40 bg-gradient-to-b from-background to-card/20">
           <div className="container mx-auto px-4 md:px-6 text-center">
+            <div id="ad-pre-header" className="mb-8 min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+               Top Banner Ad
+                {/*
+                  After approval, paste your ad code here. Example:
+                  <ins className="adsbygoogle"
+                       style={{ display: 'block' }}
+                       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                       data-ad-slot="1234567890"
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
+                */}
+            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground via-accent to-primary-foreground mb-4">
               Your Ultimate Digital Toolkit
             </h1>
