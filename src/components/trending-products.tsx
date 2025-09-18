@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 
 function ProductCard({ product }: { product: Product }) {
     return (
-        <article className="h-full flex flex-col group bg-card/60 backdrop-blur-lg rounded-lg border shadow-lg transition-all duration-300 ease-in-out hover:shadow-primary/20 hover:scale-105">
+        <article className="h-full flex flex-col group bg-card/60 backdrop-blur-lg rounded-lg border shadow-sm transition-all duration-300 ease-in-out hover:shadow-primary/20 hover:scale-105 overflow-hidden">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -31,17 +31,23 @@ function ProductCard({ product }: { product: Product }) {
                     })
                 }}
             />
-            <div className="relative w-full aspect-square rounded-t-lg overflow-hidden">
-                <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={product.imageHint}
-                />
+            <div className="relative w-full aspect-[4/3] rounded-t-lg overflow-hidden">
+                {product.image ? (
+                    <Image
+                        src={product.image}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                        data-ai-hint={product.imageHint}
+                    />
+                ) : (
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                        <span className="text-xs text-muted-foreground">No Image</span>
+                    </div>
+                )}
             </div>
             <div className="p-3 flex flex-col flex-grow">
-                <h3 className="text-base font-semibold text-foreground">{product.title}</h3>
+                <h3 className="text-sm font-semibold text-foreground leading-tight">{product.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1 flex-grow">{product.description}</p>
                 <div className="mt-3">
                     <a
@@ -63,7 +69,7 @@ export default function TrendingProducts() {
     return (
         <section>
             <h2 className="text-3xl font-bold text-center mb-8">🔥 Trending Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {trendingProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
