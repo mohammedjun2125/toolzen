@@ -31,9 +31,25 @@ export default function BlogIndexPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-8">
+            {/* Left Ad Banner */}
+            <aside className="hidden lg:block lg:col-span-2">
+                <div id="ad-blog-sidebar-left" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    <div className="text-center">
+                        <p>Left Sidebar Ad</p>
+                        <p className="text-xs">(e.g., 160x600)</p>
+                    </div>
+                    <ins className="adsbygoogle"
+                         style={{ display: 'none' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </aside>
+
             {/* Main Content */}
-            <div className="md:col-span-9">
+            <div className="col-span-12 lg:col-span-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {posts.map((post) => (
                         <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
@@ -63,8 +79,8 @@ export default function BlogIndexPage() {
                 </div>
             </div>
 
-            {/* Sidebar */}
-            <aside className="md:col-span-3 space-y-8">
+            {/* Right Sidebar / Ad Banner */}
+            <aside className="col-span-12 lg:col-span-2 space-y-8">
                 <Card className="bg-card/60 backdrop-blur-lg">
                     <CardHeader>
                         <CardTitle>Search</CardTitle>
@@ -89,10 +105,10 @@ export default function BlogIndexPage() {
                     </CardContent>
                 </Card>
 
-                <div id="ad-blog-sidebar" className="sticky top-20 min-h-[600px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-blog-sidebar-right" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
-                        <p>Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 300x600)</p>
+                        <p>Right Sidebar Ad</p>
+                        <p className="text-xs">(e.g., 160x600)</p>
                     </div>
                     <ins className="adsbygoogle"
                          style={{ display: 'none' }}
