@@ -119,48 +119,80 @@ export default function BlogPostPage({ params }: Props) {
     />
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
-      <main className="flex-1 py-12">
-        <article className="container max-w-3xl mx-auto px-4 md:px-6">
-            <Button asChild variant="ghost" className="mb-4">
-              <Link href="/blog">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Blog
-              </Link>
-            </Button>
-          <header className="mb-8 text-center">
-            <Badge variant="outline" className="mb-2">{post.category}</Badge>
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
-            <p className="mt-4 text-muted-foreground">{new Date(post.date).toLocaleDateString()} by {post.author}</p>
-          </header>
-          
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">
-            <Image 
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-                data-ai-hint={post.imageHint}
-             />
-          </div>
+      <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+        <div className="grid grid-cols-12 gap-8">
+            <aside className="hidden lg:block lg:col-span-2">
+                <div id="ad-article-sidebar-left" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    <div className="text-center">
+                        <p>Left Sidebar Ad</p>
+                        <p className="text-xs">(e.g., 160x600)</p>
+                    </div>
+                    <ins className="adsbygoogle"
+                         style={{ display: 'none' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </aside>
 
-          <div 
-            className="prose dark:prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: contentWithAd }}
-           />
-
-          {relatedTool && (
-            <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">
-                <h3 className="text-xl font-bold mb-2">Try the Tool</h3>
-                <p className="text-muted-foreground mb-4">{relatedTool.description}</p>
-                <Button asChild size="lg">
-                    <Link href={relatedTool.href}>
-                        Use {relatedTool.name}
-                    </Link>
+            <article className="col-span-12 lg:col-span-8">
+                <Button asChild variant="ghost" className="mb-4">
+                <Link href="/blog">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Blog
+                </Link>
                 </Button>
+            <header className="mb-8 text-center">
+                <Badge variant="outline" className="mb-2">{post.category}</Badge>
+                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
+                <p className="mt-4 text-muted-foreground">{new Date(post.date).toLocaleDateString()} by {post.author}</p>
+            </header>
+            
+            <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">
+                <Image 
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    data-ai-hint={post.imageHint}
+                />
             </div>
-          )}
-        </article>
+
+            <div 
+                className="prose dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: contentWithAd }}
+            />
+
+            {relatedTool && (
+                <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">
+                    <h3 className="text-xl font-bold mb-2">Try the Tool</h3>
+                    <p className="text-muted-foreground mb-4">{relatedTool.description}</p>
+                    <Button asChild size="lg">
+                        <Link href={relatedTool.href}>
+                            Use {relatedTool.name}
+                        </Link>
+                    </Button>
+                </div>
+            )}
+            </article>
+
+            <aside className="hidden lg:block lg:col-span-2">
+                <div id="ad-article-sidebar-right" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    <div className="text-center">
+                        <p>Right Sidebar Ad</p>
+                        <p className="text-xs">(e.g., 160x600)</p>
+                    </div>
+                    <ins className="adsbygoogle"
+                         style={{ display: 'none' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </aside>
+        </div>
       </main>
       <SiteFooter />
     </div>
