@@ -12,6 +12,7 @@ export default function DisclaimerPage() {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
+    // This code runs only on the client, after the page has been hydrated.
     setCurrentDate(new Date().toLocaleDateString());
   }, []);
 
@@ -30,7 +31,7 @@ export default function DisclaimerPage() {
             <CardTitle className="text-3xl">Disclaimer</CardTitle>
           </CardHeader>
           <CardContent className="prose dark:prose-invert max-w-none">
-            <p>Last updated: {currentDate}</p>
+            <p>Last updated: {currentDate || '...'}</p>
             <p>
               The information provided by Toolzen ("we," "us," or "our") on this website is for general informational purposes only. All information on the site is provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the site.
             </p>

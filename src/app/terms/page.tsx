@@ -12,6 +12,7 @@ export default function TermsPage() {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
+    // This code runs only on the client, after the page has been hydrated.
     setCurrentDate(new Date().toLocaleDateString());
   }, []);
 
@@ -30,7 +31,7 @@ export default function TermsPage() {
             <CardTitle className="text-3xl">Terms of Use</CardTitle>
           </CardHeader>
           <CardContent className="prose dark:prose-invert max-w-none">
-            <p>Last updated: {currentDate}</p>
+            <p>Last updated: {currentDate || '...'}</p>
             <p>
               Please read these terms and conditions carefully before using Our Service.
             </p>

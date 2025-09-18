@@ -12,6 +12,7 @@ export default function PrivacyPage() {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
+    // This code runs only on the client, after the page has been hydrated.
     setCurrentDate(new Date().toLocaleDateString());
   }, []);
 
@@ -30,7 +31,7 @@ export default function PrivacyPage() {
             <CardTitle className="text-3xl">Privacy Policy</CardTitle>
           </CardHeader>
           <CardContent className="prose dark:prose-invert max-w-none">
-            <p>Last updated: {currentDate}</p>
+            <p>Last updated: {currentDate || '...'}</p>
             <p>
               This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
             </p>
