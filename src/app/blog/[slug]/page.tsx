@@ -6,7 +6,7 @@ import { mockPosts, postMap } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { marked } from 'marked';
-import { tools, toolMap } from '@/lib/tools';
+import { tools } from '@/lib/tools';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: 'article',
+      url: `/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author],
       images: [
@@ -86,8 +87,8 @@ export default function BlogPostPage({ params }: Props) {
             data-ad-slot="1234567890"></ins>
     </div>
   `;
-  const contentWithAd = contentParts.length > 1 
-    ? contentParts[0] + '</p>' + adPlaceholder + contentParts.slice(1).join('</p>')
+  const contentWithAd = contentParts.length > 2
+    ? contentParts.slice(0, 2).join('</p>') + '</p>' + adPlaceholder + contentParts.slice(2).join('</p>')
     : htmlContent;
 
 
@@ -109,7 +110,7 @@ export default function BlogPostPage({ params }: Props) {
                 "name": "Toolzen",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "/favicon.svg" // Replace with your actual logo URL
+                    "url": "/favicon.svg"
                 }
             },
             "datePublished": post.date,
@@ -149,10 +150,10 @@ export default function BlogPostPage({ params }: Props) {
            />
 
           {relatedTool && (
-            <div className="mt-12 text-center">
-                <h3 className="text-xl font-bold mb-4">Try the Tool</h3>
+            <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">
+                <h3 className="text-xl font-bold mb-2">Try the Tool</h3>
                 <p className="text-muted-foreground mb-4">{relatedTool.description}</p>
-                <Button asChild>
+                <Button asChild size="lg">
                     <Link href={relatedTool.href}>
                         Use {relatedTool.name}
                     </Link>
