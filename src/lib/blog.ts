@@ -266,7 +266,7 @@ Does your blog post meet the minimum word count for SEO? Does your tweet fit wit
 It's much faster than pasting into a word processor and provides a more detailed breakdown.
 
 ### 3. URL Encoder / Decoder
-Ever seen a URL filled with strange characters like \`%20\` or \`%3F\`? That\'s URL encoding in action. It ensures that data passed in a URL is transmitted correctly and not misinterpreted by a web server. A [URL Encoder/Decoder](/tools/url-encoder-decoder) is crucial for web developers when building links or API requests.
+Ever seen a URL filled with strange characters like \`%20\` or \`%3F\`? That's URL encoding in action. It ensures that data passed in a URL is transmitted correctly and not misinterpreted by a web server. A [URL Encoder/Decoder](/tools/url-encoder-decoder) is crucial for web developers when building links or API requests.
 
 *   **Encoding:** Converts special characters (like spaces, question marks, and ampersands) into a format safe for URLs.
 *   **Decoding:** Reverts an encoded URL back into a human-readable format for debugging.
@@ -444,7 +444,7 @@ That's why our **Color Palette Extractor** is a **client-side tool**. All the im
 A: Absolutely. The generated palettes are a starting point. You can take the extracted colors and refine them to perfectly match your brand's guidelines. They are excellent for websites, mobile apps, marketing materials, and presentations.
 
 **Q: What are HEX codes?**
-A: A HEX code (e.g., \`#3B82F6\`) is a six-digit code used in HTML, CSS, and design software to represent a specific color. Our tool lets you copy these codes with one click, making it easy to transfer colors into your design files.
+A: A HEX code (e.g., '#3B82F6') is a six-digit code used in HTML, CSS, and design software to represent a specific color. Our tool lets you copy these codes with one click, making it easy to transfer colors into your design files.
 
 **Q: How do I check if my color palette is accessible?**
 A: This is a crucial step. After generating a palette, use a contrast checker tool (many are available online for free) to ensure your text and background color combinations meet the WCAG (Web Content Accessibility Guidelines) standards. This ensures your design is readable for everyone.
