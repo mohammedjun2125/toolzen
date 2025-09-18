@@ -6,6 +6,8 @@ import { mockPosts, Post } from '@/lib/blog';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export default function BlogIndexPage() {
   // In a real app, you would fetch posts from a CMS or database.
@@ -16,6 +18,12 @@ export default function BlogIndexPage() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+        <Button asChild variant="ghost" className="mb-4">
+          <Link href="/">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+          </Link>
+        </Button>
         <header className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">Toolzen Blog</h1>
           <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
