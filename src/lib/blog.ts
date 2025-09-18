@@ -1,4 +1,5 @@
 
+
 export type Post = {
     slug: string;
     title: string;
@@ -265,7 +266,7 @@ Does your blog post meet the minimum word count for SEO? Does your tweet fit wit
 It's much faster than pasting into a word processor and provides a more detailed breakdown.
 
 ### 3. URL Encoder / Decoder
-Ever seen a URL filled with strange characters like \`%20\` or \`%3F\`? That's URL encoding in action. It ensures that data passed in a URL is transmitted correctly and not misinterpreted by a web server. A [URL Encoder/Decoder](/tools/url-encoder-decoder) is crucial for web developers when building links or API requests.
+Ever seen a URL filled with strange characters like \`%20\` or \`%3F\`? That\'s URL encoding in action. It ensures that data passed in a URL is transmitted correctly and not misinterpreted by a web server. A [URL Encoder/Decoder](/tools/url-encoder-decoder) is crucial for web developers when building links or API requests.
 
 *   **Encoding:** Converts special characters (like spaces, question marks, and ampersands) into a format safe for URLs.
 *   **Decoding:** Reverts an encoded URL back into a human-readable format for debugging.
