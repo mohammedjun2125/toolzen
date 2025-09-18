@@ -4,18 +4,21 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { X } from 'lucide-react';
 
 export function CookieConsent() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     try {
+      // Use sessionStorage to hide for the session if dismissed
       const consent = localStorage.getItem('cookie_consent');
-      if (!consent) {
+      const dismissed = sessionStorage.getItem('cookie_dismissed');
+      if (!consent && !dismissed) {
         setShow(true);
       }
     } catch (error) {
-      // localStorage is not available
+      // storage is not available
     }
   }, []);
 
@@ -28,13 +31,26 @@ export function CookieConsent() {
     setShow(false);
   };
 
+  const dismiss = () => {
+    try {
+      sessionStorage.setItem('cookie_dismissed', 'true');
+    } catch (error) {
+      // sessionStorage is not available
+    }
+    setShow(false);
+  }
+
   if (!show) {
     return null;
   }
 
   return (
     <div className="fixed inset-0 bg-black/60 z-50 flex items-end justify-center">
-      <Card className="m-4 max-w-lg w-full shadow-2xl rounded-lg">
+      <Card className="m-4 max-w-lg w-full shadow-2xl rounded-lg relative">
+        <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={dismiss}>
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+        </Button>
         <CardHeader>
           <CardTitle>We value your privacy</CardTitle>
           <CardDescription>
