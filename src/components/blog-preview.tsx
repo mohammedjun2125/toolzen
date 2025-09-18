@@ -3,6 +3,7 @@
 import type { Post } from '@/lib/blog';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from './ui/button';
 
 export function BlogPreview({ posts }: { posts: Post[] }) {
   if (!posts || posts.length === 0) {
@@ -35,6 +36,11 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
             </article>
           </Link>
         ))}
+      </div>
+      <div className="text-center mt-12">
+        <Button asChild size="lg">
+          <Link href="/blog">View All Posts</Link>
+        </Button>
       </div>
     </section>
   );
