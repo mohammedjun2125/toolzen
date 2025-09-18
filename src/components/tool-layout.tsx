@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, X } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -23,22 +24,24 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                 <DialogContent className="max-w-lg">
                     <DialogHeader>
                         <DialogTitle>Advertisement</DialogTitle>
-                         <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                            <X className="h-4 w-4" />
-                            <span className="sr-only">Close</span>
+                         <DialogClose asChild>
+                            <Button variant="ghost" size="icon" className="absolute right-4 top-4">
+                                <X className="h-4 w-4" />
+                                <span className="sr-only">Close</span>
+                            </Button>
                         </DialogClose>
                     </DialogHeader>
                     <div className="min-h-[250px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg p-4">
-                        Medium Rectangle Ad (300x250)
-                         {/*
-                            After approval, paste your ad code here. Example:
-                            <ins className="adsbygoogle"
-                                 style={{ display: 'block' }}
-                                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                                 data-ad-slot="1234567890"
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                        */}
+                        <div className="text-center">
+                            <p>Medium Rectangle Ad</p>
+                            <p className="text-xs">(e.g., 300x250 or 336x280)</p>
+                        </div>
+                        <ins className="adsbygoogle"
+                            style={{ display: 'none' }}
+                            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                            data-ad-slot="1234567890"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -56,19 +59,33 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                 </div>
                 
                 <div id="ad-tool-page" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                   Tool Page Ad
-                    {/*
-                      After approval, paste your ad code here. Example:
-                      <ins className="adsbygoogle"
-                           style={{ display: 'block' }}
-                           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                           data-ad-slot="1234567890"
-                           data-ad-format="auto"
-                           data-full-width-responsive="true"></ins>
-                    */}
+                   <div className="text-center">
+                     <p>Tool Page Ad</p>
+                     <p className="text-xs">(e.g., 728x90)</p>
+                   </div>
+                    <ins className="adsbygoogle"
+                         style={{ display: 'none' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
                 </div>
                 
                 {children}
+
+                <section className="related-articles mt-12">
+                    <Card className="bg-card/60 backdrop-blur-lg">
+                        <CardHeader>
+                            <CardTitle>Related Articles</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <ul className="space-y-2">
+                                <li><Link href="/blog/how-to-compress-images-online" className="text-primary hover:underline">How to Compress Images Online Without Losing Quality</Link></li>
+                                <li><Link href="/blog/online-pdf-merge-guide" className="text-primary hover:underline">How to Merge PDFs Safely</Link></li>
+                            </ul>
+                        </CardContent>
+                    </Card>
+                </section>
 
                 {faq.length > 0 && (
                   <div className="mt-12">
@@ -77,6 +94,7 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                           {faq.map((item, index) => (
                               <AccordionItem value={`item-${index}`} key={index}>
                                   <AccordionTrigger>{item.question}</AccordionTrigger>
+
                                   <AccordionContent>{item.answer}</AccordionContent>
                               </AccordionItem>
                           ))}

@@ -1,0 +1,159 @@
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { mockPosts, postMap } from '@/lib/blog';
+import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
+import { marked } from 'marked';
+import { tools, toolMap } from '@/lib/tools';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = postMap.get(params.slug);
+
+  if (!post) {
+    return { title: 'Post Not Found' };
+  }
+  
+  const title = `${post.title} | Toolzen Blog`;
+  const description = post.excerpt;
+
+  return {
+    title,
+    description,
+    canonical: `/blog/${post.slug}`,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [
+        {
+          url: post.image,
+          width: 800,
+          height: 600,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [post.image],
+    },
+  };
+}
+
+export function generateStaticParams() {
+  return mockPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default function BlogPostPage({ params }: Props) {
+  const post = postMap.get(params.slug);
+
+  if (!post) {
+    notFound();
+  }
+  
+  const relatedTool = tools.find(tool => post.content.includes(tool.href));
+  const htmlContent = marked.parse(post.content);
+  // Simple logic to insert an ad after the first paragraph
+  const contentParts = htmlContent.split('</p>');
+  const adPlaceholder = `
+    <div id="ad-in-article" class="my-8 min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+      <div class="text-center">
+        <p>In-Article Ad</p>
+        <p class="text-xs">(e.g., Fluid or Responsive)</p>
+      </div>
+      <ins class="adsbygoogle"
+            style="display: block; text-align: center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+            data-ad-slot="1234567890"></ins>
+    </div>
+  `;
+  const contentWithAd = contentParts.length > 1 
+    ? contentParts[0] + '</p>' + adPlaceholder + contentParts.slice(1).join('</p>')
+    : htmlContent;
+
+
+  return (
+    <>
+    <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "image": [post.image],
+            "author": {
+                "@type": "Organization",
+                "name": "Toolzen"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Toolzen",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "/favicon.svg" // Replace with your actual logo URL
+                }
+            },
+            "datePublished": post.date,
+            "description": post.excerpt
+        })}}
+    />
+    <div className="flex flex-col min-h-screen">
+      <SiteHeader />
+      <main className="flex-1 py-12">
+        <article className="container max-w-3xl mx-auto px-4 md:px-6">
+          <header className="mb-8 text-center">
+            <Badge variant="outline" className="mb-2">{post.category}</Badge>
+            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
+            <p className="mt-4 text-muted-foreground">{new Date(post.date).toLocaleDateString()} by {post.author}</p>
+          </header>
+          
+          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">
+            <Image 
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                data-ai-hint={post.imageHint}
+             />
+          </div>
+
+          <div 
+            className="prose dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: contentWithAd }}
+           />
+
+          {relatedTool && (
+            <div className="mt-12 text-center">
+                <h3 className="text-xl font-bold mb-4">Try the Tool</h3>
+                <p className="text-muted-foreground mb-4">{relatedTool.description}</p>
+                <Button asChild>
+                    <Link href={relatedTool.href}>
+                        Use {relatedTool.name}
+                    </Link>
+                </Button>
+            </div>
+          )}
+        </article>
+      </main>
+      <SiteFooter />
+    </div>
+    </>
+  );
+}

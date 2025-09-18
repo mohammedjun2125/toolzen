@@ -12,10 +12,13 @@ export function SiteHeader() {
       </Link>
       <nav className="ml-auto flex items-center gap-4 sm:gap-6">
         <Button variant="ghost" asChild>
-            <Link href="/about">About</Link>
+          <Link href="/blog">Blog</Link>
         </Button>
         <Button variant="ghost" asChild>
-            <Link href="/contact">Contact</Link>
+          <Link href="/about">About</Link>
+        </Button>
+        <Button variant="ghost" asChild>
+          <Link href="/contact">Contact</Link>
         </Button>
         <ThemeToggle />
       </nav>

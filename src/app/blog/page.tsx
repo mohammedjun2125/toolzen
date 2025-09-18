@@ -1,0 +1,102 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { mockPosts, Post } from '@/lib/blog';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+
+export default function BlogIndexPage() {
+  // In a real app, you would fetch posts from a CMS or database.
+  const posts = mockPosts;
+  const categories = Array.from(new Set(posts.map(p => p.category)));
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <SiteHeader />
+      <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">Toolzen Blog</h1>
+          <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
+            Guides, tips, and articles on web development, design, and online privacy.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {/* Main Content */}
+            <div className="md:col-span-9">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {posts.map((post) => (
+                        <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
+                            <article className="border rounded-lg h-full flex flex-col transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/20 bg-card/60 backdrop-blur-lg">
+                                {post.image && (
+                                    <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
+                                        <Image
+                                            src={post.image}
+                                            alt={post.title}
+                                            fill
+                                            className="object-cover"
+                                            data-ai-hint={post.imageHint}
+                                        />
+                                    </div>
+                                )}
+                                <div className="p-6 flex flex-col flex-grow">
+                                    <h2 className="text-xl font-semibold">{post.title}</h2>
+                                    <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString()} &middot; {post.author}</p>
+                                    <p className="text-sm mt-3 flex-grow line-clamp-3">{post.excerpt}</p>
+                                    <div className="mt-4">
+                                        <Badge variant="outline">{post.category}</Badge>
+                                    </div>
+                                </div>
+                            </article>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="md:col-span-3 space-y-8">
+                <Card className="bg-card/60 backdrop-blur-lg">
+                    <CardHeader>
+                        <CardTitle>Search</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Input placeholder="Search articles..." />
+                    </CardContent>
+                </Card>
+
+                <Card className="bg-card/60 backdrop-blur-lg">
+                    <CardHeader>
+                        <CardTitle>Categories</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="space-y-2">
+                            {categories.map(cat => (
+                                <li key={cat}>
+                                    <Link href="#" className="text-muted-foreground hover:text-primary">{cat}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
+
+                <div id="ad-blog-sidebar" className="sticky top-20 min-h-[600px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                    <div className="text-center">
+                        <p>Sidebar Ad</p>
+                        <p className="text-xs">(e.g., 300x600)</p>
+                    </div>
+                    <ins className="adsbygoogle"
+                         style={{ display: 'none' }}
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
+            </aside>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
