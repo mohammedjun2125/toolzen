@@ -9,6 +9,7 @@ import { marked } from 'marked';
 import { tools, toolMap } from '@/lib/tools';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 type Props = {
   params: { slug: string };
@@ -27,7 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    canonical: `/blog/${post.slug}`,
+    alternates: {
+        canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title,
       description,
@@ -117,6 +120,12 @@ export default function BlogPostPage({ params }: Props) {
       <SiteHeader />
       <main className="flex-1 py-12">
         <article className="container max-w-3xl mx-auto px-4 md:px-6">
+            <Button asChild variant="ghost" className="mb-4">
+              <Link href="/blog">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Blog
+              </Link>
+            </Button>
           <header className="mb-8 text-center">
             <Badge variant="outline" className="mb-2">{post.category}</Badge>
             <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
