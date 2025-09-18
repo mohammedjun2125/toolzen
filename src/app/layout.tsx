@@ -65,15 +65,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
        <head>
         {/*
-          Once your AdSense account is approved, uncomment this script
-          and replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID.
+          AdSense script is currently disabled. 
+          To enable, uncomment the Script component below and replace 
+          ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID.
         */}
+        {/*
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        */}
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
         <ThemeProvider
