@@ -40,17 +40,17 @@ function ProductCard({ product }: { product: Product }) {
                     data-ai-hint={product.imageHint}
                 />
             </div>
-            <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold text-foreground">{product.title}</h3>
-                <p className="text-sm text-muted-foreground mt-2 flex-grow">{product.description}</p>
-                <div className="mt-4">
+            <div className="p-3 flex flex-col flex-grow">
+                <h3 className="text-base font-semibold text-foreground">{product.title}</h3>
+                <p className="text-xs text-muted-foreground mt-1 flex-grow">{product.description}</p>
+                <div className="mt-3">
                     <a
                         href={product.amazonLink}
                         target="_blank"
                         rel="nofollow sponsored"
                         className="w-full"
                     >
-                        <Button className="w-full">View on Amazon</Button>
+                        <Button className="w-full" size="sm">View on Amazon</Button>
                     </a>
                 </div>
             </div>
@@ -63,7 +63,7 @@ export default function TrendingProducts() {
     return (
         <section>
             <h2 className="text-3xl font-bold text-center mb-8">🔥 Trending Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {trendingProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
