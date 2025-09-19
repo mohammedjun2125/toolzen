@@ -85,7 +85,7 @@ export default function TermsPage() {
             <h3>Contact Us</h3>
             <p>If you have any questions about these Terms of Use, You can contact us:</p>
             <ul>
-              <li>By email: support@toolzen.com</li>
+              <li>By email: support@toolzenweb.com</li>
             </ul>
           </CardContent>
         </Card>

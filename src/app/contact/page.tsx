@@ -49,7 +49,7 @@ export default function ContactPage() {
                 <p>
                   For all inquiries, you can also email us at:
                   <br />
-                  <a href="mailto:support@toolzen.com">support@toolzen.com</a>
+                  <a href="mailto:support@toolzenweb.com">support@toolzenweb.com</a>
                 </p>
             </div>
           </CardContent>
