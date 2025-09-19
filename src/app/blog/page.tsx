@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
@@ -34,7 +35,7 @@ export default function BlogIndexPage() {
         <div className="grid grid-cols-12 gap-8">
             {/* Left Ad Banner */}
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-blog-sidebar-left" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-blog-sidebar-left" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Left Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>
@@ -105,7 +106,7 @@ export default function BlogIndexPage() {
                     </CardContent>
                 </Card>
 
-                <div id="ad-blog-sidebar-right" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-blog-sidebar-right" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Right Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>

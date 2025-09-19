@@ -31,13 +31,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-        canonical: `/blog/${post.slug}`,
+        canonical: `https://www.toolzenweb.com/blog/${post.slug}`,
     },
     openGraph: {
       title,
       description,
       type: 'article',
-      url: `/blog/${post.slug}`,
+      url: `https://www.toolzenweb.com/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author],
       images: [
@@ -76,7 +76,7 @@ export default function BlogPostPage({ params }: Props) {
   // Simple logic to insert an ad after the first paragraph
   const contentParts = htmlContent.split('</p>');
   const adPlaceholder = `
-    <div id="ad-in-article" class="my-8 min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+    <div id="ad-in-article" class="hidden my-8 min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
       <div class="text-center">
         <p>In-Article Ad</p>
         <p class="text-xs">(e.g., Fluid or Responsive)</p>
@@ -112,7 +112,7 @@ export default function BlogPostPage({ params }: Props) {
                 "name": "Toolzen",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "/favicon.svg"
+                    "url": "https://www.toolzenweb.com/favicon.svg"
                 }
             },
             "datePublished": post.date,
@@ -124,7 +124,7 @@ export default function BlogPostPage({ params }: Props) {
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-12 gap-8">
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-left" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-article-sidebar-left" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Left Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>
@@ -184,7 +184,7 @@ export default function BlogPostPage({ params }: Props) {
             </article>
 
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-right" className="sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-article-sidebar-right" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Right Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>

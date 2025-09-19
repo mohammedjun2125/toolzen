@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -16,7 +17,7 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
-    const [showAdModal, setShowAdModal] = useState(true);
+    const [showAdModal, setShowAdModal] = useState(false); // Changed to false
     
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
@@ -58,7 +59,7 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                     <p className="text-muted-foreground">{description}</p>
                 </div>
                 
-                <div id="ad-tool-page" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-tool-page" className="hidden min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                    <div className="text-center">
                      <p>Tool Page Ad</p>
                      <p className="text-xs">(e.g., 728x90)</p>

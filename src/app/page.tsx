@@ -16,7 +16,7 @@ export default function Home() {
       <main className="flex-1">
         <section className="w-full py-20 md:py-32 lg:py-40 bg-gradient-to-b from-background to-card/20">
           <div className="container mx-auto px-4 md:px-6 text-center">
-            <div id="ad-pre-header" className="mb-8 min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+            <div id="ad-pre-header" className="hidden mb-8 min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                 <div className="text-center">
                   <p>Top Banner Ad</p>
                   <p className="text-xs">(e.g., 970x90 or 728x90)</p>
@@ -36,7 +36,7 @@ export default function Home() {
               A suite of free, fast, and privacy-focused online tools to boost your productivity.
               No data is sent to our servers. Everything happens in your browser for maximum security and speed.
             </p>
-            <div id="ad-header" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+            <div id="ad-header" className="hidden min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                <div className="text-center">
                  <p>Header Ad</p>
                  <p className="text-xs">(e.g., 728x90)</p>
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 md:px-6 my-12">
-            <div id="ad-mid-page-1" className="min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+            <div id="ad-mid-page-1" className="hidden min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                <div className="text-center">
                  <p>Mid-Page Ad</p>
                  <p className="text-xs">(e.g., 300x250 or 336x280)</p>
@@ -75,7 +75,7 @@ export default function Home() {
         <BlogPreview posts={mockPosts} />
 
         <div className="container mx-auto px-4 md:px-6 my-12">
-            <div id="ad-mid-page-2" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+            <div id="ad-mid-page-2" className="hidden min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                <div className="text-center">
                  <p>Bottom Banner Ad</p>
                  <p className="text-xs">(e.g., 728x90)</p>

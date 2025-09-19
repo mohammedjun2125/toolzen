@@ -30,7 +30,7 @@ export function SiteFooter() {
           </Link>
         </nav>
       </div>
-      <div id="ad-footer" className="min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg mt-8">
+      <div id="ad-footer" className="hidden min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg mt-8">
           <div className="text-center">
             <p>Footer Ad</p>
             <p className="text-xs">(e.g., 728x90)</p>
