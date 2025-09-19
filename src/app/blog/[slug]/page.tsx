@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
@@ -128,7 +129,7 @@ export default function BlogPostPage({ params }: Props) {
                         <p>Left Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>
                     </div>
-                    <ins className="adsbygoogle"
+                    <ins class="adsbygoogle"
                          style={{ display: 'none' }}
                          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
                          data-ad-slot="1234567890"
@@ -188,7 +189,7 @@ export default function BlogPostPage({ params }: Props) {
                         <p>Right Sidebar Ad</p>
                         <p className="text-xs">(e.g., 160x600)</p>
                     </div>
-                    <ins className="adsbygoogle"
+                    <ins class="adsbygoogle"
                          style={{ display: 'none' }}
                          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
                          data-ad-slot="1234567890"
