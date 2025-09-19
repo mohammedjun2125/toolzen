@@ -35,10 +35,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'www.toolzenweb.com',
+            value: 'toolzenweb.com',
           },
         ],
-        destination: 'https://toolzenweb.com/:path*',
+        destination: 'https://www.toolzenweb.com/:path*',
         permanent: true,
       },
     ];

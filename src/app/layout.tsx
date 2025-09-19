@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Toolzen' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
-  metadataBase: new URL('https://toolzenweb.com'),
+  metadataBase: new URL('https://www.toolzenweb.com'),
   icons: {
     icon: '/favicon.svg',
   },
