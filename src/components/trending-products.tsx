@@ -1,3 +1,4 @@
+
 'use client';
 
 import { trendingProducts, Product } from '@/lib/products';
@@ -23,7 +24,7 @@ function ProductCard({ product }: { product: Product }) {
                         },
                         "offers": {
                             "@type": "Offer",
-                            "url": product.amazonLink,
+                            "url": product.affiliateLink,
                             "priceCurrency": product.currency,
                             "price": product.price,
                             "availability": "https://schema.org/InStock"
@@ -51,7 +52,7 @@ function ProductCard({ product }: { product: Product }) {
                 <p className="text-xs text-muted-foreground mt-1 flex-grow">{product.description}</p>
                 <div className="mt-3">
                     <a
-                        href={product.amazonLink}
+                        href={product.affiliateLink}
                         target="_blank"
                         rel="nofollow sponsored"
                         className="w-full"

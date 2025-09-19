@@ -1,0 +1,192 @@
+
+{
+  "categories": [
+    {
+      "name": "Electronics & Gadgets",
+      "slug": "electronics",
+      "description": "Shop smart gadgets, laptops, accessories, and cool electronics at Toolzen’s affiliate store.",
+      "seo": {
+        "title": "Best Electronics & Gadgets Online 2025 | Toolzen",
+        "metaDescription": "Shop the latest smart gadgets, powerful laptops, must-have accessories, and cool electronics at Toolzen’s affiliate store.",
+        "keywords": ["buy gadgets online India", "best laptop accessories", "cheap electronics 2025", "smart home devices"]
+      },
+      "faq": [
+        {
+          "question": "What kind of electronics can I find here?",
+          "answer": "Our collection includes everything from the latest smart home devices and wireless audio to essential laptop accessories and unique tech gadgets."
+        },
+        {
+          "question": "Are these products new?",
+          "answer": "Yes, all products are new and sold through trusted retailers like Amazon. We curate this list based on user reviews and our own research."
+        }
+      ],
+      "products": [
+        {
+          "id": "elec-001",
+          "title": "Smart Wi-Fi Power Strip",
+          "description": "Control your devices from anywhere with this 4-outlet smart power strip. Compatible with Alexa and Google Home for voice control.",
+          "image": "https://picsum.photos/seed/elec1/400/400",
+          "imageHint": "power strip",
+          "affiliateLink": "#AmazonLink-SmartStrip",
+          "brand": "TechHive",
+          "price": "25.99",
+          "currency": "USD"
+        },
+        {
+          "id": "elec-002",
+          "title": "Ergonomic Vertical Mouse",
+          "description": "Reduce wrist strain with this wireless vertical mouse. Its natural handshake position is designed for all-day comfort.",
+          "image": "https://picsum.photos/seed/elec2/400/400",
+          "imageHint": "ergonomic mouse",
+          "affiliateLink": "#AmazonLink-VerticalMouse",
+          "brand": "ComfortClick",
+          "price": "29.99",
+          "currency": "USD"
+        },
+        {
+          "id": "elec-003",
+          "title": "Portable 4K Projector",
+          "description": "Turn any room into a home theater. This compact projector supports 4K input and has built-in speakers for an immersive experience.",
+          "image": "https://picsum.photos/seed/elec3/400/400",
+          "imageHint": "portable projector",
+          "affiliateLink": "#AmazonLink-Projector",
+          "brand": "CineBeam",
+          "price": "149.99",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "name": "Home & Kitchen Essentials",
+      "slug": "home-kitchen",
+      "description": "Discover kitchen tools, home organizers, and daily essentials at Toolzen.",
+      "seo": {
+        "title": "Affordable Home & Kitchen Essentials 2025 | Toolzen",
+        "metaDescription": "Discover time-saving kitchen tools, clever home organizers, and essential products for daily life at the Toolzen affiliate shop.",
+        "keywords": ["best kitchen gadgets India", "affordable home tools", "daily use essentials 2025", "home organization"]
+      },
+      "faq": [
+        {
+          "question": "What are the must-have kitchen gadgets?",
+          "answer": "We recommend starting with a good quality air fryer, an automatic vegetable chopper, and a digital food scale. They save time and make cooking more enjoyable."
+        },
+        {
+          "question": "Are these products durable?",
+          "answer": "We prioritize products with high customer ratings for durability and quality. Our goal is to recommend items that provide long-lasting value."
+        }
+      ],
+      "products": [
+        {
+          "id": "home-001",
+          "title": "Automatic Soap Dispenser",
+          "description": "A touch-free soap dispenser for your kitchen or bathroom. Promotes hygiene and has an adjustable soap volume control.",
+          "image": "https://picsum.photos/seed/home1/400/400",
+          "imageHint": "soap dispenser",
+          "affiliateLink": "#AmazonLink-SoapDispenser",
+          "brand": "CleanFlow",
+          "price": "19.99",
+          "currency": "USD"
+        },
+        {
+          "id": "home-002",
+          "title": "Electric Kettle with Temperature Control",
+          "description": "The perfect brew every time. This kettle has preset temperature settings for tea, coffee, and more.",
+          "image": "https://picsum.photos/seed/home2/400/400",
+          "imageHint": "electric kettle",
+          "affiliateLink": "#AmazonLink-Kettle",
+          "brand": "PureBoil",
+          "price": "49.99",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "name": "Books & Learning",
+      "slug": "books-learning",
+      "description": "Find coding books, productivity guides, and learning tools with Toolzen affiliate deals.",
+      "seo": {
+        "title": "Top Books & Learning Resources 2025 | Toolzen",
+        "metaDescription": "Find the best coding books, top-rated productivity guides, and essential learning tools with Toolzen's curated affiliate deals.",
+        "keywords": ["best coding books", "top productivity books 2025", "books for students online", "learn programming"]
+      },
+       "faq": [
+        {
+          "question": "What is the best book for a beginner programmer?",
+          "answer": "For absolute beginners, we recommend starting with a book on Python, such as 'Python Crash Course'. It provides a solid foundation in programming fundamentals."
+        },
+        {
+          "question": "Are there any books on productivity?",
+          "answer": "Yes, we highly recommend 'Atomic Habits' by James Clear and 'Deep Work' by Cal Newport. Both offer practical strategies for improving focus and building good habits."
+        }
+      ],
+      "products": [
+        {
+          "id": "book-001",
+          "title": "'Atomic Habits' by James Clear",
+          "description": "An international bestseller that provides a proven framework for improving every day by building tiny, incremental habits.",
+          "image": "https://picsum.photos/seed/book1/400/400",
+          "imageHint": "book cover",
+          "affiliateLink": "#AmazonLink-AtomicHabits",
+          "brand": "Penguin Random House",
+          "price": "15.99",
+          "currency": "USD"
+        },
+        {
+          "id": "book-002",
+          "title": "'The Pragmatic Programmer' by Andrew Hunt",
+          "description": "A classic book for software developers that covers everything from personal responsibility to career development and architectural techniques.",
+          "image": "https://picsum.photos/seed/book2/400/400",
+          "imageHint": "programming book",
+          "affiliateLink": "#AmazonLink-PragmaticProgrammer",
+          "brand": "Addison-Wesley",
+          "price": "35.50",
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "name": "Fashion & Lifestyle",
+      "slug": "fashion-lifestyle",
+      "description": "Explore lifestyle accessories, fashion trends, and stylish gadgets at Toolzen affiliate shop.",
+      "seo": {
+        "title": "Trending Fashion & Lifestyle Products 2025 | Toolzen",
+        "metaDescription": "Explore our curated collection of modern lifestyle accessories, the latest fashion trends, and stylish gadgets at the Toolzen affiliate shop.",
+        "keywords": ["best lifestyle accessories India", "fashion trends 2025", "buy smartwatches online", "stylish gadgets"]
+      },
+      "faq": [
+        {
+            "question": "What are some must-have lifestyle accessories?",
+            "answer": "A high-quality smartwatch, a durable and stylish backpack, and a portable power bank are three essentials for a modern, on-the-go lifestyle."
+        },
+        {
+            "question": "How do you choose which fashion items to feature?",
+            "answer": "We focus on timeless pieces and accessories that combine style with functionality, prioritizing items with excellent customer reviews and lasting appeal."
+        }
+      ],
+      "products": [
+        {
+          "id": "life-001",
+          "title": "Minimalist Smartwatch with Fitness Tracker",
+          "description": "Track your fitness goals in style. This watch offers a clean design, long battery life, and essential health monitoring features.",
+          "image": "https://picsum.photos/seed/life1/400/400",
+          "imageHint": "smartwatch",
+          "affiliateLink": "#AmazonLink-Smartwatch",
+          "brand": "ChronoFit",
+          "price": "129.00",
+          "currency": "USD"
+        },
+        {
+          "id": "life-002",
+          "title": "Anti-Theft Waterproof Backpack",
+          "description": "A sleek and secure backpack for your daily commute or travel. Features hidden zippers, a USB charging port, and water-resistant fabric.",
+          "image": "https://picsum.photos/seed/life2/400/400",
+          "imageHint": "backpack",
+          "affiliateLink": "#AmazonLink-Backpack",
+          "brand": "Urban Armor",
+          "price": "65.00",
+          "currency": "USD"
+        }
+      ]
+    }
+  ]
+}
