@@ -36,3 +36,10 @@ export interface ProductsData {
 export const productsData: ProductsData = products as ProductsData;
 
 export const categoryMap = new Map(productsData.categories.map(cat => [cat.slug, cat]));
+
+// Select a few products to feature as "trending"
+export const trendingProducts: Product[] = [
+    ...productsData.categories[0].products.slice(0, 2), // 2 from electronics
+    ...productsData.categories[1].products.slice(0, 1), // 1 from home
+    ...productsData.categories[2].products.slice(0, 1), // 1 from books
+];
