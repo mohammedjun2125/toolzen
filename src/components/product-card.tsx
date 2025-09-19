@@ -44,7 +44,7 @@ export function ProductCard({ product }: { product: Product }) {
                         fill
                         className="object-cover"
                         data-ai-hint={product.imageHint}
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     />
                 </div>
                 <div className="p-4 flex flex-col flex-grow">

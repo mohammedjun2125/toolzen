@@ -31,7 +31,17 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
+        source: '/:path*.amp',
+        destination: '/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*(\\?amp=1)',
+        destination: '/:path*',
+        permanent: true,
+      },
+      {
+        source: '/toolzenweb.com/:path*',
         has: [
           {
             type: 'host',
