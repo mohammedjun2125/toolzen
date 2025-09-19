@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://toolzen.com
+
+# Sitemaps
 Sitemap: https://toolzen.com/sitemap.xml
