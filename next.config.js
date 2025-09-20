@@ -31,16 +31,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*.amp',
-        destination: '/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*(\\?amp=1)',
-        destination: '/:path*',
-        permanent: true,
-      },
-      {
         source: '/toolzenweb.com/:path*',
         has: [
           {
@@ -51,6 +41,18 @@ const nextConfig = {
         destination: 'https://www.toolzenweb.com/:path*',
         permanent: true,
       },
+    ];
+  },
+  async rewrites() {
+    return [
+        {
+            source: '/:path*.amp',
+            destination: '/404',
+        },
+        {
+            source: '/:path*\\?amp=1',
+            destination: '/404',
+        },
     ];
   },
 }
