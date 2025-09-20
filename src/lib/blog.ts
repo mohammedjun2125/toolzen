@@ -985,8 +985,3 @@ Random number generators are fascinating and incredibly useful tools. While true
 ];
 
 export const postMap = new Map(mockPosts.map(post => [post.slug, post]));
-
-
-    
-
-
