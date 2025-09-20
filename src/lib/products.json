@@ -41,14 +41,19 @@
         {
           "id": "elec-002",
           "title": "Ergonomic Vertical Mouse",
-          "description": "Reduce wrist strain with this wireless vertical mouse. Its natural handshake position is designed for all-day comfort.",
-          "images": ["https://picsum.photos/seed/elec2/400/400"],
+          "description": "Portronics Toad Ergo Vertical Advanced Wireless Ergonomic Mouse 2.4Ghz, 6D Button, Wrist Support, Adjustable DPI Upto 3200, Supports Hand Posture(Black).",
+          "images": [
+            "https://m.media-amazon.com/images/I/51CziEalEJL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61cfbVcUBuL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/610RDcyrCoL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/71C-yFgZsXL._SX679_.jpg"
+          ],
           "imageHint": "ergonomic mouse",
-          "affiliateLink": "#AmazonLink-VerticalMouse",
-          "brand": "ComfortClick",
-          "price": "29.99",
-          "originalPrice": "39.99",
-          "currency": "USD"
+          "affiliateLink": "https://amzn.to/46LhKrn",
+          "brand": "Portronics",
+          "price": "549",
+          "originalPrice": "1499",
+          "currency": "₹"
         },
         {
           "id": "elec-003",
