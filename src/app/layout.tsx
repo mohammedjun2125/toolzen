@@ -22,7 +22,14 @@ export const metadata: Metadata = {
   publisher: 'Toolzen',
   metadataBase: new URL('https://www.toolzenweb.com'),
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    other: {
+      rel: 'icon',
+      url: '/favicon.svg',
+      type: 'image/svg+xml',
+    },
   },
   verification: {
     google: 'TZ4ILWL6OcwJ1vjR2BrFEnCXjM1bWVMrl8lersFqt4g',
