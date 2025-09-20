@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { ProductCard } from './product-card';
+import Link from 'next/link';
 
 
 export default function TrendingProducts() {
@@ -16,6 +17,11 @@ export default function TrendingProducts() {
                 {trendingProducts.map((product) => (
                     <ProductCard product={product} key={product.id} />
                 ))}
+            </div>
+             <div className="text-center mt-12">
+                <Button asChild size="lg">
+                    <Link href="/products">View All Products</Link>
+                </Button>
             </div>
             <div className="text-center mt-8">
                 <p className="text-xs text-muted-foreground">
