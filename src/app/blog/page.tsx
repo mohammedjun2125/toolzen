@@ -48,6 +48,9 @@ export default function BlogIndexPage() {
             </aside>
 
             <div className="col-span-12 lg:col-span-8">
+                <div className="mb-8 max-w-lg mx-auto">
+                  <Input placeholder="Search articles..." />
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {posts.map((post, index) => (
                         <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
@@ -80,15 +83,6 @@ export default function BlogIndexPage() {
             </div>
 
             <aside className="col-span-12 lg:col-span-2 space-y-8">
-                <Card className="bg-card/60 backdrop-blur-lg">
-                    <CardHeader>
-                        <CardTitle>Search</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <Input placeholder="Search articles..." />
-                    </CardContent>
-                </Card>
-
                 <Card className="bg-card/60 backdrop-blur-lg">
                     <CardHeader>
                         <CardTitle>Categories</CardTitle>
