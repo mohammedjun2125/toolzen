@@ -50,7 +50,33 @@ export default function CategoryPage({ params }: Props) {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
-        
+        {category.products.map(product => (
+          <script
+            key={product.id}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                    "@context": "https://schema.org/",
+                    "@type": "Product",
+                    "name": product.title,
+                    "image": product.images,
+                    "description": product.description,
+                    "brand": {
+                        "@type": "Brand",
+                        "name": product.brand
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": product.affiliateLink,
+                        "priceCurrency": product.currency,
+                        "price": product.price,
+                        "availability": "https://schema.org/InStock"
+                    }
+                })
+            }}
+          />
+        ))}
+
         <Breadcrumbs items={[
           { label: 'Products', href: '/products' },
           { label: category.name, href: `/products/${category.slug}` }
