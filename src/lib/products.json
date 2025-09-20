@@ -57,14 +57,20 @@
         },
         {
           "id": "elec-003",
-          "title": "Portable 4K Projector",
-          "description": "Turn any room into a home theater. This compact projector supports 4K input and has built-in speakers for an immersive experience.",
-          "images": ["https://picsum.photos/seed/elec3/400/400"],
+          "title": "Crossbeats Lumex Flix 4K Projector",
+          "description": "[Netflix Official License] Crossbeats Lumex Flix Projector 4k Ultra HD, 1080p Native, Android 13, WiFi, 16000 Lumens, Smart Mini Projector for Room, Portable Home Cinema, Built-in Apps, 300''Display.",
+          "images": [
+            "https://m.media-amazon.com/images/I/818VgGLuQ6L._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81SfWi6Kz6L._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81kkCfgkGGL._SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/81pEkMmLq+L._SL1500_.jpg"
+          ],
           "imageHint": "portable projector",
-          "affiliateLink": "#AmazonLink-Projector",
-          "brand": "CineBeam",
-          "price": "149.99",
-          "currency": "USD"
+          "affiliateLink": "https://amzn.to/4mpal5O",
+          "brand": "Crossbeats",
+          "price": "14990",
+          "originalPrice": "36999",
+          "currency": "₹"
         },
         {
           "id": "elec-004",
