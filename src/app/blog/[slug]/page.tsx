@@ -124,10 +124,10 @@ export default function BlogPostPage({ params }: Props) {
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-12 gap-8">
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-left" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-article-sidebar-left" class="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Left Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
+                        <p class="text-xs">(e.g., 160x600)</p>
                     </div>
                     <ins class="adsbygoogle"
                          style={{ display: 'none' }}
@@ -184,10 +184,10 @@ export default function BlogPostPage({ params }: Props) {
             </article>
 
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-right" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
+                <div id="ad-article-sidebar-right" class="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
                     <div className="text-center">
                         <p>Right Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
+                        <p class="text-xs">(e.g., 160x600)</p>
                     </div>
                     <ins class="adsbygoogle"
                          style={{ display: 'none' }}

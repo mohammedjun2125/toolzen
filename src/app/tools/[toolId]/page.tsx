@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: toolTitle,
     description: toolDescription,
     alternates: {
-      canonical: `/tools/${params.toolId}`,
+      canonical: `https://www.toolzenweb.com/tools/${params.toolId}`,
     },
     openGraph: {
         title: toolTitle,
@@ -87,20 +87,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title: toolTitle,
         description: toolDescription,
-    },
-    // Structured Data
-    other: {
-      '@context': 'https://schema.org',
-      '@type': 'HowToTool',
-      name: tool.name,
-      description: tool.description,
-      step: [
-        { '@type': 'HowToStep', text: `Open the ${tool.name} tool on Toolzen.` },
-        { '@type': 'HowToStep', text: 'Provide your input (e.g., upload a file, enter text, select options).' },
-        { '@type': 'HowToStep', text: 'Adjust any available settings to your preference.' },
-        { '@type': 'HowToStep', text: 'Click the action button (e.g., "Compress", "Generate", "Calculate").' },
-        { '@type': 'HowToStep', text: 'Get your result instantly on the same page, ready to copy or download.' }
-      ]
     },
   }
 }
@@ -122,9 +108,29 @@ export default function ToolPage({ params }: Props) {
 
   const faq = toolFaqs[toolId] || [];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowToTool',
+    name: tool.name,
+    description: tool.description,
+    step: [
+      { '@type': 'HowToStep', text: `Open the ${tool.name} tool on Toolzen.` },
+      { '@type': 'HowToStep', text: 'Provide your input (e.g., upload a file, enter text, select options).' },
+      { '@type': 'HowToStep', text: 'Adjust any available settings to your preference.' },
+      { '@type': 'HowToStep', text: 'Click the action button (e.g., "Compress", "Generate", "Calculate").' },
+      { '@type': 'HowToStep', text: 'Get your result instantly on the same page, ready to copy or download.' }
+    ]
+  };
+
   return (
-    <ToolLayout title={tool.name} description={tool.description} faq={faq}>
-      <ToolComponent />
-    </ToolLayout>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolLayout title={tool.name} description={tool.description} faq={faq}>
+        <ToolComponent />
+      </ToolLayout>
+    </>
   );
 }
