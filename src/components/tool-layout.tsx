@@ -82,7 +82,9 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                         <CardContent>
                             <ul className="space-y-2">
                                 <li><Link href="/blog/how-to-compress-images-online" className="text-primary hover:underline">How to Compress Images Online Without Losing Quality</Link></li>
-                                <li><Link href="/blog/online-pdf-merge-guide" className="text-primary hover:underline">How to Merge PDFs Safely</Link></li>
+                                <li><Link href="/blog/how-to-merge-pdfs-safely" className="text-primary hover:underline">How to Merge PDFs Safely</Link></li>
+                                <li><Link href="/blog/how-to-resize-images-online" className="text-primary hover:underline">How to Resize Images Without Losing Quality</Link></li>
+                                <li><Link href="/blog/how-to-calculate-percentages-quickly" className="text-primary hover:underline">How to Calculate Percentages Quickly</Link></li>
                             </ul>
                         </CardContent>
                     </Card>

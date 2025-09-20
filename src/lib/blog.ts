@@ -600,6 +600,387 @@ Stop letting time zones be a barrier to effective communication. A simple, free 
 
 **[Try our fast and easy Time Zone Converter now!](/tools/timezone-converter)**
 `,
+    },
+    {
+        slug: 'how-to-resize-images-online',
+        title: 'How to Resize Images Online Without Losing Quality',
+        excerpt: 'Learn the best way to resize JPG, PNG, and WEBP images for social media, blogs, or emails. This guide shows you how to change image dimensions while preserving quality for free.',
+        date: '2024-08-18',
+        image: 'https://picsum.photos/seed/blog9/800/600',
+        imageHint: 'image dimensions',
+        author: 'Toolzen Team',
+        category: 'Image Optimization',
+        content: `
+# How to Resize Images Online Without Losing Quality
+
+Have you ever tried to upload a profile picture only to be told it's the wrong size? Or maybe you've noticed that the images on your blog look stretched and blurry. Sizing images correctly is a fundamental step in web design, social media, and digital communication. Using an image that's too large can slow down your website, while one that's too small will look unprofessional and pixelated.
+
+This comprehensive guide will teach you how to resize images online for free, explaining the difference between resizing and compressing, how to maintain aspect ratio, and why using a private, client-side tool is the best choice for the job.
+
+## Resizing vs. Compressing: What's the Difference?
+
+While often used interchangeably, resizing and compressing are two distinct processes:
+
+*   **Resizing:** This changes the **dimensions** of an image (its width and height in pixels). If you have a 4000x3000 pixel photo from your camera but need a 800x600 image for your blog, you need to resize it. Resizing an image to be smaller almost always reduces the file size as a byproduct.
+*   **Compressing:** This reduces the **file size** (in KB or MB) of an image, ideally without changing its dimensions. This is achieved by removing redundant or less noticeable data from the image file.
+
+**In short: resizing changes the size it appears on screen, while compressing changes how much storage it takes up.** Often, the best approach is to first resize an image to the exact dimensions you need, and then compress it to further reduce its file size.
+
+## Why You Should Always Resize Your Images
+
+1.  **Faster Website Performance:** A browser should not have to do the work of resizing a massive 4000px image down to fit in a 500px container. This wastes bandwidth and processing power, slowing your site down. By serving an image that's already the correct size, your pages will load much faster.
+2.  **Professional Appearance:** Images that are properly sized for their containers look sharp and professional. Using a small image and stretching it to fit a large space results in pixelation and blurriness.
+3.  **Meeting Platform Requirements:** Social media sites, content management systems, and email marketing platforms often have specific dimension requirements for images. Resizing ensures your images look their best everywhere.
+
+## How to Resize an Image with Our Free Online Tool
+
+Our [Image Resizer](/tools/image-resizer) is a fast, private, and easy-to-use tool that works entirely in your browser. Your images are never uploaded to a server, ensuring your data remains completely secure.
+
+### Step-by-Step Guide:
+
+1.  **Upload Your Image:** Drag and drop your image file (JPG, PNG, WEBP) or click to select it from your device.
+2.  **Enter New Dimensions:** Once the image is loaded, you'll see its original width and height. You can enter your desired new width or height in the input fields.
+3.  **Maintain Aspect Ratio:** By default, the "Maintain aspect ratio" option is checked. This is highly recommended. It means if you change the width, the height will automatically adjust to keep the image from looking stretched or squashed. If you need specific, non-proportional dimensions, you can uncheck this box.
+4.  **Resize and Download:** Click the "Resize Image" button. The tool will instantly process the image and show you a preview of the resized version. If you're happy with it, click "Download" to save the new image to your computer.
+
+## FAQ: Online Image Resizing
+
+**Q: Will resizing my image make it lose quality?**
+A: When you make an image **smaller**, the quality loss is generally minimal and often unnoticeable. The resizing algorithm intelligently removes pixels to shrink the image. However, when you make an image **larger** than its original dimensions (upscaling), the software has to guess what the new pixels should look like, which can lead to a loss of sharpness and a "blurry" or "pixelated" look. It's always best to start with a high-resolution image and resize it down.
+
+**Q: Is it safe to use this tool? My images are private.**
+A: Yes, it is 100% safe. Our Image Resizer is a client-side tool, meaning all the processing happens on your own computer within your web browser. Your images are never sent to our servers, guaranteeing your privacy.
+
+**Q: What's the best size for a web image?**
+A: It depends on its use. A full-width "hero" image might be 1920px wide. A blog post image might be 800-1200px wide. A small thumbnail could be 150x150px. The key is to find out the maximum size the image will be displayed at on your site and resize it to those dimensions.
+
+## Conclusion
+
+Properly resizing your images is one of the easiest and most effective optimizations you can make for your website or digital content. It improves performance, ensures a professional appearance, and guarantees your images meet the requirements of any platform. By using a fast and secure online tool, you can get the job done in seconds without needing complex software like Photoshop.
+
+**Ready to get your images perfectly sized?**
+
+**[Try our Free Image Resizer now!](/tools/image-resizer)**
+`,
+    },
+    {
+        slug: 'how-to-calculate-percentages-quickly',
+        title: 'How to Calculate Percentages Quickly (3 Easy Methods)',
+        excerpt: 'A step-by-step guide on how to calculate percentages for discounts, tips, and more. Learn the formulas and use our free online Percentage Calculator to get instant answers.',
+        date: '2024-08-16',
+        image: 'https://picsum.photos/seed/blog10/800/600',
+        imageHint: 'calculator chart',
+        author: 'Toolzen Team',
+        category: 'Calculators',
+        content: `
+# How to Calculate Percentages Quickly (3 Easy Methods)
+
+Percentages are a part of our daily lives, whether we're figuring out a discount at our favorite store, calculating a tip at a restaurant, or tracking our progress towards a goal. While the concept is simple, the calculations can sometimes be confusing. Are you trying to find the percentage of a number, the percentage increase, or what percentage one number is of another?
+
+This guide will break down the three most common percentage calculations into simple, easy-to-understand formulas. We'll also show you how to use a [free online Percentage Calculator](/tools/percentage-calculator) to do the hard work for you, saving you time and ensuring accuracy.
+
+## What is a Percentage?
+
+The word "percent" literally means "per one hundred." A percentage is simply a fraction or a ratio where the value of the whole is always 100. So, 25% is the same as 25/100, or 0.25. It's a universal way to talk about parts of a whole, which is why it's used in everything from finance to statistics.
+
+Let's dive into the three most common scenarios you'll encounter.
+
+### Method 1: How to Find a Percentage of a Number
+This is the most common calculation. You want to find out what a certain percentage of a given number is.
+
+**Use Case:** A shirt you want to buy is $40, and it's on sale for 20% off. How much money do you save?
+
+**The Formula:**
+\`(Percentage / 100) * Number = Result\`
+
+**Step-by-Step:**
+1.  **Convert the percentage to a decimal:** 20% = 20 / 100 = 0.20
+2.  **Multiply the decimal by the number:** 0.20 * $40 = $8
+
+**Answer:** You save $8 on the shirt.
+
+### Method 2: How to Calculate What Percentage One Number is of Another
+This is useful when you want to compare two numbers and express their relationship as a percentage.
+
+**Use Case:** You scored 35 out of 50 on a test. What is your score as a percentage?
+
+**The Formula:**
+\`(Part / Whole) * 100 = Percentage\`
+
+**Step-by-Step:**
+1.  **Divide the "part" by the "whole":** 35 / 50 = 0.7
+2.  **Multiply the result by 100:** 0.7 * 100 = 70%
+
+**Answer:** You scored 70% on the test.
+
+### Method 3: How to Calculate Percentage Increase or Decrease
+This is used to determine how much a value has changed over time.
+
+**Use Case:** Your monthly rent increased from $1,200 to $1,350. What was the percentage increase?
+
+**The Formula:**
+\`((New Value - Old Value) / Old Value) * 100 = Percentage Change\`
+
+**Step-by-Step:**
+1.  **Calculate the difference:** $1,350 - $1,200 = $150
+2.  **Divide the difference by the original value:** $150 / $1,200 = 0.125
+3.  **Multiply by 100:** 0.125 * 100 = 12.5%
+
+**Answer:** Your rent increased by 12.5%. The same formula works for a decrease; the result will just be a negative number.
+
+## The Easiest Way: Use an Online Percentage Calculator
+
+While it's helpful to understand the formulas, doing these calculations manually can be slow and prone to errors. That's where a simple online tool comes in handy.
+
+Our [Percentage Calculator](/tools/percentage-calculator) provides a clean, easy-to-use interface for all three scenarios.
+*   **No manual formulas:** Just enter the numbers into the correct fields.
+*   **Instant results:** The answer is calculated in real-time as you type.
+*   **Client-Side and Private:** All calculations happen in your browser. Your financial or academic data is never sent to our servers.
+
+## FAQ: Percentage Calculations
+
+**Q: Can I use this calculator for financial calculations like interest?**
+A: Yes, you can use it for simple interest calculations. For example, to find 5% interest on a $1,000 loan for one year, you would use Method 1: (5 / 100) * 1000 = $50. For more complex loans with compounding interest, you should use our [Loan / EMI Calculator](/tools/loan-emi-calculator).
+
+**Q: How do I calculate a reverse percentage? (e.g., if a price is $50 *after* a 20% discount, what was the original price?)**
+A: This is a bit trickier. If the price is $50 after a 20% discount, it means $50 is 80% (100% - 20%) of the original price. The formula is: \`Original Price = Final Price / (1 - (Discount Percentage / 100))\`.
+So, \`$50 / (1 - 0.20) = $50 / 0.80 = $62.50\`. The original price was $62.50.
+
+## Conclusion
+
+Understanding how to calculate percentages is a fundamental life skill. By learning the three core formulas, you can handle most everyday situations with confidence. And for those times when you need a quick, reliable answer without the mental math, a free online percentage calculator is the perfect tool for the job.
+
+**Need to calculate a percentage right now?**
+
+**[Try our fast and free Percentage Calculator!](/tools/percentage-calculator)**
+`,
+    },
+    {
+        slug: 'how-to-plan-loan-repayments-with-emi-calculator',
+        title: 'How to Plan Your Loan Repayments with an EMI Calculator',
+        excerpt: 'Taking out a loan? Our guide explains what an EMI is, how it\'s calculated, and how you can use a free online EMI Calculator to plan your monthly budget and save on interest.',
+        date: '2024-08-14',
+        image: 'https://picsum.photos/seed/blog11/800/600',
+        imageHint: 'financial planning',
+        author: 'Toolzen Team',
+        category: 'Calculators',
+        content: `
+# How to Plan Your Loan Repayments with an EMI Calculator
+
+Taking out a loan is one of the biggest financial decisions you'll ever make. Whether it's a home loan, a car loan, or a personal loan, the amount you borrow is only one part of the equation. Understanding how much you'll have to pay back each month is crucial for managing your budget and ensuring you can afford the loan over its entire lifetime.
+
+This is where an EMI calculator comes in. This guide will demystify the concept of EMI, explain the formula behind it, and show you how a [free online EMI calculator](/tools/loan-emi-calculator) can become your most powerful tool for financial planning.
+
+## What is an EMI?
+
+EMI stands for **Equated Monthly Installment**. It is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. The EMI is used to pay off both the interest and principal each month so that over a specified number of years, the loan is paid off in full.
+
+Each EMI payment consists of two parts:
+1.  **Interest Payment:** The portion of the payment that covers the cost of borrowing the money.
+2.  **Principal Repayment:** The portion that goes towards reducing the actual loan amount you borrowed.
+
+In the beginning, the interest component of the EMI is larger. As you continue to pay off the loan, the principal component grows larger, and the interest portion shrinks.
+
+## The EMI Calculation Formula
+
+The mathematical formula to calculate EMI is:
+
+**EMI = [P × r × (1 + r)^n] / [(1 + r)^n – 1]**
+
+Where:
+*   **P** is the **Principal** loan amount.
+*   **r** is the monthly **rate of interest**. (Note: The annual interest rate is divided by 12).
+*   **n** is the number of monthly installments, or the **tenure** of the loan in months.
+
+Let's say you take a $50,000 loan for 5 years (60 months) at an annual interest rate of 10%.
+*   P = 50,000
+*   r = (10 / 100) / 12 = 0.00833
+*   n = 60
+
+Plugging this into the formula gives you an EMI of approximately **$1,062.35**. Manually calculating this is tedious and prone to errors, which is why an online calculator is so valuable.
+
+## How to Use a Loan / EMI Calculator for Smart Financial Planning
+
+A [Loan / EMI Calculator](/tools/loan-emi-calculator) does the heavy lifting for you. You just need to input the three key variables, and it instantly calculates your monthly payment.
+
+### Step-by-Step Guide:
+
+1.  **Enter Loan Amount:** Use the slider or input field to set the total amount you wish to borrow.
+2.  **Set Interest Rate:** Input the annual interest rate offered by your lender.
+3.  **Define Loan Tenure:** Set the repayment period in months (e.g., 60 months for a 5-year loan).
+
+The calculator will immediately display:
+*   **Your Monthly EMI:** The fixed amount you'll need to pay each month.
+*   **Total Interest Payable:** The total cost of borrowing the money over the life of the loan.
+*   **Total Amount Payable:** The sum of the principal and the total interest.
+
+### Using the Calculator to Make Better Decisions
+
+*   **Experiment with Tenure:** See how a shorter loan tenure increases your EMI but drastically reduces the total interest you pay. A longer tenure makes the EMI smaller and more manageable, but you'll pay significantly more in interest over time.
+*   **Compare Lender Offers:** When you get loan offers from different banks, you can input their respective interest rates to see how a small difference in the rate can affect your EMI and total payable amount over the years.
+*   **Check Affordability:** Before committing to a loan, use the calculator to determine if the monthly EMI fits comfortably within your budget.
+
+## FAQ: Loan and EMI Calculations
+
+**Q: Is the EMI calculator accurate?**
+A: Yes, it uses the standard, universally accepted formula for calculating EMIs. It provides a very accurate estimate of what your monthly payments will be.
+
+**Q: Is my financial data safe?**
+A: Absolutely. Our EMI Calculator is a **client-side tool**. This means all calculations are done in your browser on your device. Your loan amount, interest rate, and other financial details are never sent to our servers, ensuring complete privacy.
+
+**Q: Does this calculator work for both home loans and car loans?**
+A: Yes, the EMI formula is the same for all types of loans, including home loans, car loans, and personal loans. Simply enter the correct principal, interest rate, and tenure for your specific loan.
+
+## Conclusion
+
+An EMI calculator is an essential tool for anyone considering taking out a loan. It demystifies the complex calculation and empowers you to make informed financial decisions. By allowing you to visualize how different loan amounts, interest rates, and tenures will impact your monthly budget, it helps you choose a loan that you can comfortably afford and plan your financial future with confidence.
+
+**Ready to plan your next big purchase?**
+
+**[Try our free and secure Loan / EMI Calculator now!](/tools/loan-emi-calculator)**
+`,
+    },
+    {
+        slug: 'how-to-create-barcodes-online',
+        title: 'How to Create Barcodes Online for Free (A Beginner\'s Guide)',
+        excerpt: 'Learn how to create and download barcodes for your business, inventory, or personal projects. This guide covers different barcode types and shows you how to use a free online barcode generator.',
+        date: '2024-08-12',
+        image: 'https://picsum.photos/seed/blog12/800/600',
+        imageHint: 'barcode scanner',
+        author: 'Toolzen Team',
+        category: 'Generators',
+        content: `
+# How to Create Barcodes Online for Free (A Beginner's Guide)
+
+Barcodes are everywhere. From the groceries we buy to the packages we receive, these machine-readable patterns of lines and spaces are the unsung heroes of modern commerce and logistics. They allow for fast, accurate identification of products, making inventory management, retail checkouts, and asset tracking incredibly efficient.
+
+You might think that creating barcodes requires specialized, expensive software, but that's no longer the case. Thanks to free online tools, anyone can generate high-quality, printable barcodes in seconds. This guide will walk you through the basics of barcodes, explain the most common formats, and show you how to create your own using our [free Barcode Generator](/tools/barcode-generator).
+
+## What is a Barcode and How Does It Work?
+
+A barcode is a visual representation of data that can be read by a machine (a barcode scanner). The data usually represents a unique identifier for a product, like a number or an alphanumeric string. When a scanner reads the lines and spaces, it decodes them back into the original data, which can then be looked up in a database to find information like the product's name, price, and stock level.
+
+There are two main categories of barcodes:
+
+1.  **1D (Linear) Barcodes:** These are the traditional barcodes made up of vertical lines and spaces of varying widths. They hold a small amount of data, typically a product's identification number. Examples include UPC and EAN codes found on retail products.
+2.  **2D (Matrix) Barcodes:** These use patterns of squares, dots, and hexagons to store information both vertically and horizontally. They can hold much more data than 1D barcodes, including website URLs, contact information, and more. The most famous example is the **QR Code**.
+
+## Common 1D Barcode Formats
+
+Our barcode generator supports a wide range of formats. Here are a few of the most popular ones:
+
+*   **CODE128:** A very versatile and popular alphanumeric barcode. It can encode all 128 ASCII characters and is widely used in logistics and transportation for inventory tracking. It's a great general-purpose choice.
+*   **EAN-13 (European Article Number):** A 13-digit numeric code used for marking retail products worldwide (outside of North America). If you sell products in stores, you'll likely need an EAN barcode.
+*   **UPC (Universal Product Code):** A 12-digit numeric code that is the standard for retail products in the United States and Canada.
+*   **CODE39:** One of the oldest barcode types. It can encode numbers, uppercase letters, and a few symbols. It's still used in some industries for internal inventory.
+*   **ITF (Interleaved 2 of 5):** A numeric-only barcode used for shipping and warehouse applications.
+
+## How to Create a Barcode with Our Free Online Tool
+
+Creating a barcode with our tool is a simple, three-step process. Since it's a **client-side tool**, the barcode is generated directly in your browser, ensuring your data is private.
+
+### Step-by-Step Guide:
+
+1.  **Enter Your Data:** In the "Text to Encode" field, type the number or text you want the barcode to represent.
+2.  **Choose a Format:** Select the barcode format that fits your needs from the dropdown menu (e.g., CODE128 for general use, EAN-13 for retail). The tool will provide real-time validation to let you know if your data is valid for the chosen format (e.g., EAN-13 only accepts numbers of a specific length).
+3.  **Download Your Barcode:** A preview of the barcode will appear instantly. If it looks correct, click the "Download as PNG" button. You'll get a high-quality, transparent image file that's ready for printing or use in your designs.
+
+## FAQ: Barcode Generation
+
+**Q: Do I need a special license to create barcodes?**
+A: For internal use, like tracking your own inventory or assets, you can create and use any barcodes you want for free. However, if you are selling products in retail stores, you need to obtain an official GS1 Company Prefix to create unique EAN or UPC codes. Our tool can generate the barcode *image* for you once you have the number.
+
+**Q: Can I change the color of the barcode?**
+A: For best results, barcodes should always be printed with dark bars (preferably black) on a light background (preferably white). High contrast is essential for scanners to read them accurately. Our tool generates a standard black-on-white PNG for maximum scannability.
+
+**Q: Is it safe to generate barcodes online?**
+A: Yes. Our tool is 100% private because it runs on your device. The data you enter is never sent to our servers.
+
+## Conclusion
+
+Barcodes are a powerful tool for streamlining operations, whether you're running a small business, managing a warehouse, or just organizing your personal belongings. With free and accessible online barcode generators, you no longer need to be a large corporation to benefit from this technology. You can create custom, high-quality barcodes in just a few clicks, ready for immediate use.
+
+**Ready to create your first barcode?**
+
+**[Try our free and private Barcode Generator now!](/tools/barcode-generator)**
+`,
+    },
+    {
+        slug: 'how-random-number-generators-work',
+        title: 'Random Number Generators: How They Work and Why We Use Them',
+        excerpt: 'From gaming and lotteries to scientific research, random numbers are crucial. This guide explains how online random number generators work and shows you how to generate them for free.',
+        date: '2024-08-08',
+        image: 'https://picsum.photos/seed/blog13/800/600',
+        imageHint: 'dice data',
+        author: 'Toolzen Team',
+        category: 'Generators',
+        content: `
+# Random Number Generators: How They Work and Why We Use Them
+
+The concept of "randomness" is something we intuitively understand, yet it's surprisingly complex to achieve in the digital world. Computers, by their very nature, are deterministic machines that follow instructions. So how can a machine designed for logic and order produce something truly unpredictable?
+
+This is the challenge that random number generators (RNGs) aim to solve. They are essential tools used in a vast range of applications, from picking a winner in a giveaway to powering complex scientific simulations. This guide will explore how RNGs work, the difference between "true" randomness and "pseudo-randomness," and how you can use a [free online Random Number Generator](/tools/random-number-generator) for your own needs.
+
+## Why Do We Need Random Numbers?
+
+Random numbers are the engine behind fairness, unpredictability, and unbiased sampling in many fields:
+
+*   **Gaming and Lotteries:** From shuffling a deck of cards in a digital card game to drawing the winning numbers in a lottery, RNGs ensure that the outcome is fair and not predictable.
+*   **Cryptography and Security:** Random numbers are critical for generating secure encryption keys and other cryptographic elements that protect our data online.
+*   **Scientific Research and Statistics:** Scientists use random numbers to select unbiased samples for studies, simulate complex systems (like weather patterns), and run Monte Carlo simulations.
+*   **Testing and Quality Assurance:** Developers use random data to test how their software behaves under unexpected conditions.
+*   **Everyday Decisions:** Can't decide where to go for dinner? Assign numbers to your options and let a random generator choose for you!
+
+## True Randomness vs. Pseudo-Randomness
+
+There are two main types of random number generators, and understanding the difference is key.
+
+### 1. True Random Number Generators (TRNGs)
+TRNGs generate numbers from a physical, unpredictable source in the real world. This source, often called an "entropy source," could be:
+*   Atmospheric noise
+*   Radioactive decay
+*   The static between radio stations
+*   The chaotic movement of lava lamps (as famously used by Cloudflare)
+
+Because these physical processes are inherently unpredictable, the numbers they produce are considered "truly" random. TRNGs are essential for high-stakes security applications like generating cryptographic keys.
+
+### 2. Pseudo-Random Number Generators (PRNGs)
+PRNGs are algorithms that generate a sequence of numbers that *appears* random but is actually deterministic. They work by taking an initial value, called a **seed**, and running it through a complex mathematical formula to produce a number. The next number in the sequence is generated using the previous number as the new seed.
+
+The key point is that if you start with the same seed, you will get the exact same sequence of "random" numbers every time. This is why they are called "pseudo-random."
+
+Most online tools, including our **Random Number Generator**, use a PRNG. Specifically, they use the \`Math.random()\` function built into your web browser. This function is typically seeded by the browser using a source of entropy like the current time, mouse movements, or other system-level data, making it unpredictable enough for most everyday uses.
+
+## How to Use Our Free Online Random Number Generator
+
+Our tool is a simple, private, and fast way to generate random numbers for non-cryptographic purposes. It's a **client-side tool**, meaning it runs entirely in your browser.
+
+### Step-by-Step:
+
+1.  **Set Your Range:** Enter the minimum and maximum values for the range you want to generate a number from. The tool will include these two numbers in the possible outcomes.
+2.  **Click Generate:** Press the "Generate Number" button.
+3.  **Get Your Result:** A random number within your specified range will instantly appear. You can click "Generate" as many times as you like to get new numbers.
+4.  **Copy (Optional):** If you need to use the number elsewhere, you can copy it to your clipboard with a single click.
+
+## FAQ: Random Number Generation
+
+**Q: Are the numbers generated by this tool truly random?**
+A: The tool uses a pseudo-random number generator (\`Math.random()\`), which is standard for most web applications. While the sequence is technically deterministic, it is statistically random and unpredictable enough for general-purpose use like picking contest winners, playing games, or making decisions.
+
+**Q: Can I use this for my password or security keys?**
+A: **No.** For security-sensitive applications, you should use a cryptographically secure pseudo-random number generator (CSPRNG). Our [Password Generator](/tools/password-generator) is designed for this purpose, as it uses the \`window.crypto\` API, which is a CSPRNG built for security. The standard \`Math.random()\` function is not secure enough for cryptography.
+
+**Q: Is there a limit to the min/max range?**
+A: You can enter any integer values for the minimum and maximum range. The tool is designed to handle a very wide spectrum of numbers, from small ranges to very large ones.
+
+## Conclusion
+
+Random number generators are fascinating and incredibly useful tools. While true randomness is a complex physical phenomenon, pseudo-random generators provide a practical and effective way to achieve unpredictability for most everyday tasks. Whether you're a teacher picking a student for a question, a gamer looking for a random outcome, or just someone trying to make an unbiased choice, a simple online RNG is a fantastic utility to have in your digital toolbox.
+
+**Need to generate a random number right now?**
+
+**[Try our fast and free Random Number Generator!](/tools/random-number-generator)**
+`,
     }
 ];
 
@@ -607,3 +988,5 @@ export const postMap = new Map(mockPosts.map(post => [post.slug, post]));
 
 
     
+
+
