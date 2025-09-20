@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, Palette, Copy } from 'lucide-react';
+import Image from 'next/image';
 
 export default function ColorPaletteExtractor() {
-  const [imagePreview, setImagePreview] = useState<string | null>('/placeholder-image.jpg');
+  const [imagePreview, setImagePreview] = useState<string | null>('https://picsum.photos/seed/palette/600/400');
   const [palette, setPalette] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,7 +23,7 @@ export default function ColorPaletteExtractor() {
   const extractPalette = useCallback((imageUrl: string) => {
     setIsLoading(true);
     setPalette([]);
-    const img = new Image();
+    const img = new window.Image();
     img.crossOrigin = 'Anonymous';
     img.src = imageUrl;
     img.onload = () => {
@@ -85,6 +86,7 @@ export default function ColorPaletteExtractor() {
     if(imagePreview) {
       extractPalette(imagePreview);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,7 +129,7 @@ export default function ColorPaletteExtractor() {
           onClick={() => fileInputRef.current?.click()}
         >
           {imagePreview ? (
-            <img src={imagePreview} alt="Uploaded preview" className="max-h-64 rounded-md" />
+            <Image src={imagePreview} alt="Uploaded preview" width={600} height={400} className="max-h-64 w-auto rounded-md" data-ai-hint="abstract art" />
           ) : (
             <>
               <Upload className="h-12 w-12 text-muted-foreground" />

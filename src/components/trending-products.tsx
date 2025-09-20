@@ -1,4 +1,3 @@
-
 'use client';
 
 import { trendingProducts, Product } from '@/lib/products';

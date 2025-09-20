@@ -1,4 +1,3 @@
-
 'use client';
 
 import type { Product } from '@/lib/products';
@@ -39,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
             <CardContent className="p-0 flex flex-col flex-grow">
                 <div className="relative w-full aspect-[4/3]">
                     <Image
-                        src={product.image || '/placeholder-image.jpg'}
+                        src={product.image || 'https://picsum.photos/seed/placeholder/400/300'}
                         alt={product.title}
                         fill
                         className="object-cover"

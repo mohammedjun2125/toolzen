@@ -1,4 +1,3 @@
-
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
