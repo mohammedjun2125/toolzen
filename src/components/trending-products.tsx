@@ -1,3 +1,4 @@
+
 'use client';
 
 import { trendingProducts, Product } from '@/lib/products';
@@ -15,7 +16,7 @@ function ProductCard({ product }: { product: Product }) {
                         "@context": "https://schema.org/",
                         "@type": "Product",
                         "name": product.title,
-                        "image": product.image,
+                        "image": product.images,
                         "description": product.description,
                         "brand": {
                             "@type": "Brand",
@@ -32,9 +33,9 @@ function ProductCard({ product }: { product: Product }) {
                 }}
             />
             <div className="relative w-full aspect-[4/3] rounded-t-lg overflow-hidden">
-                {product.image ? (
+                {product.images && product.images.length > 0 ? (
                     <Image
-                        src={product.image}
+                        src={product.images[0]}
                         alt={product.title}
                         fill
                         className="object-cover"

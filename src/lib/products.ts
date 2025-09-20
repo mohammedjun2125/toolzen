@@ -5,7 +5,7 @@ export interface Product {
     id: string;
     title: string;
     description: string;
-    image: string;
+    images: string[];
     imageHint: string;
     affiliateLink: string;
     brand: string;

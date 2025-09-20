@@ -1,9 +1,11 @@
+
 'use client';
 
 import type { Product } from '@/lib/products';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 export function ProductCard({ product }: { product: Product }) {
     return (
@@ -15,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
                         "@context": "https://schema.org/",
                         "@type": "Product",
                         "name": product.title,
-                        "image": product.image,
+                        "image": product.images,
                         "description": product.description,
                         "brand": {
                             "@type": "Brand",
@@ -36,16 +38,30 @@ export function ProductCard({ product }: { product: Product }) {
                 }}
             />
             <CardContent className="p-0 flex flex-col flex-grow">
-                <div className="relative w-full aspect-[4/3]">
-                    <Image
-                        src={product.image || 'https://picsum.photos/seed/placeholder/400/300'}
-                        alt={product.title}
-                        fill
-                        className="object-cover"
-                        data-ai-hint={product.imageHint}
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
-                </div>
+                <Carousel className="w-full">
+                    <CarouselContent>
+                        {product.images.map((imgSrc, index) => (
+                            <CarouselItem key={index}>
+                                <div className="relative w-full aspect-[4/3]">
+                                    <Image
+                                        src={imgSrc || 'https://picsum.photos/seed/placeholder/400/300'}
+                                        alt={`${product.title} image ${index + 1}`}
+                                        fill
+                                        className="object-cover"
+                                        data-ai-hint={product.imageHint}
+                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                    />
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {product.images.length > 1 && (
+                        <>
+                            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2" />
+                            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
+                        </>
+                    )}
+                </Carousel>
                 <div className="p-4 flex flex-col flex-grow">
                     <h3 className="text-base font-semibold text-foreground leading-tight group-hover:text-primary">{product.title}</h3>
                     <p className="text-sm text-muted-foreground mt-2 flex-grow">{product.description}</p>
