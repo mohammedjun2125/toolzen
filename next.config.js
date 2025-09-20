@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -21,7 +22,8 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https'
+        ,
         hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
@@ -45,14 +47,14 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-        {
-            source: '/:path*.amp',
-            destination: '/404',
-        },
-        {
-            source: '/:path*\\?amp=1',
-            destination: '/404',
-        },
+      {
+        source: '/:path*.amp',
+        destination: '/404',
+      },
+      {
+        source: '/:path*\\?amp=1',
+        destination: '/404',
+      },
     ];
   },
 }
