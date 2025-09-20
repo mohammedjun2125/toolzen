@@ -1,4 +1,5 @@
 
+
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
@@ -124,7 +125,7 @@ export default function BlogPostPage({ params }: Props) {
             <header className="mb-8 text-center">
                 <Badge variant="outline" className="mb-2">{post.category}</Badge>
                 <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
-                <p className="mt-4 text-muted-foreground">{new Date(post.date).toLocaleDateString()} by {post.author}</p>
+                <p className="mt-4 text-muted-foreground">by {post.author}</p>
             </header>
             
             <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">

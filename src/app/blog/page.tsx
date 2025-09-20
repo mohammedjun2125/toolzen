@@ -70,7 +70,7 @@ export default function BlogIndexPage() {
                                 )}
                                 <div className="p-6 flex flex-col flex-grow">
                                     <h2 className="text-xl font-semibold">{post.title}</h2>
-                                    <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString()} &middot; {post.author}</p>
+                                    <p className="text-sm text-muted-foreground mt-2">{post.author}</p>
                                     <p className="text-sm mt-3 flex-grow line-clamp-3">{post.excerpt}</p>
                                     <div className="mt-4">
                                         <Badge variant="outline">{post.category}</Badge>
