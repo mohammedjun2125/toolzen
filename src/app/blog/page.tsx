@@ -1,16 +1,18 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { mockPosts, Post } from '@/lib/blog';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { mockPosts } from '@/lib/blog';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import Balancer from 'react-wrap-balancer';
 
 export default function BlogIndexPage() {
-  // In a real app, you would fetch posts from a CMS or database.
   const posts = mockPosts;
   const categories = Array.from(new Set(posts.map(p => p.category)));
 
@@ -25,18 +27,26 @@ export default function BlogIndexPage() {
           </Link>
         </Button>
         <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">Toolzen Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
+            <Balancer>Toolzen Blog</Balancer>
+          </h1>
           <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
-            Guides, tips, and articles on web development, design, and online privacy.
+            <Balancer>Guides, tips, and articles on web development, design, and online privacy.</Balancer>
           </p>
         </header>
 
         <div className="grid grid-cols-12 gap-8">
-            {/* Left Ad Banner */}
             <aside className="hidden lg:block lg:col-span-2">
+                 <div className="sticky top-20">
+                    <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
+                        <div>
+                            <p className="text-sm text-muted-foreground">Advertisement</p>
+                            <p className="text-xs text-muted-foreground">(160x600)</p>
+                        </div>
+                    </div>
+                </div>
             </aside>
 
-            {/* Main Content */}
             <div className="col-span-12 lg:col-span-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {posts.map((post) => (
@@ -49,12 +59,13 @@ export default function BlogIndexPage() {
                                             alt={post.title}
                                             fill
                                             className="object-cover"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             data-ai-hint={post.imageHint}
                                         />
                                     </div>
                                 )}
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h2 className="text-xl font-semibold">{post.title}</h2>
+                                    <h2 className="text-xl font-semibold"><Balancer>{post.title}</Balancer></h2>
                                     <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString()} &middot; {post.author}</p>
                                     <p className="text-sm mt-3 flex-grow line-clamp-3">{post.excerpt}</p>
                                     <div className="mt-4">
@@ -67,7 +78,6 @@ export default function BlogIndexPage() {
                 </div>
             </div>
 
-            {/* Right Sidebar / Ad Banner */}
             <aside className="col-span-12 lg:col-span-2 space-y-8">
                 <Card className="bg-card/60 backdrop-blur-lg">
                     <CardHeader>

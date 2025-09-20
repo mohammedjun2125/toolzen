@@ -8,6 +8,7 @@ import { ArrowLeft, X } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
+import Balancer from 'react-wrap-balancer';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -17,7 +18,7 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
-    const [showAdModal, setShowAdModal] = useState(false); // Changed to false
+    const [showAdModal, setShowAdModal] = useState(false);
     
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
@@ -49,11 +50,18 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
             </Button>
             <main className="space-y-8">
                 <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-                    <p className="text-muted-foreground">{description}</p>
+                    <h1 className="text-3xl font-bold tracking-tight"><Balancer>{title}</Balancer></h1>
+                    <p className="text-muted-foreground"><Balancer>{description}</Balancer></p>
                 </div>
                 
                 {children}
+
+                 <div className="my-8 text-center bg-muted/30 p-8 rounded-lg">
+                    <h3 className="font-bold text-lg">Advertisement</h3>
+                    <div className="w-full max-w-[728px] h-[90px] mx-auto bg-background/50 my-2 flex items-center justify-center">
+                        <p className="text-sm text-muted-foreground">Leaderboard Ad (728x90)</p>
+                    </div>
+                </div>
 
                 <section className="related-articles mt-12">
                     <Card className="bg-card/60 backdrop-blur-lg">
