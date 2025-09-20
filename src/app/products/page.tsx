@@ -33,7 +33,7 @@ function CategoryPreviewCard({ category }: { category: (typeof productsData.cate
             <div key={product.id} className="border rounded-lg p-2">
               <div className="relative aspect-square w-full">
                 <Image 
-                  src={product.images[0] || 'https://picsum.photos/seed/placeholder/400/400'} 
+                  src={product.image || 'https://picsum.photos/seed/placeholder/400/400'} 
                   alt={product.title} 
                   fill
                   className="rounded-md object-cover"
@@ -86,4 +86,3 @@ export default function ProductsPage() {
     </div>
   );
 }
-
