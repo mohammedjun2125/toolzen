@@ -55,14 +55,6 @@ export const tools: Tool[] = [
     category: 'Image & Media',
   },
   {
-    id: 'pdf-maker',
-    name: 'Free PDF Maker Tool',
-    description: 'Convert multiple JPG and PNG images into a single PDF document online for free.',
-    href: '/tools/pdf-maker',
-    icon: FileText,
-    category: 'Image & Media',
-  },
-  {
     id: 'text-to-speech',
     name: 'Text to Speech Online',
     description: 'Convert any text into natural-sounding speech with various voice controls. Free online TTS tool.',

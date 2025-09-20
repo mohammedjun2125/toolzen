@@ -37,12 +37,6 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                             <p>Medium Rectangle Ad</p>
                             <p className="text-xs">(e.g., 300x250 or 336x280)</p>
                         </div>
-                        <ins className="adsbygoogle"
-                            style={{ display: 'none' }}
-                            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                            data-ad-slot="1234567890"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"></ins>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -57,19 +51,6 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                 <div className="space-y-2">
                     <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
                     <p className="text-muted-foreground">{description}</p>
-                </div>
-                
-                <div id="ad-tool-page" className="hidden min-h-[100px] min-w-[320px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                   <div className="text-center">
-                     <p>Tool Page Ad</p>
-                     <p className="text-xs">(e.g., 728x90)</p>
-                   </div>
-                    <ins className="adsbygoogle"
-                         style={{ display: 'none' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
                 </div>
                 
                 {children}

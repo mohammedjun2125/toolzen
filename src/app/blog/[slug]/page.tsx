@@ -72,26 +72,6 @@ export default function BlogPostPage({ params }: Props) {
   
   const relatedTool = tools.find(tool => post.content.includes(tool.href));
   const htmlContent = marked.parse(post.content);
-  // Simple logic to insert an ad after the first paragraph
-  const contentParts = htmlContent.split('</p>');
-  const adPlaceholder = `
-    <div id="ad-in-article" class="hidden my-8 min-h-[250px] min-w-[300px] max-w-full mx-auto flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-      <div class="text-center">
-        <p>In-Article Ad</p>
-        <p class="text-xs">(e.g., Fluid or Responsive)</p>
-      </div>
-      <ins class="adsbygoogle"
-            style="display: block; text-align: center;"
-            data-ad-layout="in-article"
-            data-ad-format="fluid"
-            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-            data-ad-slot="1234567890"></ins>
-    </div>
-  `;
-  const contentWithAd = contentParts.length > 2
-    ? contentParts.slice(0, 2).join('</p>') + '</p>' + adPlaceholder + contentParts.slice(2).join('</p>')
-    : htmlContent;
-
 
   return (
     <>
@@ -123,18 +103,6 @@ export default function BlogPostPage({ params }: Props) {
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-12 gap-8">
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-left" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    <div className="text-center">
-                        <p>Left Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
-                    </div>
-                    <ins className="adsbygoogle"
-                         style={{ display: 'none' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
             </aside>
 
             <article className="col-span-12 lg:col-span-8">
@@ -163,7 +131,7 @@ export default function BlogPostPage({ params }: Props) {
 
             <div 
                 className="prose dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: contentWithAd }}
+                dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
 
             {relatedTool && (
@@ -183,18 +151,6 @@ export default function BlogPostPage({ params }: Props) {
             </article>
 
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-article-sidebar-right" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    <div className="text-center">
-                        <p>Right Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
-                    </div>
-                    <ins className="adsbygoogle"
-                         style={{ display: 'none' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
             </aside>
         </div>
       </main>

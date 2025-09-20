@@ -34,18 +34,6 @@ export default function BlogIndexPage() {
         <div className="grid grid-cols-12 gap-8">
             {/* Left Ad Banner */}
             <aside className="hidden lg:block lg:col-span-2">
-                <div id="ad-blog-sidebar-left" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    <div className="text-center">
-                        <p>Left Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
-                    </div>
-                    <ins className="adsbygoogle"
-                         style={{ display: 'none' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
             </aside>
 
             {/* Main Content */}
@@ -105,18 +93,6 @@ export default function BlogIndexPage() {
                     </CardContent>
                 </Card>
 
-                <div id="ad-blog-sidebar-right" className="hidden sticky top-20 min-h-[600px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg">
-                    <div className="text-center">
-                        <p>Right Sidebar Ad</p>
-                        <p className="text-xs">(e.g., 160x600)</p>
-                    </div>
-                    <ins className="adsbygoogle"
-                         style={{ display: 'none' }}
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                </div>
             </aside>
         </div>
       </main>

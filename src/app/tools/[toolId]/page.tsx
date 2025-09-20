@@ -18,7 +18,6 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'json-formatter': dynamic(() => import('@/components/tools/json-formatter')),
     'markdown-preview': dynamic(() => import('@/components/tools/markdown-preview')),
     'password-generator': dynamic(() => import('@/components/tools/password-generator')),
-    'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker')),
     'qr-code-generator': dynamic(() => import('@/components/tools/qr-code-generator')),
     'text-to-speech': dynamic(() => import('@/components/tools/text-to-speech')),
     'unit-converter': dynamic(() => import('@/components/tools/unit-converter')),
@@ -44,11 +43,6 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Is my image data secure?', answer: 'Yes. All resizing is performed in your browser. Your images are never uploaded to any server, guaranteeing your privacy.' },
         { question: 'Does resizing affect image quality?', answer: 'Making an image smaller generally preserves quality well. Making an image larger than its original size may result in some loss of sharpness. Our tool uses a high-quality resampling algorithm to maintain the best possible result.'},
         { question: 'Can I maintain the aspect ratio?', answer: 'Yes, our tool includes an option to lock the aspect ratio. When you change the width, the height will adjust automatically to prevent distortion, and vice-versa.' },
-    ],
-    'pdf-maker': [
-        { question: 'Is this PDF maker tool free to use?', answer: 'Yes, our PDF maker is completely free. You can convert as many images to PDF as you like without any cost.' },
-        { question: 'Are my images secure?', answer: 'Absolutely. The PDF is created entirely in your browser. Your images are never uploaded to any server, guaranteeing your data privacy.' },
-        { question: 'What image formats can I use to create a PDF?', answer: 'You can use JPG and PNG images to create your PDF. Simply drag and drop them to get started.' },
     ],
     'password-generator': [
         { question: 'How secure are the passwords generated?', answer: 'The passwords are highly secure. They are generated on your device using the browser\'s built-in cryptographically secure random number generator. They are never sent over the internet.' },
