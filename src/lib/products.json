@@ -53,6 +53,17 @@
           "brand": "CineBeam",
           "price": "149.99",
           "currency": "USD"
+        },
+        {
+          "id": "elec-004",
+          "title": "Portronics Ruffpad 15-inch LCD Writing Pad",
+          "description": "A large 15-inch re-writable LCD writing pad, perfect for notes, doodles, and digital learning. Eco-friendly and easy to use.",
+          "image": "https://picsum.photos/seed/elec4/400/400",
+          "imageHint": "lcd writing pad",
+          "affiliateLink": "https://amzn.to/423oe2p",
+          "brand": "Portronics",
+          "price": "11.99",
+          "currency": "USD"
         }
       ]
     },
