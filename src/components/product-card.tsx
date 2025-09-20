@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { Product } from '@/lib/products';
@@ -13,7 +14,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, priority = false }: { product: Product, priority?: boolean }) {
     const hasDiscount = product.originalPrice && parseFloat(product.originalPrice) > parseFloat(product.price);
     const discountPercentage = hasDiscount 
         ? Math.round(((parseFloat(product.originalPrice!) - parseFloat(product.price)) / parseFloat(product.originalPrice!)) * 100)
@@ -33,6 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
                                         fill
                                         className="object-cover"
                                         data-ai-hint={product.imageHint}
+                                        priority={priority && index === 0}
                                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                     />
                                 </div>

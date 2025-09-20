@@ -1,10 +1,8 @@
 
 'use client';
 
-import { trendingProducts, Product } from '@/lib/products';
-import Image from 'next/image';
+import { trendingProducts } from '@/lib/products';
 import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { ProductCard } from './product-card';
 import Link from 'next/link';
 
@@ -14,8 +12,8 @@ export default function TrendingProducts() {
         <section>
             <h2 className="text-3xl font-bold text-center mb-8">🔥 Trending Products</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {trendingProducts.map((product) => (
-                    <ProductCard product={product} key={product.id} />
+                {trendingProducts.map((product, index) => (
+                    <ProductCard product={product} key={product.id} priority={index < 2} />
                 ))}
             </div>
              <div className="text-center mt-12">
