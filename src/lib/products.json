@@ -74,14 +74,20 @@
         },
         {
           "id": "elec-004",
-          "title": "Portronics Ruffpad 15-inch LCD Writing Pad",
-          "description": "A large 15-inch re-writable LCD writing pad, perfect for notes, doodles, and digital learning. Eco-friendly and easy to use.",
-          "images": ["https://picsum.photos/seed/elec4/400/400"],
+          "title": "Portronics Ruffpad 21-inch LCD Writing Pad",
+          "description": "Portronics Ruffpad 21 LCD Writing Pad with 21 Inches Large Screen, Stylus Pen, Erase Button, Smart Lock for Birthday Gift, Kids Toys, Students, School, Office (Grey).",
+          "images": [
+            "https://m.media-amazon.com/images/I/61B20xKJPbL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/71DIIqmeTYL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/715dv8WWqeL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/71qi7uS3zYL._SX679_.jpg"
+          ],
           "imageHint": "lcd writing pad",
-          "affiliateLink": "https://amzn.to/423oe2p",
+          "affiliateLink": "https://amzn.to/4mtgttY",
           "brand": "Portronics",
-          "price": "11.99",
-          "currency": "USD"
+          "price": "1999",
+          "originalPrice": "3999",
+          "currency": "₹"
         }
       ]
     },
