@@ -20,6 +20,10 @@ import {
   BookType,
   Clock,
   Crop,
+  Percent,
+  Landmark,
+  Barcode,
+  Sparkles,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators";
@@ -83,11 +87,43 @@ export const tools: Tool[] = [
     category: 'Calculators',
   },
   {
+    id: 'percentage-calculator',
+    name: 'Percentage Calculator',
+    description: 'Quickly calculate percentages, percentage increase/decrease, and ratios.',
+    href: '/tools/percentage-calculator',
+    icon: Percent,
+    category: 'Calculators',
+  },
+  {
+    id: 'loan-emi-calculator',
+    name: 'Loan / EMI Calculator',
+    description: 'Calculate your Equated Monthly Installment (EMI) for loans.',
+    href: '/tools/loan-emi-calculator',
+    icon: Landmark,
+    category: 'Calculators',
+  },
+  {
     id: 'qr-code-generator',
     name: 'Free QR Code Generator',
     description: 'Generate QR codes from text, URLs, or contact info in real-time. Free and easy to use.',
     href: '/tools/qr-code-generator',
     icon: QrCode,
+    category: 'Generators',
+  },
+  {
+    id: 'barcode-generator',
+    name: 'Barcode Generator',
+    description: 'Create and download various types of barcodes like Code128, EAN, and UPC.',
+    href: '/tools/barcode-generator',
+    icon: Barcode,
+    category: 'Generators',
+  },
+  {
+    id: 'random-number-generator',
+    name: 'Random Number Generator',
+    description: 'Generate random numbers within a specified range. Simple and secure.',
+    href: '/tools/random-number-generator',
+    icon: Sparkles,
     category: 'Generators',
   },
   {
@@ -190,4 +226,4 @@ export const tools: Tool[] = [
 
 export const toolMap = new Map(tools.map(tool => [tool.id, tool]));
 
-export const categories: ToolCategory[] = Array.from(new Set(tools.map(tool => tool.category)));
+export const categories: ToolCategory[] = Array.from(new Set(tools.map(tool => tool.category))).sort();

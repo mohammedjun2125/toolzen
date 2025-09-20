@@ -29,6 +29,10 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'base64-encoder-decoder': dynamic(() => import('@/components/tools/base64-encoder-decoder')),
     'lorem-ipsum-generator': dynamic(() => import('@/components/tools/lorem-ipsum-generator')),
     'timezone-converter': dynamic(() => import('@/components/tools/timezone-converter')),
+    'percentage-calculator': dynamic(() => import('@/components/tools/percentage-calculator')),
+    'loan-emi-calculator': dynamic(() => import('@/components/tools/loan-emi-calculator')),
+    'barcode-generator': dynamic(() => import('@/components/tools/barcode-generator')),
+    'random-number-generator': dynamic(() => import('@/components/tools/random-number-generator')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -53,7 +57,7 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
     ],
     'hash-generator': [
       { question: 'Is my text sent to a server for hashing?', answer: 'No, all hashing is performed in your browser using the Web Crypto API. Your data remains completely private and secure.' },
-      { question: 'Which hashing algorithms are supported?', answer: 'We support the most common and secure hashing algorithms: SHA-1, SHA-256, and SHA-512. MD5 is not supported due to security vulnerabilities.' },
+      { question: 'Which hashing algorithms are supported?', answer: 'We support the most common and secure hashing algorithms: SHA-1, SHA-256, and SHA-512. MD5 is not supported by the Web Crypto API for security reasons but may be available in some JS libraries.' },
     ],
     'base64-encoder-decoder': [
         { question: 'Is my data secure when using this tool?', answer: 'Yes, all Base64 encoding and decoding happens on your device. No data is ever sent to our servers, ensuring your information remains private.' },
@@ -62,7 +66,23 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
     'word-counter': [
         { question: 'Does this tool store my text?', answer: 'No, all calculations are done in your browser. Your text is never stored or sent to a server. Your privacy is guaranteed.'},
         { question: 'What does the word counter tool measure?', answer: 'It provides real-time statistics on the number of words, characters (with and without spaces), sentences, and paragraphs in your text.'}
-    ]
+    ],
+    'percentage-calculator': [
+        { question: 'Is this calculator free?', answer: 'Yes, our percentage calculator is completely free and works offline in your browser. All calculations are performed on your device, ensuring your data is private.'},
+        { question: 'What kinds of percentage calculations can I do?', answer: 'You can perform three main types of calculations: finding what X% of Y is, determining what percentage X is of Y, and calculating the percentage increase or decrease from one number to another.'},
+    ],
+    'loan-emi-calculator': [
+        { question: 'How is the EMI calculated?', answer: 'Our calculator uses the standard formula: EMI = [P × r × (1+r)^n] / [(1+r)^n – 1], where P is the principal amount, r is the monthly interest rate, and n is the tenure in months.'},
+        { question: 'Is my financial data safe?', answer: 'Yes, absolutely. This is a client-side tool, meaning your loan amount, interest rate, and tenure details are never sent to our servers. All calculations happen privately in your browser.'},
+    ],
+    'barcode-generator': [
+        { question: 'What types of barcodes can I generate?', answer: 'Our tool supports a wide variety of formats, including CODE128, EAN-13, EAN-8, UPC, and more. You can select the format that best fits your needs, whether for retail, inventory, or personal use.'},
+        { question: 'Can I download the generated barcode?', answer: 'Yes, you can download the generated barcode as a PNG image file, which is suitable for printing or for use in digital documents and designs. The download is instant and free.'},
+    ],
+    'random-number-generator': [
+        { question: 'How "random" are the numbers?', answer: 'The numbers are generated using your browser\'s built-in `Math.random()` function. While this is sufficient for most general-purpose needs like games or picking winners, it is not considered cryptographically secure for high-stakes security applications.'},
+        { question: 'Is there a limit to the range?', answer: 'You can set any minimum and maximum values for the range. The tool will generate a random integer (whole number) that is inclusive of the min and max values you provide.'},
+    ],
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
