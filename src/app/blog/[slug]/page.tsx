@@ -7,12 +7,12 @@ import { SiteFooter } from '@/components/site-footer';
 import { mockPosts, postMap } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import { marked } from 'marked';
 import { tools } from '@/lib/tools';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import TrendingProducts from '@/components/trending-products';
+import ReactMarkdown from 'react-markdown';
 
 type Props = {
   params: { slug: string };
@@ -73,7 +73,6 @@ export default function BlogPostPage({ params }: Props) {
   }
   
   const relatedTool = tools.find(tool => post.content.includes(tool.href));
-  const htmlContent = marked.parse(post.content);
 
   return (
     <>
@@ -125,7 +124,6 @@ export default function BlogPostPage({ params }: Props) {
             <header className="mb-8 text-center">
                 <Badge variant="outline" className="mb-2">{post.category}</Badge>
                 <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
-                <p className="mt-4 text-muted-foreground">by {post.author}</p>
             </header>
             
             <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">
@@ -140,10 +138,9 @@ export default function BlogPostPage({ params }: Props) {
                 />
             </div>
 
-            <div 
-                className="prose dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: htmlContent }}
-            />
+            <div className="prose dark:prose-invert max-w-none">
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </div>
 
             {relatedTool && (
                 <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">
