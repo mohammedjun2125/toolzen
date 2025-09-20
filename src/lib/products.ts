@@ -10,6 +10,7 @@ export interface Product {
     affiliateLink: string;
     brand: string;
     price: string;
+    originalPrice?: string;
     currency: string;
 }
 

@@ -30,6 +30,7 @@
           "affiliateLink": "https://amzn.to/42D4brF",
           "brand": "Wipro",
           "price": "1939",
+          "originalPrice": "2599",
           "currency": "₹"
         },
         {
@@ -41,6 +42,7 @@
           "affiliateLink": "#AmazonLink-VerticalMouse",
           "brand": "ComfortClick",
           "price": "29.99",
+          "originalPrice": "39.99",
           "currency": "USD"
         },
         {
@@ -96,6 +98,7 @@
           "affiliateLink": "#AmazonLink-SoapDispenser",
           "brand": "CleanFlow",
           "price": "19.99",
+          "originalPrice": "24.99",
           "currency": "USD"
         },
         {
