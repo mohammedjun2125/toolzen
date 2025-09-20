@@ -11,35 +11,23 @@ import { CookieConsent } from '@/components/cookie-consent';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.toolzenweb.com'),
   title: {
     default: 'Toolzen - Free, Fast & Private Online Tools for Everyone',
     template: '%s | Toolzen',
   },
   description: 'Discover Toolzen, your ultimate suite of free, fast, and privacy-focused online tools. Compress images, create PDFs, generate passwords, convert units, and more—all within your browser. No uploads, no sign-ups.',
   keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools'],
-  authors: [{ name: 'Toolzen' }],
+  authors: [{ name: 'Toolzen', url: 'https://www.toolzenweb.com' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
-  metadataBase: new URL('https://www.toolzenweb.com'),
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'icon',
-      url: '/favicon.svg',
-      type: 'image/svg+xml',
-    },
-  },
-  verification: {
-    google: 'TZ4ILWL6OcwJ1vjR2BrFEnCXjM1bWVMrl8lersFqt4g',
-  },
   openGraph: {
     title: 'Toolzen - The Ultimate Collection of Free Online Tools',
     description: 'A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads.',
     siteName: 'Toolzen',
     locale: 'en_US',
     type: 'website',
+    url: 'https://www.toolzenweb.com',
   },
   twitter: {
     card: 'summary_large_image',
@@ -57,7 +45,20 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    other: {
+      rel: 'icon',
+      url: '/favicon.svg',
+      type: 'image/svg+xml',
+    },
+  },
   manifest: '/site.webmanifest',
+  verification: {
+    google: 'TZ4ILWL6OcwJ1vjR2BrFEnCXjM1bWVMrl8lersFqt4g',
+  },
 };
 
 export const viewport: Viewport = {
@@ -72,9 +73,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Toolzen',
+    url: 'https://www.toolzenweb.com',
+    description: 'A comprehensive suite of free, fast, and privacy-focused online tools to boost your productivity.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.toolzenweb.com/tools/{search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/*
           AdSense script is currently disabled. 
           To enable, uncomment the Script component below and replace 

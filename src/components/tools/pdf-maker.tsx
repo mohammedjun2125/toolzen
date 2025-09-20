@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef } from 'react';
@@ -7,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, Download, FileImage, X, Loader2 } from 'lucide-react';
-import jsPDF from 'jspdf';
+import type jsPDF from 'jspdf';
 import Image from 'next/image';
 
 export default function PdfMaker() {
@@ -16,6 +17,7 @@ export default function PdfMaker() {
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const jsPdfRef = useRef<typeof jsPDF | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -48,7 +50,12 @@ export default function PdfMaker() {
     setProgress(0);
     toast({ title: 'Generating PDF...', description: 'This may take a moment.' });
     
-    const pdf = new jsPDF();
+    if (!jsPdfRef.current) {
+        const { default: jsPDF } = await import('jspdf');
+        jsPdfRef.current = jsPDF;
+    }
+
+    const pdf = new jsPdfRef.current();
     
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -140,6 +147,7 @@ export default function PdfMaker() {
                     fill
                     style={{ objectFit: "cover" }}
                     className="rounded-md"
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <Button variant="destructive" size="icon" onClick={() => removeFile(index)}>

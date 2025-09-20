@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import JsBarcode from 'jsbarcode';
+import type JsBarcode from 'jsbarcode';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,12 +20,19 @@ export default function BarcodeGenerator() {
     const [format, setFormat] = useState('CODE128');
     const [isValid, setIsValid] = useState(true);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const jsBarcodeRef = useRef<typeof JsBarcode | null>(null);
     const { toast } = useToast();
 
     useEffect(() => {
-        if (canvasRef.current) {
+        import('jsbarcode').then(module => {
+            jsBarcodeRef.current = module.default;
+        });
+    }, []);
+
+    useEffect(() => {
+        if (canvasRef.current && jsBarcodeRef.current) {
             try {
-                JsBarcode(canvasRef.current, text, {
+                jsBarcodeRef.current(canvasRef.current, text, {
                     format: format,
                     displayValue: true,
                     background: 'transparent',
@@ -41,7 +48,7 @@ export default function BarcodeGenerator() {
     }, [text, format]);
 
     const handleDownload = () => {
-        if (!isValid || !canvasRef.current) {
+        if (!isValid || !canvasRef.current || !jsBarcodeRef.current) {
             toast({ variant: 'destructive', title: 'Invalid Barcode', description: 'Cannot download an invalid or empty barcode.' });
             return;
         }
@@ -58,7 +65,7 @@ export default function BarcodeGenerator() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         let downloadIsValid = true;
-        JsBarcode(canvas, text, {
+        jsBarcodeRef.current(canvas, text, {
             format: format,
             displayValue: true,
             lineColor: '#000000',

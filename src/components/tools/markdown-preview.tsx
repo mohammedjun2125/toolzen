@@ -1,9 +1,10 @@
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { marked } from 'marked';
+import type { Marked } from 'marked';
 
 export default function MarkdownPreview() {
   const [markdown, setMarkdown] = useState(`# Hello, Markdown!
@@ -26,13 +27,23 @@ function greet() {
 }
 \`\`\`
 `);
+  const [html, setHtml] = useState('');
+  const [marked, setMarked] = useState<Marked | null>(null);
 
-  const getHtml = () => {
-    // Note: In a real app, you should sanitize the HTML to prevent XSS attacks.
-    // Libraries like DOMPurify are great for this.
-    // For this example, we trust the markdown source.
-    return { __html: marked(markdown) };
-  };
+  useEffect(() => {
+    import('marked').then(module => {
+        setMarked(new module.Marked());
+    });
+  }, []);
+
+  useEffect(() => {
+    if (marked) {
+        const rawHtml = marked.parse(markdown) as string;
+        // In a real app, you should sanitize the HTML to prevent XSS attacks.
+        // Libraries like DOMPurify are great for this.
+        setHtml(rawHtml);
+    }
+  }, [markdown, marked]);
 
   return (
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
@@ -50,7 +61,7 @@ function greet() {
           />
           <div
             className="prose dark:prose-invert bg-muted/50 rounded-lg p-4 overflow-auto h-full"
-            dangerouslySetInnerHTML={getHtml()}
+            dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>
       </CardContent>
