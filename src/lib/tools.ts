@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 import {
   Image,
@@ -18,6 +19,7 @@ import {
   Binary,
   BookType,
   Clock,
+  Crop,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators";
@@ -38,6 +40,14 @@ export const tools: Tool[] = [
     description: 'Reduce JPG, PNG, WEBP, and GIF file sizes without losing quality. Fast and free.',
     href: '/tools/image-compressor',
     icon: Image,
+    category: 'Image & Media',
+  },
+  {
+    id: 'image-resizer',
+    name: 'Image Resizer',
+    description: 'Resize images to specific dimensions (width and height) online. Simple and fast.',
+    href: '/tools/image-resizer',
+    icon: Crop,
     category: 'Image & Media',
   },
   {

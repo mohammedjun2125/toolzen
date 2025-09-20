@@ -15,6 +15,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'case-converter': dynamic(() => import('@/components/tools/case-converter')),
     'color-palette-extractor': dynamic(() => import('@/components/tools/color-palette-extractor')),
     'image-compressor': dynamic(() => import('@/components/tools/image-compressor')),
+    'image-resizer': dynamic(() => import('@/components/tools/image-resizer')),
     'json-formatter': dynamic(() => import('@/components/tools/json-formatter')),
     'markdown-preview': dynamic(() => import('@/components/tools/markdown-preview')),
     'password-generator': dynamic(() => import('@/components/tools/password-generator')),
@@ -35,6 +36,11 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
         { question: 'What image formats can I compress?', answer: 'Our tool supports JPG, PNG, WEBP, and GIF images. You can optimize any of these formats for free.' },
         { question: 'Is there a file size limit for the image compressor?', answer: 'There is no hard limit. However, performance may vary with very large images (over 20MB) on less powerful devices, as all processing is client-side.' },
+    ],
+    'image-resizer': [
+        { question: 'Is my image data secure?', answer: 'Yes. All resizing is performed in your browser. Your images are never uploaded to any server, guaranteeing your privacy.' },
+        { question: 'Does resizing affect image quality?', answer: 'Making an image smaller generally preserves quality well. Making an image larger than its original size may result in some loss of sharpness. Our tool uses a high-quality resampling algorithm to maintain the best possible result.'},
+        { question: 'Can I maintain the aspect ratio?', answer: 'Yes, our tool includes an option to lock the aspect ratio. When you change the width, the height will adjust automatically to prevent distortion, and vice-versa.' },
     ],
     'pdf-maker': [
         { question: 'Is this PDF maker tool free to use?', answer: 'Yes, our PDF maker is completely free. You can convert as many images to PDF as you like without any cost.' },
