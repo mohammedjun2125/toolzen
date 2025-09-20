@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
@@ -11,7 +12,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import TrendingProducts from '@/components/trending-products';
-import Balancer from 'react-wrap-balancer';
 
 type Props = {
   params: { slug: string };
@@ -104,7 +104,7 @@ export default function BlogPostPage({ params }: Props) {
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-12 gap-8">
             <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20">
+                 <div className="sticky top-20 hidden">
                     <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
                         <div>
                             <p className="text-sm text-muted-foreground">Advertisement</p>
@@ -123,7 +123,7 @@ export default function BlogPostPage({ params }: Props) {
                 </Button>
             <header className="mb-8 text-center">
                 <Badge variant="outline" className="mb-2">{post.category}</Badge>
-                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl"><Balancer>{post.title}</Balancer></h1>
+                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{post.title}</h1>
                 <p className="mt-4 text-muted-foreground">{new Date(post.date).toLocaleDateString()} by {post.author}</p>
             </header>
             
@@ -161,7 +161,7 @@ export default function BlogPostPage({ params }: Props) {
             </article>
 
             <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20">
+                 <div className="sticky top-20 hidden">
                     <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
                         <div>
                             <p className="text-sm text-muted-foreground">Advertisement</p>

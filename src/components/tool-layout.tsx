@@ -8,7 +8,6 @@ import { ArrowLeft, X } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
-import Balancer from 'react-wrap-balancer';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -23,7 +22,7 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
              <Dialog open={showAdModal} onOpenChange={setShowAdModal}>
-                <DialogContent className="max-w-lg">
+                <DialogContent className="max-w-lg hidden">
                     <DialogHeader>
                         <DialogTitle>Advertisement</DialogTitle>
                          <DialogClose asChild>
@@ -50,13 +49,13 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
             </Button>
             <main className="space-y-8">
                 <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tight"><Balancer>{title}</Balancer></h1>
-                    <p className="text-muted-foreground"><Balancer>{description}</Balancer></p>
+                    <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+                    <p className="text-muted-foreground">{description}</p>
                 </div>
                 
                 {children}
 
-                 <div className="my-8 text-center bg-muted/30 p-8 rounded-lg">
+                 <div className="my-8 text-center bg-muted/30 p-8 rounded-lg hidden">
                     <h3 className="font-bold text-lg">Advertisement</h3>
                     <div className="w-full max-w-[728px] h-[90px] mx-auto bg-background/50 my-2 flex items-center justify-center">
                         <p className="text-sm text-muted-foreground">Leaderboard Ad (728x90)</p>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -10,7 +11,6 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import Balancer from 'react-wrap-balancer';
 
 export default function BlogIndexPage() {
   const posts = mockPosts;
@@ -28,16 +28,16 @@ export default function BlogIndexPage() {
         </Button>
         <header className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
-            <Balancer>Toolzen Blog</Balancer>
+            Toolzen Blog
           </h1>
           <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
-            <Balancer>Guides, tips, and articles on web development, design, and online privacy.</Balancer>
+            Guides, tips, and articles on web development, design, and online privacy.
           </p>
         </header>
 
         <div className="grid grid-cols-12 gap-8">
             <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20">
+                 <div className="sticky top-20 hidden">
                     <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
                         <div>
                             <p className="text-sm text-muted-foreground">Advertisement</p>
@@ -65,7 +65,7 @@ export default function BlogIndexPage() {
                                     </div>
                                 )}
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h2 className="text-xl font-semibold"><Balancer>{post.title}</Balancer></h2>
+                                    <h2 className="text-xl font-semibold">{post.title}</h2>
                                     <p className="text-sm text-muted-foreground mt-2">{new Date(post.date).toLocaleDateString()} &middot; {post.author}</p>
                                     <p className="text-sm mt-3 flex-grow line-clamp-3">{post.excerpt}</p>
                                     <div className="mt-4">
