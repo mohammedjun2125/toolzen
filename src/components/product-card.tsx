@@ -10,33 +10,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 export function ProductCard({ product }: { product: Product }) {
     return (
         <Card className="h-full flex flex-col group overflow-hidden transition-all duration-300 ease-in-out hover:shadow-primary/20 hover:scale-105 bg-card/60 backdrop-blur-lg">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org/",
-                        "@type": "Product",
-                        "name": product.title,
-                        "image": product.images,
-                        "description": product.description,
-                        "brand": {
-                            "@type": "Brand",
-                            "name": product.brand
-                        },
-                        "offers": {
-                            "@type": "Offer",
-                            "url": product.affiliateLink,
-                            "priceCurrency": product.currency,
-                            "price": product.price,
-                            "availability": "https://schema.org/InStock",
-                            "seller": {
-                                "@type": "Organization",
-                                "name": "Amazon"
-                            }
-                        }
-                    })
-                }}
-            />
             <CardContent className="p-0 flex flex-col flex-grow">
                 <Carousel className="w-full">
                     <CarouselContent>

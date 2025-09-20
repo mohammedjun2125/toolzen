@@ -41,7 +41,7 @@ function CategoryPreviewCard({ category }: { category: (typeof productsData.cate
                 />
               </div>
               <h4 className="text-xs font-semibold mt-2 truncate">{product.title}</h4>
-              <p className="text-xs text-muted-foreground">{product.price}</p>
+              <p className="text-xs text-muted-foreground">{product.currency}{product.price}</p>
             </div>
           ))}
         </div>
@@ -86,3 +86,4 @@ export default function ProductsPage() {
     </div>
   );
 }
+

@@ -47,10 +47,9 @@ export default function HashGenerator() {
       setIsLoading(false);
     };
     
-    // Generate hashes on initial load and when input changes
     const debounceTimer = setTimeout(() => {
         generateHashes();
-    }, 300); // Debounce to avoid excessive re-hashing while typing
+    }, 300); 
 
     return () => clearTimeout(debounceTimer);
 

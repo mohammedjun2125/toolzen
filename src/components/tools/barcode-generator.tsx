@@ -10,7 +10,6 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Download } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
 const barcodeFormats = [
     "CODE128", "CODE39", "EAN13", "EAN8", "UPC", "ITF", "MSI", "Pharmacode"
@@ -22,7 +21,6 @@ export default function BarcodeGenerator() {
     const [isValid, setIsValid] = useState(true);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { toast } = useToast();
-    const { resolvedTheme } = useTheme();
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -30,58 +28,59 @@ export default function BarcodeGenerator() {
                 JsBarcode(canvasRef.current, text, {
                     format: format,
                     displayValue: true,
-                    lineColor: resolvedTheme === 'dark' ? '#FFF' : '#000',
                     background: 'transparent',
+                    lineColor: '#000000', // Always render black for consistency
                     fontOptions: 'bold',
                     font: 'monospace',
-                    // Callback to check if barcode was rendered successfully
                     valid: (valid) => setIsValid(valid),
                 });
             } catch (error) {
-                // This catch block might not be strictly necessary with `valid` callback,
-                // but it's good for catching other unexpected errors from the library.
                 setIsValid(false);
             }
         }
-    }, [text, format, resolvedTheme]);
+    }, [text, format]);
 
     const handleDownload = () => {
-        if (!isValid) {
-            toast({ variant: 'destructive', title: 'Invalid Barcode', description: 'Cannot download an invalid barcode.' });
+        if (!isValid || !canvasRef.current) {
+            toast({ variant: 'destructive', title: 'Invalid Barcode', description: 'Cannot download an invalid or empty barcode.' });
             return;
         }
-        if (canvasRef.current) {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            if(!ctx) return;
-            
-            const originalCanvas = canvasRef.current;
-            canvas.width = originalCanvas.width;
-            canvas.height = originalCanvas.height;
 
-            // Fill background for downloaded image
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw the barcode on top
-            JsBarcode(canvas, text, {
-                format: format,
-                displayValue: true,
-                lineColor: '#000', // Black for download
-                background: '#FFF',
-                fontOptions: 'bold',
-                font: 'monospace',
-            });
-            
-            const dataUrl = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataUrl;
-            link.download = `barcode-${text}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            toast({ title: 'Barcode downloaded as PNG.' });
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if(!ctx) return;
+        
+        const originalCanvas = canvasRef.current;
+        canvas.width = originalCanvas.width;
+        canvas.height = originalCanvas.height;
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        let downloadIsValid = true;
+        JsBarcode(canvas, text, {
+            format: format,
+            displayValue: true,
+            lineColor: '#000000',
+            background: '#FFFFFF',
+            fontOptions: 'bold',
+            font: 'monospace',
+            valid: (valid) => { downloadIsValid = valid; }
+        });
+        
+        if (!downloadIsValid) {
+             toast({ variant: 'destructive', title: 'Download Failed', description: 'The barcode data is invalid for the selected format.' });
+             return;
         }
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = `barcode-${text}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        toast({ title: 'Barcode downloaded as PNG.' });
     };
 
     return (
@@ -114,7 +113,7 @@ export default function BarcodeGenerator() {
                     </div>
                 </div>
 
-                <div className="p-4 rounded-lg flex justify-center bg-card/80">
+                <div className="p-4 rounded-lg flex justify-center bg-white dark:bg-white">
                     <canvas ref={canvasRef} />
                 </div>
                  {!isValid && (

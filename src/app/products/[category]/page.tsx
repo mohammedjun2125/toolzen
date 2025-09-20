@@ -1,4 +1,5 @@
 
+
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/site-header';
@@ -64,7 +65,36 @@ export default function CategoryPage({ params }: Props) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {category.products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <div key={product.id}>
+              <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                      __html: JSON.stringify({
+                          "@context": "https://schema.org/",
+                          "@type": "Product",
+                          "name": product.title,
+                          "image": product.images,
+                          "description": product.description,
+                          "brand": {
+                              "@type": "Brand",
+                              "name": product.brand
+                          },
+                          "offers": {
+                              "@type": "Offer",
+                              "url": product.affiliateLink,
+                              "priceCurrency": product.currency,
+                              "price": product.price,
+                              "availability": "https://schema.org/InStock",
+                              "seller": {
+                                  "@type": "Organization",
+                                  "name": "Amazon"
+                              }
+                          }
+                      })
+                  }}
+              />
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
 
