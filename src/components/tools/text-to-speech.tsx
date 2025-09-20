@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Play, Pause, Square, Volume2 } from 'lucide-react';
+import { Play, Pause, Square } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Slider } from '../ui/slider';
 import { Label } from '../ui/label';
@@ -13,6 +13,7 @@ import { Label } from '../ui/label';
 export default function TextToSpeech() {
   const [text, setText] = useState('Hello, welcome to Toolzen. You can convert any text into speech here.');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string>('');
   const [pitch, setPitch] = useState(1);
@@ -35,14 +36,15 @@ export default function TextToSpeech() {
     // Voices are loaded asynchronously
     if ('onvoiceschanged' in window.speechSynthesis) {
       window.speechSynthesis.onvoiceschanged = getVoices;
-    } else {
-        getVoices(); // For browsers that don't support the event
-    }
+    } 
+    getVoices(); // Also call it directly for browsers that might not fire the event
 
     // Cleanup
     return () => {
         window.speechSynthesis.cancel();
-        window.speechSynthesis.onvoiceschanged = null;
+        if ('onvoiceschanged' in window.speechSynthesis) {
+          window.speechSynthesis.onvoiceschanged = null;
+        }
     }
   }, []);
 
@@ -52,12 +54,18 @@ export default function TextToSpeech() {
       return;
     }
 
-    if (isSpeaking) {
+    if (isSpeaking && !isPaused) {
       window.speechSynthesis.pause();
-      setIsSpeaking(false);
+      setIsPaused(true);
       return;
     }
     
+    if (isPaused) {
+        window.speechSynthesis.resume();
+        setIsPaused(false);
+        return;
+    }
+
     window.speechSynthesis.cancel(); // Clear any previous utterance
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -68,10 +76,14 @@ export default function TextToSpeech() {
     utterance.pitch = pitch;
     utterance.rate = rate;
     
-    utterance.onend = () => setIsSpeaking(false);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setIsPaused(false);
+    };
     utterance.onerror = (event) => {
         toast({variant: 'destructive', title: 'An error occurred', description: event.error});
         setIsSpeaking(false);
+        setIsPaused(false);
     };
 
     window.speechSynthesis.speak(utterance);
@@ -81,6 +93,7 @@ export default function TextToSpeech() {
   const handleStop = () => {
       window.speechSynthesis.cancel();
       setIsSpeaking(false);
+      setIsPaused(false);
   }
   
   // Group voices by language
@@ -116,14 +129,18 @@ export default function TextToSpeech() {
                         <SelectValue placeholder="Select a voice" />
                     </SelectTrigger>
                     <SelectContent className="max-h-60">
-                        {Object.entries(voiceGroups).map(([lang, voices]) => (
+                        {Object.keys(voiceGroups).length > 0 ? (
+                           Object.entries(voiceGroups).map(([lang, voices]) => (
                             <div key={lang}>
                                 <Label className="px-2 py-1.5 text-xs font-semibold">{lang}</Label>
                                 {voices.map(voice => (
                                     <SelectItem key={voice.name} value={voice.name}>{voice.name} ({voice.lang})</SelectItem>
                                 ))}
                             </div>
-                        ))}
+                           ))
+                        ) : (
+                            <SelectItem value="loading" disabled>Loading voices...</SelectItem>
+                        )}
                     </SelectContent>
                 </Select>
             </div>
@@ -139,13 +156,13 @@ export default function TextToSpeech() {
 
         <div className="flex gap-2">
             <Button onClick={handleSpeak} disabled={!text} className="w-full">
-              {isSpeaking ? (
+              {isSpeaking && !isPaused ? (
                 <><Pause className="mr-2 h-4 w-4" /> Pause</>
               ) : (
-                <><Play className="mr-2 h-4 w-4" /> Play</>
+                <><Play className="mr-2 h-4 w-4" /> {isPaused ? 'Resume' : 'Play'}</>
               )}
             </Button>
-            <Button onClick={handleStop} variant="outline">
+            <Button onClick={handleStop} variant="outline" disabled={!isSpeaking}>
                 <Square className="mr-2 h-4 w-4"/> Stop
             </Button>
         </div>
