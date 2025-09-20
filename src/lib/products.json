@@ -23,12 +23,12 @@
       "products": [
         {
           "id": "elec-001",
-          "title": "Smart Wi-Fi Power Strip",
-          "description": "Control your devices from anywhere with this 4-outlet smart power strip. Compatible with Alexa and Google Home for voice control.",
+          "title": "Wipro Smart Extension with WiFi, 4-Socket Smart Extension Board with Alexa Support",
+          "description": "16 Amp Power Socket, Control Your Appliances from Anywhere, White (DSE2150), Pack of 1.",
           "image": "https://picsum.photos/seed/elec1/400/400",
           "imageHint": "power strip",
-          "affiliateLink": "#AmazonLink-SmartStrip",
-          "brand": "TechHive",
+          "affiliateLink": "https://amzn.to/42D4brF",
+          "brand": "Wipro",
           "price": "25.99",
           "currency": "USD"
         },
