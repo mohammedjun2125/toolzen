@@ -2,37 +2,32 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import type JsBarcode from 'jsbarcode';
+import dynamic from 'next/dynamic';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Download } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
+import type JsBarcode from 'jsbarcode';
+import { Skeleton } from '../ui/skeleton';
 
 const barcodeFormats = [
     "CODE128", "CODE39", "EAN13", "EAN8", "UPC", "ITF", "MSI", "Pharmacode"
 ];
 
-export default function BarcodeGenerator() {
+function BarcodeGeneratorComponent({ JsBarcode }: { JsBarcode: typeof JsBarcode }) {
     const [text, setText] = useState('Toolzen-12345');
     const [format, setFormat] = useState('CODE128');
     const [isValid, setIsValid] = useState(true);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const jsBarcodeRef = useRef<typeof JsBarcode | null>(null);
     const { toast } = useToast();
 
     useEffect(() => {
-        import('jsbarcode').then(module => {
-            jsBarcodeRef.current = module.default;
-        });
-    }, []);
-
-    useEffect(() => {
-        if (canvasRef.current && jsBarcodeRef.current) {
+        if (canvasRef.current) {
             try {
-                jsBarcodeRef.current(canvasRef.current, text, {
+                JsBarcode(canvasRef.current, text, {
                     format: format,
                     displayValue: true,
                     background: 'transparent',
@@ -45,10 +40,10 @@ export default function BarcodeGenerator() {
                 setIsValid(false);
             }
         }
-    }, [text, format]);
+    }, [text, format, JsBarcode]);
 
     const handleDownload = () => {
-        if (!isValid || !canvasRef.current || !jsBarcodeRef.current) {
+        if (!isValid || !canvasRef.current || !JsBarcode) {
             toast({ variant: 'destructive', title: 'Invalid Barcode', description: 'Cannot download an invalid or empty barcode.' });
             return;
         }
@@ -65,7 +60,7 @@ export default function BarcodeGenerator() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         let downloadIsValid = true;
-        jsBarcodeRef.current(canvas, text, {
+        JsBarcode(canvas, text, {
             format: format,
             displayValue: true,
             lineColor: '#000000',
@@ -137,3 +132,31 @@ export default function BarcodeGenerator() {
         </Card>
     );
 }
+
+const BarcodeGenerator = () => {
+    const [JsBarcode, setJsBarcode] = useState<typeof JsBarcode | null>(null);
+
+    useEffect(() => {
+        import('jsbarcode').then(module => setJsBarcode(() => module.default));
+    }, []);
+
+    if (!JsBarcode) {
+        return (
+            <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
+                <CardHeader>
+                    <CardTitle className="text-2xl">Barcode Generator</CardTitle>
+                    <CardDescription>Create downloadable barcodes in various formats.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <Skeleton className="h-10 w-full" />
+                    <Skeleton className="h-24 w-full" />
+                    <Skeleton className="h-10 w-full" />
+                </CardContent>
+            </Card>
+        );
+    }
+
+    return <BarcodeGeneratorComponent JsBarcode={JsBarcode} />;
+};
+
+export default BarcodeGenerator;

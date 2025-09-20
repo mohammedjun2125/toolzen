@@ -6,7 +6,6 @@ import { SiteFooter } from '@/components/site-footer';
 import { BlogPreview } from '@/components/blog-preview';
 import { mockPosts } from '@/lib/blog';
 import TrendingProducts from '@/components/trending-products';
-import Balancer from 'react-wrap-balancer';
 
 export default function Home() {
   
@@ -19,11 +18,11 @@ export default function Home() {
             <div className="container mx-auto px-4 md:px-6 text-center">
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">
-                  <Balancer>Your Ultimate Digital Toolkit</Balancer>
+                  Your Ultimate Digital Toolkit
               </h1>
               <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
-                  <Balancer>A suite of free, fast, and privacy-focused online tools to boost your productivity.
-                  No data is sent to our servers. Everything happens in your browser for maximum security and speed.</Balancer>
+                  A suite of free, fast, and privacy-focused online tools to boost your productivity.
+                  No data is sent to our servers. Everything happens in your browser for maximum security and speed.
               </p>
               
             </div>

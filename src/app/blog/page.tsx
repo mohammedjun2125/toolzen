@@ -49,7 +49,7 @@ export default function BlogIndexPage() {
 
             <div className="col-span-12 lg:col-span-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    {posts.map((post) => (
+                    {posts.map((post, index) => (
                         <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
                             <article className="border rounded-lg h-full flex flex-col transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/20 bg-card/60 backdrop-blur-lg">
                                 {post.image && (
@@ -61,6 +61,7 @@ export default function BlogIndexPage() {
                                             className="object-cover"
                                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             data-ai-hint={post.imageHint}
+                                            priority={index < 2}
                                         />
                                     </div>
                                 )}
