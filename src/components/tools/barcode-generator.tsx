@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -10,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Download } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const barcodeFormats = [
     "CODE128", "CODE39", "EAN13", "EAN8", "UPC", "ITF", "MSI", "Pharmacode"
@@ -18,8 +18,10 @@ const barcodeFormats = [
 export default function BarcodeGenerator() {
     const [text, setText] = useState('Toolzen-12345');
     const [format, setFormat] = useState('CODE128');
+    const [isValid, setIsValid] = useState(true);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { toast } = useToast();
+    const { resolvedTheme } = useTheme();
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -27,22 +29,53 @@ export default function BarcodeGenerator() {
                 JsBarcode(canvasRef.current, text, {
                     format: format,
                     displayValue: true,
-                    lineColor: '#000',
-                    background: '#FFF',
+                    lineColor: resolvedTheme === 'dark' ? '#FFF' : '#000',
+                    background: 'transparent',
+                    fontOptions: 'bold',
+                    font: 'monospace',
+                    // Callback to check if barcode was rendered successfully
+                    valid: (valid) => setIsValid(valid),
                 });
             } catch (error) {
-                // The error is handled by JsBarcode by rendering an invalid barcode.
-                // We could add a toast here, but it can be noisy as the user types.
+                // This catch block might not be strictly necessary with `valid` callback,
+                // but it's good for catching other unexpected errors from the library.
+                setIsValid(false);
             }
         }
-    }, [text, format]);
+    }, [text, format, resolvedTheme]);
 
     const handleDownload = () => {
+        if (!isValid) {
+            toast({ variant: 'destructive', title: 'Invalid Barcode', description: 'Cannot download an invalid barcode.' });
+            return;
+        }
         if (canvasRef.current) {
-            const dataUrl = canvasRef.current.toDataURL('image/png');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if(!ctx) return;
+            
+            const originalCanvas = canvasRef.current;
+            canvas.width = originalCanvas.width;
+            canvas.height = originalCanvas.height;
+
+            // Fill background for downloaded image
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw the barcode on top
+            JsBarcode(canvas, text, {
+                format: format,
+                displayValue: true,
+                lineColor: '#000', // Black for download
+                background: '#FFF',
+                fontOptions: 'bold',
+                font: 'monospace',
+            });
+            
+            const dataUrl = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.href = dataUrl;
-            link.download = 'barcode.png';
+            link.download = `barcode-${text}.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -80,11 +113,16 @@ export default function BarcodeGenerator() {
                     </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-lg flex justify-center">
+                <div className="p-4 rounded-lg flex justify-center bg-card/80">
                     <canvas ref={canvasRef} />
                 </div>
+                 {!isValid && (
+                    <div className="text-center text-red-500 text-sm">
+                        Invalid input for the selected barcode format. Please check the format's requirements.
+                    </div>
+                 )}
 
-                <Button onClick={handleDownload} className="w-full" disabled={!text}>
+                <Button onClick={handleDownload} className="w-full" disabled={!text || !isValid}>
                     <Download className="mr-2 h-4 w-4" />
                     Download as PNG
                 </Button>
