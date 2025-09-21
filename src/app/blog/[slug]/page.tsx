@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import TrendingProducts from '@/components/trending-products';
-import ReactMarkdown from 'react-markdown';
+import { marked } from 'marked';
 
 type Props = {
   params: { slug: string };
@@ -73,6 +73,7 @@ export default function BlogPostPage({ params }: Props) {
   }
   
   const relatedTool = tools.find(tool => post.content.includes(tool.href));
+  const parsedContent = marked(post.content);
 
   return (
     <>
@@ -138,9 +139,10 @@ export default function BlogPostPage({ params }: Props) {
                 />
             </div>
 
-            <div className="prose dark:prose-invert max-w-none">
-              <ReactMarkdown>{post.content}</ReactMarkdown>
-            </div>
+            <div 
+                className="prose dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: parsedContent as string}} 
+            />
 
             {relatedTool && (
                 <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">

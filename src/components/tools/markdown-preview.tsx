@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import ReactMarkdown from 'react-markdown';
+import { marked } from 'marked';
 
 export default function MarkdownPreview() {
   const [markdown, setMarkdown] = useState(`# Hello, Markdown!
@@ -28,6 +28,8 @@ function greet() {
 \`\`\`
 `);
 
+  const parsedMarkdown = marked(markdown);
+
   return (
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
@@ -44,8 +46,8 @@ function greet() {
           />
           <div
             className="prose dark:prose-invert bg-muted/50 rounded-lg p-4 overflow-auto h-full"
+            dangerouslySetInnerHTML={{ __html: parsedMarkdown as string}}
           >
-            <ReactMarkdown>{markdown}</ReactMarkdown>
           </div>
         </div>
       </CardContent>
