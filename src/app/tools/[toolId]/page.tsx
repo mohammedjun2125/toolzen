@@ -1,3 +1,4 @@
+
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -31,6 +32,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'loan-emi-calculator': dynamic(() => import('@/components/tools/loan-emi-calculator')),
     'barcode-generator': dynamic(() => import('@/components/tools/barcode-generator')),
     'random-number-generator': dynamic(() => import('@/components/tools/random-number-generator')),
+    'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -75,6 +77,10 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
     'random-number-generator': [
         { question: 'How "random" are the numbers?', answer: 'The numbers are generated using your browser\'s built-in `Math.random()` function. While this is sufficient for most general-purpose needs like games or picking winners, it is not considered cryptographically secure for high-stakes security applications.'},
         { question: 'Is there a limit to the range?', answer: 'You can set any minimum and maximum values for the range. The tool will generate a random integer (whole number) that is inclusive of the min and max values you provide.'},
+    ],
+    'pdf-maker': [
+        { question: 'Are my images uploaded to a server?', answer: 'No. Our PDF Maker is a client-side tool. All images are processed directly in your browser, and your files never leave your computer, ensuring 100% privacy.' },
+        { question: 'What image formats can I use?', answer: 'You can convert JPG and PNG images into a PDF. Simply select all the images you want to include, and the tool will combine them into a single file.' },
     ],
 };
 
