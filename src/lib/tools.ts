@@ -27,6 +27,7 @@ import {
   Merge,
   RotateCw,
   Trash2,
+  Split,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
@@ -87,6 +88,14 @@ export const tools: Tool[] = [
     description: 'Remove one or more pages from a PDF document. Fast, private, and simple to use.',
     href: '/tools/pdf-deleter',
     icon: Trash2,
+    category: 'PDF',
+  },
+    {
+    id: 'pdf-splitter',
+    name: 'Split PDF',
+    description: 'Extract specific pages from a PDF document into a new file. 100% secure.',
+    href: '/tools/pdf-splitter',
+    icon: Split,
     category: 'PDF',
   },
   {

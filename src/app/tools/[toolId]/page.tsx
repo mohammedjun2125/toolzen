@@ -37,6 +37,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-merger': dynamic(() => import('@/components/tools/pdf-merger')),
     'pdf-rotator': dynamic(() => import('@/components/tools/pdf-rotator')),
     'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
+    'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -119,6 +120,11 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Is deleting pages from my PDF secure?', answer: 'Yes. Our tool is 100% secure as it processes the file directly in your browser. Your PDF is never uploaded to a server, so your confidential information remains completely private.'},
         { question: 'Will deleting pages affect the quality of the remaining pages?', answer: 'Not at all. Deleting pages is a structural change, and it does not re-compress or alter the content of the other pages. The quality of the remaining pages will be identical to the original.'},
         { question: 'Can I recover a page after I delete it?', answer: 'Once you apply the changes and download the new PDF, the deleted pages are gone from that new file. However, your original file remains untouched on your device, so you can always start over if you make a mistake.'}
+    ],
+    'pdf-splitter': [
+        { question: 'Is splitting my PDF secure?', answer: 'Yes. The tool operates entirely in your browser. Your PDF is never uploaded to our servers, so your data remains completely private and secure.'},
+        { question: 'What can I do with the Split PDF tool?', answer: 'You can select one or more pages from a PDF and extract them into a new, separate PDF file. This is perfect for isolating a chapter, a report, or specific pages you need.'},
+        { question: 'Can I split one PDF into multiple single-page files?', answer: 'This version of the tool extracts all selected pages into one new file. A feature to split each selected page into an individual file is coming soon!'}
     ]
 };
 
