@@ -10,6 +10,7 @@ import { Upload, X, Loader2, Download, RotateCw, RotateCcw } from 'lucide-react'
 import { PDFDocument, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
+import Link from 'next/link';
 
 export default function PdfRotator() {
     const [file, setFile] = useState<File | null>(null);
@@ -35,8 +36,6 @@ export default function PdfRotator() {
 
             const previews: string[] = [];
             for (let i = 0; i < numPages; i++) {
-                // To create a preview, we create a new document with just one page.
-                // This is a workaround to render individual pages as blobs.
                 const newDoc = await PDFDocument.create();
                 const [copiedPage] = await newDoc.copyPages(pdfDoc, [i]);
                 newDoc.addPage(copiedPage);
@@ -72,7 +71,7 @@ export default function PdfRotator() {
         setPageRotations(prev => {
             const newRotations = [...prev];
             const change = direction === 'cw' ? 90 : -90;
-            newRotations[index] = (newRotations[index] + change) % 360;
+            newRotations[index] = (newRotations[index] + 360 + change) % 360;
             return newRotations;
         });
     };
@@ -117,10 +116,11 @@ export default function PdfRotator() {
     };
 
     return (
+        <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Rotate PDF</CardTitle>
-                <CardDescription>Rotate pages in your PDF document. All processing is done securely in your browser.</CardDescription>
+                <CardTitle className="text-2xl">Rotate PDF Pages Online - Free & Secure</CardTitle>
+                <CardDescription>Easily **rotate PDF pages** clockwise or counterclockwise. Fix the orientation of your PDF documents securely in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -128,7 +128,7 @@ export default function PdfRotator() {
                         className="border-2 border-dashed border-border rounded-lg p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary transition-colors"
                         onClick={() => fileInputRef.current?.click()}
                     >
-                        <Upload className="h-12 w-12 text-muted-foreground" />
+                        <Upload className="h-12 w-12 text-muted-foreground" alt="Upload a PDF to rotate its pages" />
                         <p className="mt-4 text-muted-foreground">Click to upload or drag and drop a PDF</p>
                         <Input
                             ref={fileInputRef}
@@ -175,15 +175,60 @@ export default function PdfRotator() {
                 )}
                 
                 {file && (
-                    <Button onClick={handleApplyChanges} disabled={isProcessing} className="w-full">
+                    <Button onClick={handleApplyChanges} disabled={isProcessing} className="w-full text-lg py-6">
                         {isProcessing ? (
                             <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
                         ) : (
-                            <><Download className="mr-2 h-4 w-4" /> Apply Changes & Download</>
+                            <><Download className="mr-2 h-4 w-4" /> Apply Changes & Download PDF</>
                         )}
                     </Button>
                 )}
             </CardContent>
         </Card>
+        <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+            <h2 className="text-2xl font-bold">Instantly Fix PDF Page Orientation</h2>
+            <p>Scanned a document upside down? Is a page in your report sideways? Our **free online PDF rotator** lets you **turn PDF pages** to the correct orientation in seconds. This **PDF editor free** tool works entirely in your browser, ensuring your files are processed quickly and privately without needing to install any software.</p>
+            
+            <h3>Features of Our PDF Page Rotation Tool</h3>
+            <ul>
+                <li><strong>Individual Page Control:</strong> Rotate specific pages or all pages at once. You have full control to **rotate PDF pages online**.</li>
+                <li><strong>90, 180, or 270 Degrees:</strong> Turn pages clockwise or counterclockwise in 90-degree increments to get the perfect orientation.</li>
+                <li><strong>100% Secure & Private:</strong> This is a **client-side PDF tool**. Your PDF is never uploaded to a server. All processing happens on your computer.</li>
+                <li><strong>Fast and Free:</strong> No signups, no watermarks, no limits. A truly **free PDF utility** for everyone.</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold">How to Rotate PDF Pages Online for Free</h2>
+            <ol>
+                <li><strong>Step 1: Upload Your PDF:</strong> Click the upload box to select your PDF file.</li>
+                <li><strong>Step 2: Preview and Rotate:</strong> See a preview of every page. Use the rotate buttons under each page to turn it left or right. A badge will show the current rotation angle.</li>
+                <li><strong>Step 3: Apply Changes:</strong> Once you've corrected the orientation for all necessary pages, click the "Apply Changes & Download" button.</li>
+                <li><strong>Step 4: Download Your Rotated PDF:</strong> Your new, correctly oriented PDF will be saved to your device instantly.</li>
+            </ol>
+
+            <h3>Common Use Cases</h3>
+            <ul>
+                <li>**Scanned Documents:** Quickly fix scanned receipts, forms, or photos that were scanned in the wrong orientation.</li>
+                <li>**Presentations:** Ensure all slides and pages in your **PDF pages for presentations or reports** are facing the right way.</li>
+                <li>**Digital Booklets:** Correct the layout of digital catalogs or brochures where some pages might be landscape and others portrait.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions (FAQs)</h2>
+            <h3>How do you turn PDF pages?</h3>
+            <p>Our tool makes it easy. After uploading your PDF, you'll see a preview of each page. Simply click the clockwise or counterclockwise rotate buttons below a page to turn it. You can rotate pages by 90, 180, or 270 degrees.</p>
+            <h3>Is it free to rotate pages in a PDF?</h3>
+            <p>Yes, our **PDF page rotation free** tool is completely free to use. There are no hidden costs or limitations on the number of files or pages you can rotate.</p>
+            <h3>Will rotating a PDF reduce its quality?</h3>
+            <p>No, rotating a PDF is a lossless operation. It only changes the metadata for the page's orientation. The quality of the text, images, and other content on the page will remain exactly the same.</p>
+
+            <div className="not-prose mt-8">
+                <h3 className="text-xl font-semibold">Other Free PDF Editing Tools</h3>
+                <p>Once your pages are rotated, you might need to perform other edits. Try our other **online PDF tools**:</p>
+                <ul className="list-disc list-inside">
+                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine this rotated PDF with other documents.</li>
+                    <li><Link href="/tools/pdf-deleter" className="text-primary hover:underline">Delete PDF Pages</Link> - Remove any unwanted pages after rotating.</li>
+                </ul>
+            </div>
+        </article>
+        </>
     );
 }

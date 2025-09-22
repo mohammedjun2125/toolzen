@@ -10,6 +10,7 @@ import { Upload, X, Loader2, Download, Split, CheckSquare } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
+import Link from 'next/link';
 
 export default function PdfSplitter() {
     const [file, setFile] = useState<File | null>(null);
@@ -117,10 +118,11 @@ export default function PdfSplitter() {
     };
 
     return (
+        <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Split PDF</CardTitle>
-                <CardDescription>Securely extract specific pages from your PDF into a new document.</CardDescription>
+                <CardTitle className="text-2xl">Split PDF Online - Free PDF Splitter Tool</CardTitle>
+                <CardDescription>Securely **extract pages from PDF** into a new document. Our **PDF splitter tool free** works in your browser, keeping your files private.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -128,7 +130,7 @@ export default function PdfSplitter() {
                         className="border-2 border-dashed border-border rounded-lg p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary transition-colors"
                         onClick={() => fileInputRef.current?.click()}
                     >
-                        <Upload className="h-12 w-12 text-muted-foreground" />
+                        <Upload className="h-12 w-12 text-muted-foreground" alt="Upload a PDF to split" />
                         <p className="mt-4 text-muted-foreground">Click to upload or drag and drop a PDF</p>
                         <Input
                             ref={fileInputRef}
@@ -175,15 +177,61 @@ export default function PdfSplitter() {
                 )}
                 
                 {file && (
-                    <Button onClick={handleApplyChanges} disabled={isProcessing || pagesToExtract.size === 0} className="w-full">
+                    <Button onClick={handleApplyChanges} disabled={isProcessing || pagesToExtract.size === 0} className="w-full text-lg py-6">
                         {isProcessing ? (
                             <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
                         ) : (
-                            <><Split className="mr-2 h-4 w-4" /> Extract {pagesToExtract.size} Page(s) & Download</>
+                            <><Split className="mr-2 h-4 w-4" /> Extract {pagesToExtract.size} Page(s) & Download PDF</>
                         )}
                     </Button>
                 )}
             </CardContent>
         </Card>
+        <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+            <h2 className="text-2xl font-bold">Your Go-To Tool to Split PDF Files Online</h2>
+            <p>Need to isolate a specific chapter, a single report, or just a few important pages from a large PDF? Our **free online PDF splitter** is the tool for you. It allows you to **extract pages from PDF** documents with precision and ease. This **PDF splitter tool free** is designed for speed and security, processing everything directly in your browser so your data never leaves your computer.</p>
+            
+            <h3>Key Features and Benefits</h3>
+            <ul>
+                <li><strong>Visual Page Selection:</strong> See a clear preview of every page and simply click to select the ones you want to extract into a new file.</li>
+                <li><strong>100% Free and Private:</strong> As a client-side tool, your files are never uploaded. Enjoy unlimited PDF splitting without compromising the security of your documents.</li>
+                <li><strong>No Software Required:</strong> This is a fast, browser-based **online PDF tool** that requires no installation or registration.</li>
+                <li><strong>High-Quality Output:</strong> The extracted pages maintain their original quality, ensuring your new PDF is crisp and clear.</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold">How to Split a PDF Document for Free</h2>
+            <ol>
+                <li><strong>Step 1: Upload Your PDF:</strong> Drag and drop your file or click the upload area to select a PDF from your device.</li>
+                <li><strong>Step 2: Select Pages to Extract:</strong> Browse the page previews and click on each page you want to include in your new document. Selected pages will be highlighted.</li>
+                <li><strong>Step 3: Split and Download:</strong> Click the "Extract Page(s) & Download" button. Our tool will instantly create a new PDF containing only the pages you selected.</li>
+                <li><strong>Step 4: Save Your File:</strong> Your new, split PDF will be automatically downloaded to your device.</li>
+            </ol>
+
+            <h3>Common Use Cases for Splitting PDFs</h3>
+            <ul>
+                <li>**Extracting Chapters:** Isolate a single chapter from a large e-book or textbook for focused reading.</li>
+                <li>**Sharing Reports:** Share only the relevant sections of a long report with colleagues or clients.</li>
+                <li>**Isolating Forms:** Extract a single form or application page from a larger document packet.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions (FAQs)</h2>
+            <h3>How do I split a PDF online for free?</h3>
+            <p>Our **PDF splitter tool free** makes it easy. Upload your document, select the pages you need by clicking on their previews, and then click the "Extract" button to download a new PDF containing only those pages.</p>
+            <h3>Is it safe to extract pages from a PDF online?</h3>
+            <p>Yes, our tool is extremely safe. Because it's a **client-side PDF tool**, all processing happens in your browser. Your PDF file is never uploaded to our servers, ensuring 100% privacy and security.</p>
+            <h3>Can I split one PDF into multiple single-page files?</h3>
+            <p>This version of the tool extracts all selected pages into one new file. A feature to **split PDF document into separate files free** (one file per page) is coming soon!</p>
+
+            <div className="not-prose mt-8">
+                <h3 className="text-xl font-semibold">Complete Your PDF Workflow</h3>
+                <p>After splitting your file, you may need other tools:</p>
+                <ul className="list-disc list-inside">
+                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine your new file with other documents.</li>
+                    <li><Link href="/tools/add-watermark" className="text-primary hover:underline">Add Watermark to PDF</Link> - Add a watermark to your extracted pages.</li>
+                    <li><Link href="/tools/pdf-deleter" className="text-primary hover:underline">Delete PDF Pages</Link> - Further refine your document by removing pages.</li>
+                </ul>
+            </div>
+        </article>
+        </>
     );
 }
