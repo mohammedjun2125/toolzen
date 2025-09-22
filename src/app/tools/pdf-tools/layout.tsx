@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 const pdfTools = [
     { name: 'Merge PDF', href: '/tools/pdf-merger', description: 'Combine multiple PDFs into one.' },
+    { name: 'Rotate PDF', href: '/tools/pdf-rotator', description: 'Rotate pages in a PDF.' },
     // { name: 'Split PDF', href: '/tools/pdf-splitter', description: 'Extract pages from a PDF.' },
     // { name: 'Compress PDF', href: '/tools/pdf-compressor', description: 'Reduce the file size of your PDF.' },
 ];
