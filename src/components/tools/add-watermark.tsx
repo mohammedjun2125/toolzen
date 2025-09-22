@@ -191,7 +191,7 @@ export default function AddWatermark() {
                                     </div>
                                 )}
                                 {previewUrl ? (
-                                    <embed src={previewUrl} type="application/pdf" className="w-full h-full border-none rounded-lg" />
+                                    <iframe src={previewUrl} className="w-full h-full border-none rounded-lg" title="PDF Preview" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center bg-muted/30 rounded-lg">
                                        <p className="text-muted-foreground text-sm">Preview will appear here</p>
