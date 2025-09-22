@@ -24,9 +24,11 @@ import {
   Landmark,
   Barcode,
   Sparkles,
+  Merge,
+  RotateCw,
 } from 'lucide-react';
 
-export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators";
+export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
 
 export type Tool = {
   id: string;
@@ -60,7 +62,23 @@ export const tools: Tool[] = [
     description: 'Convert JPG and PNG images into a single, downloadable PDF file. 100% private.',
     href: '/tools/pdf-maker',
     icon: FileText,
-    category: 'Image & Media',
+    category: 'PDF',
+  },
+  {
+    id: 'pdf-merger',
+    name: 'Merge PDF',
+    description: 'Combine multiple PDF documents into one single file. Secure and client-side.',
+    href: '/tools/pdf-merger',
+    icon: Merge,
+    category: 'PDF',
+  },
+  {
+    id: 'pdf-rotator',
+    name: 'Rotate PDF',
+    description: 'Rotate pages in a PDF document individually. Processed securely in your browser.',
+    href: '/tools/pdf-rotator',
+    icon: RotateCw,
+    category: 'PDF',
   },
   {
     id: 'text-to-speech',

@@ -11,7 +11,7 @@ import { PDFDocument, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 
-export default function PdfRotatorPage() {
+export default function PdfRotator() {
     const [file, setFile] = useState<File | null>(null);
     const [pagePreviews, setPagePreviews] = useState<string[]>([]);
     const [pageRotations, setPageRotations] = useState<number[]>([]);
@@ -35,6 +35,8 @@ export default function PdfRotatorPage() {
 
             const previews: string[] = [];
             for (let i = 0; i < numPages; i++) {
+                // To create a preview, we create a new document with just one page.
+                // This is a workaround to render individual pages as blobs.
                 const newDoc = await PDFDocument.create();
                 const [copiedPage] = await newDoc.copyPages(pdfDoc, [i]);
                 newDoc.addPage(copiedPage);
@@ -138,7 +140,12 @@ export default function PdfRotatorPage() {
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        <h3 className="font-semibold text-lg">Rotate Pages</h3>
+                        <div className="flex justify-between items-center">
+                            <h3 className="font-semibold text-lg">Rotate Pages in: {file.name}</h3>
+                            <Button onClick={resetState} variant="outline" size="sm">
+                                <X className="mr-2 h-4 w-4" /> Change File
+                            </Button>
+                        </div>
                         {isProcessing && progress < 100 ? (
                              <Progress value={progress} className="w-full" />
                         ) : (
@@ -156,29 +163,26 @@ export default function PdfRotatorPage() {
                                             </Button>
                                         </div>
                                          {pageRotations[index] !== 0 && (
-                                            <div className="absolute top-1 right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                                {pageRotations[index]/90}
+                                            <div className="absolute top-1 right-1 bg-primary text-primary-foreground text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold">
+                                                {pageRotations[index]}°
                                             </div>
                                          )}
                                     </div>
                                 ))}
                             </div>
                         )}
-                        <Button onClick={resetState} variant="outline" size="sm">
-                            <X className="mr-2 h-4 w-4" /> Change File
-                        </Button>
                     </div>
                 )}
                 
-                {isProcessing && file && <Progress value={progress} className="w-full" />}
-
-                <Button onClick={handleApplyChanges} disabled={!file || isProcessing} className="w-full">
-                    {isProcessing ? (
-                        <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
-                    ) : (
-                        <><Download className="mr-2 h-4 w-4" /> Apply Changes & Download</>
-                    )}
-                </Button>
+                {file && (
+                    <Button onClick={handleApplyChanges} disabled={isProcessing} className="w-full">
+                        {isProcessing ? (
+                            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
+                        ) : (
+                            <><Download className="mr-2 h-4 w-4" /> Apply Changes & Download</>
+                        )}
+                    </Button>
+                )}
             </CardContent>
         </Card>
     );

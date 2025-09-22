@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useRef, useCallback, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,7 +11,7 @@ import { PDFDocument } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 
-export default function PdfMergerPage() {
+export default function PdfMerger() {
     const [files, setFiles] = useState<File[]>([]);
     const [isMerging, setIsMerging] = useState(false);
     const [progress, setProgress] = useState(0);
@@ -152,24 +152,7 @@ export default function PdfMergerPage() {
                         <><Download className="mr-2 h-4 w-4" /> Merge PDFs & Download</>
                     )}
                 </Button>
-
-                <div className="prose dark:prose-invert max-w-none mx-auto mt-8">
-                    <h2 className="text-xl font-bold">How to Merge PDFs Online Securely</h2>
-                    <p>Our PDF Merger allows you to combine multiple PDF documents into a single file directly in your browser. Unlike other online tools, we prioritize your privacy by ensuring that your files are never uploaded to a server. All processing happens on your computer, making it a fast and secure solution.</p>
-                    <ol>
-                        <li><strong>Select Your Files:</strong> Drag and drop your PDFs into the upload area, or click to select them from your computer. You can add as many files as you need.</li>
-                        <li><strong>Order Your Files:</strong> The files will be merged in the order they appear in the list. (Reordering functionality coming soon!)</li>
-                        <li><strong>Merge & Download:</strong> Click the "Merge PDFs" button. The tool will process the files and your browser will automatically download the combined PDF.</li>
-                    </ol>
-                    <h3 className="font-semibold">Why use a client-side PDF merger?</h3>
-                    <ul>
-                        <li><strong>Privacy:</strong> Your sensitive documents are never sent over the internet.</li>
-                        <li><strong>Speed:</strong> No waiting for large files to upload. The merging process is incredibly fast.</li>
-                        <li><strong>No Limits:</strong> Merge as many files as you want, as often as you want, completely for free.</li>
-                    </ul>
-                </div>
             </CardContent>
         </Card>
     );
 }
-

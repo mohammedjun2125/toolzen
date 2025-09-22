@@ -10,8 +10,7 @@ export default function ToolsLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
-      <main className="flex-1">
-        {/* The PDF tools layout will wrap its own content */}
+      <main className="flex-1 container mx-auto py-8">
         {children}
       </main>
       <SiteFooter />
