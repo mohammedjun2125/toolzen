@@ -25,7 +25,7 @@ export default function AddWatermark() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
 
-    const generatePdfWithWatermark = async () => {
+    const generatePdfWithWatermark = async (outputType: 'dataUri' | 'bytes' = 'bytes') => {
         if (!file) return null;
         
         const arrayBuffer = await file.arrayBuffer();
@@ -33,13 +33,16 @@ export default function AddWatermark() {
         const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
         const pages = pdfDoc.getPages();
 
-        const textColor = rgb(0.5, 0.5, 0.5); // A semi-transparent gray color
+        const textColor = rgb(0.5, 0.5, 0.5);
 
         for (const page of pages) {
             const { width, height } = page.getSize();
+            const centerX = width / 2;
+            const centerY = height / 2;
+
             page.drawText(watermarkText, {
-                x: width / 2,
-                y: height / 2,
+                x: centerX,
+                y: centerY,
                 font: helveticaFont,
                 size: fontSize,
                 color: textColor,
@@ -48,6 +51,10 @@ export default function AddWatermark() {
                 xSkew: degrees(0),
                 ySkew: degrees(0),
             });
+        }
+
+        if (outputType === 'dataUri') {
+            return await pdfDoc.saveAsBase64({ dataUri: true });
         }
         return await pdfDoc.save();
     }
@@ -58,11 +65,9 @@ export default function AddWatermark() {
         const timer = setTimeout(async () => {
             setGeneratingPreview(true);
             try {
-                const pdfBytes = await generatePdfWithWatermark();
-                if (pdfBytes) {
-                    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-                    if (previewUrl) URL.revokeObjectURL(previewUrl);
-                    setPreviewUrl(URL.createObjectURL(blob));
+                const pdfDataUri = await generatePdfWithWatermark('dataUri');
+                if (pdfDataUri) {
+                    setPreviewUrl(pdfDataUri);
                 }
             } catch (error) {
                 console.error("Failed to generate preview", error);
@@ -97,7 +102,7 @@ export default function AddWatermark() {
         toast({ title: 'Applying watermark to your PDF...' });
 
         try {
-            const pdfBytes = await generatePdfWithWatermark();
+            const pdfBytes = await generatePdfWithWatermark('bytes');
             if (pdfBytes) {
                 saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), `watermarked-${file.name}`);
                 toast({ title: 'Success!', description: 'Your PDF has been watermarked and downloaded.' });
@@ -112,7 +117,6 @@ export default function AddWatermark() {
 
     const resetState = () => {
         setFile(null);
-        if (previewUrl) URL.revokeObjectURL(previewUrl);
         setPreviewUrl(null);
         setIsProcessing(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
