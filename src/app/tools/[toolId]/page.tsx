@@ -39,6 +39,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
     'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
     'protect-pdf': dynamic(() => import('@/components/tools/protect-pdf')),
+    'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -131,7 +132,12 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'How secure is the password protection?', answer: 'Our tool uses standard PDF encryption (AES-256) which is very strong. The encryption happens in your browser, so your password and file are never sent to our servers. The security of the file depends on the strength of the password you choose.'},
         { question: 'Can I recover a forgotten password?', answer: 'No. Because the encryption is done on your device, we have no knowledge of your password. If you forget it, there is no way for us to recover the file. Please store your password in a safe place.'},
         { question: 'Does this work on all PDF readers?', answer: 'Yes, password-protected PDFs created with our tool will work with all standard PDF readers, such as Adobe Acrobat, Chrome, and Preview on Mac.'}
-    ]
+    ],
+    'add-watermark': [
+      { question: 'Is adding a watermark to my PDF secure?', answer: 'Yes, 100%. The entire process happens in your browser. Your PDF file is never uploaded to a server, so your confidential documents remain completely private.' },
+      { question: 'What kind of watermarks can I add?', answer: 'Currently, you can add text-based watermarks. You can customize the text, font size, rotation, and opacity to fit your needs, whether for branding, confidentiality notices, or draft indicators.' },
+      { question: 'Will the watermark appear on all pages?', answer: 'Yes, the watermark you configure will be applied consistently to every page of the PDF document.' },
+    ],
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

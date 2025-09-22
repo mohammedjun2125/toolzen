@@ -29,6 +29,7 @@ import {
   Trash2,
   Split,
   Shield,
+  SquarePen,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
@@ -105,6 +106,14 @@ export const tools: Tool[] = [
     description: 'Add a password to your PDF files to protect them from unauthorized access.',
     href: '/tools/protect-pdf',
     icon: Shield,
+    category: 'PDF',
+  },
+  {
+    id: 'add-watermark',
+    name: 'Add Watermark to PDF',
+    description: 'Add a text watermark to your PDF files with customizable opacity and rotation.',
+    href: '/tools/add-watermark',
+    icon: SquarePen,
     category: 'PDF',
   },
   {
