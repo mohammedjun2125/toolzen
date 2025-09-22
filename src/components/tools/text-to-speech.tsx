@@ -25,7 +25,6 @@ export default function TextToSpeech() {
       const voiceList = window.speechSynthesis.getVoices();
       if (voiceList.length > 0) {
         setVoices(voiceList);
-        // Set a default voice, prefer a local English one
         const defaultVoice = voiceList.find(voice => voice.lang.includes('en') && voice.localService) || voiceList[0];
         if (defaultVoice) {
           setSelectedVoice(defaultVoice.name);
@@ -33,13 +32,11 @@ export default function TextToSpeech() {
       }
     };
     
-    // Voices are loaded asynchronously
     if ('onvoiceschanged' in window.speechSynthesis) {
       window.speechSynthesis.onvoiceschanged = getVoices;
     } 
-    getVoices(); // Also call it directly for browsers that might not fire the event
+    getVoices();
 
-    // Cleanup
     return () => {
         window.speechSynthesis.cancel();
         if ('onvoiceschanged' in window.speechSynthesis) {
@@ -66,7 +63,7 @@ export default function TextToSpeech() {
         return;
     }
 
-    window.speechSynthesis.cancel(); // Clear any previous utterance
+    window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = voices.find(v => v.name === selectedVoice);
@@ -96,7 +93,6 @@ export default function TextToSpeech() {
       setIsPaused(false);
   }
   
-  // Group voices by language
   const voiceGroups = voices.reduce((acc, voice) => {
     const lang = voice.lang;
     if (!acc[lang]) {
@@ -108,6 +104,7 @@ export default function TextToSpeech() {
 
 
   return (
+    <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Text to Speech Online</CardTitle>
@@ -121,8 +118,8 @@ export default function TextToSpeech() {
           rows={8}
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-2 md:col-span-3">
                 <Label htmlFor="voice-select">Voice</Label>
                 <Select value={selectedVoice} onValueChange={setSelectedVoice}>
                     <SelectTrigger id="voice-select">
@@ -168,5 +165,27 @@ export default function TextToSpeech() {
         </div>
       </CardContent>
     </Card>
+    
+    <div className="prose dark:prose-invert max-w-none mx-auto mt-12">
+        <h2 className="text-2xl font-bold">Hear Your Words Come to Life</h2>
+        <p>Text-to-Speech (TTS) technology has revolutionized how we interact with digital content. It provides a voice to the written word, making information more accessible and easier to consume for everyone. Our free online Text-to-Speech tool leverages your browser's built-in synthesis engine to provide high-quality, natural-sounding speech instantly and privately.</p>
+        
+        <h3>Key Features and Benefits</h3>
+        <ul>
+            <li><strong>Natural Voices:</strong> Access a wide range of voices available in your operating system, covering various languages and accents.</li>
+            <li><strong>Customizable Speech:</strong> Easily adjust the pitch and speed (rate) of the voice to match your preference, whether you need slow, clear narration or want to quickly listen to a long article.</li>
+            <li><strong>Complete Privacy:</strong> Our tool is 100% client-side. The text you enter is processed directly on your device and is never sent to our servers. This guarantees that your data remains confidential.</li>
+            <li><strong>No Limits:</strong> Convert as much text as you want, as often as you want. There are no character limits or daily usage caps.</li>
+        </ul>
+
+        <h3>Practical Applications of Text-to-Speech</h3>
+        <ol>
+            <li><strong>Accessibility:</strong> It's an essential tool for individuals with visual impairments or reading difficulties like dyslexia, providing them with access to written content.</li>
+            <li><strong>Proofreading:</strong> Hearing your own writing read aloud is a powerful way to catch typos, grammatical mistakes, and awkward phrasing that your eyes might miss.</li>
+            <li><strong>Learning & Language:</strong> For language learners, listening to text can help improve pronunciation, intonation, and comprehension.</li>
+            <li><strong>Multitasking:</strong> Turn any article, report, or email into a podcast. Listen to content while you're driving, exercising, or cooking, making you more productive.</li>
+        </ol>
+    </div>
+    </>
   );
 }

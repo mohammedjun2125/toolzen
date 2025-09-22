@@ -22,8 +22,9 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
     const [showAdModal, setShowAdModal] = useState(false);
     
     // Find related articles based on keywords in title
+    const keywords = title.toLowerCase().split(' ').filter(kw => kw.length > 3);
     const relatedArticles = mockPosts.filter(post => 
-        title.toLowerCase().split(' ').some(keyword => keyword.length > 3 && post.title.toLowerCase().includes(keyword))
+        keywords.some(keyword => post.title.toLowerCase().includes(keyword) || post.content.toLowerCase().includes(keyword))
     ).slice(0, 4);
 
     return (
