@@ -101,14 +101,6 @@ export const tools: Tool[] = [
     category: 'PDF',
   },
   {
-    id: 'protect-pdf',
-    name: 'Protect PDF',
-    description: 'Add a password to your PDF files to protect them from unauthorized access.',
-    href: '/tools/protect-pdf',
-    icon: Shield,
-    category: 'PDF',
-  },
-  {
     id: 'add-watermark',
     name: 'Add Watermark to PDF',
     description: 'Add a text watermark to your PDF files with customizable opacity and rotation.',

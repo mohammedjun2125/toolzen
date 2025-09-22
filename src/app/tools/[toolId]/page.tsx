@@ -38,7 +38,6 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-rotator': dynamic(() => import('@/components/tools/pdf-rotator')),
     'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
     'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
-    'protect-pdf': dynamic(() => import('@/components/tools/protect-pdf')),
     'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
 };
 
@@ -127,11 +126,6 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Is splitting my PDF secure?', answer: 'Yes. The tool operates entirely in your browser. Your PDF is never uploaded to our servers, so your data remains completely private and secure.'},
         { question: 'What can I do with the Split PDF tool?', answer: 'You can select one or more pages from a PDF and extract them into a new, separate PDF file. This is perfect for isolating a chapter, a report, or specific pages you need.'},
         { question: 'Can I split one PDF into multiple single-page files?', answer: 'This version of the tool extracts all selected pages into one new file. A feature to split each selected page into an individual file is coming soon!'}
-    ],
-    'protect-pdf': [
-        { question: 'How secure is the password protection?', answer: 'Our tool uses standard PDF encryption (AES-256) which is very strong. The encryption happens in your browser, so your password and file are never sent to our servers. The security of the file depends on the strength of the password you choose.'},
-        { question: 'Can I recover a forgotten password?', answer: 'No. Because the encryption is done on your device, we have no knowledge of your password. If you forget it, there is no way for us to recover the file. Please store your password in a safe place.'},
-        { question: 'Does this work on all PDF readers?', answer: 'Yes, password-protected PDFs created with our tool will work with all standard PDF readers, such as Adobe Acrobat, Chrome, and Preview on Mac.'}
     ],
     'add-watermark': [
       { question: 'Is adding a watermark to my PDF secure?', answer: 'Yes, 100%. The entire process happens in your browser. Your PDF file is never uploaded to a server, so your confidential documents remain completely private.' },
