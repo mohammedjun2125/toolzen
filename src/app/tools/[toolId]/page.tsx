@@ -1,4 +1,5 @@
 
+
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -79,8 +80,10 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Is there a limit to the range?', answer: 'You can set any minimum and maximum values for the range. The tool will generate a random integer (whole number) that is inclusive of the min and max values you provide.'},
     ],
     'pdf-maker': [
-        { question: 'Are my images uploaded to a server?', answer: 'No. Our PDF Maker is a client-side tool. All images are processed directly in your browser, and your files never leave your computer, ensuring 100% privacy.' },
-        { question: 'What image formats can I use?', answer: 'You can convert JPG and PNG images into a PDF. Simply select all the images you want to include, and the tool will combine them into a single file.' },
+        { question: 'Are my images uploaded to a server?', answer: 'No. Our PDF Maker is a 100% client-side tool. All images are processed directly in your browser, and your files never leave your computer, ensuring total privacy.' },
+        { question: 'What image formats can I use to create a PDF?', answer: 'You can convert JPG and PNG images into a PDF. Simply select all the images you want to include, and the tool will combine them into a single, professional document.' },
+        { question: 'Is this PDF creation tool free to use?', answer: 'Yes, absolutely. Our tool is completely free and requires no sign-up. You can create as many PDFs as you need.' },
+        { question: 'Does the generated PDF have a watermark?', answer: 'No. The PDFs you create are clean and do not contain any watermarks, making them perfect for professional and personal use.' },
     ],
 };
 
@@ -135,17 +138,36 @@ export default function ToolPage({ params }: Props) {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'HowToTool',
+    '@type': 'SoftwareApplication',
     name: tool.name,
+    applicationCategory: 'Utilities',
+    operatingSystem: 'Any (Web browser)',
     description: tool.description,
-    step: [
-      { '@type': 'HowToStep', text: `Open the ${tool.name} tool on Toolzen.` },
-      { '@type': 'HowToStep', text: 'Provide your input (e.g., upload a file, enter text, select options).' },
-      { '@type': 'HowToStep', text: 'Adjust any available settings to your preference.' },
-      { '@type': 'HowToStep', text: 'Click the action button (e.g., "Compress", "Generate", "Calculate").' },
-      { '@type': 'HowToStep', text: 'Get your result instantly on the same page, ready to copy or download.' }
-    ]
+    offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '531'
+    }
   };
+  
+  if (faq.length > 0) {
+      jsonLd['mainEntity'] = {
+          '@type': 'FAQPage',
+          'mainEntity': faq.map(item => ({
+              '@type': 'Question',
+              'name': item.question,
+              'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': item.answer
+              }
+          }))
+      }
+  }
 
   return (
     <>

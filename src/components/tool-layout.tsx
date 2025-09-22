@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState } from 'react';
@@ -8,6 +9,7 @@ import { ArrowLeft, X } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
+import { mockPosts } from '@/lib/blog';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -19,6 +21,11 @@ type ToolLayoutProps = {
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
     const [showAdModal, setShowAdModal] = useState(false);
     
+    // Find related articles based on keywords in title
+    const relatedArticles = mockPosts.filter(post => 
+        title.toLowerCase().split(' ').some(keyword => keyword.length > 3 && post.title.toLowerCase().includes(keyword))
+    ).slice(0, 4);
+
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
              <Dialog open={showAdModal} onOpenChange={setShowAdModal}>
@@ -62,21 +69,27 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                     </div>
                 </div>
 
-                <section className="related-articles mt-12">
-                    <Card className="bg-card/60 backdrop-blur-lg">
-                        <CardHeader>
-                            <CardTitle>Related Articles</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-2">
-                                <li><Link href="/blog/how-to-compress-images-online" className="text-primary hover:underline">How to Compress Images Online Without Losing Quality</Link></li>
-                                <li><Link href="/blog/how-to-merge-pdfs-safely" className="text-primary hover:underline">How to Merge PDFs Safely</Link></li>
-                                <li><Link href="/blog/how-to-resize-images-online" className="text-primary hover:underline">How to Resize Images Without Losing Quality</Link></li>
-                                <li><Link href="/blog/how-to-calculate-percentages-quickly" className="text-primary hover:underline">How to Calculate Percentages Quickly</Link></li>
-                            </ul>
-                        </CardContent>
-                    </Card>
-                </section>
+                {relatedArticles.length > 0 && (
+                  <section className="related-articles mt-12">
+                      <Card className="bg-card/60 backdrop-blur-lg">
+                          <CardHeader>
+                              <CardTitle>Helpful Guides & Articles</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                              <ul className="space-y-2">
+                                  {relatedArticles.map(post => (
+                                      <li key={post.slug}>
+                                          <Link href={`/blog/${post.slug}`} className="text-primary hover:underline">
+                                              {post.title}
+                                          </Link>
+                                      </li>
+                                  ))}
+                              </ul>
+                          </CardContent>
+                      </Card>
+                  </section>
+                )}
+
 
                 {faq.length > 0 && (
                   <div className="mt-12">
@@ -86,7 +99,7 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                               <AccordionItem value={`item-${index}`} key={index}>
                                   <AccordionTrigger>{item.question}</AccordionTrigger>
 
-                                  <AccordionContent>{item.answer}</AccordionContent>
+                                  <AccordionContent><p className="prose dark:prose-invert max-w-none">{item.answer}</p></AccordionContent>
                               </AccordionItem>
                           ))}
                       </Accordion>
