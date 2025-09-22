@@ -28,6 +28,7 @@ import {
   RotateCw,
   Trash2,
   Split,
+  Shield,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
@@ -96,6 +97,14 @@ export const tools: Tool[] = [
     description: 'Extract specific pages from a PDF document into a new file. 100% secure.',
     href: '/tools/pdf-splitter',
     icon: Split,
+    category: 'PDF',
+  },
+  {
+    id: 'protect-pdf',
+    name: 'Protect PDF',
+    description: 'Add a password to your PDF files to protect them from unauthorized access.',
+    href: '/tools/protect-pdf',
+    icon: Shield,
     category: 'PDF',
   },
   {
