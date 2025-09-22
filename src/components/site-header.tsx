@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -11,6 +12,7 @@ export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
+    { href: '/tools/pdf-merger', text: 'PDF Tools' },
     { href: '/products', text: 'Products' },
     { href: '/blog', text: 'Blog' },
     { href: '/about', text: 'About' },
