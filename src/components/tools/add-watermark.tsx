@@ -33,7 +33,7 @@ export default function AddWatermark() {
         const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
         const pages = pdfDoc.getPages();
 
-        const textColor = rgb(0, 0, 0);
+        const textColor = rgb(0.5, 0.5, 0.5); // A semi-transparent gray color
 
         for (const page of pages) {
             const { width, height } = page.getSize();
@@ -45,8 +45,8 @@ export default function AddWatermark() {
                 color: textColor,
                 opacity: opacity,
                 rotate: degrees(rotation),
-                xSkew: degrees(-15),
-                ySkew: degrees(15),
+                xSkew: degrees(0),
+                ySkew: degrees(0),
             });
         }
         return await pdfDoc.save();
@@ -191,7 +191,7 @@ export default function AddWatermark() {
                                     </div>
                                 )}
                                 {previewUrl ? (
-                                    <iframe src={`${previewUrl}#toolbar=0&navpanes=0`} className="w-full h-full border-none rounded-lg" title="PDF Preview" />
+                                    <embed src={previewUrl} type="application/pdf" className="w-full h-full border-none rounded-lg" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center bg-muted/30 rounded-lg">
                                        <p className="text-muted-foreground text-sm">Preview will appear here</p>
