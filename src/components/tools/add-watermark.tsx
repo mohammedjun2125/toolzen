@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useRef, ChangeEvent, useEffect } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -16,16 +16,14 @@ export default function AddWatermark() {
     const [file, setFile] = useState<File | null>(null);
     const [watermarkText, setWatermarkText] = useState('CONFIDENTIAL');
     const [opacity, setOpacity] = useState(0.5);
-    const [fontSize, setFontSize] = useState(50);
+    const [fontSize, setFontSize] = useState(120);
     const [rotation, setRotation] = useState(-45);
     const [isProcessing, setIsProcessing] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [generatingPreview, setGeneratingPreview] = useState(false);
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
 
-    const generatePdfWithWatermark = async (outputType: 'dataUri' | 'bytes' = 'bytes') => {
+    const generatePdfWithWatermark = async () => {
         if (!file) return null;
         
         const arrayBuffer = await file.arrayBuffer();
@@ -40,7 +38,7 @@ export default function AddWatermark() {
             const centerX = width / 2;
             const centerY = height / 2;
 
-            page.drawText(watermarkText, {
+            page.drawText(watermarkText.toUpperCase(), {
                 x: centerX,
                 y: centerY,
                 font: helveticaFont,
@@ -53,33 +51,8 @@ export default function AddWatermark() {
             });
         }
 
-        if (outputType === 'dataUri') {
-            return await pdfDoc.saveAsBase64({ dataUri: true });
-        }
         return await pdfDoc.save();
     }
-
-    useEffect(() => {
-        if (!file) return;
-
-        const timer = setTimeout(async () => {
-            setGeneratingPreview(true);
-            try {
-                const pdfDataUri = await generatePdfWithWatermark('dataUri');
-                if (pdfDataUri) {
-                    setPreviewUrl(pdfDataUri);
-                }
-            } catch (error) {
-                console.error("Failed to generate preview", error);
-                toast({ variant: 'destructive', title: 'Preview Error', description: 'Could not generate a preview.' });
-            } finally {
-                setGeneratingPreview(false);
-            }
-        }, 500); // 500ms debounce
-
-        return () => clearTimeout(timer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [file, watermarkText, opacity, fontSize, rotation]);
     
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0];
@@ -102,7 +75,7 @@ export default function AddWatermark() {
         toast({ title: 'Applying watermark to your PDF...' });
 
         try {
-            const pdfBytes = await generatePdfWithWatermark('bytes');
+            const pdfBytes = await generatePdfWithWatermark();
             if (pdfBytes) {
                 saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), `watermarked-${file.name}`);
                 toast({ title: 'Success!', description: 'Your PDF has been watermarked and downloaded.' });
@@ -117,7 +90,6 @@ export default function AddWatermark() {
 
     const resetState = () => {
         setFile(null);
-        setPreviewUrl(null);
         setIsProcessing(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
@@ -126,7 +98,7 @@ export default function AddWatermark() {
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
                 <CardTitle className="text-2xl">Add Watermark to PDF</CardTitle>
-                <CardDescription>Stamp a text watermark onto your PDF and see a live preview of your changes.</CardDescription>
+                <CardDescription>Stamp a text watermark onto your PDF. Your files are processed securely in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -145,64 +117,45 @@ export default function AddWatermark() {
                         />
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-4">
-                             <div className="border rounded-lg p-4 flex items-center justify-between gap-4 bg-muted/20">
-                                <div className="flex items-center gap-4 truncate">
-                                    <FileIcon className="h-6 w-6 text-primary" />
-                                    <p className="text-sm truncate">{file.name}</p>
-                                </div>
-                                <Button onClick={resetState} variant="ghost" size="icon">
-                                    <X className="h-4 w-4" />
-                                </Button>
+                    <div className="space-y-4">
+                         <div className="border rounded-lg p-4 flex items-center justify-between gap-4 bg-muted/20">
+                            <div className="flex items-center gap-4 truncate">
+                                <FileIcon className="h-6 w-6 text-primary" />
+                                <p className="text-sm truncate">{file.name}</p>
                             </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="watermark-text">Watermark Text</Label>
-                                <Input
-                                    id="watermark-text"
-                                    value={watermarkText}
-                                    onChange={(e) => setWatermarkText(e.target.value)}
-                                    placeholder="e.g., DRAFT, CONFIDENTIAL"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Font Size: {fontSize}px</Label>
-                                <Slider value={[fontSize]} onValueChange={(v) => setFontSize(v[0])} min={10} max={200} step={2} />
-                            </div>
-                             <div className="space-y-2">
-                                <Label>Opacity: {opacity.toFixed(2)}</Label>
-                                <Slider value={[opacity]} onValueChange={(v) => setOpacity(v[0])} min={0.1} max={1} step={0.05} />
-                            </div>
-                             <div className="space-y-2">
-                                <Label>Rotation: {rotation}°</Label>
-                                <Slider value={[rotation]} onValueChange={(v) => setRotation(v[0])} min={-90} max={90} step={5} />
-                            </div>
-                             <Button onClick={handleDownload} disabled={isProcessing} className="w-full">
-                                {isProcessing ? (
-                                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Applying Watermark...</>
-                                ) : (
-                                    <><Download className="mr-2 h-4 w-4" /> Apply & Download</>
-                                )}
+                            <Button onClick={resetState} variant="ghost" size="icon">
+                                <X className="h-4 w-4" />
                             </Button>
                         </div>
+
                         <div className="space-y-2">
-                            <Label>Live Preview</Label>
-                            <div className="border rounded-lg aspect-[3/4] w-full relative">
-                                {generatingPreview && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-10">
-                                        <Loader2 className="h-8 w-8 animate-spin" />
-                                    </div>
-                                )}
-                                {previewUrl ? (
-                                    <iframe src={previewUrl} className="w-full h-full border-none rounded-lg" title="PDF Preview" />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-muted/30 rounded-lg">
-                                       <p className="text-muted-foreground text-sm">Preview will appear here</p>
-                                    </div>
-                                )}
-                            </div>
+                            <Label htmlFor="watermark-text">Watermark Text</Label>
+                            <Input
+                                id="watermark-text"
+                                value={watermarkText}
+                                onChange={(e) => setWatermarkText(e.target.value)}
+                                placeholder="e.g., DRAFT, CONFIDENTIAL"
+                            />
                         </div>
+                        <div className="space-y-2">
+                            <Label>Font Size: {fontSize}px</Label>
+                            <Slider value={[fontSize]} onValueChange={(v) => setFontSize(v[0])} min={10} max={200} step={2} />
+                        </div>
+                         <div className="space-y-2">
+                            <Label>Opacity: {opacity.toFixed(2)}</Label>
+                            <Slider value={[opacity]} onValueChange={(v) => setOpacity(v[0])} min={0.1} max={1} step={0.05} />
+                        </div>
+                         <div className="space-y-2">
+                            <Label>Rotation: {rotation}°</Label>
+                            <Slider value={[rotation]} onValueChange={(v) => setRotation(v[0])} min={-90} max={90} step={5} />
+                        </div>
+                         <Button onClick={handleDownload} disabled={isProcessing} className="w-full">
+                            {isProcessing ? (
+                                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Applying Watermark...</>
+                            ) : (
+                                <><Download className="mr-2 h-4 w-4" /> Apply & Download</>
+                            )}
+                        </Button>
                     </div>
                 )}
             </CardContent>
