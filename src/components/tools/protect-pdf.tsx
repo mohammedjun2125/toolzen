@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, X, Loader2, Download, Shield, File as FileIcon } from 'lucide-react';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, PermissionFlags } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Label } from '../ui/label';
 
@@ -49,15 +49,24 @@ export default function ProtectPdf() {
             pdfDoc.encrypt({
                 userPassword: password,
                 ownerPassword: password,
-                permissions: {},
+                permissions: {
+                    printing: 'highResolution',
+                    modifying: true,
+                    copying: true,
+                    annotating: true,
+                    fillingForms: true,
+                    contentAccessibility: true,
+                    documentAssembly: true,
+                },
             });
 
             const pdfBytes = await pdfDoc.save();
             saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), `protected-${file.name}`);
             toast({ title: 'Success!', description: 'Your PDF has been encrypted and downloaded.' });
         } catch (error) {
-            console.error(error);
-            toast({ variant: 'destructive', title: 'Failed to Protect PDF', description: 'An error occurred while encrypting the file.' });
+            console.error("PDF Encryption Error:", error);
+            const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+            toast({ variant: 'destructive', title: 'Failed to Protect PDF', description: `An error occurred while encrypting the file: ${errorMessage}` });
         } finally {
             setIsProcessing(false);
         }
