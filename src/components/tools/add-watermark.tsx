@@ -11,7 +11,6 @@ import { PDFDocument, rgb, StandardFonts, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Label } from '../ui/label';
 import { Slider } from '../ui/slider';
-import { Skeleton } from '../ui/skeleton';
 
 export default function AddWatermark() {
     const [file, setFile] = useState<File | null>(null);
@@ -34,21 +33,20 @@ export default function AddWatermark() {
         const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
         const pages = pdfDoc.getPages();
 
+        const textColor = rgb(0, 0, 0);
+
         for (const page of pages) {
             const { width, height } = page.getSize();
-            const centerX = width / 2;
-            const centerY = height / 2;
-
             page.drawText(watermarkText, {
-                x: centerX,
-                y: centerY,
+                x: width / 2,
+                y: height / 2,
                 font: helveticaFont,
                 size: fontSize,
-                color: rgb(0.5, 0.5, 0.5),
+                color: textColor,
                 opacity: opacity,
                 rotate: degrees(rotation),
-                xSkew: degrees(0),
-                ySkew: degrees(0),
+                xSkew: degrees(-15),
+                ySkew: degrees(15),
             });
         }
         return await pdfDoc.save();
