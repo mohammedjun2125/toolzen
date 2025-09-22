@@ -36,6 +36,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker')),
     'pdf-merger': dynamic(() => import('@/components/tools/pdf-merger')),
     'pdf-rotator': dynamic(() => import('@/components/tools/pdf-rotator')),
+    'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
 };
 
 const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
@@ -114,6 +115,11 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
         { question: 'Can I rotate just one page in a multi-page document?', answer: 'Absolutely. Our tool generates a preview of every page, allowing you to apply rotations to individual pages or all pages at once before downloading the final document.' },
         { question: 'Will rotating the PDF reduce its quality?', answer: 'No, rotating a PDF is a lossless operation. The quality of your text and images will remain exactly the same as the original.' }
     ],
+    'pdf-deleter': [
+        { question: 'Is deleting pages from my PDF secure?', answer: 'Yes. Our tool is 100% secure as it processes the file directly in your browser. Your PDF is never uploaded to a server, so your confidential information remains completely private.'},
+        { question: 'Will deleting pages affect the quality of the remaining pages?', answer: 'Not at all. Deleting pages is a structural change, and it does not re-compress or alter the content of the other pages. The quality of the remaining pages will be identical to the original.'},
+        { question: 'Can I recover a page after I delete it?', answer: 'Once you apply the changes and download the new PDF, the deleted pages are gone from that new file. However, your original file remains untouched on your device, so you can always start over if you make a mistake.'}
+    ]
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

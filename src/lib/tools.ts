@@ -26,6 +26,7 @@ import {
   Sparkles,
   Merge,
   RotateCw,
+  Trash2,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
@@ -78,6 +79,14 @@ export const tools: Tool[] = [
     description: 'Rotate pages in a PDF document individually. Processed securely in your browser.',
     href: '/tools/pdf-rotator',
     icon: RotateCw,
+    category: 'PDF',
+  },
+  {
+    id: 'pdf-deleter',
+    name: 'Delete PDF Pages',
+    description: 'Remove one or more pages from a PDF document. Fast, private, and simple to use.',
+    href: '/tools/pdf-deleter',
+    icon: Trash2,
     category: 'PDF',
   },
   {
