@@ -12,7 +12,6 @@ export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/products', text: 'Products' },
     { href: '/blog', text: 'Blog' },
     { href: '/about', text: 'About' },
     { href: '/contact', text: 'Contact' },

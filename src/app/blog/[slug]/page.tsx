@@ -11,7 +11,6 @@ import { tools } from '@/lib/tools';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import TrendingProducts from '@/components/trending-products';
 import { marked } from 'marked';
 
 type Props = {
@@ -177,9 +176,6 @@ export default function BlogPostPage({ params }: Props) {
                     </Button>
                 </div>
             )}
-            <div className="my-12">
-              <TrendingProducts />
-            </div>
             </article>
 
             <aside className="hidden lg:block lg:col-span-2">

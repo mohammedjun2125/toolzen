@@ -6,7 +6,6 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { BlogPreview } from '@/components/blog-preview';
 import { mockPosts } from '@/lib/blog';
-import TrendingProducts from '@/components/trending-products';
 
 export default function Home() {
   
@@ -30,10 +29,6 @@ export default function Home() {
           </section>
           
           <ToolGrid />
-
-          <div className="container mx-auto px-4 md:px-6 my-12">
-            <TrendingProducts />
-          </div>
 
           <BlogPreview posts={mockPosts} />
 
