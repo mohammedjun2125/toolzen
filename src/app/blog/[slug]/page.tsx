@@ -75,31 +75,53 @@ export default function BlogPostPage({ params }: Props) {
   const relatedTool = tools.find(tool => post.content.includes(tool.href));
   const parsedContent = marked(post.content);
 
+  const faqSchema = post.faq && post.faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": post.faq.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answer
+        }
+    }))
+  } : null;
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": [post.image],
+    "author": {
+        "@type": "Organization",
+        "name": "Toolzen"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Toolzen",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.toolzenweb.com/favicon.svg"
+        }
+    },
+    "datePublished": post.date,
+    "description": post.excerpt
+  };
+
+
   return (
     <>
     <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": post.title,
-            "image": [post.image],
-            "author": {
-                "@type": "Organization",
-                "name": "Toolzen"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "Toolzen",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://www.toolzenweb.com/favicon.svg"
-                }
-            },
-            "datePublished": post.date,
-            "description": post.excerpt
-        })}}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema)}}
     />
+    {faqSchema && (
+         <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema)}}
+        />
+    )}
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
