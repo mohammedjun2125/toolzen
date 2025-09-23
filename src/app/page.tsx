@@ -6,6 +6,8 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { BlogPreview } from '@/components/blog-preview';
 import { mockPosts } from '@/lib/blog';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   
@@ -22,13 +24,18 @@ export default function Home() {
               </h1>
               <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
                   A suite of free, fast, and privacy-focused online tools to boost your productivity.
-                  No data is sent to our servers. Everything happens in your browser for maximum security and speed.
+                  No data is ever sent to our servers.
               </p>
+              <Button asChild size="lg">
+                <Link href="#tools">Explore Tools</Link>
+              </Button>
               
             </div>
           </section>
           
-          <ToolGrid />
+          <div id="tools">
+            <ToolGrid />
+          </div>
 
           <BlogPreview posts={mockPosts} />
 
