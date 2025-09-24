@@ -57,7 +57,10 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'gradient-generator': dynamic(() => import('@/components/tools/gradient-generator')),
     'box-shadow-generator': dynamic(() => import('@/components/tools/box-shadow-generator')),
     'border-radius-generator': dynamic(() => import('@/components/tools/border-radius-generator')),
-    // Add new placeholders here for tools that don't have a component yet
+    'text-shadow-generator': dynamic(() => import('@/components/tools/text-shadow-generator')),
+    'flexbox-playground': dynamic(() => import('@/components/tools/flexbox-playground')),
+    'grid-generator': dynamic(() => import('@/components/tools/grid-generator')),
+    'animation-generator': dynamic(() => import('@/components/tools/animation-generator')),
 };
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
