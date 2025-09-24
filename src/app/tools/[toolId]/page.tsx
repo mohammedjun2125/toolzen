@@ -51,6 +51,9 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'date-difference-calculator': dynamic(() => import('@/components/tools/date-difference-calculator')),
     'discount-calculator': dynamic(() => import('@/components/tools/discount-calculator')),
     'currency-converter': dynamic(() => import('@/components/tools/currency-converter')),
+    'username-generator': dynamic(() => import('@/components/tools/username-generator')),
+    'meme-generator': dynamic(() => import('@/components/tools/meme-generator')),
+    'domain-generator': dynamic(() => import('@/components/tools/domain-generator')),
     // Add new placeholders here for tools that don't have a component yet
 };
 
