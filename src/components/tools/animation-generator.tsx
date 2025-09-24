@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Copy, Play } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 const animations = {
   'fade-in': { name: 'Fade In', keyframes: '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }' },
