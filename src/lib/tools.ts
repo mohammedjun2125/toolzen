@@ -110,7 +110,6 @@ export const tools: Tool[] = [
   { id: 'notes-tool', name: 'Notes Tool', description: 'A simple, private notepad in your browser.', href: '/tools/notes-tool', icon: 'notepad-text', category: categoryMap.get('utilities')! },
   { id: 'dns-lookup', name: 'DNS Lookup', description: 'Look up DNS records for any domain.', href: '/tools/dns-lookup', icon: 'webhook', category: categoryMap.get('utilities')! },
   { id: 'ip-lookup', name: 'IP Address Finder – Instant IP Lookup Tool', description: 'Find IP address location and other geolocation details instantly.', href: '/tools/ip-lookup', icon: 'mouse-pointer', category: categoryMap.get('utilities')! },
-  { id: 'ssl-checker', name: 'SSL Checker', description: 'Check the SSL certificate details of any website.', href: '/tools/ssl-checker', icon: 'shield', category: categoryMap.get('utilities')! },
 ];
 
 export const toolMap = new Map(tools.map(tool => [tool.id, tool]));
