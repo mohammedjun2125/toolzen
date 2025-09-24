@@ -47,10 +47,7 @@ export const tools: Tool[] = [
   { id: 'image-resizer', name: 'Image Resizer', description: 'Resize images to specific dimensions online.', href: '/tools/image-resizer', icon: 'crop', category: categoryMap.get('image-media')! },
   { id: 'color-palette-extractor', name: 'Color Palette Extractor', description: 'Extract a color palette from an uploaded image.', href: '/tools/color-palette-extractor', icon: 'palette', category: categoryMap.get('image-media')! },
   { id: 'image-to-pdf', name: 'Image to PDF', description: 'Convert JPG and PNG images into a single PDF file.', href: '/tools/pdf-maker', icon: 'file-scan', category: categoryMap.get('image-media')! },
-  { id: 'gif-maker', name: 'GIF Maker', description: 'Create animated GIFs from a sequence of images.', href: '/tools/gif-maker', icon: 'gif-icon', category: categoryMap.get('image-media')! },
   { id: 'image-converter', name: 'Image Converter', description: 'Convert images between formats like JPG, PNG, and WEBP.', href: '/tools/image-converter', icon: 'component', category: categoryMap.get('image-media')! },
-  { id: 'background-remover', name: 'AI Background Remover', description: 'Remove the background from any image with a single click.', href: '/tools/background-remover', icon: 'bot', category: categoryMap.get('image-media')! },
-
 
   // PDF Tools (Ordered by popularity)
   { id: 'pdf-maker', name: 'PDF Maker', description: 'Convert images (JPG, PNG) into a single PDF document.', href: '/tools/pdf-maker', icon: 'file-text', category: categoryMap.get('pdf')! },
