@@ -2,5 +2,5 @@
 module.exports = {
   siteUrl: 'https://www.toolzenweb.com',
   generateRobotsTxt: true,
-  outDir: './public',
+  outDir: './out',
 };
