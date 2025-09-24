@@ -11,6 +11,7 @@ import {
     FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, Animation, MousePointer, UtilityPole, Webhook,
     NotepadText, CheckCheck, KeyRound, Globe, Component, FileType as GifIcon,
 } from 'lucide-react';
+import { Button } from './ui/button';
 
 export const iconMap: { [key: string]: LucideIcon } = {
     'image': ImageIcon,
@@ -63,8 +64,36 @@ export const iconMap: { [key: string]: LucideIcon } = {
     'mouse-pointer': MousePointer,
 };
 
+function ToolCategoryNav() {
+  return (
+    <section className="w-full pb-16 pt-8 container mx-auto px-4 md:px-6">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Tool Categories</h2>
+            <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
+                Click a category to jump to the tools you need.
+            </p>
+        </div>
+        <div className="flex justify-center flex-wrap gap-4">
+            {categories.map(category => {
+                const CategoryIcon = iconMap[category.icon as keyof typeof iconMap] as React.ElementType;
+                return (
+                    <Button asChild key={category.id} variant="outline" size="lg">
+                        <Link href={`#${category.id}`}>
+                           {CategoryIcon && <CategoryIcon className="mr-2 h-5 w-5" />} 
+                           {category.name}
+                        </Link>
+                    </Button>
+                );
+            })}
+        </div>
+    </section>
+  )
+}
+
 export function HomeClient() {
     return (
+        <>
+        <ToolCategoryNav />
         <section className="w-full pb-20 md:pb-32 lg:pb-40 container mx-auto px-4 md:px-6">
             {categories.map((category) => {
               const categoryTools = tools.filter(tool => tool.category.id === category.id);
@@ -116,5 +145,6 @@ export function HomeClient() {
               );
             })}
           </section>
+          </>
     )
 }
