@@ -12,6 +12,7 @@ import {
     NotepadText, CheckCheck, KeyRound, Globe, Component, FileType as GifIcon,
 } from 'lucide-react';
 import { Button } from './ui/button';
+import { ToolSearch } from './tool-search';
 
 export const iconMap: { [key: string]: LucideIcon } = {
     'image': ImageIcon,
@@ -94,6 +95,7 @@ export function HomeClient() {
     return (
         <>
         <ToolCategoryNav />
+        <ToolSearch />
         <section className="w-full pb-20 md:pb-32 lg:pb-40 container mx-auto px-4 md:px-6">
             {categories.map((category) => {
               const categoryTools = tools.filter(tool => tool.category.id === category.id);
