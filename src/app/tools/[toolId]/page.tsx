@@ -61,6 +61,9 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'flexbox-playground': dynamic(() => import('@/components/tools/flexbox-playground')),
     'grid-generator': dynamic(() => import('@/components/tools/grid-generator')),
     'animation-generator': dynamic(() => import('@/components/tools/animation-generator')),
+    'stopwatch': dynamic(() => import('@/components/tools/stopwatch')),
+    'timer': dynamic(() => import('@/components/tools/timer')),
+    'notes-tool': dynamic(() => import('@/components/tools/notes-tool')),
 };
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
