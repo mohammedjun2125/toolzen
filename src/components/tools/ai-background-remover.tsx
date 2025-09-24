@@ -52,7 +52,7 @@ export default function AiBackgroundRemover() {
         }
     };
     
-    const handleRemoveBackground = useCallback(async () => {
+    const handleRemoveBackground = async () => {
         if (!imageFile) {
             toast({ variant: 'destructive', title: 'No Image Selected', description: 'Please upload an image first.' });
             return;
@@ -61,7 +61,7 @@ export default function AiBackgroundRemover() {
         setIsProcessing(true);
         const { dismiss } = toast({ 
             title: 'AI is removing the background...', 
-            description: 'The model is loading. This may take a moment.',
+            description: 'The model is loading on your device. This may take a moment.',
             duration: Infinity,
         });
 
@@ -77,7 +77,7 @@ export default function AiBackgroundRemover() {
             setIsProcessing(false);
             dismiss();
         }
-    }, [imageFile, toast]);
+    };
 
     const handleDownload = (format: 'png' | 'jpeg') => {
         if (!processedImage || !imageFile) return;
