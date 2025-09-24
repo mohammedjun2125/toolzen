@@ -70,18 +70,20 @@ export default function PdfCompressor() {
                 const page = pages[i];
                 try {
                     const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
-                    const xObjectDict = imageStreams?.as(Object);
-                    if (!xObjectDict) continue;
+                    if (imageStreams) {
+                        const xObjectDict = imageStreams.as(Object) as any;
+                        if (!xObjectDict || !xObjectDict.entries) continue;
 
-                    for (const [key, value] of xObjectDict.entries()) {
-                        const stream = pdfDoc.context.lookup(value);
-                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
-                            try {
-                                const imageBytes = (stream as any).getContents();
-                                const image = await pdfDoc.embedJpg(imageBytes, { quality });
-                                xObjectDict.set(key, image.ref);
-                            } catch (e) {
-                                // Ignore images that can't be re-compressed
+                        for (const [key, value] of xObjectDict.entries()) {
+                            const stream = pdfDoc.context.lookup(value);
+                            if ((stream as any)?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
+                                try {
+                                    const imageBytes = (stream as any).getContents();
+                                    const image = await pdfDoc.embedJpg(imageBytes, { quality });
+                                    xObjectDict.set(key, image.ref);
+                                } catch (e) {
+                                    // Ignore images that can't be re-compressed (e.g. not JPGs)
+                                }
                             }
                         }
                     }
