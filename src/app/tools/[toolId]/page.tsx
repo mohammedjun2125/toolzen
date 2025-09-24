@@ -42,6 +42,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
     'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
     'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
+    'image-converter': dynamic(() => import('@/components/tools/image-converter')),
     // Add new placeholders here for tools that don't have a component yet
 };
 
