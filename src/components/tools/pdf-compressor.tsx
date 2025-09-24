@@ -14,7 +14,7 @@ import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import Link from 'next/link';
 
-type CompressionLevel = 'low' | 'medium' | 'high';
+type CompressionLevel = 'recommended' | 'high' | 'extreme';
 
 export default function PdfCompressor() {
     const [file, setFile] = useState<File | null>(null);
@@ -22,7 +22,7 @@ export default function PdfCompressor() {
     const [progress, setProgress] = useState(0);
     const [originalSize, setOriginalSize] = useState(0);
     const [compressedSize, setCompressedSize] = useState(0);
-    const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>('medium');
+    const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>('recommended');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
 
@@ -51,28 +51,61 @@ export default function PdfCompressor() {
 
         try {
             const arrayBuffer = await file.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(arrayBuffer);
+            const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
             
             const qualityMap = {
-                low: 0.75, // Good quality, decent compression
-                medium: 0.5, // Balanced quality and compression
-                high: 0.25, // Lower quality, high compression
+                recommended: 0.7, // Good quality, good compression
+                high: 0.4, // Lower quality, higher compression
+                extreme: 0.2, // Lowest quality, max compression
             };
             const quality = qualityMap[compressionLevel];
             
-            const images = pdfDoc.getPages().flatMap(page => page.node.Resources?.XObject?.entries() ?? []);
-
+            const pages = pdfDoc.getPages();
             let processedImages = 0;
-            for (const [key, value] of images) {
-                if (value.dict.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
-                    const image = await pdfDoc.embedJpg(await value.dict.get(pdfDoc.context.obj('imageData')), { quality });
-                    page.node.Resources.XObject.set(key, image.ref);
+            const totalImages = (await Promise.all(pages.map(async page => {
+                try {
+                    const xObjects = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
+                    const xObjectDict = xObjects?.as(Object);
+                    if (!xObjectDict) return [];
+
+                    const imageRefs = [];
+                    xObjectDict.entries().forEach(([key, value]) => {
+                        const stream = pdfDoc.context.lookup(value);
+                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
+                            imageRefs.push({ key, stream });
+                        }
+                    });
+                    return imageRefs;
+                } catch(e) {
+                    return [];
                 }
-                processedImages++;
-                setProgress(Math.round((processedImages / images.length) * 100));
+            }))).flat();
+            
+
+            for (const page of pages) {
+                 try {
+                    const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
+                    const xObjectDict = imageStreams?.as(Object);
+                    if (!xObjectDict) continue;
+
+                    for (const [key, value] of xObjectDict.entries()) {
+                       const stream = pdfDoc.context.lookup(value);
+                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
+                            const imageBytes = (stream as any).getContents();
+                            const image = await pdfDoc.embedJpg(imageBytes, { quality });
+                            xObjectDict.set(key, image.ref);
+
+                            processedImages++;
+                            setProgress(Math.round((processedImages / totalImages.length) * 100));
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Could not process images on a page, skipping.", e);
+                    continue;
+                }
             }
 
-            const pdfBytes = await pdfDoc.save();
+            const pdfBytes = await pdfDoc.save({ useObjectStreams: false });
             const compressedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
             setCompressedSize(compressedBlob.size);
             
@@ -80,7 +113,7 @@ export default function PdfCompressor() {
             toast({ title: 'Success!', description: `PDF compressed by ${Math.round(((originalSize - compressedBlob.size) / originalSize) * 100)}% and downloaded.` });
         } catch (error) {
             console.error(error);
-            toast({ variant: 'destructive', title: 'Failed to Compress PDF', description: 'An error occurred. The PDF might be encrypted or have an unsupported format.' });
+            toast({ variant: 'destructive', title: 'Failed to Compress PDF', description: 'An error occurred. The PDF might be encrypted, corrupted, or have an unsupported format for client-side compression.' });
         } finally {
             setIsProcessing(false);
         }
@@ -139,12 +172,29 @@ export default function PdfCompressor() {
 
                         <div className="space-y-2">
                             <Label>Compression Level</Label>
-                            <RadioGroup value={compressionLevel} onValueChange={(v) => setCompressionLevel(v as CompressionLevel)} className="grid grid-cols-3 gap-4">
-                                <div><RadioGroupItem value="low" id="low" className="peer sr-only" /><Label htmlFor="low" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">Low</Label></div>
-                                <div><RadioGroupItem value="medium" id="medium" className="peer sr-only" /><Label htmlFor="medium" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">Medium</Label></div>
-                                <div><RadioGroupItem value="high" id="high" className="peer sr-only" /><Label htmlFor="high" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">High</Label></div>
+                            <RadioGroup value={compressionLevel} onValueChange={(v) => setCompressionLevel(v as CompressionLevel)} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div className='flex-1'>
+                                    <RadioGroupItem value="recommended" id="recommended" className="peer sr-only" />
+                                    <Label htmlFor="recommended" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                        Recommended
+                                        <span className='text-xs text-muted-foreground mt-1'>Good Quality</span>
+                                    </Label>
+                                </div>
+                                <div className='flex-1'>
+                                    <RadioGroupItem value="high" id="high" className="peer sr-only" />
+                                    <Label htmlFor="high" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                        High Compression
+                                        <span className='text-xs text-muted-foreground mt-1'>Smaller Size</span>
+                                    </Label>
+                                </div>
+                                <div className='flex-1'>
+                                    <RadioGroupItem value="extreme" id="extreme" className="peer sr-only" />
+                                    <Label htmlFor="extreme" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                        Extreme Compression
+                                        <span className='text-xs text-muted-foreground mt-1'>Lowest Quality</span>
+                                    </Label>
+                                </div>
                             </RadioGroup>
-                            <p className="text-sm text-muted-foreground text-center mt-2">Medium compression is recommended for a good balance of size and quality.</p>
                         </div>
                         
                         {isProcessing && <Progress value={progress} className="w-full" />}
@@ -179,7 +229,7 @@ export default function PdfCompressor() {
             <h2 className="text-2xl font-bold">How to Compress a PDF Online for Free</h2>
             <ol>
                 <li><strong>Step 1: Upload Your PDF:</strong> Select the PDF file you want to compress.</li>
-                <li><strong>Step 2: Choose a Compression Level:</strong> Select from Low, Medium, or High compression. "Medium" offers a great balance for most uses.</li>
+                <li><strong>Step 2: Choose a Compression Level:</strong> Select from Recommended, High, or Extreme compression. "Recommended" offers a great balance for most uses.</li>
                 <li><strong>Step 3: Compress & Download:</strong> Click the button to start the compression. The tool will process the file on your device and automatically download the new, smaller PDF.</li>
             </ol>
             
@@ -192,7 +242,7 @@ export default function PdfCompressor() {
 
             <h2>Frequently Asked Questions (FAQs)</h2>
             <h3>How do I reduce PDF file size without losing quality?</h3>
-            <p>Our tool is designed to **reduce PDF file size without losing quality** in a noticeable way for on-screen viewing. It primarily compresses the images within the PDF. For most documents, especially those with text and graphics, the "Medium" compression setting provides a significant size reduction with almost no visible difference in quality.</p>
+            <p>Our tool is designed to **reduce PDF file size without losing quality** in a noticeable way for on-screen viewing. It primarily compresses the images within the PDF. For most documents, especially those with text and graphics, the "Recommended" compression setting provides a significant size reduction with almost no visible difference in quality.</p>
             <h3>Is it safe to compress a confidential PDF online?</h3>
             <p>Using most online compressors is risky because you have to upload your confidential files. Our tool is different. It is a **client-side PDF compressor**, which means your confidential document is never sent over the internet. This makes it one of the safest options available.</p>
 
