@@ -12,13 +12,6 @@ type Props = {
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
 
-// A single dynamic component that loads the correct tool
-const ToolComponent = dynamic(
-  () => import(`@/components/tools/coming-soon-tool`),
-  { loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" /> }
-);
-
-
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
         { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
