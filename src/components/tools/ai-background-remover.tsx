@@ -59,16 +59,14 @@ export default function AiBackgroundRemover() {
         }
 
         setIsProcessing(true);
-        toast({ title: 'AI is removing the background...', description: 'This may take a moment. The model is loading.' });
+        const { dismiss } = toast({ 
+            title: 'AI is removing the background...', 
+            description: 'The model is loading. This may take a moment.',
+            duration: Infinity,
+        });
 
         try {
-            const resultBlob = await removeBackground(imageFile, {
-                progress: (key, current, total) => {
-                    const [action, model] = key.split(':');
-                    const progress = (current / total) * 100;
-                    toast({title: `Loading AI model: ${model}`, description: `${action} - ${Math.round(progress)}% complete`});
-                }
-            });
+            const resultBlob = await removeBackground(imageFile);
             const resultUrl = URL.createObjectURL(resultBlob);
             setProcessedImage(resultUrl);
             toast({ title: 'Success!', description: 'Background removed. You can now download the image.' });
@@ -77,6 +75,7 @@ export default function AiBackgroundRemover() {
             toast({ variant: 'destructive', title: 'Processing Failed', description: 'An error occurred while removing the background.' });
         } finally {
             setIsProcessing(false);
+            dismiss();
         }
     }, [imageFile, toast]);
 
@@ -223,4 +222,5 @@ export default function AiBackgroundRemover() {
         </article>
         </>
     );
-}
+
+    
