@@ -7,7 +7,6 @@ import { SiteFooter } from '@/components/site-footer';
 import { mockPosts, postMap } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import { tools } from '@/lib/tools';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
@@ -71,7 +70,6 @@ export default function BlogPostPage({ params }: Props) {
     notFound();
   }
   
-  const relatedTool = tools.find(tool => post.content.includes(tool.href));
   const parsedContent = marked(post.content);
 
   const faqSchema = post.faq && post.faq.length > 0 ? {
@@ -124,19 +122,8 @@ export default function BlogPostPage({ params }: Props) {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
-        <div className="grid grid-cols-12 gap-8">
-            <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20 hidden">
-                    <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
-                        <div>
-                            <p className="text-sm text-muted-foreground">Advertisement</p>
-                            <p className="text-xs text-muted-foreground">(160x600)</p>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-            <article className="col-span-12 lg:col-span-8">
+        <div className="max-w-4xl mx-auto">
+            <article>
                 <Button asChild variant="ghost" className="mb-4">
                 <Link href="/blog">
                     <ArrowLeft className="mr-2 h-4 w-4" />
@@ -165,29 +152,7 @@ export default function BlogPostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: parsedContent as string}} 
             />
 
-            {relatedTool && (
-                <div className="mt-12 text-center p-6 bg-muted/30 rounded-lg">
-                    <h3 className="text-xl font-bold mb-2">Try the Tool</h3>
-                    <p className="text-muted-foreground mb-4">{relatedTool.description}</p>
-                    <Button asChild size="lg">
-                        <Link href={relatedTool.href}>
-                            Use {relatedTool.name}
-                        </Link>
-                    </Button>
-                </div>
-            )}
             </article>
-
-            <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20 hidden">
-                    <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
-                        <div>
-                            <p className="text-sm text-muted-foreground">Advertisement</p>
-                             <p className="text-xs text-muted-foreground">(160x600)</p>
-                        </div>
-                    </div>
-                </div>
-            </aside>
         </div>
       </main>
       <SiteFooter />

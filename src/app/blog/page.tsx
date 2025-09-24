@@ -36,18 +36,7 @@ export default function BlogIndexPage() {
         </header>
 
         <div className="grid grid-cols-12 gap-8">
-            <aside className="hidden lg:block lg:col-span-2">
-                 <div className="sticky top-20 hidden">
-                    <div className="bg-muted/30 rounded-lg p-4 text-center h-[600px] flex items-center justify-center">
-                        <div>
-                            <p className="text-sm text-muted-foreground">Advertisement</p>
-                            <p className="text-xs text-muted-foreground">(160x600)</p>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-            <div className="col-span-12 lg:col-span-8">
+            <div className="col-span-12 lg:col-span-9">
                 <div className="mb-8 max-w-lg mx-auto">
                   <Input placeholder="Search articles..." />
                 </div>
@@ -82,7 +71,7 @@ export default function BlogIndexPage() {
                 </div>
             </div>
 
-            <aside className="col-span-12 lg:col-span-2 space-y-8">
+            <aside className="col-span-12 lg:col-span-3 space-y-8">
                 <Card className="bg-card/60 backdrop-blur-lg">
                     <CardHeader>
                         <CardTitle>Categories</CardTitle>

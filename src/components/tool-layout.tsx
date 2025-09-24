@@ -2,12 +2,10 @@
 
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, X } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { mockPosts } from '@/lib/blog';
 
@@ -19,8 +17,6 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
-    const [showAdModal, setShowAdModal] = useState(false);
-    
     // Find related articles based on keywords in title
     const keywords = title.toLowerCase().split(' ').filter(kw => kw.length > 3);
     const relatedArticles = mockPosts.filter(post => 
@@ -29,26 +25,6 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
 
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
-             <Dialog open={showAdModal} onOpenChange={setShowAdModal}>
-                <DialogContent className="max-w-lg hidden">
-                    <DialogHeader>
-                        <DialogTitle>Advertisement</DialogTitle>
-                         <DialogClose asChild>
-                            <Button variant="ghost" size="icon" className="absolute right-4 top-4">
-                                <X className="h-4 w-4" />
-                                <span className="sr-only">Close</span>
-                            </Button>
-                        </DialogClose>
-                    </DialogHeader>
-                    <div className="min-h-[250px] w-full flex items-center justify-center text-muted-foreground bg-muted/20 rounded-lg p-4">
-                        <div className="text-center">
-                            <p>Medium Rectangle Ad</p>
-                            <p className="text-xs">(e.g., 300x250 or 336x280)</p>
-                        </div>
-                    </div>
-                </DialogContent>
-            </Dialog>
-
              <Button asChild variant="ghost" className="mb-4">
                 <Link href="/">
                     <ArrowLeft className="mr-2 h-4 w-4" />
@@ -62,13 +38,6 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
                 </div>
                 
                 {children}
-
-                 <div className="my-8 text-center bg-muted/30 p-8 rounded-lg hidden">
-                    <h3 className="font-bold text-lg">Advertisement</h3>
-                    <div className="w-full max-w-[728px] h-[90px] mx-auto bg-background/50 my-2 flex items-center justify-center">
-                        <p className="text-sm text-muted-foreground">Leaderboard Ad (728x90)</p>
-                    </div>
-                </div>
 
                 {relatedArticles.length > 0 && (
                   <section className="related-articles mt-12">
