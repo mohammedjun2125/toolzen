@@ -39,9 +39,11 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
     'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
     'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
+    'ai-background-remover': dynamic(() => import('@/components/tools/ai-background-remover')),
+    'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
 };
 
-const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
+const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
         { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
         { question: 'What image formats can I compress?', answer: 'Our tool supports JPG, PNG, WEBP, and GIF images. You can optimize any of these formats for free.' },
@@ -132,6 +134,16 @@ const toolFaqs: { [key: string]: { question: string; answer: string }[] } = {
       { question: 'What kind of watermarks can I add?', answer: 'Currently, you can add text-based watermarks. You can customize the text, font size, rotation, and opacity to fit your needs, whether for branding, confidentiality notices, or draft indicators.' },
       { question: 'Will the watermark appear on all pages?', answer: 'Yes, the watermark you configure will be applied consistently to every page of the PDF document.' },
     ],
+    'pdf-to-word-converter': [
+        { question: 'Is this PDF to Word converter free?', answer: 'Yes, once launched, our tool will be completely free to use. All processing will happen in your browser, ensuring your documents remain private.' },
+        { question: 'Will my formatting be preserved when converting from PDF to Word?', answer: 'Preserving complex formatting is a major challenge in client-side conversion. Our goal is to maintain basic text flow, paragraphs, and headings. We are working hard to make it as accurate as possible.' },
+        { question: 'Why is a client-side converter more secure?', answer: 'Client-side means the conversion happens on your computer. Your PDF file is never uploaded to a server, so there is zero risk of your confidential data being stored, scanned, or exposed.' }
+    ],
+    'ai-background-remover': [
+        { question: 'Is the AI Background Remover free to use?', answer: 'Yes, our tool is completely free. You can remove the background from any image without watermarks or sign-ups.' },
+        { question: 'How does the AI background removal work?', answer: 'The tool uses a pre-trained artificial intelligence model that runs in your browser to identify the main subject in your photo and automatically erase the background behind it.' },
+        { question: 'Are my photos uploaded to a server?', answer: 'No. Your privacy is our priority. The entire background removal process happens on your device. Your images are never sent over the internet, making it 100% safe and private.' }
+    ]
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

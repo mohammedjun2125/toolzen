@@ -1,4 +1,5 @@
 
+
 import type { LucideIcon } from 'lucide-react';
 import {
   Image,
@@ -30,6 +31,8 @@ import {
   Split,
   Shield,
   SquarePen,
+  FileScan,
+  FileKey2,
 } from 'lucide-react';
 
 export type ToolCategory = "Text & Data" | "Image & Media" | "Calculators" | "Generators" | "PDF";
@@ -53,6 +56,14 @@ export const tools: Tool[] = [
     category: 'Image & Media',
   },
   {
+    id: 'ai-background-remover',
+    name: 'AI Background Remover',
+    description: 'Automatically remove the background from any image with a single click. 100% free and private.',
+    href: '/tools/ai-background-remover',
+    icon: FileScan,
+    category: 'Image & Media',
+  },
+  {
     id: 'image-resizer',
     name: 'Image Resizer',
     description: 'Resize images to specific dimensions (width and height) online. Simple and fast.',
@@ -66,6 +77,14 @@ export const tools: Tool[] = [
     description: 'Convert JPG and PNG images into a single, downloadable PDF file. 100% private.',
     href: '/tools/pdf-maker',
     icon: FileText,
+    category: 'PDF',
+  },
+  {
+    id: 'pdf-to-word-converter',
+    name: 'PDF to Word Converter',
+    description: 'Convert PDF files to editable Word documents. (Coming Soon)',
+    href: '/tools/pdf-to-word-converter',
+    icon: FileKey2,
     category: 'PDF',
   },
   {
