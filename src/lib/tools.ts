@@ -108,7 +108,6 @@ export const tools: Tool[] = [
   { id: 'stopwatch', name: 'Stopwatch', description: 'A simple online stopwatch to time anything.', href: '/tools/stopwatch', icon: 'clock', category: categoryMap.get('utilities')! },
   { id: 'timer', name: 'Timer', description: 'Set a countdown timer for any task.', href: '/tools/timer', icon: 'clock', category: categoryMap.get('utilities')! },
   { id: 'notes-tool', name: 'Notes Tool', description: 'A simple, private notepad in your browser.', href: '/tools/notes-tool', icon: 'notepad-text', category: categoryMap.get('utilities')! },
-  { id: 'whois-lookup', name: 'Whois Lookup', description: 'Get registration information for any domain name.', href: '/tools/whois-lookup', icon: 'key-round', category: categoryMap.get('utilities')! },
   { id: 'dns-lookup', name: 'DNS Lookup', description: 'Look up DNS records for any domain.', href: '/tools/dns-lookup', icon: 'webhook', category: categoryMap.get('utilities')! },
   { id: 'ip-lookup', name: 'IP Lookup', description: 'Find geolocation and other details for an IP address.', href: '/tools/ip-lookup', icon: 'mouse-pointer', category: categoryMap.get('utilities')! },
   { id: 'ssl-checker', name: 'SSL Checker', description: 'Check the SSL certificate details of any website.', href: '/tools/ssl-checker', icon: 'shield', category: categoryMap.get('utilities')! },

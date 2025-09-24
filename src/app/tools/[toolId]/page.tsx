@@ -64,7 +64,6 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'stopwatch': dynamic(() => import('@/components/tools/stopwatch')),
     'timer': dynamic(() => import('@/components/tools/timer')),
     'notes-tool': dynamic(() => import('@/components/tools/notes-tool')),
-    'whois-lookup': dynamic(() => import('@/components/tools/whois-lookup')),
     'dns-lookup': dynamic(() => import('@/components/tools/dns-lookup')),
     'ip-lookup': dynamic(() => import('@/components/tools/ip-lookup')),
     'ssl-checker': dynamic(() => import('@/components/tools/ssl-checker')),
