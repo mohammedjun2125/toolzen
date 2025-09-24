@@ -53,18 +53,20 @@ export default function PdfCompressor() {
             const arrayBuffer = await file.arrayBuffer();
             let finalPdfBytes: Uint8Array | null = null;
             
-            // This is a simplified approach. True client-side compression to a target size is very complex
-            // and resource-intensive. This will attempt one pass with a reasonable quality setting.
+            // This is a more refined approach. True client-side compression to a target size is complex.
+            // This will attempt to make a more educated guess at the quality setting.
             let quality = 0.7; // Default quality
-            if (file.size > 0) {
+            if (file.size > 0 && file.size > targetSizeBytes) {
                  const compressionRatio = targetSizeBytes / file.size;
-                 if (compressionRatio < 0.1) quality = 0.1;
-                 else if (compressionRatio < 0.5) quality = 0.5;
-                 else quality = 0.7;
+                 // A simple heuristic to map compression ratio to JPEG quality
+                 if (compressionRatio < 0.2) quality = 0.3; // High compression needed
+                 else if (compressionRatio < 0.5) quality = 0.5; // Medium compression
+                 else quality = 0.7; // Low compression
             }
 
             const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
             const pages = pdfDoc.getPages();
+            let imageRecompressed = false;
             
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i];
@@ -79,8 +81,12 @@ export default function PdfCompressor() {
                             if ((stream as any)?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
                                 try {
                                     const imageBytes = (stream as any).getContents();
-                                    const image = await pdfDoc.embedJpg(imageBytes, { quality });
-                                    xObjectDict.set(key, image.ref);
+                                    // Check if it's likely a JPG before trying to re-embed
+                                    if (imageBytes[0] === 0xFF && imageBytes[1] === 0xD8) {
+                                       const image = await pdfDoc.embedJpg(imageBytes, { quality });
+                                       xObjectDict.set(key, image.ref);
+                                       imageRecompressed = true;
+                                    }
                                 } catch (e) {
                                     // Ignore images that can't be re-compressed (e.g. not JPGs)
                                 }
@@ -91,10 +97,15 @@ export default function PdfCompressor() {
                     console.warn("Could not process images on a page, skipping.", e);
                     continue;
                 }
-                setProgress(Math.round(((i + 1) / pages.length) * 100));
+                setProgress(Math.round(((i + 1) / pages.length) * 90)); // Leave 10% for saving
+            }
+            
+            if (!imageRecompressed) {
+                 toast({ variant: 'destructive', title: 'No Compressible Images Found', description: 'This PDF does not contain standard JPG images to compress. File size may not change.' });
             }
             
             finalPdfBytes = await pdfDoc.save({ useObjectStreams: false });
+            setProgress(100);
             
             if (finalPdfBytes) {
                 const compressedBlob = new Blob([finalPdfBytes], { type: 'application/pdf' });
@@ -111,7 +122,6 @@ export default function PdfCompressor() {
             toast({ variant: 'destructive', title: 'Failed to Compress PDF', description: 'An error occurred. The PDF might be encrypted, corrupted, or have a format that is difficult to compress on the client-side.' });
         } finally {
             setIsProcessing(false);
-            setProgress(100);
         }
     };
     
@@ -225,7 +235,7 @@ export default function PdfCompressor() {
             <h2 className="text-2xl font-bold">How to Compress a PDF Online for Free</h2>
             <ol>
                 <li><strong>Step 1: Upload Your PDF:</strong> Select the PDF file you want to compress.</li>
-                <li><strong>Step 2: Choose a Compression Level:</strong> Select from Recommended, High, or Extreme compression. "Recommended" offers a great balance for most uses.</li>
+                <li><strong>Step 2: Choose a Target Size:</strong> Enter your desired file size in KB or MB. The tool will try its best to reach this target.</li>
                 <li><strong>Step 3: Compress & Download:</strong> Click the button to start the compression. The tool will process the file on your device and automatically download the new, smaller PDF.</li>
             </ol>
             
@@ -233,14 +243,16 @@ export default function PdfCompressor() {
             <ul>
                 <li><strong className="flex items-center gap-2"><ShieldCheck size={20} />100% Private:</strong> Your files are processed on your device, not on our servers. This makes it the most secure way to **compress PDF files online**.</li>
                 <li><strong className="flex items-center gap-2"><Zap size={20} />Fast & Efficient:</strong> No upload/download cycle means the process is incredibly fast. **Make PDF smaller** in seconds.</li>
-                <li><strong className="flex items-center gap-2"><Percent size={20} />Adjustable Quality:</strong> You have control over the compression level to find the right balance between file size and quality for your needs.</li>
+                <li><strong className="flex items-center gap-2"><Percent size={20} />Smart Quality Adjustment:</strong> Our tool makes an educated guess on the best compression quality to meet your target size.</li>
             </ul>
 
             <h2>Frequently Asked Questions (FAQs)</h2>
             <h3>How do I reduce PDF file size without losing quality?</h3>
-            <p>Our tool is designed to **reduce PDF file size without losing quality** in a noticeable way for on-screen viewing. It primarily compresses the images within the PDF. For most documents, especially those with text and graphics, the "Recommended" compression setting provides a significant size reduction with almost no visible difference in quality.</p>
+            <p>Our tool is designed to **reduce PDF file size without losing quality** in a noticeable way for on-screen viewing. It primarily compresses the images within the PDF. For most documents, you can achieve a significant size reduction with almost no visible difference in quality.</p>
             <h3>Is it safe to compress a confidential PDF online?</h3>
             <p>Using most online compressors is risky because you have to upload your confidential files. Our tool is different. It is a **client-side PDF compressor**, which means your confidential document is never sent over the internet. This makes it one of the safest options available.</p>
+            <h3>Why didn't the file size change much?</h3>
+            <p>PDF compression works best on files with large, uncompressed images. If your PDF is mostly text, or if its images are already highly compressed or in a non-standard format (like PNG), the size reduction may be minimal.</p>
 
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Explore More Free PDF Tools</h3>
