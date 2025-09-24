@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Search, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function WhoisLookup() {
     const [domain, setDomain] = useState('google.com');
@@ -40,10 +41,11 @@ export default function WhoisLookup() {
     };
 
     return (
+        <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">WHOIS Lookup</CardTitle>
-                <CardDescription>Get registration information for any domain name.</CardDescription>
+                <CardTitle className="text-2xl">Free Online Whois Lookup Tool</CardTitle>
+                <CardDescription>Use this **Whois lookup** tool to instantly **check domain owner information**, registration dates, and other public records. An essential **domain lookup** utility.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex gap-2">
@@ -71,5 +73,33 @@ export default function WhoisLookup() {
                 )}
             </CardContent>
         </Card>
+        <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+            <h2 className="text-2xl font-bold">What is a Whois Lookup?</h2>
+            <p>A **Whois lookup** is a public query to a database that stores information about the owners of domain names. When a domain is registered, the owner's contact information is collected. This **free online Whois lookup tool** allows you to access this public record to see details like the domain registrar, registration date, expiration date, and name servers associated with a domain.</p>
+            
+            <h3>How to Use This Domain Lookup Tool</h3>
+            <ol>
+                <li><strong>Enter a Domain Name:</strong> Type the domain you want to investigate into the search box.</li>
+                <li><strong>Initiate the Search:</strong> Click the "Lookup" button to perform the query.</li>
+                <li><strong>Analyze the Results:</strong> The tool will display the raw WHOIS data provided by the domain's registrar.</li>
+            </ol>
+            
+            <h3>Why Check Domain Owner Information?</h3>
+            <ul>
+                <li><strong>Business Intelligence:</strong> Research who is behind a competitor's website.</li>
+                <li><strong>Security Research:</strong> Investigate the source of a suspicious domain or email.</li>
+                <li><strong>Domain Purchasing:</strong> Find out when a domain is set to expire to potentially acquire it.</li>
+            </ul>
+
+            <div className="not-prose mt-8">
+                <h3 className="text-xl font-semibold">Related Web Utilities</h3>
+                <ul className="list-disc list-inside">
+                    <li><Link href="/tools/dns-lookup" className="text-primary hover:underline">DNS Lookup</Link></li>
+                    <li><Link href="/tools/ip-lookup" className="text-primary hover:underline">IP Lookup</Link></li>
+                    <li><Link href="/tools/ssl-checker" className="text-primary hover:underline">SSL Checker</Link></li>
+                </ul>
+            </div>
+        </article>
+        </>
     );
 }

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Copy, Play } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 const animations = {
   'fade-in': { name: 'Fade In', keyframes: '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }' },
@@ -63,10 +64,11 @@ ${selectedAnimation.keyframes}
     };
 
     return (
+        <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">CSS Animation Generator</CardTitle>
-                <CardDescription>Visually create and customize CSS animations, then copy the code.</CardDescription>
+                <CardTitle className="text-2xl">Free CSS Animation Generator Online</CardTitle>
+                <CardDescription>Visually **create keyframe animations for websites**. This **free CSS animation generator online** helps you design and copy the code instantly.</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="flex items-center justify-center p-8 bg-muted rounded-lg h-64">
@@ -76,7 +78,7 @@ ${selectedAnimation.keyframes}
                         className="w-24 h-24 bg-primary rounded-lg flex items-center justify-center"
                         style={animationStyle}
                     >
-                        <span className="text-primary-foreground font-medium text-center">Animate Me</span>
+                        <span className="text-primary-foreground font-medium text-center" alt="Preview of CSS animation">Animate Me</span>
                     </div>
                 </div>
 
@@ -127,6 +129,27 @@ ${selectedAnimation.keyframes}
                 </div>
             </CardContent>
         </Card>
+        <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+            <h2 className="text-2xl font-bold">Why Use a CSS Animation Generator?</h2>
+            <p>CSS animations bring websites to life, but writing keyframes from scratch can be complex and time-consuming. A **free CSS animation generator online** makes this process visual and intuitive. Instead of tweaking values in a stylesheet and refreshing your browser, you can adjust sliders and see the results instantly. This **CSS animation** tool is perfect for both beginners learning about **keyframe animations for websites** and experienced developers who want to prototype quickly.</p>
+            
+            <h3>How to Create a CSS Animation</h3>
+            <ol>
+                <li>**Choose an Animation Type:** Select a base animation like "Fade In" or "Slide In" to get started.</li>
+                <li>**Customize Properties:** Use the sliders to adjust the duration, delay, and other parameters to fit your design.</li>
+                <li>**Preview in Real-Time:** Watch your animation play out in the preview window. Click "Replay" to see it again.</li>
+                <li>**Copy the Code:** Once you're happy with the result, copy the generated `@keyframes` and CSS class to your project.</li>
+            </ol>
+
+            <div className="not-prose mt-8">
+                <h3 className="text-xl font-semibold">Explore More CSS Tools</h3>
+                <ul className="list-disc list-inside">
+                    <li><Link href="/tools/gradient-generator" className="text-primary hover:underline">CSS Gradient Generator</Link></li>
+                    <li><Link href="/tools/box-shadow-generator" className="text-primary hover:underline">CSS Box Shadow Generator</Link></li>
+                </ul>
+            </div>
+        </article>
+        </>
     );
 }
 

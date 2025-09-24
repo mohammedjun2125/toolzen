@@ -68,6 +68,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'dns-lookup': dynamic(() => import('@/components/tools/dns-lookup')),
     'ip-lookup': dynamic(() => import('@/components/tools/ip-lookup')),
     'ssl-checker': dynamic(() => import('@/components/tools/ssl-checker')),
+    'otp-generator': dynamic(() => import('@/components/tools/otp-generator')),
 };
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
@@ -170,6 +171,10 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'Is this PDF to Text converter free?', answer: 'Yes, our tool is completely free and works in your browser.' },
         { question: 'Will this tool extract text from scanned PDFs?', answer: 'No, this tool works with text-based PDFs. It cannot perform Optical Character Recognition (OCR) on scanned images or image-based PDFs.' },
         { question: 'How is this different from the PDF to Word converter?', answer: 'This tool focuses purely on extracting raw text content. The PDF to Word converter aims to provide a basic editable document structure, but both use the same core text extraction technology.' }
+    ],
+    'animation-generator': [
+        { question: 'Is this a free CSS animation generator online?', answer: 'Yes, this tool is completely free. You can create keyframe animations for websites and copy the code without any limits.' },
+        { question: 'Does this tool require any coding knowledge?', answer: 'No, our CSS animation tool is fully visual. You can adjust settings with sliders and dropdowns and see the animation change in real-time, making it perfect for beginners.' }
     ],
 };
 
