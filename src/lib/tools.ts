@@ -56,14 +56,6 @@ export const tools: Tool[] = [
     category: 'Image & Media',
   },
   {
-    id: 'ai-background-remover',
-    name: 'AI Background Remover',
-    description: 'Automatically remove the background from any image with a single click. 100% free and private.',
-    href: '/tools/ai-background-remover',
-    icon: FileScan,
-    category: 'Image & Media',
-  },
-  {
     id: 'image-resizer',
     name: 'Image Resizer',
     description: 'Resize images to specific dimensions (width and height) online. Simple and fast.',
