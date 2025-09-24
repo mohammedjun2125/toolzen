@@ -10,10 +10,11 @@ import { Upload, X, Loader2, Download, FileIcon, Copy } from 'lucide-react';
 import { Textarea } from '../ui/textarea';
 import * as pdfjs from 'pdfjs-dist';
 
-// Set worker source
+// This is required for the worker to be loaded correctly.
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-export default function PdfToWordConverter() {
+
+export default function PdfToText() {
     const [file, setFile] = useState<File | null>(null);
     const [extractedText, setExtractedText] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
@@ -48,7 +49,7 @@ export default function PdfToWordConverter() {
                 const page = await pdf.getPage(i);
                 const textContent = await page.getTextContent();
                 const pageText = textContent.items.map(item => ('str' in item ? item.str : '')).join(' ');
-                fullText += pageText + '\n\n'; // Add space between pages
+                fullText += pageText + '\n\n';
             }
             
             setExtractedText(fullText.trim());
@@ -61,24 +62,7 @@ export default function PdfToWordConverter() {
             setIsProcessing(false);
         }
     };
-
-    const handleDownload = () => {
-        if (!extractedText) {
-            toast({ variant: 'destructive', title: 'No Text to Download', description: 'There is no extracted text to save.' });
-            return;
-        }
-
-        const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        const originalName = file?.name.split('.').slice(0, -1).join('.') || 'document';
-        link.download = `${originalName}.txt`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        toast({ title: 'Text file downloaded.' });
-    };
-
+    
     const handleCopy = () => {
         if (!extractedText) {
             toast({ variant: 'destructive', title: 'Nothing to Copy' });
@@ -98,8 +82,8 @@ export default function PdfToWordConverter() {
     return (
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">PDF to Word (Text Extraction)</CardTitle>
-                <CardDescription>Extract all text from your PDF into an editable format. This tool works in your browser, keeping your files private.</CardDescription>
+                <CardTitle className="text-2xl">PDF to Text Extractor</CardTitle>
+                <CardDescription>Extract all text content from a PDF file. The process is fast, private, and works entirely in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -135,21 +119,16 @@ export default function PdfToWordConverter() {
                             </div>
                         ) : (
                             <Textarea
-                                readOnly={!extractedText}
-                                value={extractedText || "No text could be extracted. The PDF might be image-based."}
+                                readOnly
+                                value={extractedText || "No text could be extracted. The PDF might be image-based or empty."}
                                 rows={12}
                                 placeholder="Extracted text will appear here..."
                             />
                         )}
                         
-                         <div className="flex gap-2">
-                           <Button onClick={handleCopy} disabled={!extractedText} className="w-full">
-                                <Copy className="mr-2 h-4 w-4" /> Copy Text
-                           </Button>
-                           <Button onClick={handleDownload} disabled={!extractedText} variant="outline" className="w-full">
-                               <Download className="mr-2 h-4 w-4" /> Download as .txt
-                           </Button>
-                        </div>
+                        <Button onClick={handleCopy} disabled={!extractedText} className="w-full">
+                            <Copy className="mr-2 h-4 w-4" /> Copy Extracted Text
+                        </Button>
                     </div>
                 )}
             </CardContent>

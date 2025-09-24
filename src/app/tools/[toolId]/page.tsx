@@ -44,6 +44,7 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
     'image-converter': dynamic(() => import('@/components/tools/image-converter')),
     'pdf-compressor': dynamic(() => import('@/components/tools/pdf-compressor')),
+    'pdf-to-text': dynamic(() => import('@/components/tools/pdf-to-text')),
     // Add new placeholders here for tools that don't have a component yet
 };
 
@@ -139,9 +140,14 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
       { question: 'Will the watermark appear on all pages?', answer: 'Yes, the watermark you configure will be applied consistently to every page of the PDF document.' },
     ],
     'pdf-to-word-converter': [
-        { question: 'Is this PDF to Word converter free?', answer: 'Yes, once launched, our tool will be completely free to use. All processing will happen in your browser, ensuring your documents remain private.' },
-        { question: 'Will my formatting be preserved when converting from PDF to Word?', answer: 'Preserving complex formatting is a major challenge in client-side conversion. Our goal is to maintain basic text flow, paragraphs, and headings. We are working hard to make it as accurate as possible.' },
+        { question: 'Is this PDF to Word converter free?', answer: 'Yes, our tool is completely free to use. All processing happens in your browser, ensuring your documents remain private.' },
+        { question: 'Will my formatting be preserved when converting from PDF to Word?', answer: 'Our tool focuses on extracting text content. It will preserve paragraphs and line breaks, but complex formatting like tables, columns, and fonts may not be retained. It is designed to give you an editable text version of your document.' },
         { question: 'Why is a client-side converter more secure?', answer: 'Client-side means the conversion happens on your computer. Your PDF file is never uploaded to a server, so there is zero risk of your confidential data being stored, scanned, or exposed.' }
+    ],
+    'pdf-to-text': [
+        { question: 'Is this PDF to Text converter free?', answer: 'Yes, our tool is completely free and works in your browser.' },
+        { question: 'Will this tool extract text from scanned PDFs?', answer: 'No, this tool works with text-based PDFs. It cannot perform Optical Character Recognition (OCR) on scanned images or image-based PDFs.' },
+        { question: 'How is this different from the PDF to Word converter?', answer: 'This tool focuses purely on extracting raw text content. The PDF to Word converter aims to provide a basic editable document structure, but both use the same core text extraction technology.' }
     ],
 };
 
