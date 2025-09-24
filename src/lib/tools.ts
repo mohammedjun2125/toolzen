@@ -46,8 +46,9 @@ export const tools: Tool[] = [
   { id: 'image-compressor', name: 'Image Compressor', description: 'Reduce JPG, PNG & WEBP file sizes without losing quality.', href: '/tools/image-compressor', icon: 'image-icon', category: categoryMap.get('image-media')! },
   { id: 'image-resizer', name: 'Image Resizer', description: 'Resize images to specific dimensions online.', href: '/tools/image-resizer', icon: 'crop', category: categoryMap.get('image-media')! },
   { id: 'color-palette-extractor', name: 'Color Palette Extractor', description: 'Extract a color palette from an uploaded image.', href: '/tools/color-palette-extractor', icon: 'palette', category: categoryMap.get('image-media')! },
-  { id: 'image-to-pdf', name: 'Image to PDF', description: 'Convert JPG and PNG images into a single PDF file.', href: '/tools/pdf-maker', icon: 'file-scan', category: categoryMap.get('image-media')! },
   { id: 'image-converter', name: 'Image Converter', description: 'Convert images between formats like JPG, PNG, and WEBP.', href: '/tools/image-converter', icon: 'component', category: categoryMap.get('image-media')! },
+  { id: 'meme-generator', name: 'Meme Generator', description: 'Create your own memes with custom text and images.', href: '/tools/meme-generator', icon: 'bot', category: categoryMap.get('image-media')! },
+  
 
   // PDF Tools (Ordered by popularity)
   { id: 'pdf-maker', name: 'PDF Maker', description: 'Convert images (JPG, PNG) into a single PDF document.', href: '/tools/pdf-maker', icon: 'file-text', category: categoryMap.get('pdf')! },
@@ -90,7 +91,6 @@ export const tools: Tool[] = [
   { id: 'barcode-generator', name: 'Barcode Generator', description: 'Create various types of barcodes like Code128, EAN, UPC.', href: '/tools/barcode-generator', icon: 'barcode', category: categoryMap.get('generators')! },
   { id: 'random-number-generator', name: 'Random Number Generator', description: 'Generate random numbers within a specified range.', href: '/tools/random-number-generator', icon: 'wand', category: categoryMap.get('generators')! },
   { id: 'username-generator', name: 'Username Generator', description: 'Create unique and cool usernames.', href: '/tools/username-generator', icon: 'key-round', category: categoryMap.get('generators')! },
-  { id: 'meme-generator', name: 'Meme Generator', description: 'Create your own memes with custom text and images.', href: '/tools/meme-generator', icon: 'bot', category: categoryMap.get('generators')! },
   { id: 'domain-generator', name: 'Domain Generator', description: 'Generate available domain name ideas.', href: '/tools/domain-generator', icon: 'globe', category: categoryMap.get('generators')! },
   { id: 'otp-generator', name: 'OTP Generator', description: 'Generate Time-based One-Time Passwords (TOTP).', href: '/tools/otp-generator', icon: 'shield', category: categoryMap.get('generators')! },
 
@@ -115,4 +115,4 @@ export const tools: Tool[] = [
 
 export const toolMap = new Map(tools.map(tool => [tool.id, tool]));
 
-
+    

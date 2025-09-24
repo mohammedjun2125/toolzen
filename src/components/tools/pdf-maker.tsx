@@ -1,22 +1,19 @@
 
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { Upload, Download, X, Loader2, FileType, ShieldCheck, Zap } from 'lucide-react';
-import type jsPDF from 'jspdf';
+import { PDFDocument, rgb } from 'pdf-lib';
+import { saveAs } from 'file-saver';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type PDFMakerProps = {
-  jsPDF: typeof jsPDF;
-};
-
-function PDFMakerClient({ jsPDF }: PDFMakerProps) {
+export default function PdfMaker() {
   const [files, setFiles] = useState<File[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -54,48 +51,38 @@ function PDFMakerClient({ jsPDF }: PDFMakerProps) {
     setProgress(0);
     toast({ title: 'Generating PDF...', description: 'This may take a moment.' });
 
-    const pdf = new jsPDF();
+    const pdfDoc = await PDFDocument.create();
     
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const reader = new FileReader();
+      const arrayBuffer = await file.arrayBuffer();
       
-      await new Promise<void>(resolve => {
-        reader.onload = (e) => {
-          const img = document.createElement('img');
-          img.src = e.target?.result as string;
-          img.onload = () => {
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const ratio = img.width / img.height;
-            
-            let imgWidth = pdfWidth - 20;
-            let imgHeight = imgWidth / ratio;
+      let image;
+      if(file.type === 'image/png') {
+          image = await pdfDoc.embedPng(arrayBuffer);
+      } else {
+          image = await pdfDoc.embedJpg(arrayBuffer);
+      }
+      
+      const page = pdfDoc.addPage();
+      const { width, height } = page.getSize();
+      const { width: imgWidth, height: imgHeight } = image.scaleToFit(width - 50, height - 50);
 
-            if (imgHeight > pdfHeight - 20) {
-              imgHeight = pdfHeight - 20;
-              imgWidth = imgHeight * ratio;
-            }
-            
-            if (i > 0) {
-              pdf.addPage();
-            }
-
-            const x = (pdfWidth - imgWidth) / 2;
-            const y = (pdfHeight - imgHeight) / 2;
-            pdf.addImage(img.src, file.type.split('/')[1].toUpperCase(), x, y, imgWidth, imgHeight);
-            setProgress(Math.round(((i + 1) / files.length) * 100));
-            resolve();
-          };
-        };
-        reader.readAsDataURL(file);
+      page.drawImage(image, {
+        x: width / 2 - imgWidth / 2,
+        y: height / 2 - imgHeight / 2,
+        width: imgWidth,
+        height: imgHeight,
       });
+
+      setProgress(Math.round(((i + 1) / files.length) * 100));
     }
 
-    pdf.save('toolzen-document.pdf');
+    const pdfBytes = await pdfDoc.save();
+    saveAs(new Blob([pdfBytes], { type: 'application/pdf' }), 'toolzen-document.pdf');
     setIsGenerating(false);
     toast({ title: 'PDF generated successfully!', variant: 'default' });
-  }, [files, toast, jsPDF]);
+  }, [files, toast]);
 
   const removeFile = (indexToRemove: number) => {
     setFiles(prev => prev.filter((_, index) => index !== indexToRemove));
@@ -222,22 +209,4 @@ function PDFMakerClient({ jsPDF }: PDFMakerProps) {
   );
 }
 
-export default function PdfMaker() {
-    const [jsPDF, setJsPDF] = useState<typeof jsPDF | null>(null);
-
-    useEffect(() => {
-        import('jspdf').then(module => {
-            setJsPDF(() => module.default);
-        });
-    }, []);
-
-    if (!jsPDF) {
-        return (
-            <Card className="w-full shadow-lg rounded-lg flex items-center justify-center h-96 bg-card/60 backdrop-blur-lg">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            </Card>
-        );
-    }
-
-    return <PDFMakerClient jsPDF={jsPDF} />;
-}
+    
