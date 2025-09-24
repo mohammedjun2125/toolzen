@@ -39,7 +39,7 @@ export const categories: ToolCategoryInfo[] = Object.entries(categoryInfo).map((
   ...info
 }));
 
-const categoryMap = new Map(categories.map(c => [c.id, c]));
+export const categoryMap = new Map(categories.map(c => [c.id, c]));
 
 export const tools: Tool[] = [
   // Image & Media (Ordered by popularity)
