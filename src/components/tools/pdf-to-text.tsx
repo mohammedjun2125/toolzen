@@ -11,7 +11,7 @@ import { Textarea } from '../ui/textarea';
 import * as pdfjs from 'pdfjs-dist';
 
 // This is required for the worker to be loaded correctly.
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
 export default function PdfToText() {

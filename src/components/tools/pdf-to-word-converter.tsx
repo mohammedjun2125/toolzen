@@ -11,7 +11,7 @@ import { Textarea } from '../ui/textarea';
 import * as pdfjs from 'pdfjs-dist';
 
 // Set worker source
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export default function PdfToWordConverter() {
     const [file, setFile] = useState<File | null>(null);
