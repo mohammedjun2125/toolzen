@@ -193,7 +193,7 @@ export default function PdfSplitter() {
             
             <h3>Key Features and Benefits</h3>
             <ul>
-                <li><strong>Visual Page Selection:</strong> See a clear preview of every page and simply click to select the ones you want to extract into a new file.</li>
+                <li><strong>Visual Page Selection:</strong> See a clear preview of every page and simply click to select the ones you want to include in your new file.</li>
                 <li><strong>100% Free and Private:</strong> As a client-side tool, your files are never uploaded. Enjoy unlimited PDF splitting without compromising the security of your documents.</li>
                 <li><strong>No Software Required:</strong> This is a fast, browser-based **online PDF tool** that requires no installation or registration.</li>
                 <li><strong>High-Quality Output:</strong> The extracted pages maintain their original quality, ensuring your new PDF is crisp and clear.</li>

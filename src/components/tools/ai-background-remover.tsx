@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useRef, useCallback, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -62,7 +62,6 @@ export default function AiBackgroundRemover() {
         const { dismiss } = toast({ 
             title: 'AI is removing the background...', 
             description: 'The model is loading on your device. This may take a moment.',
-            duration: Infinity,
         });
 
         try {
@@ -146,7 +145,7 @@ export default function AiBackgroundRemover() {
                                 </div>
                             ) : processedImage ? (
                                 <div className="w-full h-80 rounded-lg p-2" style={{backgroundImage: `url("data:image/svg+xml,%3csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='10' height='10' fill='%23f1f5f9'/%3e%3crect x='10' y='10' width='10' height='10' fill='%23f1f5f9'/%3e%3c/svg%3e")`}}>
-                                    <Image src={processedImage} width={400} height={400} alt="Image with background removed" className="object-contain h-full w-auto mx-auto" />
+                                    <img src={processedImage} alt="Image with background removed" className="object-contain h-full w-auto mx-auto" />
                                 </div>
                             ) : (
                                 <div className="w-full h-80 rounded-lg bg-muted flex items-center justify-center">
