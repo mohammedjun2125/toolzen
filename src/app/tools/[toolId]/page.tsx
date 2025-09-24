@@ -1,5 +1,6 @@
 
 
+
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -40,7 +41,11 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
     'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
     'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
+    // Add new placeholders here for tools that don't have a component yet
 };
+
+const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
+
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
@@ -180,10 +185,11 @@ export function generateStaticParams() {
 
 export default function ToolPage({ params }: Props) {
   const { toolId } = params;
-  const ToolComponent = toolComponents[toolId];
   const tool = toolMap.get(toolId);
+  const ToolComponent = toolComponents[toolId] || ComingSoonTool;
 
-  if (!ToolComponent || !tool) {
+
+  if (!tool) {
     notFound();
   }
 
@@ -228,7 +234,7 @@ export default function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ToolLayout title={tool.name} description={tool.description} faq={faq}>
+      <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
         <ToolComponent />
       </ToolLayout>
     </>

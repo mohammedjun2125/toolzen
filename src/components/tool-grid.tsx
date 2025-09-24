@@ -3,18 +3,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { tools, categories, ToolCategory } from '@/lib/tools';
+import { tools, categories, ToolCategoryInfo } from '@/lib/tools';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from './ui/button';
 
 export function ToolGrid() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState<ToolCategory | 'All'>('All');
+  const [activeCategory, setActiveCategory] = useState<string>('All');
 
   const filteredTools = tools.filter(
     (tool) =>
-      (activeCategory === 'All' || tool.category === activeCategory) &&
+      (activeCategory === 'All' || tool.category.id === activeCategory) &&
       (tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
@@ -40,11 +40,11 @@ export function ToolGrid() {
             </Button>
             {categories.map(category => (
                 <Button
-                    key={category}
-                    variant={activeCategory === category ? 'default' : 'outline'}
-                    onClick={() => setActiveCategory(category)}
+                    key={category.id}
+                    variant={activeCategory === category.id ? 'default' : 'outline'}
+                    onClick={() => setActiveCategory(category.id)}
                 >
-                    {category}
+                    {category.name}
                 </Button>
             ))}
         </div>

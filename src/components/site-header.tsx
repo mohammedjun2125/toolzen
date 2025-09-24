@@ -3,15 +3,22 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Puzzle, Menu, X } from 'lucide-react';
+import { Puzzle, Menu, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { categories } from '@/lib/tools';
 
 export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  const mainNavLinks = [
     { href: '/blog', text: 'Blog' },
     { href: '/about', text: 'About' },
     { href: '/contact', text: 'Contact' },
@@ -26,7 +33,25 @@ export function SiteHeader() {
       
       {/* Desktop Navigation */}
       <nav className="ml-auto hidden md:flex items-center gap-4 sm:gap-6">
-        {navLinks.map(link => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost">
+              Tools <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {categories.map(category => (
+               <DropdownMenuItem key={category.id} asChild>
+                 <Link href={`/category/${category.id}`}>
+                    <category.icon className="mr-2 h-4 w-4" />
+                    {category.name}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {mainNavLinks.map(link => (
           <Button variant="ghost" asChild key={link.href}>
             <Link href={link.href}>{link.text}</Link>
           </Button>
@@ -45,14 +70,14 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <nav className="flex flex-col gap-4 pt-8">
-              {navLinks.map(link => (
+              {mainNavLinks.map(link => (
                 <Button variant="ghost" asChild key={link.href} onClick={() => setIsMobileMenuOpen(false)}>
                   <Link href={link.href}>{link.text}</Link>
                 </Button>
               ))}
-              <div className="mt-4 flex justify-center">
-                <ThemeToggle />
-              </div>
+               <div className="mt-4 flex justify-center">
+                 <ThemeToggle />
+               </div>
             </nav>
           </SheetContent>
         </Sheet>

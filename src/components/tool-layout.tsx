@@ -1,10 +1,9 @@
 
-
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Grip } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { mockPosts } from '@/lib/blog';
@@ -14,9 +13,10 @@ type ToolLayoutProps = {
     title: string;
     description: string;
     faq: { question: string; answer: string }[];
+    categoryId: string;
 };
 
-export function ToolLayout({ children, title, description, faq }: ToolLayoutProps) {
+export function ToolLayout({ children, title, description, faq, categoryId }: ToolLayoutProps) {
     // Find related articles based on keywords in title
     const keywords = title.toLowerCase().split(' ').filter(kw => kw.length > 3);
     const relatedArticles = mockPosts.filter(post => 
@@ -25,12 +25,20 @@ export function ToolLayout({ children, title, description, faq }: ToolLayoutProp
 
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
-             <Button asChild variant="ghost" className="mb-4">
-                <Link href="/">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Home
-                </Link>
-            </Button>
+             <div className="flex justify-between items-center mb-4">
+                <Button asChild variant="ghost">
+                    <Link href="/">
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Back to Home
+                    </Link>
+                </Button>
+                <Button asChild variant="ghost">
+                    <Link href={`/category/${categoryId}`}>
+                        <Grip className="mr-2 h-4 w-4" />
+                        Back to Category
+                    </Link>
+                </Button>
+            </div>
             <main className="space-y-8">
                 <div className="space-y-2">
                     <h1 className="text-3xl font-bold tracking-tight">{title}</h1>

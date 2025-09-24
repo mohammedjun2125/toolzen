@@ -1,13 +1,14 @@
 
 'use client';
 
-import { ToolGrid } from '@/components/tool-grid';
+import Link from 'next/link';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { BlogPreview } from '@/components/blog-preview';
 import { mockPosts } from '@/lib/blog';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { categories } from '@/lib/tools';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function Home() {
   
@@ -27,15 +28,34 @@ export default function Home() {
                   No data is ever sent to our servers.
               </p>
               <Button asChild size="lg">
-                <Link href="#tools">Explore Tools</Link>
+                <Link href="#categories">Explore Tool Categories</Link>
               </Button>
               
             </div>
           </section>
           
-          <div id="tools">
-            <ToolGrid />
-          </div>
+          <section id="categories" className="w-full pb-20 md:pb-32 lg:pb-40">
+            <div className="container mx-auto px-4 md:px-6">
+              <h2 className="text-3xl font-bold text-center mb-12">Tool Categories</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {categories.map((category) => (
+                  <Link href={`/category/${category.id}`} key={category.id} className="group">
+                    <Card className="h-full transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2 bg-card/60 backdrop-blur-lg">
+                      <CardHeader className="p-6">
+                        <div className="flex items-center gap-4">
+                          <div className="bg-primary/10 p-3 rounded-lg">
+                            <category.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <CardTitle className="text-lg font-semibold">{category.name}</CardTitle>
+                        </div>
+                        <CardDescription className="mt-4 text-sm text-muted-foreground">{category.description_short}</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <BlogPreview posts={mockPosts} />
 
