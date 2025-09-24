@@ -46,14 +46,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: '/favicon.svg',
     apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'icon',
-      url: '/favicon.svg',
-      type: 'image/svg+xml',
-    },
   },
   manifest: '/site.webmanifest',
   verification: {
