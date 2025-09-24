@@ -11,10 +11,8 @@ import { PDFDocument } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 import { Label } from '../ui/label';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Link from 'next/link';
-
-type CompressionLevel = 'recommended' | 'high' | 'extreme';
 
 export default function PdfCompressor() {
     const [file, setFile] = useState<File | null>(null);
@@ -22,7 +20,8 @@ export default function PdfCompressor() {
     const [progress, setProgress] = useState(0);
     const [originalSize, setOriginalSize] = useState(0);
     const [compressedSize, setCompressedSize] = useState(0);
-    const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>('recommended');
+    const [targetSize, setTargetSize] = useState(500); // in KB
+    const [targetUnit, setTargetUnit] = useState<'KB' | 'MB'>('KB');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
 
@@ -50,72 +49,67 @@ export default function PdfCompressor() {
         toast({ title: 'Compressing PDF...', description: 'This may take a moment, especially for large files.' });
 
         try {
+            const targetSizeBytes = targetUnit === 'MB' ? targetSize * 1024 * 1024 : targetSize * 1024;
             const arrayBuffer = await file.arrayBuffer();
-            const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-            
-            const qualityMap = {
-                recommended: 0.7, // Good quality, good compression
-                high: 0.4, // Lower quality, higher compression
-                extreme: 0.2, // Lowest quality, max compression
-            };
-            const quality = qualityMap[compressionLevel];
-            
-            const pages = pdfDoc.getPages();
-            let processedImages = 0;
-            const totalImages = (await Promise.all(pages.map(async page => {
-                try {
-                    const xObjects = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
-                    const xObjectDict = xObjects?.as(Object);
-                    if (!xObjectDict) return [];
+            let finalPdfBytes: Uint8Array | null = null;
+            let finalQuality = 0.7;
 
-                    const imageRefs = [];
-                    xObjectDict.entries().forEach(([key, value]) => {
-                        const stream = pdfDoc.context.lookup(value);
-                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
-                            imageRefs.push({ key, stream });
+            // Iterative compression attempt
+            for (let quality = 0.9; quality >= 0.1; quality -= 0.2) {
+                const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+                const pages = pdfDoc.getPages();
+                
+                for (const page of pages) {
+                    try {
+                        const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
+                        const xObjectDict = imageStreams?.as(Object);
+                        if (!xObjectDict) continue;
+
+                        for (const [key, value] of xObjectDict.entries()) {
+                            const stream = pdfDoc.context.lookup(value);
+                            if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
+                                try {
+                                    const imageBytes = (stream as any).getContents();
+                                    const image = await pdfDoc.embedJpg(imageBytes, { quality });
+                                    xObjectDict.set(key, image.ref);
+                                } catch (e) {
+                                    // Ignore images that can't be re-compressed (e.g. not JPG compatible)
+                                }
+                            }
                         }
-                    });
-                    return imageRefs;
-                } catch(e) {
-                    return [];
-                }
-            }))).flat();
-            
-
-            for (const page of pages) {
-                 try {
-                    const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
-                    const xObjectDict = imageStreams?.as(Object);
-                    if (!xObjectDict) continue;
-
-                    for (const [key, value] of xObjectDict.entries()) {
-                       const stream = pdfDoc.context.lookup(value);
-                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
-                            const imageBytes = (stream as any).getContents();
-                            const image = await pdfDoc.embedJpg(imageBytes, { quality });
-                            xObjectDict.set(key, image.ref);
-
-                            processedImages++;
-                            setProgress(Math.round((processedImages / totalImages.length) * 100));
-                        }
+                    } catch (e) {
+                        console.warn("Could not process images on a page, skipping.", e);
+                        continue;
                     }
-                } catch (e) {
-                    console.warn("Could not process images on a page, skipping.", e);
-                    continue;
+                }
+                
+                const currentPdfBytes = await pdfDoc.save({ useObjectStreams: false });
+                finalPdfBytes = currentPdfBytes;
+                finalQuality = quality;
+
+                setProgress(prev => prev + 20);
+
+                if (currentPdfBytes.length <= targetSizeBytes) {
+                    break;
                 }
             }
-
-            const pdfBytes = await pdfDoc.save({ useObjectStreams: false });
-            const compressedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-            setCompressedSize(compressedBlob.size);
             
-            saveAs(compressedBlob, `compressed-${file.name}`);
-            toast({ title: 'Success!', description: `PDF compressed by ${Math.round(((originalSize - compressedBlob.size) / originalSize) * 100)}% and downloaded.` });
+            if (finalPdfBytes) {
+                const compressedBlob = new Blob([finalPdfBytes], { type: 'application/pdf' });
+                setCompressedSize(compressedBlob.size);
+                
+                saveAs(compressedBlob, `compressed-${file.name}`);
+                toast({ title: 'Success!', description: `PDF compressed to ${(compressedBlob.size / 1024).toFixed(0)} KB and downloaded.` });
+            } else {
+                 throw new Error("Failed to generate final PDF bytes.");
+            }
+
         } catch (error) {
             console.error(error);
-            toast({ variant: 'destructive', title: 'Failed to Compress PDF', description: 'An error occurred. The PDF might be encrypted, corrupted, or have an unsupported format for client-side compression.' });
+            toast({ variant: 'destructive', title: 'Failed to Compress PDF', description: 'An error occurred. The PDF might be encrypted, corrupted, or have a format that is difficult to compress on the client-side.' });
         } finally {
             setIsProcessing(false);
+            setProgress(100);
         }
     };
     
@@ -169,32 +163,32 @@ export default function PdfCompressor() {
                                 <X className="h-4 w-4" />
                             </Button>
                         </div>
-
-                        <div className="space-y-2">
-                            <Label>Compression Level</Label>
-                            <RadioGroup value={compressionLevel} onValueChange={(v) => setCompressionLevel(v as CompressionLevel)} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div className='flex-1'>
-                                    <RadioGroupItem value="recommended" id="recommended" className="peer sr-only" />
-                                    <Label htmlFor="recommended" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                        Recommended
-                                        <span className='text-xs text-muted-foreground mt-1'>Good Quality</span>
-                                    </Label>
-                                </div>
-                                <div className='flex-1'>
-                                    <RadioGroupItem value="high" id="high" className="peer sr-only" />
-                                    <Label htmlFor="high" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                        High Compression
-                                        <span className='text-xs text-muted-foreground mt-1'>Smaller Size</span>
-                                    </Label>
-                                </div>
-                                <div className='flex-1'>
-                                    <RadioGroupItem value="extreme" id="extreme" className="peer sr-only" />
-                                    <Label htmlFor="extreme" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                        Extreme Compression
-                                        <span className='text-xs text-muted-foreground mt-1'>Lowest Quality</span>
-                                    </Label>
-                                </div>
-                            </RadioGroup>
+                        
+                        <div className="grid grid-cols-3 gap-2">
+                            <div className="col-span-2 space-y-2">
+                            <Label htmlFor="target-size">Target Size</Label>
+                            <Input
+                                id="target-size"
+                                type="number"
+                                value={targetSize}
+                                onChange={(e) => setTargetSize(Number(e.target.value))}
+                                className="w-full"
+                                min="1"
+                                disabled={isProcessing}
+                            />
+                            </div>
+                            <div className="space-y-2">
+                            <Label htmlFor="unit">Unit</Label>
+                            <Select value={targetUnit} onValueChange={(value) => setTargetUnit(value as 'KB' | 'MB')}>
+                                <SelectTrigger id="unit">
+                                <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                <SelectItem value="KB">KB</SelectItem>
+                                <SelectItem value="MB">MB</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            </div>
                         </div>
                         
                         {isProcessing && <Progress value={progress} className="w-full" />}
@@ -256,4 +250,3 @@ export default function PdfCompressor() {
         </article>
         </>
     );
-}
