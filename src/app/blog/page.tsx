@@ -86,7 +86,7 @@ export default function BlogIndexPage() {
                         </ul>
                     </CardContent>
                 </Card>
-
+                
             </aside>
         </div>
       </main>
