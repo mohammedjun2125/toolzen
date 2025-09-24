@@ -14,8 +14,8 @@ const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool
 
 // A single dynamic component that loads the correct tool
 const ToolComponent = dynamic(
-    ({ params }: Props) => import(`@/components/tools/${params.toolId}`).catch(() => ComingSoonTool),
-    { loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" /> }
+  () => import(`@/components/tools/coming-soon-tool`),
+  { loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" /> }
 );
 
 
@@ -164,6 +164,18 @@ export function generateStaticParams() {
   }));
 }
 
+const DynamicTool = ({ toolId }: { toolId: string }) => {
+  const Component = dynamic(
+    () => import(`@/components/tools/${toolId}`).catch(() => ComingSoonTool),
+    {
+      loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" />,
+    }
+  );
+
+  return <Component />;
+};
+
+
 export default function ToolPage({ params }: Props) {
   const { toolId } = params;
   const tool = toolMap.get(toolId);
@@ -194,7 +206,7 @@ export default function ToolPage({ params }: Props) {
   };
   
   if (faq.length > 0) {
-      jsonLd['mainEntity'] = {
+      (jsonLd as any)['mainEntity'] = {
           '@type': 'FAQPage',
           'mainEntity': faq.map(item => ({
               '@type': 'Question',
@@ -214,7 +226,7 @@ export default function ToolPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
-        <ToolComponent params={params} />
+        <DynamicTool toolId={toolId} />
       </ToolLayout>
     </>
   );
