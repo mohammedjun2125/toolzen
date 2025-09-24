@@ -1,8 +1,7 @@
-
 'use client';
 
 import Link from 'next/link';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown, Puzzle } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -24,7 +23,8 @@ export function SiteHeader() {
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center bg-card/60 backdrop-blur-lg sticky top-0 z-50 border-b">
-      <Link href="/" className="flex items-center justify-center" prefetch={false}>
+      <Link href="/" className="flex items-center justify-center gap-2" prefetch={false}>
+        <Puzzle className="h-6 w-6 text-primary" />
         <span className="text-xl font-bold text-foreground">Toolzen</span>
       </Link>
       
@@ -41,7 +41,7 @@ export function SiteHeader() {
                const CategoryIcon = iconMap[category.icon];
                return (
                  <DropdownMenuItem key={category.id} asChild>
-                   <Link href={`/#${category.id}`}>
+                   <Link href={`/category/${category.id}`}>
                       {CategoryIcon && <CategoryIcon className="mr-2 h-4 w-4" />}
                       {category.name}
                   </Link>
@@ -71,7 +71,8 @@ export function SiteHeader() {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
              <nav className="flex flex-col gap-4 pt-8">
                <SheetTrigger asChild>
-                <Link href="/" className="flex items-center justify-center mb-4" prefetch={false}>
+                <Link href="/" className="flex items-center justify-center gap-2 mb-4" prefetch={false}>
+                   <Puzzle className="h-6 w-6 text-primary" />
                   <span className="text-xl font-bold text-foreground">Toolzen</span>
                 </Link>
                </SheetTrigger>
