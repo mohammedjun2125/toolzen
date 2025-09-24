@@ -1,7 +1,5 @@
-
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { Puzzle, Menu, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
@@ -16,8 +14,6 @@ import {
 import { categories } from '@/lib/tools';
 
 export function SiteHeader() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const mainNavLinks = [
     { href: '/blog', text: 'Blog' },
     { href: '/about', text: 'About' },
@@ -26,7 +22,7 @@ export function SiteHeader() {
 
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center bg-card/60 backdrop-blur-lg sticky top-0 z-50 border-b">
-      <Link href="/" className="flex items-center justify-center" prefetch={false} onClick={() => setIsMobileMenuOpen(false)}>
+      <Link href="/" className="flex items-center justify-center" prefetch={false}>
         <Puzzle className="h-6 w-6 text-primary" />
         <span className="ml-2 text-xl font-bold text-foreground">Toolzen</span>
       </Link>
@@ -61,7 +57,7 @@ export function SiteHeader() {
 
       {/* Mobile Navigation */}
       <div className="ml-auto md:hidden">
-        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
               <Menu className="h-6 w-6" />
@@ -69,11 +65,20 @@ export function SiteHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <nav className="flex flex-col gap-4 pt-8">
+             <nav className="flex flex-col gap-4 pt-8">
+               <SheetTrigger asChild>
+                <Link href="/" className="flex items-center justify-center mb-4" prefetch={false}>
+                  <Puzzle className="h-6 w-6 text-primary" />
+                  <span className="ml-2 text-xl font-bold text-foreground">Toolzen</span>
+                </Link>
+               </SheetTrigger>
+
               {mainNavLinks.map(link => (
-                <Button variant="ghost" asChild key={link.href} onClick={() => setIsMobileMenuOpen(false)}>
-                  <Link href={link.href}>{link.text}</Link>
-                </Button>
+                <SheetTrigger asChild key={link.href}>
+                  <Button variant="ghost" asChild>
+                    <Link href={link.href}>{link.text}</Link>
+                  </Button>
+                </SheetTrigger>
               ))}
                <div className="mt-4 flex justify-center">
                  <ThemeToggle />

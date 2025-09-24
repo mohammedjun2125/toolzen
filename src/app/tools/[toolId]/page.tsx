@@ -1,6 +1,6 @@
 
 
-import { tools, toolMap, Tool } from '@/lib/tools';
+import { tools, toolMap } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -12,63 +12,12 @@ type Props = {
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
 
-const toolComponents: { [key: string]: React.ComponentType } = {
-    'age-calculator': dynamic(() => import('@/components/tools/age-calculator')),
-    'bmi-calculator': dynamic(() => import('@/components/tools/bmi-calculator')),
-    'case-converter': dynamic(() => import('@/components/tools/case-converter')),
-    'color-palette-extractor': dynamic(() => import('@/components/tools/color-palette-extractor')),
-    'image-compressor': dynamic(() => import('@/components/tools/image-compressor')),
-    'image-resizer': dynamic(() => import('@/components/tools/image-resizer')),
-    'json-formatter': dynamic(() => import('@/components/tools/json-formatter')),
-    'markdown-preview': dynamic(() => import('@/components/tools/markdown-preview')),
-    'password-generator': dynamic(() => import('@/components/tools/password-generator')),
-    'qr-code-generator': dynamic(() => import('@/components/tools/qr-code-generator')),
-    'text-to-speech': dynamic(() => import('@/components/tools/text-to-speech')),
-    'unit-converter': dynamic(() => import('@/components/tools/unit-converter')),
-    'url-encoder-decoder': dynamic(() => import('@/components/tools/url-encoder-decoder')),
-    'word-counter': dynamic(() => import('@/components/tools/word-counter')),
-    'hash-generator': dynamic(() => import('@/components/tools/hash-generator')),
-    'base64-encoder-decoder': dynamic(() => import('@/components/tools/base64-encoder-decoder')),
-    'lorem-ipsum-generator': dynamic(() => import('@/components/tools/lorem-ipsum-generator')),
-    'timezone-converter': dynamic(() => import('@/components/tools/timezone-converter')),
-    'percentage-calculator': dynamic(() => import('@/components/tools/percentage-calculator')),
-    'loan-emi-calculator': dynamic(() => import('@/components/tools/loan-emi-calculator')),
-    'barcode-generator': dynamic(() => import('@/components/tools/barcode-generator')),
-    'random-number-generator': dynamic(() => import('@/components/tools/random-number-generator')),
-    'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker')),
-    'pdf-merger': dynamic(() => import('@/components/tools/pdf-merger')),
-    'pdf-rotator': dynamic(() => import('@/components/tools/pdf-rotator')),
-    'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter')),
-    'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter')),
-    'add-watermark': dynamic(() => import('@/components/tools/add-watermark')),
-    'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
-    'image-converter': dynamic(() => import('@/components/tools/image-converter')),
-    'pdf-compressor': dynamic(() => import('@/components/tools/pdf-compressor')),
-    'pdf-to-text': dynamic(() => import('@/components/tools/pdf-to-text')),
-    'remove-duplicate-lines': dynamic(() => import('@/components/tools/remove-duplicate-lines')),
-    'email-extractor': dynamic(() => import('@/components/tools/email-extractor')),
-    'text-reverser': dynamic(() => import('@/components/tools/text-reverser')),
-    'date-difference-calculator': dynamic(() => import('@/components/tools/date-difference-calculator')),
-    'discount-calculator': dynamic(() => import('@/components/tools/discount-calculator')),
-    'currency-converter': dynamic(() => import('@/components/tools/currency-converter')),
-    'username-generator': dynamic(() => import('@/components/tools/username-generator')),
-    'meme-generator': dynamic(() => import('@/components/tools/meme-generator')),
-    'domain-generator': dynamic(() => import('@/components/tools/domain-generator')),
-    'gradient-generator': dynamic(() => import('@/components/tools/gradient-generator')),
-    'box-shadow-generator': dynamic(() => import('@/components/tools/box-shadow-generator')),
-    'border-radius-generator': dynamic(() => import('@/components/tools/border-radius-generator')),
-    'text-shadow-generator': dynamic(() => import('@/components/tools/text-shadow-generator')),
-    'flexbox-playground': dynamic(() => import('@/components/tools/flexbox-playground')),
-    'grid-generator': dynamic(() => import('@/components/tools/grid-generator')),
-    'animation-generator': dynamic(() => import('@/components/tools/animation-generator')),
-    'stopwatch': dynamic(() => import('@/components/tools/stopwatch')),
-    'timer': dynamic(() => import('@/components/tools/timer')),
-    'notes-tool': dynamic(() => import('@/components/tools/notes-tool')),
-    'dns-lookup': dynamic(() => import('@/components/tools/dns-lookup')),
-    'ip-lookup': dynamic(() => import('@/components/tools/ip-lookup')),
-    'ssl-checker': dynamic(() => import('@/components/tools/ssl-checker')),
-    'otp-generator': dynamic(() => import('@/components/tools/otp-generator')),
-};
+// A single dynamic component that loads the correct tool
+const ToolComponent = dynamic(
+    ({ params }: Props) => import(`@/components/tools/${params.toolId}`).catch(() => ComingSoonTool),
+    { loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" /> }
+);
+
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
@@ -218,9 +167,7 @@ export function generateStaticParams() {
 export default function ToolPage({ params }: Props) {
   const { toolId } = params;
   const tool = toolMap.get(toolId);
-  const ToolComponent = toolComponents[toolId] || ComingSoonTool;
-
-
+  
   if (!tool) {
     notFound();
   }
@@ -267,7 +214,7 @@ export default function ToolPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
-        <ToolComponent />
+        <ToolComponent params={params} />
       </ToolLayout>
     </>
   );
