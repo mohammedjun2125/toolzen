@@ -1,6 +1,5 @@
 
 
-
 import { tools, toolMap, Tool } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -10,6 +9,8 @@ import { ToolLayout } from '@/components/tool-layout';
 type Props = {
   params: { toolId: string }
 }
+
+const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
 
 const toolComponents: { [key: string]: React.ComponentType } = {
     'age-calculator': dynamic(() => import('@/components/tools/age-calculator')),
@@ -43,9 +44,6 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter')),
     // Add new placeholders here for tools that don't have a component yet
 };
-
-const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
-
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
