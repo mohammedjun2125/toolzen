@@ -58,8 +58,8 @@ export default function IpLookup() {
     return (
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">IP Address Lookup</CardTitle>
-                <CardDescription>Find geolocation and other details for an IP address.</CardDescription>
+                <CardTitle className="text-2xl">IP Address Locator</CardTitle>
+                <CardDescription>Find IP address location and other geolocation details instantly.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex gap-2">
