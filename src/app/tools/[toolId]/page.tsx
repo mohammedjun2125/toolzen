@@ -45,6 +45,9 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'image-converter': dynamic(() => import('@/components/tools/image-converter')),
     'pdf-compressor': dynamic(() => import('@/components/tools/pdf-compressor')),
     'pdf-to-text': dynamic(() => import('@/components/tools/pdf-to-text')),
+    'remove-duplicate-lines': dynamic(() => import('@/components/tools/remove-duplicate-lines')),
+    'email-extractor': dynamic(() => import('@/components/tools/email-extractor')),
+    'text-reverser': dynamic(() => import('@/components/tools/text-reverser')),
     // Add new placeholders here for tools that don't have a component yet
 };
 
