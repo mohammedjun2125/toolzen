@@ -59,7 +59,7 @@ export const tools: Tool[] = [
   { id: 'add-watermark', name: 'Watermark PDF', description: 'Add a text watermark to your PDF files.', href: '/tools/add-watermark', icon: SquarePen, category: categoryMap.get('pdf')! },
   { id: 'pdf-rotator', name: 'Rotate PDF', description: 'Rotate pages in a PDF document individually.', href: '/tools/pdf-rotator', icon: RotateCw, category: categoryMap.get('pdf')! },
   { id: 'pdf-compressor', name: 'PDF Compressor', description: 'Reduce the file size of your PDF documents.', href: '/tools/pdf-compressor', icon: ImageIcon, category: categoryMap.get('pdf')! },
-  { id: 'pdf-to-word', name: 'PDF to Word', description: 'Convert PDF files to editable Word documents.', href: '/tools/pdf-to-word-converter', icon: FileKey2, category: categoryMap.get('pdf')! },
+  { id: 'pdf-to-word', name: 'PDF to Word', description: 'Convert PDF files to editable Word documents.', href: '/tools/pdf-to-word', icon: FileKey2, category: categoryMap.get('pdf')! },
   { id: 'pdf-to-text', name: 'PDF to Text Extractor', description: 'Extract all text content from a PDF file.', href: '/tools/pdf-to-text', icon: FileCog, category: categoryMap.get('pdf')! },
   
   // Text & Data Tools (Ordered by popularity)

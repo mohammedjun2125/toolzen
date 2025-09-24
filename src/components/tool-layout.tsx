@@ -47,6 +47,11 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
                 
                 {children}
 
+                {/* Ad Placeholder */}
+                <div className="my-8 h-24 flex items-center justify-center rounded-lg">
+                    {/* Future ad content goes here */}
+                </div>
+
                 {relatedArticles.length > 0 && (
                   <section className="related-articles mt-12">
                       <Card className="bg-card/60 backdrop-blur-lg">

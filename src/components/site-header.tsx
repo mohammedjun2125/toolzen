@@ -42,7 +42,7 @@ export function SiteHeader() {
           <DropdownMenuContent>
             {categories.map(category => (
                <DropdownMenuItem key={category.id} asChild>
-                 <Link href={`/category/${category.id}`}>
+                 <Link href={`/#${category.id}`}>
                     <category.icon className="mr-2 h-4 w-4" />
                     {category.name}
                 </Link>
