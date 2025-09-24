@@ -54,6 +54,9 @@ const toolComponents: { [key: string]: React.ComponentType } = {
     'username-generator': dynamic(() => import('@/components/tools/username-generator')),
     'meme-generator': dynamic(() => import('@/components/tools/meme-generator')),
     'domain-generator': dynamic(() => import('@/components/tools/domain-generator')),
+    'gradient-generator': dynamic(() => import('@/components/tools/gradient-generator')),
+    'box-shadow-generator': dynamic(() => import('@/components/tools/box-shadow-generator')),
+    'border-radius-generator': dynamic(() => import('@/components/tools/border-radius-generator')),
     // Add new placeholders here for tools that don't have a component yet
 };
 
