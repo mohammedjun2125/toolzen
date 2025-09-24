@@ -52,47 +52,47 @@ export default function PdfCompressor() {
             const targetSizeBytes = targetUnit === 'MB' ? targetSize * 1024 * 1024 : targetSize * 1024;
             const arrayBuffer = await file.arrayBuffer();
             let finalPdfBytes: Uint8Array | null = null;
-            let finalQuality = 0.7;
+            
+            // This is a simplified approach. True client-side compression to a target size is very complex
+            // and resource-intensive. This will attempt one pass with a reasonable quality setting.
+            let quality = 0.7; // Default quality
+            if (file.size > 0) {
+                 const compressionRatio = targetSizeBytes / file.size;
+                 if (compressionRatio < 0.1) quality = 0.1;
+                 else if (compressionRatio < 0.5) quality = 0.5;
+                 else quality = 0.7;
+            }
 
-            // Iterative compression attempt
-            for (let quality = 0.9; quality >= 0.1; quality -= 0.2) {
-                const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-                const pages = pdfDoc.getPages();
-                
-                for (const page of pages) {
-                    try {
-                        const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
-                        const xObjectDict = imageStreams?.as(Object);
-                        if (!xObjectDict) continue;
+            const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+            const pages = pdfDoc.getPages();
+            
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i];
+                try {
+                    const imageStreams = page.node.Resources?.get(pdfDoc.context.obj('XObject'));
+                    const xObjectDict = imageStreams?.as(Object);
+                    if (!xObjectDict) continue;
 
-                        for (const [key, value] of xObjectDict.entries()) {
-                            const stream = pdfDoc.context.lookup(value);
-                            if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
-                                try {
-                                    const imageBytes = (stream as any).getContents();
-                                    const image = await pdfDoc.embedJpg(imageBytes, { quality });
-                                    xObjectDict.set(key, image.ref);
-                                } catch (e) {
-                                    // Ignore images that can't be re-compressed (e.g. not JPG compatible)
-                                }
+                    for (const [key, value] of xObjectDict.entries()) {
+                        const stream = pdfDoc.context.lookup(value);
+                        if (stream?.dict?.get(pdfDoc.context.obj('Subtype'))?.toString() === '/Image') {
+                            try {
+                                const imageBytes = (stream as any).getContents();
+                                const image = await pdfDoc.embedJpg(imageBytes, { quality });
+                                xObjectDict.set(key, image.ref);
+                            } catch (e) {
+                                // Ignore images that can't be re-compressed
                             }
                         }
-                    } catch (e) {
-                        console.warn("Could not process images on a page, skipping.", e);
-                        continue;
                     }
+                } catch (e) {
+                    console.warn("Could not process images on a page, skipping.", e);
+                    continue;
                 }
-                
-                const currentPdfBytes = await pdfDoc.save({ useObjectStreams: false });
-                finalPdfBytes = currentPdfBytes;
-                finalQuality = quality;
-
-                setProgress(prev => prev + 20);
-
-                if (currentPdfBytes.length <= targetSizeBytes) {
-                    break;
-                }
+                setProgress(Math.round(((i + 1) / pages.length) * 100));
             }
+            
+            finalPdfBytes = await pdfDoc.save({ useObjectStreams: false });
             
             if (finalPdfBytes) {
                 const compressedBlob = new Blob([finalPdfBytes], { type: 'application/pdf' });
@@ -250,3 +250,4 @@ export default function PdfCompressor() {
         </article>
         </>
     );
+}
