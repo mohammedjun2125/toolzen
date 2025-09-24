@@ -8,7 +8,7 @@ import {
     Image as ImageIcon, FileText, Mic, Palette, Ruler, QrCode, Sigma, CaseSensitive, Link as LinkIcon,
     Calendar, Calculator, Lock, FileCode, Braces, Hash, Binary, BookType, Clock, Crop, Percent, Landmark,
     Barcode, Sparkles, Merge, RotateCw, Trash2, Split, Shield, SquarePen, FileScan, FileKey2, Beaker,
-    FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, Animation, MousePointer, UtilityPole, Webhook,
+    FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, MousePointer, UtilityPole, Webhook,
     NotepadText, CheckCheck, KeyRound, Globe, Component, FileType as GifIcon,
 } from 'lucide-react';
 import { Button } from './ui/button';
@@ -60,8 +60,6 @@ export const iconMap: { [key: string]: LucideIcon } = {
     'shield': Shield,
     'sun': Sun,
     'columns': Columns,
-    'animation': Animation,
-    'clock': Clock,
     'mouse-pointer': MousePointer,
 };
 

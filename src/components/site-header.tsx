@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { categories } from '@/lib/tools';
+import { iconMap } from './home-client';
 
 export function SiteHeader() {
   const mainNavLinks = [
@@ -36,14 +38,17 @@ export function SiteHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            {categories.map(category => (
-               <DropdownMenuItem key={category.id} asChild>
-                 <Link href={`/#${category.id}`}>
-                    <category.icon className="mr-2 h-4 w-4" />
-                    {category.name}
-                </Link>
-              </DropdownMenuItem>
-            ))}
+            {categories.map(category => {
+               const CategoryIcon = iconMap[category.icon];
+               return (
+                 <DropdownMenuItem key={category.id} asChild>
+                   <Link href={`/#${category.id}`}>
+                      {CategoryIcon && <CategoryIcon className="mr-2 h-4 w-4" />}
+                      {category.name}
+                  </Link>
+                </DropdownMenuItem>
+               )
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
 

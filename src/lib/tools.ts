@@ -4,8 +4,8 @@ import {
   Image as ImageIcon, FileText, Mic, Palette, Ruler, QrCode, Sigma, CaseSensitive, Link as LinkIcon,
   Calendar, Calculator, Lock, FileCode, Braces, Hash, Binary, BookType, Clock, Crop, Percent, Landmark,
   Barcode, Sparkles, Merge, RotateCw, Trash2, Split, Shield, SquarePen, FileScan, FileKey2, Beaker,
-  FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, Animation, MousePointer, UtilityPole, Webhook,
-  NotepadText, CheckCheck, KeyRound, Globe, Component, FileType as GifIcon, Palette as ColorPaletteIcon
+  FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, MousePointer, UtilityPole, Webhook,
+  NotepadText, CheckCheck, KeyRound, Globe, Component, FileType as GifIcon
 } from 'lucide-react';
 
 export type ToolCategoryInfo = {
@@ -95,13 +95,13 @@ export const tools: Tool[] = [
   { id: 'otp-generator', name: 'OTP Generator', description: 'Generate Time-based One-Time Passwords (TOTP).', href: '/tools/otp-generator', icon: 'shield', category: categoryMap.get('generators')! },
 
   // CSS Tools
-  { id: 'gradient-generator', name: 'Gradient Generator', description: 'Create beautiful CSS gradients visually.', href: '/tools/gradient-generator', icon: 'sun', category: categoryMap.get('css')! },
-  { id: 'box-shadow-generator', name: 'Box Shadow Generator', description: 'Design complex box shadows with a visual editor.', href: '/tools/box-shadow-generator', icon: 'square-pen', category: categoryMap.get('css')! },
-  { id: 'border-radius-generator', name: 'Border Radius Generator', description: 'Create custom border radii for your elements.', href: '/tools/border-radius-generator', icon: 'component', category: categoryMap.get('css')! },
-  { id: 'text-shadow-generator', name: 'Text Shadow Generator', description: 'Design layered text shadows with ease.', href: '/tools/text-shadow-generator', icon: 'case-sensitive', category: categoryMap.get('css')! },
-  { id: 'flexbox-playground', name: 'Flexbox Playground', description: 'Learn and experiment with CSS Flexbox.', href: '/tools/flexbox-playground', icon: 'columns', category: categoryMap.get('css')! },
-  { id: 'grid-generator', name: 'Grid Generator', description: 'Visually create complex CSS Grid layouts.', href: '/tools/grid-generator', icon: 'rows', category: categoryMap.get('css')! },
-  { id: 'animation-generator', name: 'Animation Generator', description: 'Create and customize CSS animations.', href: '/tools/animation-generator', icon: 'animation', category: categoryMap.get('css')! },
+  { id: 'gradient-generator', name: 'Gradient Generator', description: 'Create beautiful CSS gradients and copy the code instantly.', href: '/tools/gradient-generator', icon: 'sun', category: categoryMap.get('css')! },
+  { id: 'box-shadow-generator', name: 'Box Shadow Generator', description: 'Design complex box shadows with a visual editor and copy CSS.', href: '/tools/box-shadow-generator', icon: 'square-pen', category: categoryMap.get('css')! },
+  { id: 'border-radius-generator', name: 'Border Radius Generator', description: 'Visually create custom border-radius values for your elements.', href: '/tools/border-radius-generator', icon: 'component', category: categoryMap.get('css')! },
+  { id: 'text-shadow-generator', name: 'Text Shadow Generator', description: 'Design layered text shadows with an easy-to-use visual tool.', href: '/tools/text-shadow-generator', icon: 'case-sensitive', category: categoryMap.get('css')! },
+  { id: 'flexbox-playground', name: 'Flexbox Playground', description: 'Learn and experiment with all CSS Flexbox properties visually.', href: '/tools/flexbox-playground', icon: 'columns', category: categoryMap.get('css')! },
+  { id: 'grid-generator', name: 'Grid Generator', description: 'Visually create complex CSS Grid layouts and copy the code.', href: '/tools/grid-generator', icon: 'rows', category: categoryMap.get('css')! },
+  { id: 'animation-generator', name: 'Animation Generator', description: 'Create and customize CSS keyframe animations with a live preview.', href: '/tools/animation-generator', icon: 'sparkles', category: categoryMap.get('css')! },
 
   // Utilities
   { id: 'timezone-converter', name: 'World Clock', description: 'Check the current time in cities around the world.', href: '/tools/timezone-converter', icon: 'globe', category: categoryMap.get('utilities')! },
