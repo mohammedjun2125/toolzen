@@ -84,10 +84,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
        <head>
         <Script
-          strategy="lazyOnload"
+          async
           src="https://www.googletagmanager.com/gtag/js?id=G-Q1MVVGE6DC"
         />
-        <Script strategy="lazyOnload" id="google-analytics">
+        <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
