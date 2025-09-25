@@ -85,14 +85,14 @@ export default function RootLayout({
        <head>
         <Script
           strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          src="https://www.googletagmanager.com/gtag/js?id=G-Q1MVVGE6DC"
         />
         <Script strategy="lazyOnload" id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+            gtag('config', 'G-Q1MVVGE6DC');
           `}
         </Script>
         <script
