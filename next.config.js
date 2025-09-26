@@ -29,21 +29,6 @@ const nextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/toolzenweb.com/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'toolzenweb.com',
-          },
-        ],
-        destination: 'https://www.toolzenweb.com/:path*',
-        permanent: true,
-      },
-    ];
-  },
   async rewrites() {
     return [
       {

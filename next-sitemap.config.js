@@ -5,4 +5,13 @@ module.exports = {
   outDir: './out',
   trailingSlash: true,
   exclude: ['/products*'],
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/products'],
+      },
+    ],
+  },
 };
