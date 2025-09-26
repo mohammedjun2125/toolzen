@@ -99,7 +99,7 @@ export default function BlogPostPage({ params }: Props) {
         "name": "Toolzen",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://www.toolzenweb.com/favicon.svg"
+            "url": "https://www.toolzenweb.com/logo.svg"
         }
     },
     "datePublished": post.date,
