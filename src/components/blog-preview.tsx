@@ -27,7 +27,6 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
                         className="object-cover"
                         data-ai-hint={post.imageHint}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        priority={index === 0}
                     />
                 </div>
               )}
