@@ -17,7 +17,7 @@ module.exports = {
   outDir: './out',
   trailingSlash: true, // For consistency
   
-  // Exclude the template paths, we will generate them with transform
+  // Exclude the template paths, we will generate them with additionalPaths
   exclude: [
       '/products', 
       '/products*',
@@ -26,9 +26,8 @@ module.exports = {
       '/blog/*'
   ],
 
-  // Custom transform to generate dynamic URLs
+  // Custom transform is not needed for dynamic paths, but we keep a basic one for static pages.
   transform: async (config, path) => {
-    // This function will not be used for dynamic paths, see `additionalPaths`
     return {
       loc: path,
       changefreq: 'daily',
@@ -74,6 +73,9 @@ module.exports = {
       {
         userAgent: '*',
         allow: '/',
+      },
+       {
+        userAgent: '*',
         disallow: ['/products/'],
       },
     ],

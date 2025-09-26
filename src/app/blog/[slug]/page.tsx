@@ -30,13 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-        canonical: `https://www.toolzenweb.com/blog/${post.slug}`,
+        canonical: `https://www.toolzenweb.com/blog/${post.slug}/`,
     },
     openGraph: {
       title,
       description,
       type: 'article',
-      url: `https://www.toolzenweb.com/blog/${post.slug}`,
+      url: `https://www.toolzenweb.com/blog/${post.slug}/`,
       publishedTime: post.date,
       authors: [post.author],
       images: [
@@ -99,7 +99,7 @@ export default function BlogPostPage({ params }: Props) {
         "name": "Toolzen",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://www.toolzenweb.com/logo.svg"
+            "url": "https://www.toolzenweb.com/logo.png"
         }
     },
     "datePublished": post.date,

@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       alternates: {
-          canonical: `https://www.toolzenweb.com/category/${category.id}`,
+          canonical: `https://www.toolzenweb.com/category/${category.id}/`,
       },
       openGraph: {
         title,
         description,
         type: 'website',
-        url: `https://www.toolzenweb.com/category/${category.id}`,
+        url: `https://www.toolzenweb.com/category/${category.id}/`,
       },
     };
 }

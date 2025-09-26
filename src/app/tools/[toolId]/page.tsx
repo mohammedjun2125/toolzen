@@ -135,12 +135,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: toolTitle,
     description: toolDescription,
     alternates: {
-      canonical: `https://www.toolzenweb.com/tools/${params.toolId}`,
+      canonical: `https://www.toolzenweb.com/tools/${params.toolId}/`,
     },
     openGraph: {
         title: toolTitle,
         description: toolDescription,
-        url: `/tools/${params.toolId}`,
+        url: `/tools/${params.toolId}/`,
         type: 'website',
     },
     twitter: {
