@@ -16,35 +16,35 @@ module.exports = {
   siteUrl: 'https://www.toolzenweb.com',
   generateRobotsTxt: true,
   outDir: './out',
-  exclude: ['/products/*'], // Exclude all product pages
+  exclude: ['/products/*'], // Exclude any static pages that might exist
   
   // This function now generates the full, absolute URLs for all dynamic pages
   additionalPaths: async (config) => {
     const { tools, categories } = await getToolsAndCategories();
     const posts = await getBlogPosts();
-    const { siteUrl } = config;
     
     const toolPaths = tools.map(tool => ({
-      loc: `${siteUrl}/tools/${tool.id}`, // Prepend siteUrl here
+      loc: `/tools/${tool.id}`,
       changefreq: 'weekly',
       priority: 0.9,
       lastmod: new Date().toISOString(),
     }));
 
     const categoryPaths = categories.map(category => ({
-      loc: `${siteUrl}/category/${category.id}`, // Prepend siteUrl here
+      loc: `/category/${category.id}`,
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date().toISOString(),
     }));
     
     const blogPaths = posts.map(post => ({
-      loc: `${siteUrl}/blog/${post.slug}`, // Prepend siteUrl here
+      loc: `/blog/${post.slug}`,
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(post.date).toISOString(),
     }));
 
+    // This ensures only the correct paths are returned
     return [...toolPaths, ...categoryPaths, ...blogPaths];
   },
 
