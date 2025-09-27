@@ -1,3 +1,4 @@
+
 /** @type {import('next-sitemap').IConfig} */
 
 // Dynamically import from ESM modules
@@ -15,25 +16,16 @@ module.exports = {
   siteUrl: 'https://www.toolzenweb.com',
   generateRobotsTxt: true,
   outDir: './out',
-  trailingSlash: true, // For consistency
   
-  // Exclude the template paths, we will generate them with additionalPaths
-  exclude: [
-      '/products', 
-      '/products*',
-      '/tools/*', 
-      '/category/*', 
-      '/blog/*'
-  ],
-
-  // Custom transform is not needed for dynamic paths, but we keep a basic one for static pages.
+  // Custom transform to ensure URLs are correctly formed
   transform: async (config, path) => {
     return {
       loc: path,
-      changefreq: 'daily',
-      priority: 0.7,
-      lastmod: new Date().toISOString(),
-    };
+      changefreq: config.changefreq,
+      priority: config.priority,
+      lastmod: config.lastmod,
+      alternateRefs: config.alternateRefs ?? [],
+    }
   },
 
   // Function to generate all dynamic paths
@@ -42,28 +34,25 @@ module.exports = {
     const posts = await getBlogPosts();
     
     const toolPaths = tools.map(tool => ({
-      loc: `/tools/${tool.id}/`,
+      loc: `/tools/${tool.id}`,
       changefreq: 'weekly',
       priority: 0.9,
       lastmod: new Date().toISOString(),
     }));
 
     const categoryPaths = categories.map(category => ({
-      loc: `/category/${category.id}/`,
+      loc: `/category/${category.id}`,
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date().toISOString(),
     }));
     
     const blogPaths = posts.map(post => ({
-      loc: `/blog/${post.slug}/`,
+      loc: `/blog/${post.slug}`,
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(post.date).toISOString(),
     }));
-
-    // Manually add static pages if they are not picked up, but they should be.
-    // e.g. { loc: '/about/', changefreq: 'monthly', priority: 0.5, lastmod: new Date().toISOString() }
 
     return [...toolPaths, ...categoryPaths, ...blogPaths];
   },
