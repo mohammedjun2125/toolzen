@@ -17,38 +17,28 @@ module.exports = {
   generateRobotsTxt: true,
   outDir: './out',
   
-  // Custom transform to ensure URLs are correctly formed
-  transform: async (config, path) => {
-    return {
-      loc: path,
-      changefreq: config.changefreq,
-      priority: config.priority,
-      lastmod: config.lastmod,
-      alternateRefs: config.alternateRefs ?? [],
-    }
-  },
-
-  // Function to generate all dynamic paths
+  // This function now generates the full, absolute URLs for all dynamic pages
   additionalPaths: async (config) => {
     const { tools, categories } = await getToolsAndCategories();
     const posts = await getBlogPosts();
+    const { siteUrl } = config;
     
     const toolPaths = tools.map(tool => ({
-      loc: `/tools/${tool.id}`,
+      loc: `${siteUrl}/tools/${tool.id}`, // Prepend siteUrl here
       changefreq: 'weekly',
       priority: 0.9,
       lastmod: new Date().toISOString(),
     }));
 
     const categoryPaths = categories.map(category => ({
-      loc: `/category/${category.id}`,
+      loc: `${siteUrl}/category/${category.id}`, // Prepend siteUrl here
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date().toISOString(),
     }));
     
     const blogPaths = posts.map(post => ({
-      loc: `/blog/${post.slug}`,
+      loc: `${siteUrl}/blog/${post.slug}`, // Prepend siteUrl here
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date(post.date).toISOString(),
