@@ -6,31 +6,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, X, Loader2, Download, File as FileIcon, Type, Square, Image as ImageIcon, MousePointer } from 'lucide-react';
-import { PDFDocument, rgb, StandardFonts, PDFPage } from 'pdf-lib';
+import { Upload, X, Loader2, Download, Type, Square, MousePointer } from 'lucide-react';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 import { Label } from '../ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import Draggable from 'react-draggable';
 
 type Annotation = {
   id: number;
   type: 'text';
+  page: number;
   x: number;
   y: number;
   text: string;
-  font: keyof typeof StandardFonts;
   size: number;
   color: string;
-} | {
-    id: number;
-    type: 'rect';
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    color: string;
 };
 
 let annotationId = 0;
@@ -42,7 +33,8 @@ export default function PdfEditor() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
     
-    const [pagePreviews, setPagePreviews] = useState<string[]>([]);
+    const [numPages, setNumPages] = useState(0);
+    const [fileUrl, setFileUrl] = useState<string | null>(null);
     const [activePage, setActivePage] = useState(0);
     const [annotations, setAnnotations] = useState<Annotation[]>([]);
     
@@ -50,39 +42,17 @@ export default function PdfEditor() {
 
     const renderPdf = useCallback(async (file: File) => {
         setIsProcessing(true);
-        setProgress(0);
-        setPagePreviews([]);
-
+        setProgress(10);
         try {
             const arrayBuffer = await file.arrayBuffer();
             const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-            const numPages = pdfDoc.getPageCount();
+            setNumPages(pdfDoc.getPageCount());
+            setProgress(50);
             
-            const previews: string[] = [];
-            for (let i = 0; i < numPages; i++) {
-                const page = pdfDoc.getPage(i);
-                const viewport = page.getViewport({ scale: 1.0 });
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
+            const url = URL.createObjectURL(file);
+            setFileUrl(url);
 
-                const renderContext = {
-                    canvasContext: context!,
-                    viewport: viewport
-                };
-                // This part requires pdfjs-dist, which is a heavy dependency.
-                // For a simpler approach, we'll create blank page previews and draw on them.
-                // This is a placeholder for a more complex rendering. For now, let's keep it simple.
-                 previews.push(''); // Placeholder for actual page render
-                
-                setProgress(Math.round(((i + 1) / numPages) * 100));
-            }
-            // For now, let's just use the file URL directly for rendering in an iframe.
-            const fileUrl = URL.createObjectURL(file);
-            setPagePreviews(Array(numPages).fill(fileUrl));
-
-
+            setProgress(100);
         } catch (error) {
             console.error(error);
             toast({ variant: 'destructive', title: "Error loading PDF", description: "The file might be corrupted or password-protected." });
@@ -115,14 +85,15 @@ export default function PdfEditor() {
             const newText: Annotation = {
                 id: annotationId++,
                 type: 'text',
+                page: activePage,
                 x,
                 y,
                 text: 'New Text',
-                font: 'Helvetica',
                 size: 12,
                 color: '#000000',
             };
             setAnnotations(prev => [...prev, newText]);
+            setTool('select');
         }
     };
     
@@ -140,7 +111,8 @@ export default function PdfEditor() {
             const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
             for(const annotation of annotations) {
-                 const page = pages[activePage];
+                 if (annotation.page >= pages.length) continue;
+                 const page = pages[annotation.page];
                  const { height } = page.getSize();
                 
                  if (annotation.type === 'text') {
@@ -172,10 +144,15 @@ export default function PdfEditor() {
 
     const resetState = () => {
         setFile(null);
-        setPagePreviews([]);
+        setFileUrl(null);
+        setNumPages(0);
         setAnnotations([]);
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
+
+    const updateAnnotation = (id: number, updates: Partial<Annotation>) => {
+        setAnnotations(prev => prev.map(anno => anno.id === id ? {...anno, ...updates} : anno));
+    }
 
 
     return (
@@ -209,10 +186,10 @@ export default function PdfEditor() {
                             </Button>
                         </div>
                         
-                        <div className="flex gap-2 p-2 rounded-lg bg-muted border">
-                             <Button variant={tool === 'select' ? 'secondary' : 'ghost'} size="icon" onClick={() => setTool('select')}><MousePointer/></Button>
-                             <Button variant={tool === 'text' ? 'secondary' : 'ghost'} size="icon" onClick={() => setTool('text')}><Type/></Button>
-                             <Button variant={tool === 'rect' ? 'secondary' : 'ghost'} size="icon" onClick={() => setTool('rect')}><Square/></Button>
+                        <div className="flex flex-wrap gap-2 p-2 rounded-lg bg-muted border">
+                             <Button variant={tool === 'select' ? 'secondary' : 'ghost'} size="sm" onClick={() => setTool('select')}><MousePointer className="w-4 h-4 mr-2"/>Select</Button>
+                             <Button variant={tool === 'text' ? 'secondary' : 'ghost'} size="sm" onClick={() => setTool('text')}><Type className="w-4 h-4 mr-2"/>Add Text</Button>
+                             <Button variant={tool === 'rect' ? 'secondary' : 'ghost'} size="sm" onClick={() => setTool('rect')} disabled><Square className="w-4 h-4 mr-2"/>Add Shape</Button>
                              <div className="flex-grow" />
                              <Button onClick={handleDownload} disabled={isProcessing}>
                                 <Download className="mr-2 h-4 w-4"/> Download PDF
@@ -226,46 +203,48 @@ export default function PdfEditor() {
                                 <Progress value={progress} className="w-1/2 mt-4" />
                              </div>
                         ): (
-                            <div className="flex gap-4">
-                                <div className="w-1/4 space-y-2">
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <div className="w-full md:w-1/4 space-y-2">
                                      <Label>Pages</Label>
                                      <div className="space-y-2 max-h-96 overflow-y-auto">
-                                        {pagePreviews.map((_, index) => (
+                                        {Array.from({ length: numPages }).map((_, index) => (
                                             <div 
                                                 key={index}
                                                 onClick={() => setActivePage(index)}
-                                                className={`border-2 rounded-md p-1 cursor-pointer ${activePage === index ? 'border-primary' : 'border-border'}`}
+                                                className={`border-2 rounded-md p-1 cursor-pointer ${activePage === index ? 'border-primary' : 'border-transparent'}`}
                                             >
-                                               <iframe src={`${pagePreviews[index]}#page=${index+1}&toolbar=0&navpanes=0`} className="w-full aspect-[3/4] border-none pointer-events-none" title={`Page ${index + 1}`} />
+                                               <iframe src={`${fileUrl}#page=${index+1}&toolbar=0&navpanes=0`} className="w-full aspect-[3/4] border-none pointer-events-none" title={`Page ${index + 1}`} />
+                                               <p className="text-center text-xs text-muted-foreground">Page {index + 1}</p>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="w-3/4 relative bg-muted rounded-lg" onClick={handleCanvasClick}>
-                                    <iframe src={`${pagePreviews[activePage]}#page=${activePage + 1}&toolbar=0`} className="w-full h-full border-none" title={`Active Page ${activePage + 1}`} />
+                                <div className="w-full md:w-3/4 relative bg-muted rounded-lg aspect-[3/4] overflow-hidden" onClick={handleCanvasClick}>
+                                    <iframe src={`${fileUrl}#page=${activePage + 1}&toolbar=0`} className="w-full h-full border-none" title={`Active Page ${activePage + 1}`} />
                                     <div className="absolute inset-0">
-                                         {annotations.map(anno => {
+                                         {annotations.filter(a => a.page === activePage).map(anno => {
                                              if (anno.type === 'text') {
                                                  return (
-                                                     <Draggable key={anno.id} defaultPosition={{x: anno.x, y: anno.y}} disabled={tool !== 'select'}>
-                                                        <input 
-                                                            type="text"
-                                                            defaultValue={anno.text}
-                                                            onChange={(e) => {
-                                                                const newText = e.target.value;
-                                                                setAnnotations(prev => prev.map(a => a.id === anno.id ? {...a, text: newText} : a));
-                                                            }}
-                                                            style={{
-                                                                position: 'absolute',
-                                                                background: 'transparent',
-                                                                border: '1px dashed #999',
-                                                                fontSize: anno.size,
-                                                                color: anno.color,
-                                                                fontFamily: anno.font,
-                                                                cursor: tool === 'select' ? 'move' : 'default',
-                                                            }}
-                                                            className="p-0"
-                                                        />
+                                                     <Draggable key={anno.id} handle=".drag-handle" defaultPosition={{x: anno.x, y: anno.y}} disabled={tool !== 'select'} onStop={(e, data) => updateAnnotation(anno.id, { x: data.x, y: data.y })}>
+                                                        <div style={{position: 'absolute', border: tool === 'select' ? '1px dashed #999' : 'none'}}>
+                                                            <div className={`drag-handle ${tool === 'select' ? 'cursor-move' : ''} p-1`}>
+                                                                <input 
+                                                                    type="text"
+                                                                    defaultValue={anno.text}
+                                                                    onBlur={(e) => updateAnnotation(anno.id, { text: e.target.value })}
+                                                                    style={{
+                                                                        background: 'transparent',
+                                                                        fontSize: anno.size,
+                                                                        color: anno.color,
+                                                                        width: 'auto',
+                                                                        border: 'none',
+                                                                        outline: 'none',
+                                                                        pointerEvents: tool === 'select' ? 'none' : 'auto',
+                                                                    }}
+                                                                    className="p-0"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                      </Draggable>
                                                  )
                                              }
@@ -282,4 +261,3 @@ export default function PdfEditor() {
         </Card>
     );
 }
-
