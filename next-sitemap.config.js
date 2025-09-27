@@ -16,9 +16,8 @@ module.exports = {
   siteUrl: 'https://www.toolzenweb.com',
   generateRobotsTxt: true,
   outDir: './out',
-  exclude: ['/products/*'], // Exclude any static pages that might exist
+  exclude: ['/products/*'], // This will exclude any pages under /products/
   
-  // This function now generates the full, absolute URLs for all dynamic pages
   additionalPaths: async (config) => {
     const { tools, categories } = await getToolsAndCategories();
     const posts = await getBlogPosts();
@@ -44,7 +43,6 @@ module.exports = {
       lastmod: new Date(post.date).toISOString(),
     }));
 
-    // This ensures only the correct paths are returned
     return [...toolPaths, ...categoryPaths, ...blogPaths];
   },
 
