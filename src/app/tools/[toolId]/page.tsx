@@ -117,6 +117,10 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'Is this a free CSS animation generator online?', answer: 'Yes, this tool is completely free. You can create keyframe animations for websites and copy the code without any limits.' },
         { question: 'Does this tool require any coding knowledge?', answer: 'No, our CSS animation tool is fully visual. You can adjust settings with sliders and dropdowns and see the animation change in real-time, making it perfect for beginners.' }
     ],
+    'pdf-editor': [
+      { question: 'Can I edit the existing text in my PDF?', answer: 'Directly editing existing PDF text is very complex and not supported. However, you can use this tool to add new text boxes, and draw white-out boxes to cover and replace old text.' },
+      { question: 'Is this PDF editor free and private?', answer: 'Yes. This tool is 100% free and client-side. All annotations and changes are made in your browser, and your PDF is never uploaded to a server, ensuring your privacy.' },
+    ],
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
