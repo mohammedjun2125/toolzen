@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://toolzen.com
+Host: https://toolzenweb.com
 
 # Sitemaps
-Sitemap: https://toolzen.com/sitemap.xml
+Sitemap: https://toolzenweb.com/sitemap.xml
