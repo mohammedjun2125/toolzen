@@ -16,6 +16,7 @@ module.exports = {
   siteUrl: 'https://www.toolzenweb.com',
   generateRobotsTxt: true,
   outDir: './out',
+  exclude: ['/products/*'], // Exclude all product pages
   
   // This function now generates the full, absolute URLs for all dynamic pages
   additionalPaths: async (config) => {
@@ -52,10 +53,6 @@ module.exports = {
       {
         userAgent: '*',
         allow: '/',
-      },
-       {
-        userAgent: '*',
-        disallow: ['/products/'],
       },
     ],
     additionalSitemaps: [
