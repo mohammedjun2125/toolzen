@@ -51,7 +51,6 @@ export const tools: Tool[] = [
   
 
   // PDF Tools (Ordered by popularity)
-  { id: 'pdf-editor', name: 'PDF Editor', description: 'Annotate, add text, and draw on your PDF files.', href: '/tools/pdf-editor', icon: 'square-pen', category: categoryMap.get('pdf')! },
   { id: 'pdf-maker', name: 'PDF Maker', description: 'Convert images (JPG, PNG) into a single PDF document.', href: '/tools/pdf-maker', icon: 'file-text', category: categoryMap.get('pdf')! },
   { id: 'pdf-merger', name: 'Merge PDF', description: 'Combine multiple PDF documents into one single file.', href: '/tools/pdf-merger', icon: 'merge', category: categoryMap.get('pdf')! },
   { id: 'pdf-splitter', name: 'Split PDF', description: 'Extract specific pages from a PDF into a new document.', href: '/tools/pdf-splitter', icon: 'split', category: categoryMap.get('pdf')! },
