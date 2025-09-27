@@ -40,11 +40,10 @@ export default function Home() {
             <div className="container mx-auto px-4 md:px-6 text-center">
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">
-                  Your Ultimate Digital Toolkit
+                  Free Online PDF, Image & Text Tools – Fast & Secure with Toolzen
               </h1>
               <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
-                  A suite of free, fast, and privacy-focused online tools to boost your productivity.
-                  No data is ever sent to our servers.
+                  Free PDF Tools Online – Convert, Merge, Compress & Edit PDF Files
               </p>
               <Button asChild size="lg">
                 <Link href="#tools">Explore All Tools</Link>
