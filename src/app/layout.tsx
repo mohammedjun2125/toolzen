@@ -13,11 +13,11 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.toolzenweb.com'),
   title: {
-    default: 'Toolzen - Free, Fast & Private Online Tools for Everyone',
+    default: 'Toolzen - Free Online PDF, Image & Text Tools | Fast & Secure',
     template: '%s | Toolzen',
   },
-  description: 'Discover Toolzen, your ultimate suite of free, fast, and privacy-focused online tools. Compress images, create PDFs, generate passwords, convert units, and more—all within your browser. No uploads, no sign-ups.',
-  keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools'],
+  description: 'Toolzen offers free online PDF tools merge, compress, convert, text utilities, calculators, CSS generators, SEO tools, and web utilities. Fast, secure.',
+  keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools', 'pdf tools', 'text tools', 'seo tools'],
   authors: [{ name: 'Toolzen', url: 'https://www.toolzenweb.com' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
