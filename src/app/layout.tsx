@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: 'Toolzen - Free Online PDF, Image & Text Tools | Fast & Secure',
     template: '%s | Toolzen',
   },
-  description: 'Discover Toolzen, your ultimate suite of free online tools. Merge and compress PDFs, convert images, use calculators, format text, and access dozens of other fast, secure, and private utilities right in your browser.',
+  description: 'Toolzen offers free online PDF tools merge, compress, convert, text utilities, calculators, CSS generators, SEO tools, and web utilities.',
   keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools', 'pdf tools', 'text tools', 'seo tools'],
   authors: [{ name: 'Toolzen', url: 'https://www.toolzenweb.com' }],
   creator: 'Toolzen',
