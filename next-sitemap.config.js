@@ -9,7 +9,7 @@ module.exports = {
   outDir: './out',
   
   // Exclude all paths by default and generate them manually
-  exclude: ['*'], 
+  exclude: ['/products*'], 
 
   // Manually generate all paths to ensure correctness
   transform: async (config, path) => {
