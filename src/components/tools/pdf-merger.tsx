@@ -73,7 +73,7 @@ export default function PdfMerger() {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const arrayBuffer = await file.arrayBuffer();
-                const pdf = await PDFDocument.load(arrayBuffer);
+                const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
                 const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
                 copiedPages.forEach(page => mergedPdf.addPage(page));
                 setProgress(Math.round(((i + 1) / files.length) * 100));
@@ -88,7 +88,7 @@ export default function PdfMerger() {
             toast({
                 variant: 'destructive',
                 title: 'Merge Failed',
-                description: 'An error occurred while merging the PDFs. Please ensure they are valid files.'
+                description: 'An error occurred while merging the PDFs. Please ensure they are valid, unencrypted files.'
             });
         } finally {
             setIsMerging(false);
@@ -164,8 +164,8 @@ export default function PdfMerger() {
             <h3>Key Features of Our PDF Combiner</h3>
             <ul>
                 <li><strong>Unlimited Merges:</strong> Combine as many PDF files as you need, with no limit on the number of documents.</li>
-                <li><strong>Total Privacy:</strong> Your files are never uploaded to a server. This **online PDF tool** ensures your confidential documents remain secure on your device.</li>
-                <li><strong>Blazing-Fast Speed:</strong> Since there are no uploads, the merging process is incredibly fast. **Combine PDF files free** and in seconds.</li>
+                <li><strong className="flex items-center gap-2"><ShieldCheck size={20} />Total Privacy:</strong> Your files are never uploaded to a server. This **online PDF tool** ensures your confidential documents remain secure on your device.</li>
+                <li><strong className="flex items-center gap-2"><Zap size={20} />Blazing-Fast Speed:</strong> Since there are no uploads, the merging process is incredibly fast. **Combine PDF files free** and in seconds.</li>
                 <li><strong>No Software or Signup:</strong> This is a completely browser-based utility. No installation or registration is needed to use this **free PDF merger**.</li>
             </ul>
 
@@ -184,21 +184,13 @@ export default function PdfMerger() {
                 <li>**Personal:** Join bank statements, receipts, or legal documents into one organized PDF.</li>
             </ul>
 
-            <h2>Frequently Asked Questions (FAQs)</h2>
-            <h3>How to combine PDF files for free?</h3>
-            <p>Our online tool allows you to **combine PDF files for free** without any limitations. Simply upload your files, arrange them, and click the merge button to get your combined document instantly.</p>
-            <h3>Is it safe to merge PDFs online?</h3>
-            <p>With Toolzen, yes. Our **PDF combiner tool** is 100% secure because it works on the client-side. Your files are not uploaded to any server, guaranteeing the privacy of your information. This makes it safer than most other online PDF editors.</p>
-            <h3>Can I merge a large number of PDF files?</h3>
-            <p>Yes, you can merge as many PDFs as you need. Our **free PDF utility** is designed to handle multiple documents efficiently, making it easy to **join PDFs** regardless of quantity.</p>
-
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">More Free PDF Tools</h3>
                 <p>After merging, you might need to make other changes. Check out our other tools:</p>
                 <ul className="list-disc list-inside">
                     <li><Link href="/tools/pdf-splitter" className="text-primary hover:underline">Split PDF</Link> - Need to extract pages from your newly merged file? Use our splitter.</li>
                     <li><Link href="/tools/add-watermark" className="text-primary hover:underline">Add Watermark to PDF</Link> - Protect your document by adding a text watermark.</li>
-                    <li><Link href="/tools/image-compressor" className="text-primary hover:underline">Compress PDF</Link> - (Coming Soon!) Reduce the file size of your merged PDF.</li>
+                    <li><Link href="/tools/pdf-compressor" className="text-primary hover:underline">Compress PDF</Link> - Reduce the file size of your merged PDF.</li>
                 </ul>
             </div>
         </article>
