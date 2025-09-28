@@ -76,7 +76,7 @@ export default function IpLookup() {
                         </Button>
                     </div>
                     
-                    {isLoading && <Loader2 className="mx-auto h-8 w-8 animate-spin" />}
+                    {isLoading && <div className="flex justify-center py-4"><Loader2 className="h-8 w-8 animate-spin text-muted-foreground" /></div>}
 
                     {result && !result.error && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -100,8 +100,8 @@ export default function IpLookup() {
                 <ul>
                     <li><strong>Content Personalization:</strong> Websites can use **IP geolocation** to serve content in the local language or currency.</li>
                     <li><strong>Digital Rights Management:</strong> Streaming services use IP lookups to ensure content is only shown in licensed regions.</li>
-                    <li>**Security Analysis:</strong> Network administrators use an **IP locator** to trace the origin of suspicious traffic or potential cyber threats.</li>
-                    <li>**Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience.</li>
+                    <li><strong>Security Analysis:</strong> Network administrators use an **IP locator** to trace the origin of suspicious traffic or potential cyber threats.</li>
+                    <li><strong>Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience.</li>
                 </ul>
 
                 <h2 className="text-2xl font-bold">How Accurate is IP Geolocation?</h2>
