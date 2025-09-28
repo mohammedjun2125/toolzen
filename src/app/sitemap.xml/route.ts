@@ -5,38 +5,60 @@ import { mockPosts } from '@/lib/blog';
 const URL = 'https://www.toolzenweb.com';
 
 function generateSitemap() {
-  const staticPaths = [
-    '/',
-    '/about',
-    '/blog',
-    '/contact',
-    '/disclaimer',
-    '/privacy',
-    '/terms',
+  const lastModified = new Date().toISOString();
+
+  // Core static pages
+  const staticPages = [
+    { url: '/', priority: 1.0 },
+    { url: '/about', priority: 0.8 },
+    { url: '/blog', priority: 0.8 },
+    { url: '/contact', priority: 0.8 },
+    { url: '/disclaimer', priority: 0.8 },
+    { url: '/privacy', priority: 0.8 },
+    { url: '/terms', priority: 0.8 },
   ];
 
-  const toolPaths = tools.map(tool => tool.href);
-  const categoryPaths = categories.map(category => `/category/${category.id}`);
-  const blogPostPaths = mockPosts.map(post => `/blog/${post.slug}`);
+  const sitemapEntries = staticPages.map(page => `
+    <url>
+        <loc>${`${URL}${page.url}`}</loc>
+        <lastmod>${lastModified}</lastmod>
+        <priority>${page.priority.toFixed(2)}</priority>
+    </url>
+  `).join('');
 
-  const allPaths = [...staticPaths, ...toolPaths, ...categoryPaths, ...blogPostPaths];
-  const uniquePaths = [...new Set(allPaths)];
-  const lastModified = new Date().toISOString();
+  // Tool pages
+  const toolEntries = tools.map(tool => `
+    <url>
+        <loc>${`${URL}${tool.href}`}</loc>
+        <lastmod>${lastModified}</lastmod>
+        <priority>0.80</priority>
+    </url>
+  `).join('');
+
+  // Category pages
+  const categoryEntries = categories.map(category => `
+    <url>
+        <loc>${`${URL}/category/${category.id}`}</loc>
+        <lastmod>${lastModified}</lastmod>
+        <priority>0.64</priority>
+    </url>
+  `).join('');
+  
+  // Blog post pages
+  const blogEntries = mockPosts.map(post => `
+    <url>
+        <loc>${`${URL}/blog/${post.slug}`}</loc>
+        <lastmod>${lastModified}</lastmod>
+        <priority>0.64</priority>
+    </url>
+  `).join('');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     ${uniquePaths
-       .map((path) => {
-         return `
-           <url>
-               <loc>${`${URL}${path}`}</loc>
-               <lastmod>${lastModified}</lastmod>
-               <changefreq>daily</changefreq>
-               <priority>0.7</priority>
-           </url>
-         `;
-       })
-       .join('')}
+     ${sitemapEntries}
+     ${toolEntries}
+     ${categoryEntries}
+     ${blogEntries}
    </urlset>
   `;
 }
