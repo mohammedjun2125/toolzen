@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 
@@ -120,6 +121,7 @@ export default function RootLayout({
           <Toaster />
           <CookieConsent />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
