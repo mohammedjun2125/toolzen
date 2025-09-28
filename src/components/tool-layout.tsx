@@ -7,13 +7,14 @@ import { ArrowLeft, Grip } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { mockPosts } from '@/lib/blog';
+import type { ToolCategoryInfo } from '@/lib/tools';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
     title: string;
     description: string;
     faq: { question: string; answer: string }[];
-    categoryId: string;
+    categoryId: ToolCategoryInfo['id'];
 };
 
 export function ToolLayout({ children, title, description, faq, categoryId }: ToolLayoutProps) {

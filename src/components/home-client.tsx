@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { ToolSearch } from './tool-search';
+import { Skeleton } from './ui/skeleton';
+import dynamic from 'next/dynamic';
 
 export const iconMap: { [key: string]: LucideIcon } = {
     'image': ImageIcon,
@@ -89,11 +91,16 @@ function ToolCategoryNav() {
   )
 }
 
+const DynamicToolSearch = dynamic(() => import('./tool-search').then(mod => mod.ToolSearch), {
+    ssr: false,
+    loading: () => <Skeleton className="h-14 max-w-2xl mx-auto mb-16" />,
+});
+
 export function HomeClient() {
     return (
         <>
         <ToolCategoryNav />
-        <ToolSearch />
+        <DynamicToolSearch />
         <section className="w-full pb-20 md:pb-32 lg:pb-40 container mx-auto px-4 md:px-6">
             {categories.map((category) => {
               const categoryTools = tools.filter(tool => tool.category.id === category.id);
