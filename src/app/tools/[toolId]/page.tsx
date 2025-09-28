@@ -1,5 +1,4 @@
 
-
 import { tools, toolMap } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -212,10 +211,10 @@ export default function ToolPage({ params }: Props) {
       }))
   } : null;
 
-  const combinedSchema = {
-    ...softwareSchema,
-    ...(faqSchema ? { mainEntity: faqSchema.mainEntity } : {})
-  };
+  const combinedSchema = faqSchema 
+    ? { ...softwareSchema, mainEntity: faqSchema.mainEntity }
+    : softwareSchema;
+
 
   return (
     <>
