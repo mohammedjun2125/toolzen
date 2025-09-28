@@ -1,9 +1,5 @@
-# *
+
 User-agent: *
 Allow: /
 
-# Host
-Host: https://toolzenweb.com
-
-# Sitemaps
-Sitemap: https://toolzenweb.com/sitemap.xml
+Sitemap: https://www.toolzenweb.com/sitemap.xml
