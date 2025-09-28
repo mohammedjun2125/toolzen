@@ -103,7 +103,9 @@ export default function BlogPostPage({ params }: Props) {
         }
     },
     "datePublished": post.date,
-    "description": post.excerpt
+    "description": post.excerpt,
+    "creator": "Toolzen Team",
+    ...(faqSchema ? { mainEntity: faqSchema.mainEntity } : {})
   };
 
 
@@ -113,12 +115,6 @@ export default function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema)}}
     />
-    {faqSchema && (
-         <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema)}}
-        />
-    )}
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12">

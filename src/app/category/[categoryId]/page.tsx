@@ -50,13 +50,41 @@ export default function CategoryPage({ params }: Props) {
 
     const categoryTools = tools.filter(tool => tool.category.id === category.id);
     
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: `${category.name} | Toolzen`,
+        description: category.description_short,
+        url: `https://www.toolzenweb.com/category/${category.id}/`,
+        mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: categoryTools.map((tool, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@type': 'SoftwareApplication',
+                    name: tool.name,
+                    url: `https://www.toolzenweb.com${tool.href}`,
+                    applicationCategory: 'Utility',
+                    operatingSystem: 'Web',
+                },
+            })),
+        },
+    };
+    
     return (
-      <div className="flex flex-col min-h-screen">
-        <SiteHeader />
-        <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
-            <CategoryPageClient category={category} tools={categoryTools} />
-        </main>
-        <SiteFooter />
-      </div>
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <div className="flex flex-col min-h-screen">
+            <SiteHeader />
+            <main className="flex-1 container mx-auto px-4 md:px-6 py-12">
+                <CategoryPageClient category={category} tools={categoryTools} />
+            </main>
+            <SiteFooter />
+        </div>
+      </>
     );
 }

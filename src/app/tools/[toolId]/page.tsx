@@ -135,12 +135,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: toolTitle,
     description: toolDescription,
     alternates: {
-      canonical: `https://www.toolzenweb.com/tools/${params.toolId}/`,
+      canonical: `https://www.toolzenweb.com${tool.href}`,
     },
     openGraph: {
         title: toolTitle,
         description: toolDescription,
-        url: `/tools/${params.toolId}/`,
+        url: `https://www.toolzenweb.com${tool.href}`,
         type: 'website',
     },
     twitter: {
@@ -179,13 +179,14 @@ export default function ToolPage({ params }: Props) {
 
   const faq = toolFaqs[toolId] || [];
 
-  const jsonLd = {
+  const softwareSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: tool.name,
     applicationCategory: 'Utilities',
     operatingSystem: 'Any (Web browser)',
     description: tool.description,
+    url: `https://www.toolzenweb.com${tool.href}`,
     offers: {
         '@type': 'Offer',
         price: '0',
@@ -198,25 +199,29 @@ export default function ToolPage({ params }: Props) {
     }
   };
   
-  if (faq.length > 0) {
-      (jsonLd as any)['mainEntity'] = {
-          '@type': 'FAQPage',
-          'mainEntity': faq.map(item => ({
-              '@type': 'Question',
-              'name': item.question,
-              'acceptedAnswer': {
-                  '@type': 'Answer',
-                  'text': item.answer
-              }
-          }))
-      }
-  }
+  const faqSchema = faq.length > 0 ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map(item => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+              '@type': 'Answer',
+              text: item.answer
+          }
+      }))
+  } : null;
+
+  const combinedSchema = {
+    ...softwareSchema,
+    ...(faqSchema ? { mainEntity: faqSchema.mainEntity } : {})
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
       />
       <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
         <DynamicTool toolId={toolId} />
