@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -6,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Copy, Trash2, Check, X } from 'lucide-react';
+import Link from 'next/link';
 
 export default function JsonFormatter() {
   const [jsonInput, setJsonInput] = useState('');
@@ -49,10 +51,11 @@ export default function JsonFormatter() {
   }
 
   return (
+    <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">JSON Formatter & Validator</CardTitle>
-        <CardDescription>Paste your JSON data to format and validate it.</CardDescription>
+        <CardDescription>Paste your JSON data to format and validate it. This **JSON beautifier** and **JSON validator** works securely in your browser.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="relative">
@@ -80,5 +83,29 @@ export default function JsonFormatter() {
         </div>
       </CardContent>
     </Card>
+    <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+        <h2 className="text-2xl font-bold">What is a JSON Formatter?</h2>
+        <p>A **JSON Formatter** (also known as a **JSON Beautifier**) is a tool that takes messy, unformatted JSON data and transforms it into a clean, indented, human-readable format. For developers working with APIs, configuration files, or any form of structured data, a good formatter is an essential utility. It makes debugging easier and understanding complex data structures much faster.</p>
+        
+        <h3>Why This Tool is Also a JSON Validator</h3>
+        <p>When you click "Format JSON," our tool doesn't just add spaces and line breaks. It first tries to parse the JSON string according to the official JSON specification. If the parsing fails, it means your JSON is invalid. The tool will immediately alert you to the error, making it an effective **JSON validator**. Common errors include:</p>
+        <ul>
+            <li>Missing commas between key-value pairs.</li>
+            <li>Trailing commas after the last element in an array or object.</li>
+            <li>Using single quotes instead of double quotes for keys and string values.</li>
+        </ul>
+
+        <h2 className="text-2xl font-bold">How to Use the JSON Formatter and Validator</h2>
+        <ol>
+            <li><strong>Paste Your JSON:</strong> Copy your JSON data and paste it into the text area.</li>
+            <li><strong>Click Format:</strong> Press the "Format JSON" button.</li>
+            <li><strong>Review the Output:</strong> If your JSON is valid, it will be instantly beautified. If it's invalid, you will receive an error message pointing you to the problem.</li>
+            <li><strong>Copy or Clear:</strong> Once formatted, you can easily copy the clean JSON to your clipboard.</li>
+        </ol>
+        
+        <h3>Secure and Private by Design</h3>
+        <p>Many online JSON formatters require you to paste your data, which is then sent to a server for processing. This can be a security risk if your JSON contains sensitive information like API keys or personal data. Our tool is 100% client-side. All formatting and validation happen directly in your browser. Your data is never uploaded, guaranteeing its privacy.</p>
+    </article>
+    </>
   );
 }
