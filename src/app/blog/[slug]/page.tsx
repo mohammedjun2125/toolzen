@@ -113,6 +113,7 @@ export default function BlogPostPage({ params }: Props) {
     <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema)}}
+        suppressHydrationWarning
     />
     <div className="flex flex-col min-h-screen">
       <SiteHeader />

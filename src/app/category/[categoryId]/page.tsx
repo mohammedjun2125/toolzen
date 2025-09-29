@@ -89,6 +89,7 @@ export default function CategoryPage({ params }: Props) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          suppressHydrationWarning
         />
         <div className="flex flex-col min-h-screen">
             <SiteHeader />
