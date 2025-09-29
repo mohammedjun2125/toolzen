@@ -127,7 +127,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const toolTitle = `${tool.name} | Toolzen`;
+  const toolTitle = `${tool.name} | Free Online Tool | Toolzen`;
   const toolDescription = `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
 
   return {
@@ -228,3 +228,5 @@ export default function ToolPage({ params }: Props) {
     </>
   );
 }
+
+    

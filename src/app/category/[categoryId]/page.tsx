@@ -17,8 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       return { title: 'Category Not Found' };
     }
     
-    const title = `${category.name} | Toolzen`;
-    const description = category.description_short;
+    // Create a keyword-rich title and description
+    const relatedTools = tools.filter(tool => tool.category.id === category.id).slice(0, 3).map(t => t.name).join(', ');
+    const title = `${category.name} - Free Online ${category.id.replace('-', ' ')} Utilities | Toolzen`;
+    const description = `${category.description_short} Includes: ${relatedTools}, and more. All tools are fast, private, and work in your browser.`;
   
     return {
       title,
@@ -88,3 +90,5 @@ export default function CategoryPage({ params }: Props) {
       </>
     );
 }
+
+    

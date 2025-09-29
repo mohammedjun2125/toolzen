@@ -51,7 +51,7 @@ export default function DnsLookup() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Free Online DNS Lookup Tool</CardTitle>
+                <CardTitle className="text-2xl">Free Online DNS Lookup Tool - Check DNS Records</CardTitle>
                 <CardDescription>Perform a **DNS lookup** for any domain. Check **DNS records** like A, AAAA, CNAME, MX, and NS records with our **free DNS checker tool**.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -95,26 +95,29 @@ export default function DnsLookup() {
         </Card>
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
             <h2 className="text-2xl font-bold">What is a DNS Lookup?</h2>
-            <p>A DNS (Domain Name System) lookup is the process of querying the DNS to find the IP address associated with a domain name. Think of it as the internet's phonebook. When you type a website like "www.google.com" into your browser, your computer performs a **DNS lookup** to find its corresponding IP address (e.g., 172.217.14.228) so it knows where to send the request. Our **free DNS checker tool** lets you perform this lookup manually for any domain.</p>
+            <p>A DNS (Domain Name System) lookup is the process of querying the internet's "phonebook" to find the IP address associated with a domain name. When you type a website like "www.google.com" into your browser, your computer performs a **DNS lookup** to find its corresponding IP address (e.g., 172.217.14.228) so it knows where to send the request. Our **free DNS checker tool** lets you perform this lookup manually for any domain and check all its important records.</p>
             
             <h3>Understanding Different DNS Records</h3>
-            <p>Our tool can check various types of DNS records, each serving a different purpose:</p>
+            <p>Our tool can check various types of DNS records, each serving a different purpose for domain health and configuration:</p>
             <ul>
-                <li><strong>A Record:</strong> The most basic record. It maps a domain name to an IPv4 address.</li>
-                <li><strong>AAAA Record:</strong> Maps a domain name to an IPv6 address.</li>
-                <li><strong>CNAME Record:</strong> (Canonical Name) Forwards one domain to another. For example, `www.example.com` might be a CNAME for `example.com`.</li>
-                <li><strong>MX Record:</strong> (Mail Exchanger) Directs email to a mail server. This record is crucial for email deliverability.</li>
-                <li><strong>NS Record:</strong> (Name Server) Specifies which DNS servers are authoritative for the domain.</li>
-                <li><strong>TXT Record:</strong> Allows administrators to insert arbitrary text. Often used for email security (SPF, DKIM) and domain ownership verification.</li>
+                <li><strong>A Record:</strong> The most basic DNS record. It maps a domain name to an IPv4 address. This is essential for website accessibility.</li>
+                <li><strong>AAAA Record:</strong> Similar to an A record, but it maps a domain to a more modern IPv6 address.</li>
+                <li><strong>CNAME Record:</strong> A Canonical Name record forwards one domain to another. For example, `www.example.com` is often a CNAME pointing to `example.com`.</li>
+                <li><strong>MX Record:</strong> A Mail Exchanger record directs a domain's email to the servers that host its email accounts. This record is crucial for email deliverability.</li>
+                <li><strong>NS Record:</strong> A Name Server record indicates which DNS servers are authoritative for the domain, meaning they hold the actual DNS records.</li>
+                <li><strong>TXT Record:</strong> Allows domain administrators to store text notes. Commonly used for email security verification (SPF, DKIM, DMARC) and domain ownership verification.</li>
+                <li><strong>SOA Record:</strong> The Start of Authority record contains important administrative information about the domain, like the primary name server and an email address for the domain administrator.</li>
             </ul>
 
             <h2 className="text-2xl font-bold">Why Use a DNS Lookup Tool?</h2>
             <ul>
-                <li>**Troubleshooting:** If a website is down, a **DNS lookup** can help you determine if the problem is with its DNS configuration.</li>
-                <li>**SEO & Webmaster Tasks:** SEO professionals use DNS checkers to verify domain configurations, check for proper redirections, and analyze competitor setups.</li>
-                <li>**Email Configuration:** When setting up a new email service, you need to verify that your MX and TXT records are pointing correctly.</li>
+                <li>**Technical SEO:** SEO professionals use a **DNS checker** to diagnose technical issues, verify domain configurations, check for proper redirections, and analyze competitor setups.</li>
+                <li>**Troubleshooting:** If a website or email service is down, a **DNS lookup** can help you quickly determine if the problem is with its DNS configuration.</li>
+                <li>**Email Configuration:** When setting up a new email service (like Google Workspace or Microsoft 365), you must verify that your MX and TXT records are pointing correctly to ensure you can send and receive emails.</li>
             </ul>
         </article>
         </>
     );
 }
+
+    

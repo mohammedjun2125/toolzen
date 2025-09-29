@@ -59,13 +59,13 @@ export default function IpLookup() {
         <>
             <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Free IP Address Lookup Tool</CardTitle>
-                    <CardDescription>Use this **IP address finder** to get geolocation details for any IP. Find the city, region, country, and ISP for any IPv4 or IPv6 address with our **IP locator**.</CardDescription>
+                    <CardTitle className="text-2xl">Free IP Address Lookup Tool – What Is My IP?</CardTitle>
+                    <CardDescription>Use this free **IP lookup tool** to find the geolocation of any IP address. Find the city, region, country, and ISP for any IPv4 or IPv6 address with our instant **IP finder**.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="flex gap-2">
                         <Input
-                            placeholder="Enter IP Address"
+                            placeholder="Enter IP Address (e.g., 8.8.8.8)"
                             value={ipAddress}
                             onChange={(e) => setIpAddress(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleLookup()}
@@ -84,28 +84,27 @@ export default function IpLookup() {
                             <InfoItem label="City" value={result.city} />
                             <InfoItem label="Region" value={result.region} />
                             <InfoItem label="Country" value={`${result.country_name} (${result.country_code})`} />
-                            <InfoItem label="ISP" value={result.org} />
+                            <InfoItem label="ISP / Organization" value={result.org} />
                             <InfoItem label="Timezone" value={result.timezone} />
-                            <InfoItem label="Latitude" value={result.latitude} />
-                            <InfoItem label="Longitude" value={result.longitude} />
+                            <InfoItem label="Latitude / Longitude" value={`${result.latitude}, ${result.longitude}`} />
                         </div>
                     )}
                 </CardContent>
             </Card>
             <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
                 <h2 className="text-2xl font-bold">What is an IP Address?</h2>
-                <p>An IP (Internet Protocol) address is a unique numerical label assigned to every device connected to a computer network that uses the Internet Protocol for communication. It serves two main functions: identifying the host or network interface and providing the location of the host in the network. Our **IP address finder** tool lets you instantly get location details for any IP.</p>
+                <p>An IP (Internet Protocol) address is a unique numerical label assigned to every device connected to a computer network that uses the Internet Protocol for communication. It serves two main functions: identifying the host or network interface and providing the location of the host in the network. Our **IP address finder** tool lets you instantly get **IP geolocation** details for any public IP address.</p>
                 
                 <h3>Why Use an IP Lookup Tool?</h3>
                 <ul>
-                    <li><strong>Content Personalization:</strong> Websites can use **IP geolocation** to serve content in the local language or currency.</li>
-                    <li><strong>Digital Rights Management:</strong> Streaming services use IP lookups to ensure content is only shown in licensed regions.</li>
-                    <li><strong>Security Analysis:</strong> Network administrators use an **IP locator** to trace the origin of suspicious traffic or potential cyber threats.</li>
-                    <li><strong>Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience.</li>
+                    <li><strong>Content Personalization:</strong> Websites use **IP geolocation** to serve content in the local language or currency, providing a better user experience.</li>
+                    <li><strong>Digital Rights Management:</strong> Streaming services use IP lookups to ensure content is only shown in licensed regions, a common practice in media distribution.</li>
+                    <li><strong>Security Analysis:</strong> Network administrators use an **IP locator** to trace the origin of suspicious traffic, analyze firewall logs, and identify potential cyber threats.</li>
+                    <li><strong>Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience and tailor campaigns.</li>
                 </ul>
 
                 <h2 className="text-2xl font-bold">How Accurate is IP Geolocation?</h2>
-                <p>IP-based geolocation is a science of approximation. It is generally accurate at the country level but becomes less precise at the city level. The accuracy depends on the quality of the geolocation database being used. An **IP address lookup tool** can usually identify the country correctly over 99% of the time, but city-level accuracy may vary.</p>
+                <p>IP-based geolocation is a science of approximation. It is generally very accurate at the country level but becomes less precise at the city level. The accuracy depends on the quality of the geolocation database being used. An **IP address lookup tool** can usually identify the country correctly over 99% of the time, but city-level accuracy may vary. It should not be used for precise location tracking.</p>
             </article>
         </>
     );
@@ -116,7 +115,9 @@ function InfoItem({ label, value }: { label: string, value: string | number }) {
     return (
         <div className="p-3 bg-muted/50 rounded-lg">
             <p className="text-xs text-muted-foreground">{label}</p>
-            <p className="font-semibold">{value}</p>
+            <p className="font-semibold break-words">{value}</p>
         </div>
     )
 }
+
+    
