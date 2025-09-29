@@ -15,7 +15,6 @@ import { Button } from './ui/button';
 import { ToolSearch } from './tool-search';
 import { Skeleton } from './ui/skeleton';
 import dynamic from 'next/dynamic';
-import { AdBanner } from './ad-banner';
 
 export const iconMap: { [key: string]: LucideIcon } = {
     'image': ImageIcon,
@@ -145,8 +144,8 @@ export function HomeClient() {
                   </div>
                   
                   {/* Ad Placeholder */}
-                  <div className="my-12 h-24 flex items-center justify-center rounded-lg">
-                      <AdBanner />
+                  <div className="my-12 h-24 flex items-center justify-center bg-muted/20 rounded-lg">
+                      <span className="text-muted-foreground text-sm">Ad Placeholder</span>
                   </div>
 
                 </div>

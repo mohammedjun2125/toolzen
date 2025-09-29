@@ -9,7 +9,6 @@ import type { LucideIcon } from 'lucide-react';
 import { iconMap } from '@/components/home-client';
 import type { Tool, ToolCategoryInfo } from '@/lib/tools';
 import { seoKeywords } from '@/lib/seo-keywords';
-import { AdBanner } from './ad-banner';
 
 type CategoryPageClientProps = {
     category: ToolCategoryInfo;
@@ -61,8 +60,8 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
                 })}
             </div>
             {/* Ad Placeholder */}
-             <div className="my-12 h-24 flex items-center justify-center rounded-lg">
-                <AdBanner />
+             <div className="my-12 h-24 flex items-center justify-center bg-muted/20 rounded-lg">
+                <span className="text-muted-foreground text-sm">Ad Placeholder</span>
             </div>
         </>
     );
