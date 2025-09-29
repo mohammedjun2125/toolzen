@@ -13,6 +13,7 @@ import { Progress } from '@/components/ui/progress';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function PdfCompressor() {
     const [file, setFile] = useState<File | null>(null);
@@ -24,6 +25,8 @@ export default function PdfCompressor() {
     const [targetUnit, setTargetUnit] = useState<'KB' | 'MB'>('KB');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['pdf-compressor'];
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0];
@@ -142,8 +145,8 @@ export default function PdfCompressor() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Compress PDF Files Online Free</CardTitle>
-                <CardDescription>Securely **reduce PDF file size** without losing quality. This **free PDF compressor** works in your browser to keep your files private.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Securely **{toolKeywords.meta_keywords.join(', ')}** without losing quality. This **free PDF compressor** works in your browser to keep your files private.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -256,10 +259,11 @@ export default function PdfCompressor() {
 
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Explore More Free PDF Tools</h3>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine your compressed file with other documents.</li>
-                    <li><Link href="/tools/pdf-splitter" className="text-primary hover:underline">Split PDF</Link> - Extract pages after compressing.</li>
-                </ul>
+                <p>After compressing your file, you may need other tools:</p>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-splitter">Split PDF</Link></Button>
+                </div>
             </div>
         </article>
         </>

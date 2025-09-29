@@ -11,6 +11,7 @@ import { PDFDocument, degrees } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function PdfRotator() {
     const [file, setFile] = useState<File | null>(null);
@@ -20,6 +21,8 @@ export default function PdfRotator() {
     const [progress, setProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['pdf-rotator'];
 
     const renderPdf = useCallback(async (file: File) => {
         setIsProcessing(true);
@@ -119,8 +122,8 @@ export default function PdfRotator() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Rotate PDF Pages Online - Free & Secure</CardTitle>
-                <CardDescription>Easily **rotate PDF pages** clockwise or counterclockwise. Fix the orientation of your PDF documents securely in your browser.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Easily **{toolKeywords.meta_keywords.join(', ')}** clockwise or counterclockwise. Fix the orientation of your PDF documents securely in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -149,7 +152,7 @@ export default function PdfRotator() {
                         {isProcessing && progress < 100 ? (
                              <Progress value={progress} className="w-full" />
                         ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 {pagePreviews.map((previewUrl, index) => (
                                     <div key={index} className="relative group border rounded-lg p-2 flex flex-col items-center gap-2 bg-muted/20">
                                         <iframe src={`${previewUrl}#toolbar=0&navpanes=0`} className="w-full aspect-[3/4] border-none" title={`Page ${index + 1}`} />
@@ -222,11 +225,11 @@ export default function PdfRotator() {
 
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Other Free PDF Editing Tools</h3>
-                <p>Once your pages are rotated, you might need to perform other edits. Try our other **online PDF tools**:</p>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine this rotated PDF with other documents.</li>
-                    <li><Link href="/tools/pdf-deleter" className="text-primary hover:underline">Delete PDF Pages</Link> - Remove any unwanted pages after rotating.</li>
-                </ul>
+                <p>Once your pages are rotated, you may need to perform other edits. Try our other **online PDF tools**:</p>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-deleter">Delete PDF Pages</Link></Button>
+                </div>
             </div>
         </article>
         </>

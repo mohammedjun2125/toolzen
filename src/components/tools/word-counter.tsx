@@ -38,7 +38,7 @@ export default function WordCounter() {
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
-        <CardDescription>Get instant statistics for your text. This **free word count tool** also calculates characters, sentences, and paragraphs in real-time, all securely in your browser.</CardDescription>
+        <CardDescription>Get instant statistics for your text. This **{toolKeywords.meta_keywords.join(', ')}** calculates characters, sentences, and paragraphs in real-time, all securely in your browser.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <Textarea

@@ -201,10 +201,10 @@ export default function AddWatermark() {
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Enhance Your PDF Further</h3>
                 <p>After adding a watermark, explore our other **free PDF utilities**:</p>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline" prefetch={false}>Merge PDF</Link> - Combine your watermarked file with other documents.</li>
-                    <li><Link href="/tools/pdf-deleter" className="text-primary hover:underline" prefetch={false}>Delete PDF Pages</Link> - Remove any pages you no longer need.</li>
-                </ul>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-deleter">Delete PDF Pages</Link></Button>
+                </div>
             </div>
         </article>
         </>

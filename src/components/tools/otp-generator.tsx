@@ -10,6 +10,7 @@ import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { Copy } from 'lucide-react';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 // Basic client-side implementation of TOTP. For production, use a dedicated library.
 function generateTOTP(secret: string): string {
@@ -35,6 +36,8 @@ export default function OtpGenerator() {
     const [otp, setOtp] = useState('------');
     const [timeLeft, setTimeLeft] = useState(30);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['otp-generator'];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -67,8 +70,8 @@ export default function OtpGenerator() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Free Online OTP Generator</CardTitle>
-                <CardDescription>Generate Time-based One-Time Passwords (TOTP) for secure codes, right in your browser. This is a **random one-time password generator tool**.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Generate Time-based One-Time Passwords (TOTP) for secure codes, right in your browser. This is a **{toolKeywords.meta_keywords.join(', ')}**.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="space-y-2">
@@ -114,10 +117,10 @@ export default function OtpGenerator() {
             
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Other Security Tools</h3>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/password-generator" className="text-primary hover:underline">Password Generator</Link></li>
-                    <li><Link href="/tools/hash-generator" className="text-primary hover:underline">Hash Generator</Link></li>
-                </ul>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/password-generator">Password Generator</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/hash-generator">Hash Generator</Link></Button>
+                </div>
             </div>
         </article>
         </>

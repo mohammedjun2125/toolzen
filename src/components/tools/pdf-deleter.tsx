@@ -11,6 +11,7 @@ import { PDFDocument } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function PdfDeleter() {
     const [file, setFile] = useState<File | null>(null);
@@ -20,6 +21,8 @@ export default function PdfDeleter() {
     const [progress, setProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['pdf-deleter'];
 
     const renderPdf = useCallback(async (file: File) => {
         setIsProcessing(true);
@@ -121,8 +124,8 @@ export default function PdfDeleter() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Delete PDF Pages Online for Free</CardTitle>
-                <CardDescription>Securely **remove pages from PDF free** with our easy-to-use online tool. Your files are processed in your browser for 100% privacy.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Securely **{toolKeywords.meta_keywords.join(', ')}** with our easy-to-use online tool. Your files are processed in your browser for 100% privacy.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -151,7 +154,7 @@ export default function PdfDeleter() {
                         {isProcessing && progress < 100 ? (
                              <Progress value={progress} className="w-full" />
                         ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 {pagePreviews.map((previewUrl, index) => (
                                     <div 
                                         key={index}
@@ -225,10 +228,10 @@ export default function PdfDeleter() {
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Other Powerful PDF Utilities</h3>
                 <p>After deleting pages, you may need to further edit your document:</p>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine the edited PDF with other files.</li>
-                    <li><Link href="/tools/pdf-splitter" className="text-primary hover:underline">Split PDF</Link> - If you need to break the PDF into more pieces.</li>
-                </ul>
+                 <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-splitter">Split PDF</Link></Button>
+                </div>
             </div>
         </article>
         </>

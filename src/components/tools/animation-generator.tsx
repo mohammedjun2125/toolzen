@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Copy, Play } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 const animations = {
   'fade-in': { name: 'Fade In', keyframes: '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }' },
@@ -30,6 +31,8 @@ export default function AnimationGenerator() {
     const [easing, setEasing] = useState('ease');
     const [key, setKey] = useState(0);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['animation-generator'];
 
     const selectedAnimation = animations[animationName as keyof typeof animations];
 
@@ -67,8 +70,8 @@ ${selectedAnimation.keyframes}
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Free CSS Animation Generator Online</CardTitle>
-                <CardDescription>Visually **create keyframe animations for websites**. This **free CSS animation generator online** helps you design and copy the code instantly.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Visually **{toolKeywords.meta_keywords.join(', ')}**. This **free CSS animation generator online** helps you design and copy the code instantly.</CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="flex items-center justify-center p-8 bg-muted rounded-lg h-64">
@@ -143,10 +146,10 @@ ${selectedAnimation.keyframes}
 
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Explore More CSS Tools</h3>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/gradient-generator" className="text-primary hover:underline">CSS Gradient Generator</Link></li>
-                    <li><Link href="/tools/box-shadow-generator" className="text-primary hover:underline">CSS Box Shadow Generator</Link></li>
-                </ul>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/gradient-generator">CSS Gradient Generator</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/box-shadow-generator">CSS Box Shadow Generator</Link></Button>
+                </div>
             </div>
         </article>
         </>

@@ -11,6 +11,7 @@ import { PDFDocument } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function PdfSplitter() {
     const [file, setFile] = useState<File | null>(null);
@@ -20,6 +21,8 @@ export default function PdfSplitter() {
     const [progress, setProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['pdf-splitter'];
 
     const renderPdf = useCallback(async (file: File) => {
         setIsProcessing(true);
@@ -121,8 +124,8 @@ export default function PdfSplitter() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Split PDF Online - Free PDF Splitter Tool</CardTitle>
-                <CardDescription>Securely **extract pages from PDF** into a new document. Our **PDF splitter tool free** works in your browser, keeping your files private.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Securely **{toolKeywords.meta_keywords.join(', ')}** into a new document. Our **PDF splitter tool free** works in your browser, keeping your files private.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (
@@ -151,7 +154,7 @@ export default function PdfSplitter() {
                         {isProcessing && progress < 100 ? (
                              <Progress value={progress} className="w-full" />
                         ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 {pagePreviews.map((previewUrl, index) => (
                                     <div 
                                         key={index}
@@ -225,11 +228,11 @@ export default function PdfSplitter() {
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Complete Your PDF Workflow</h3>
                 <p>After splitting your file, you may need other tools:</p>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-merger" className="text-primary hover:underline">Merge PDF</Link> - Combine your new file with other documents.</li>
-                    <li><Link href="/tools/add-watermark" className="text-primary hover:underline">Add Watermark to PDF</Link> - Add a watermark to your extracted pages.</li>
-                    <li><Link href="/tools/pdf-deleter" className="text-primary hover:underline">Delete PDF Pages</Link> - Further refine your document by removing pages.</li>
-                </ul>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/add-watermark">Add Watermark to PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-deleter">Delete PDF Pages</Link></Button>
+                </div>
             </div>
         </article>
         </>
