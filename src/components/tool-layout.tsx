@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { mockPosts } from '@/lib/blog';
 import type { ToolCategoryInfo } from '@/lib/tools';
+import { AdBanner } from './ad-banner';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -50,7 +51,7 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
 
                 {/* Ad Placeholder */}
                 <div className="my-8 h-24 flex items-center justify-center rounded-lg">
-                    {/* Future ad content goes here */}
+                    <AdBanner />
                 </div>
 
                 {relatedArticles.length > 0 && (
