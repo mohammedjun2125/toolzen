@@ -237,7 +237,6 @@ export default function ToolPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
-        suppressHydrationWarning
       />
       <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
         <DynamicTool toolId={toolId} />
