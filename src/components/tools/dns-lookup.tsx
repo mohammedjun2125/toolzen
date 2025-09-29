@@ -58,22 +58,22 @@ export default function DnsLookup() {
                 <CardDescription>Perform a **{toolKeywords.meta_keywords[0]}** for any domain. Check **{toolKeywords.meta_keywords.slice(1).join(', ')}** and more with our **free DNS checker tool**.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-                <div className="flex flex-col md:flex-row gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                     <Input
                         placeholder="e.g., google.com"
                         value={domain}
                         onChange={(e) => setDomain(e.target.value)}
-                        className="flex-grow"
+                        className="flex-grow text-base"
                     />
                     <Select value={type} onValueChange={setType}>
-                        <SelectTrigger className="w-full md:w-[120px]">
+                        <SelectTrigger className="w-full sm:w-[120px]">
                             <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                             {recordTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
                         </SelectContent>
                     </Select>
-                    <Button onClick={handleLookup} disabled={isLoading} className="w-full md:w-auto">
+                    <Button onClick={handleLookup} disabled={isLoading} className="w-full sm:w-auto">
                         {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Search className="mr-2 h-4 w-4" />}
                         Lookup
                     </Button>

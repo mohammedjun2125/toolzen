@@ -1,10 +1,11 @@
+
 'use client';
 
 import Link from 'next/link';
-import { Menu, ChevronDown, Puzzle } from 'lucide-react';
+import { Menu, ChevronDown, Puzzle, X } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { categories } from '@/lib/tools';
 import { iconMap } from './home-client';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
 export function SiteHeader() {
   const mainNavLinks = [
@@ -70,20 +72,40 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
              <nav className="flex flex-col gap-4 pt-8">
-               <SheetTrigger asChild>
-                <Link href="/" className="flex items-center justify-center gap-2 mb-4" prefetch={false}>
-                   <Puzzle className="h-6 w-6 text-primary" />
-                  <span className="text-xl font-bold text-foreground">Toolzen</span>
-                </Link>
-               </SheetTrigger>
+                <SheetClose asChild>
+                  <Link href="/" className="flex items-center justify-center gap-2 mb-4" prefetch={false}>
+                    <Puzzle className="h-6 w-6 text-primary" />
+                    <span className="text-xl font-bold text-foreground">Toolzen</span>
+                  </Link>
+                </SheetClose>
 
-              {mainNavLinks.map(link => (
-                <SheetTrigger asChild key={link.href}>
-                  <Button variant="ghost" asChild>
-                    <Link href={link.href}>{link.text}</Link>
-                  </Button>
-                </SheetTrigger>
-              ))}
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="tools">
+                    <AccordionTrigger className="font-semibold text-lg py-2">Tools</AccordionTrigger>
+                    <AccordionContent>
+                      <div className="flex flex-col gap-1 pl-2">
+                        {categories.map(category => {
+                           const CategoryIcon = iconMap[category.icon];
+                           return (
+                              <SheetClose asChild key={category.id}>
+                               <Link href={`/category/${category.id}`} className="flex items-center gap-3 p-2 rounded-md hover:bg-muted">
+                                  {CategoryIcon && <CategoryIcon className="h-5 w-5 text-primary" />}
+                                  <span className="font-medium">{category.name}</span>
+                              </Link>
+                             </SheetClose>
+                           )
+                        })}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+
+                {mainNavLinks.map(link => (
+                  <SheetClose asChild key={link.href}>
+                    <Link href={link.href} className="font-semibold text-lg py-2 px-4 rounded-md hover:bg-muted">{link.text}</Link>
+                  </SheetClose>
+                ))}
+                
                <div className="mt-4 flex justify-center">
                  <ThemeToggle />
                </div>

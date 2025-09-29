@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -63,7 +64,7 @@ export default function PasswordGenerator() {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="relative">
-          <Input type="text" value={password} readOnly placeholder="Your password will appear here" className="pr-20 text-lg" />
+          <Input type="text" value={password} readOnly placeholder="Your password will appear here" className="pr-20 text-base md:text-lg h-12" />
           <Button variant="ghost" size="icon" className="absolute right-10 top-1/2 -translate-y-1/2" onClick={generatePassword}><RefreshCw className="h-5 w-5" /></Button>
           <Button variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2" onClick={copyToClipboard}><Copy className="h-5 w-5" /></Button>
         </div>
@@ -73,25 +74,25 @@ export default function PasswordGenerator() {
             <Label>Length: {length}</Label>
             <Slider value={[length]} onValueChange={(v) => setLength(v[0])} min={6} max={64} step={1} />
           </div>
-          <div className="flex items-center justify-between">
-            <Label htmlFor="include-uppercase">Include Uppercase (A-Z)</Label>
+          <div className="flex items-center justify-between py-2">
+            <Label htmlFor="include-uppercase" className="text-base">Include Uppercase (A-Z)</Label>
             <Switch id="include-uppercase" checked={includeUppercase} onCheckedChange={setIncludeUppercase} />
           </div>
-          <div className="flex items-center justify-between">
-            <Label htmlFor="include-lowercase">Include Lowercase (a-z)</Label>
+          <div className="flex items-center justify-between py-2">
+            <Label htmlFor="include-lowercase" className="text-base">Include Lowercase (a-z)</Label>
             <Switch id="include-lowercase" checked={includeLowercase} onCheckedChange={setIncludeLowercase} />
           </div>
-          <div className="flex items-center justify-between">
-            <Label htmlFor="include-numbers">Include Numbers (0-9)</Label>
+          <div className="flex items-center justify-between py-2">
+            <Label htmlFor="include-numbers" className="text-base">Include Numbers (0-9)</Label>
             <Switch id="include-numbers" checked={includeNumbers} onCheckedChange={setIncludeNumbers} />
           </div>
-          <div className="flex items-center justify-between">
-            <Label htmlFor="include-symbols">Include Symbols (!@#...)</Label>
+          <div className="flex items-center justify-between py-2">
+            <Label htmlFor="include-symbols" className="text-base">Include Symbols (!@#...)</Label>
             <Switch id="include-symbols" checked={includeSymbols} onCheckedChange={setIncludeSymbols} />
           </div>
         </div>
 
-        <Button onClick={generatePassword} className="w-full">
+        <Button onClick={generatePassword} className="w-full text-lg py-6">
           <RefreshCw className="mr-2 h-4 w-4" />
           Generate New Password
         </Button>

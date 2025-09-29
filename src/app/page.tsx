@@ -49,7 +49,7 @@ export default function Home() {
               <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
                   {`A comprehensive suite of ${homeKeywords.meta_keywords.slice(0, 4).join(', ')} and more. All tools are fast, free, secure, and work on the client-side.`}
               </p>
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="px-8 py-6 text-lg md:px-10 md:py-7">
                 <Link href="#tools">{exploreKeywords.title_keywords[0]}</Link>
               </Button>
               

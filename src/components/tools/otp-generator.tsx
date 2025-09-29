@@ -81,9 +81,9 @@ export default function OtpGenerator() {
                     />
                 </div>
 
-                <div className="text-center p-8 bg-muted rounded-lg space-y-4">
+                <div className="text-center p-6 md:p-8 bg-muted rounded-lg space-y-4">
                     <p 
-                        className="text-5xl font-mono tracking-widest cursor-pointer"
+                        className="text-4xl md:text-5xl font-mono tracking-widest cursor-pointer"
                         onClick={handleCopy}
                         title="Click to copy"
                     >
@@ -93,7 +93,7 @@ export default function OtpGenerator() {
                     <p className="text-sm text-muted-foreground">New code in {timeLeft} seconds</p>
                 </div>
 
-                <Button onClick={handleCopy} disabled={!secret} className="w-full">
+                <Button onClick={handleCopy} disabled={!secret} className="w-full text-lg py-6">
                     <Copy className="mr-2 h-4 w-4" /> Copy Code
                 </Button>
             </CardContent>
