@@ -6,10 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function UrlEncoderDecoder() {
   const [input, setInput] = useState('https://www.toolzenweb.com/search?q=free tools');
   const [output, setOutput] = useState('');
+  const toolKeywords = (seoKeywords.tools as any)['url-encoder-decoder'];
 
   const handleEncode = () => {
     try {
@@ -31,8 +33,8 @@ export default function UrlEncoderDecoder() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">Free URL Encoder & Decoder</CardTitle>
-        <CardDescription>Safely **encode** or **decode** text strings for use in URLs. This tool performs **percent-encoding** to ensure your data is web-safe, an essential utility for developers and SEOs.</CardDescription>
+        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' & ')}</CardTitle>
+        <CardDescription>Safely **{toolKeywords.meta_keywords[0]}** or **{toolKeywords.meta_keywords[1]}** for use in URLs. This tool performs **percent-encoding** to ensure your data is web-safe, an essential utility for developers and SEOs.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">
@@ -79,5 +81,3 @@ export default function UrlEncoderDecoder() {
     </>
   );
 }
-
-    

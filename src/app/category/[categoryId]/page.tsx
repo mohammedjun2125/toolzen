@@ -1,30 +1,33 @@
 
-import { categories, categoryMap, tools } from '@/lib/tools';
+import { categories, categoryMap, tools, ToolCategoryInfo } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CategoryPageClient } from '@/components/category-page-client';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 type Props = {
   params: { categoryId: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const category = categoryMap.get(params.categoryId);
+    const category = categoryMap.get(params.categoryId as ToolCategoryInfo['id']);
   
     if (!category) {
       return { title: 'Category Not Found' };
     }
     
-    // Create a keyword-rich title and description
+    const keywords = (seoKeywords.categories as any)[category.id];
     const relatedTools = tools.filter(tool => tool.category.id === category.id).slice(0, 3).map(t => t.name).join(', ');
-    const title = `${category.name} - Free Online ${category.id.replace('-', ' ')} Utilities | Toolzen`;
-    const description = `${category.description_short} Includes: ${relatedTools}, and more. All tools are fast, private, and work in your browser.`;
+
+    const title = `${category.name} - ${keywords.title_keywords.join(', ')} | Toolzen`;
+    const description = `Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. Includes ${relatedTools}, and more. All tools are fast, private, and work in your browser.`;
   
     return {
       title,
       description,
+      keywords: keywords.meta_keywords.concat(keywords.high_cpc),
       alternates: {
           canonical: `https://www.toolzenweb.com/category/${category.id}`,
       },
@@ -44,19 +47,20 @@ export function generateStaticParams() {
 }
 
 export default function CategoryPage({ params }: Props) {
-    const category = categoryMap.get(params.categoryId);
+    const category = categoryMap.get(params.categoryId as ToolCategoryInfo['id']);
     
     if (!category) {
         notFound();
     }
 
     const categoryTools = tools.filter(tool => tool.category.id === category.id);
+    const keywords = (seoKeywords.categories as any)[category.id];
     
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: `${category.name} | Toolzen`,
-        description: category.description_short,
+        name: `${category.name} - ${keywords.title_keywords.join(' ')} | Toolzen`,
+        description: `Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. All tools are fast, private, and work in your browser.`,
         url: `https://www.toolzenweb.com/category/${category.id}`,
         mainEntity: {
             '@type': 'ItemList',
@@ -67,8 +71,14 @@ export default function CategoryPage({ params }: Props) {
                     '@type': 'SoftwareApplication',
                     name: tool.name,
                     url: `https://www.toolzenweb.com${tool.href}`,
-                    applicationCategory: 'Utility',
+                    applicationCategory: category.name,
                     operatingSystem: 'Web',
+                    description: tool.description,
+                    offers: {
+                      '@type': 'Offer',
+                      price: '0',
+                      priceCurrency: 'USD'
+                    }
                 },
             })),
         },
@@ -90,5 +100,3 @@ export default function CategoryPage({ params }: Props) {
       </>
     );
 }
-
-    

@@ -12,6 +12,7 @@ import { saveAs } from 'file-saver';
 import { Label } from '../ui/label';
 import { Slider } from '../ui/slider';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function AddWatermark() {
     const [file, setFile] = useState<File | null>(null);
@@ -23,6 +24,8 @@ export default function AddWatermark() {
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['add-watermark'];
 
     const generatePdfWithWatermark = async () => {
         if (!file) return null;
@@ -97,8 +100,8 @@ export default function AddWatermark() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Add Watermark to PDF Online Free</CardTitle>
-                <CardDescription>Easily **add a text watermark to PDF online** with custom rotation, size, and opacity. This **free PDF utility** is fast, secure, and works in your browser.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Easily **{toolKeywords.meta_keywords.join(', ')}** with custom rotation, size, and opacity. This **free PDF utility** is fast, secure, and works in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {!file ? (

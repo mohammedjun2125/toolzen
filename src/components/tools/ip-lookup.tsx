@@ -9,15 +9,16 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Search, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function IpLookup() {
     const [ipAddress, setIpAddress] = useState('');
     const [result, setResult] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
+    const toolKeywords = (seoKeywords.tools as any)['ip-lookup'];
 
     useEffect(() => {
-        // Fetch user's own IP address on component mount
         const fetchUserIp = async () => {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -59,8 +60,8 @@ export default function IpLookup() {
         <>
             <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Free IP Address Lookup Tool – What Is My IP?</CardTitle>
-                    <CardDescription>Use this free **IP lookup tool** to find the geolocation of any IP address. Find the city, region, country, and ISP for any IPv4 or IPv6 address with our instant **IP finder**.</CardDescription>
+                    <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')} – What Is My IP?</CardTitle>
+                    <CardDescription>Use this free **{toolKeywords.meta_keywords.join(', ')}** to find the geolocation of any IP address. Find the city, region, country, and ISP for any IPv4 or IPv6 address with our instant **IP finder**.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="flex gap-2">
@@ -119,5 +120,3 @@ function InfoItem({ label, value }: { label: string, value: string | number }) {
         </div>
     )
 }
-
-    

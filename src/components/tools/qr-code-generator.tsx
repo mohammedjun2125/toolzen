@@ -8,10 +8,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Download } from 'lucide-react';
 import QRCode from 'qrcode.react';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function QrCodeGenerator() {
   const [text, setText] = useState('https://www.toolzenweb.com');
   const qrRef = useRef<HTMLDivElement>(null);
+
+  const toolKeywords = (seoKeywords.tools as any)['qr-code-generator'];
 
   const handleDownload = () => {
     if (qrRef.current) {
@@ -31,8 +34,8 @@ export default function QrCodeGenerator() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">Free Online QR Code Generator</CardTitle>
-        <CardDescription>Create a custom QR code from any text or URL. Our free QR code maker is fast, private, and generates high-quality PNGs for marketing, business cards, or personal use.</CardDescription>
+        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+        <CardDescription>Create a custom QR code from any text or URL. Our free QR code maker is fast, private, and generates high-quality PNGs for {toolKeywords.meta_keywords.join(', ')}, or personal use.</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
@@ -97,5 +100,3 @@ export default function QrCodeGenerator() {
     </>
   );
 }
-
-    

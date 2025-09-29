@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Search, Loader2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 const recordTypes = ['A', 'AAAA', 'MX', 'TXT', 'CNAME', 'NS', 'SOA'];
 
@@ -19,6 +20,8 @@ export default function DnsLookup() {
     const [result, setResult] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
+
+    const toolKeywords = (seoKeywords.tools as any)['dns-lookup'];
 
     const handleLookup = async () => {
         if (!domain.trim()) {
@@ -51,8 +54,8 @@ export default function DnsLookup() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">Free Online DNS Lookup Tool - Check DNS Records</CardTitle>
-                <CardDescription>Perform a **DNS lookup** for any domain. Check **DNS records** like A, AAAA, CNAME, MX, and NS records with our **free DNS checker tool**.</CardDescription>
+                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardDescription>Perform a **{toolKeywords.meta_keywords[0]}** for any domain. Check **{toolKeywords.meta_keywords.slice(1).join(', ')}** and more with our **free DNS checker tool**.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex flex-col md:flex-row gap-2">
@@ -119,5 +122,3 @@ export default function DnsLookup() {
         </>
     );
 }
-
-    

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { ToolLayout } from '@/components/tool-layout';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 type Props = {
   params: { toolId: string }
@@ -127,12 +128,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const toolTitle = `${tool.name} | Free Online Tool | Toolzen`;
-  const toolDescription = `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
+  const keywords = (seoKeywords.tools as any)[tool.id];
+
+  if (!keywords) {
+    const fallbackTitle = `${tool.name} | Free Online Tool | Toolzen`;
+    const fallbackDescription = `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
+    return {
+      title: fallbackTitle,
+      description: fallbackDescription,
+      alternates: {
+        canonical: `https://www.toolzenweb.com${tool.href}`,
+      },
+    }
+  }
+
+  const toolTitle = `${keywords.title_keywords.join(' - ')} | Toolzen`;
+  const toolDescription = `${tool.description} Use our free online tool for ${keywords.meta_keywords.join(', ')}. Fast, secure, and works in your browser.`;
 
   return {
     title: toolTitle,
     description: toolDescription,
+    keywords: keywords.meta_keywords.concat(keywords.high_cpc),
     alternates: {
       canonical: `https://www.toolzenweb.com${tool.href}`,
     },
@@ -228,5 +244,3 @@ export default function ToolPage({ params }: Props) {
     </>
   );
 }
-
-    

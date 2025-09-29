@@ -9,6 +9,7 @@ import { HomeClient } from '@/components/home-client';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Post } from '@/lib/blog';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 const BlogPreview = dynamic<{ posts: Post[] }>(
   () => import('@/components/blog-preview').then(mod => mod.BlogPreview),
@@ -31,7 +32,9 @@ const BlogPreview = dynamic<{ posts: Post[] }>(
 import { mockPosts } from '@/lib/blog';
 
 export default function Home() {
-  
+  const homeKeywords = seoKeywords.tools.home;
+  const exploreKeywords = (seoKeywords.tools as any)['explore-all-tools'];
+
   return (
     
       <div className="flex flex-col min-h-screen bg-background">
@@ -41,13 +44,13 @@ export default function Home() {
             <div className="container mx-auto px-4 md:px-6 text-center">
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">
-                  Free Online PDF, Image & Text Tools – Fast & Secure with Toolzen
+                  {homeKeywords.title_keywords.join(' - ')}
               </h1>
               <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
-                  Free PDF Tools Online – Convert, Merge, Compress & Edit PDF Files
+                  {`A comprehensive suite of ${homeKeywords.meta_keywords.slice(0, 4).join(', ')} and more. All tools are fast, free, secure, and work on the client-side.`}
               </p>
               <Button asChild size="lg">
-                <Link href="#tools">Explore All Tools</Link>
+                <Link href="#tools">{exploreKeywords.title_keywords[0]}</Link>
               </Button>
               
             </div>

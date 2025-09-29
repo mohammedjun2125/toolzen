@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 function StatCard({ title, value }: { title: string, value: number }) {
     return (
@@ -17,6 +18,7 @@ function StatCard({ title, value }: { title: string, value: number }) {
 
 export default function WordCounter() {
   const [text, setText] = useState('');
+  const toolKeywords = (seoKeywords.tools as any)['word-counter'];
 
   const stats = useMemo(() => {
     const trimmedText = text.trim();
@@ -35,8 +37,8 @@ export default function WordCounter() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">Free Online Word Counter & Text Analysis Tool</CardTitle>
-        <CardDescription>Get instant statistics for your text. This **free word counter tool** also calculates characters, sentences, and paragraphs in real-time, all securely in your browser.</CardDescription>
+        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+        <CardDescription>Get instant statistics for your text. This **free word count tool** also calculates characters, sentences, and paragraphs in real-time, all securely in your browser.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <Textarea
@@ -80,5 +82,3 @@ export default function WordCounter() {
     </>
   );
 }
-
-    

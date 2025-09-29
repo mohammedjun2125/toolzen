@@ -8,23 +8,26 @@ import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+
+const homeKeywords = seoKeywords.tools.home;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.toolzenweb.com'),
   title: {
-    default: 'Toolzen - Free Online PDF, Image & Text Tools | Fast & Secure',
+    default: homeKeywords.title_keywords.join(' - ') + ' | Toolzen',
     template: '%s | Toolzen',
   },
-  description: 'Toolzen offers free online PDF tools merge, compress, convert, text utilities, calculators, CSS generators, SEO tools, and web utilities.',
-  keywords: ['free online tools', 'developer tools', 'image compressor', 'pdf maker', 'password generator', 'unit converter', 'json formatter', 'qr code generator', 'browser-based tools', 'privacy-first tools', 'fast web utilities', 'no-server tools', 'client-side tools', 'pdf tools', 'text tools', 'seo tools'],
+  description: `Toolzen offers a suite of ${homeKeywords.meta_keywords.join(', ')}. All our tools are fast, free, secure, and work on the client-side.`,
+  keywords: homeKeywords.meta_keywords.concat(homeKeywords.high_cpc),
   authors: [{ name: 'Toolzen', url: 'https://www.toolzenweb.com' }],
   creator: 'Toolzen',
   publisher: 'Toolzen',
   openGraph: {
-    title: 'Toolzen - The Ultimate Collection of Free Online Tools',
-    description: 'A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads.',
+    title: homeKeywords.title_keywords.join(' - ') + ' | Toolzen',
+    description: `A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads. Includes ${homeKeywords.meta_keywords.join(', ')}.`,
     siteName: 'Toolzen',
     locale: 'en_US',
     type: 'website',
@@ -32,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Toolzen - Fast, Free, and Private Online Utilities',
-    description: 'Boost your productivity with a suite of browser-based tools. From image compression to password generation, get it all done without ever leaving your browser.',
+    title: 'Toolzen - ' + homeKeywords.title_keywords.join(', '),
+    description: `Boost your productivity with a suite of browser-based tools. From image compression to password generation, get it all done without ever leaving your browser. Explore tools for ${homeKeywords.meta_keywords.join(', ')}.`,
   },
   robots: {
     index: true,

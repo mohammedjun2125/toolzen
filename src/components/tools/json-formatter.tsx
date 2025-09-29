@@ -8,11 +8,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Copy, Trash2, Check, X } from 'lucide-react';
 import Link from 'next/link';
+import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function JsonFormatter() {
   const [jsonInput, setJsonInput] = useState('');
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const { toast } = useToast();
+  const toolKeywords = (seoKeywords.tools as any)['json-formatter'];
 
   const handleFormat = () => {
     if (!jsonInput.trim()) {
@@ -54,8 +56,8 @@ export default function JsonFormatter() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">Online JSON Formatter & Validator</CardTitle>
-        <CardDescription>Paste your JSON data to format, beautify, and validate it. This free online JSON viewer and linter works securely in your browser to make debugging easy.</CardDescription>
+        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' & ')}</CardTitle>
+        <CardDescription>Paste your JSON data to {toolKeywords.meta_keywords.join(', ')}. This free online JSON viewer and linter works securely in your browser to make debugging easy.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="relative">
@@ -110,5 +112,3 @@ export default function JsonFormatter() {
     </>
   );
 }
-
-    
