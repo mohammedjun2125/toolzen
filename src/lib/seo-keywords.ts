@@ -43,6 +43,11 @@ export const seoKeywords = {
       "meta_keywords": ["free tools online", "pdf tools", "image tools", "text utilities", "generators"],
       "high_cpc": ["online productivity tools enterprise", "developer utility tools"]
     },
+    "explore-all-tools": {
+      "title_keywords": ["all free online tools", "toolzen tools list", "online utilities hub"],
+      "meta_keywords": ["free online tools list", "tool hub", "browse tools online"],
+      "high_cpc": ["enterprise tools suite", "productivity tools enterprise"]
+    },
     "image-compressor": {
       "title_keywords": ["compress image online", "image compressor free", "reduce image file size"],
       "meta_keywords": ["compress jpg", "png optimizer", "webp compressor"],
@@ -342,6 +347,141 @@ export const seoKeywords = {
       "title_keywords": ["toolzen disclaimer", "site disclaimer", "toolzen legal disclaimer"],
       "meta_keywords": ["website disclaimer", "use at your own risk", "no liability disclaimer"],
       "high_cpc": ["legal notice service", "site disclaimer consulting"]
+    },
+    "pdf-to-text-ocr": {
+      "title_keywords": ["pdf ocr online", "extract text from scanned pdf", "ocr pdf to text"],
+      "meta_keywords": ["ocr pdf online", "scanned pdf to text", "pdf ocr converter"],
+      "high_cpc": ["ocr processing api", "document digitization service"]
+    },
+    "image-to-pdf": {
+      "title_keywords": ["image to pdf online", "convert image to pdf", "jpg to pdf converter"],
+      "meta_keywords": ["image to pdf", "jpg to pdf online", "png to pdf converter"],
+      "high_cpc": ["image conversion enterprise", "document builder api"]
+    },
+    "pdf-password-remove": {
+      "title_keywords": ["remove pdf password", "unlock pdf online", "decrypt pdf password removal"],
+      "meta_keywords": ["unlock protected pdf", "remove pdf security", "pdf password remover"],
+      "high_cpc": ["document security services", "pdf unlocking enterprise"]
+    },
+    "screenshot-tool": {
+      "title_keywords": ["take screenshot online", "webpage screenshot tool", "capture screen online"],
+      "meta_keywords": ["screenshot generator", "capture page as image", "web capture tool"],
+      "high_cpc": ["screenshot api", "visual testing tools"]
+    },
+    "color-contrast-checker": {
+      "title_keywords": ["color contrast checker", "accessibility contrast tester", "contrast ratio tool"],
+      "meta_keywords": ["contrast checker online", "a11y contrast tool", "wcag contrast checker"],
+      "high_cpc": ["accessibility auditing service", "a11y consultancy"]
+    },
+    "readability-checker": {
+      "title_keywords": ["readability checker online", "flesch score checker", "readability test tool"],
+      "meta_keywords": ["readability score", "flesch kincaid test", "readability analyser"],
+      "high_cpc": ["content optimization tools", "readability api"]
+    },
+    "html-minifier": {
+      "title_keywords": ["html minifier online", "minify html code", "compress html files"],
+      "meta_keywords": ["minify html", "remove whitespace html", "compress html online"],
+      "high_cpc": ["build optimization tools", "site performance services"]
+    },
+    "css-minifier": {
+      "title_keywords": ["css minifier online", "minify css", "compress css files"],
+      "meta_keywords": ["minify css online", "compress style sheets", "css optimizer"],
+      "high_cpc": ["css optimization api", "performance tools"]
+    },
+    "js-minifier": {
+      "title_keywords": ["js minifier online", "minify javascript", "compress js files"],
+      "meta_keywords": ["minify js online", "uglify js", "javascript compressor"],
+      "high_cpc": ["js optimization service", "frontend performance api"]
+    },
+    "svg-optimizer": {
+      "title_keywords": ["svg optimizer online", "optimize svg files", "compress svg"],
+      "meta_keywords": ["svg minifier", "svg cleanup", "optimize svg online"],
+      "high_cpc": ["vector optimization service", "svg processing api"]
+    },
+    "zip-files": {
+      "title_keywords": ["zip files online", "compress files online", "create zip archive"],
+      "meta_keywords": ["zip generator", "compress folder", "download zip online"],
+      "high_cpc": ["file compression api", "bulk file tools"]
+    },
+    "html-to-pdf": {
+      "title_keywords": ["html to pdf converter", "convert webpage to pdf", "save page as pdf online"],
+      "meta_keywords": ["html to pdf online", "webpage to pdf converter", "convert url to pdf"],
+      "high_cpc": ["pdf rendering api", "document generation service"]
+    },
+    "pdf-to-image": {
+      "title_keywords": ["pdf to image converter", "convert pages to jpg png", "pdf export as images"],
+      "meta_keywords": ["pdf to png online", "pdf to jpg converter", "extract images from pdf"],
+      "high_cpc": ["pdf rendering api", "document conversion service"]
+    },
+    "ocr-image": {
+      "title_keywords": ["image ocr online", "extract text from image", "ocr image to text"],
+      "meta_keywords": ["image to text ocr", "ocr extract text", "photo to text converter"],
+      "high_cpc": ["ocr api", "image recognition service"]
+    },
+    "word-to-pdf": {
+      "title_keywords": ["word to pdf converter", "docx to pdf online", "convert word to pdf"],
+      "meta_keywords": ["docx to pdf", "word to pdf converter free", "convert doc to pdf"],
+      "high_cpc": ["document conversion enterprise", "office to pdf api"]
+    },
+    "pdf-to-excel": {
+      "title_keywords": ["pdf to excel converter", "convert pdf table to excel", "pdf to xlsx online"],
+      "meta_keywords": ["pdf table extraction", "pdf to csv convert", "convert pdf to excel"],
+      "high_cpc": ["data extraction service", "pdf table parsing api"]
+    },
+    "excel-to-pdf": {
+      "title_keywords": ["excel to pdf converter", "convert xlsx to pdf", "spreadsheet to pdf"],
+      "meta_keywords": ["xls to pdf", "convert excel to pdf online", "export sheet to pdf"],
+      "high_cpc": ["report generation api", "spreadsheet conversion service"]
+    },
+    "html-cleaner": {
+      "title_keywords": ["html cleaner online", "clean html code", "strip tags from html"],
+      "meta_keywords": ["clean html", "remove tags", "sanitize html online"],
+      "high_cpc": ["html sanitization api", "security content cleaning"]
+    },
+    "contact-form-generator": {
+      "title_keywords": ["contact form generator", "create contact form online", "form builder"],
+      "meta_keywords": ["form maker", "generate contact form", "html form generator"],
+      "high_cpc": ["form backend service", "form handling API"]
+    },
+    "placeholder-image": {
+      "title_keywords": ["placeholder image generator", "dummy image maker", "placeholder png generator"],
+      "meta_keywords": ["placeholder image", "dummy images for dev", "placeholder png"],
+      "high_cpc": ["image placeholder api", "design mockup assets"]
+    },
+    "schema-generator": {
+      "title_keywords": ["schema generator online", "json ld generator", "structured data generator"],
+      "meta_keywords": ["generate schema.org", "json-ld tool", "structured data generator"],
+      "high_cpc": ["seo structured data service", "schema validation api"]
+    },
+    "favicon-generator": {
+      "title_keywords": ["favicon generator", "create favicon online", "favicon maker"],
+      "meta_keywords": ["favicon png", "generate favicon ico", "create favicon from image"],
+      "high_cpc": ["branding asset generator", "favicon build api"]
+    },
+    "color-picker": {
+      "title_keywords": ["color picker online", "hex color picker", "choose color code"],
+      "meta_keywords": ["hex color picker", "rgb to hex", "color selector online"],
+      "high_cpc": ["design tools api", "color service"]
+    },
+    "text-to-html": {
+      "title_keywords": ["text to html converter", "convert plain text to html", "generate html from text"],
+      "meta_keywords": ["text to html", "plain text to html tool", "convert text to markup"],
+      "high_cpc": ["content generation api", "html conversion service"]
+    },
+    "html-to-text": {
+      "title_keywords": ["html to text converter", "strip html tags", "convert html to plain text"],
+      "meta_keywords": ["html to text online", "strip tags", "plain text from html"],
+      "high_cpc": ["content sanitization api", "email text extraction"]
+    },
+    "word-counter-advanced": {
+      "title_keywords": ["advanced word counter", "text statistics tool", "readability and word counts"],
+      "meta_keywords": ["word density", "readability score tool", "content length checker"],
+      "high_cpc": ["content optimization service", "editorial tools api"]
+    },
+    "sitemap-generator": {
+      "title_keywords": ["sitemap generator online", "create sitemap xml", "generate sitemap for website"],
+      "meta_keywords": ["generate sitemap.xml", "sitemap generator tool", "create robots and sitemap"],
+      "high_cpc": ["seo automation service", "sitemap api"]
     }
   }
 }
