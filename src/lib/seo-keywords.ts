@@ -1,7 +1,8 @@
 
+
 export const seoKeywords = {
   "categories": {
-    "pdf-tools": {
+    "pdf": {
       "title_keywords": ["free pdf tools online", "pdf editor online", "pdf merge split compress"],
       "meta_keywords": ["merge pdf", "split pdf", "compress pdf", "convert pdf to word", "pdf editor"],
       "high_cpc": ["pdf editor for business", "secure pdf editor online"]
@@ -485,3 +486,5 @@ export const seoKeywords = {
     }
   }
 }
+
+    
