@@ -9,7 +9,6 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
 import { seoKeywords } from '@/lib/seo-keywords';
-import { RouteChangeHandler } from '@/components/route-change-handler';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 
@@ -88,15 +87,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
-        <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
-        <script>
-            {`
-              window.ezstandalone = window.ezstandalone || {};
-              ezstandalone.cmd = ezstandalone.cmd || [];
-            `}
-        </script>
-        <Script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false" async></Script>
-        <Script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false" async></Script>
         <Script
           id="google-analytics"
           strategy="afterInteractive"
@@ -113,6 +103,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          suppressHydrationWarning
         />
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
@@ -130,7 +121,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <RouteChangeHandler />
           {children}
           <Toaster />
           <CookieConsent />
