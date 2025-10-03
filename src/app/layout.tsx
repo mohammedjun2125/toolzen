@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
 import { seoKeywords } from '@/lib/seo-keywords';
+import { RouteChangeHandler } from '@/components/route-change-handler';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 
@@ -94,8 +95,8 @@ export default function RootLayout({
               ezstandalone.cmd = ezstandalone.cmd || [];
             `}
         </script>
-        <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false" async></script>
-        <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false" async></script>
+        <Script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false" async></Script>
+        <Script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false" async></Script>
         <Script
           id="google-analytics"
           strategy="afterInteractive"
@@ -129,6 +130,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <RouteChangeHandler />
           {children}
           <Toaster />
           <CookieConsent />
