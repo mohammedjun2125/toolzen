@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   verification: {
-    google: 'TZ4ILWL6OcwJ1vjR2BrFEnCXjM1bWVMrl8lersFqt4g',
+    google: 'ca-pub-8015189558686269',
   },
 };
 
