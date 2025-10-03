@@ -87,6 +87,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
+        <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false" async></script>
+        <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false" async></script>
         <Script
           id="google-analytics"
           strategy="afterInteractive"
