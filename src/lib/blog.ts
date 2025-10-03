@@ -15,6 +15,74 @@ export type Post = {
 
 export const mockPosts: Post[] = [
     {
+        slug: 'css-text-shadow-generator',
+        title: 'CSS Text Shadow Generator: Add Stunning Shadows to Your Text',
+        excerpt: 'Learn how to use a CSS Text Shadow Generator to create beautiful and readable text effects. This guide covers the text-shadow property, tips, and free online tools to elevate your typography.',
+        date: '2024-09-04',
+        image: 'https://picsum.photos/seed/css-text-shadow/800/600',
+        imageHint: 'text with shadow effect',
+        author: 'Toolzen Team',
+        category: 'CSS',
+        content: `
+# CSS Text Shadow Generator: Add Stunning Shadows to Your Text
+
+Typography is a cornerstone of web design, but great typography is about more than just choosing the right font. It's about making your text readable, impactful, and visually appealing. One of the most powerful and versatile properties in a designer's toolkit for achieving this is \`text-shadow\`. A well-placed shadow can make text pop off the page, improve its legibility against a busy background, or create stylish, artistic effects.
+
+However, writing the CSS \`text-shadow\` property by hand can be a slow, iterative process of tweaking values and reloading the browser. This is where a **CSS Text Shadow Generator** becomes an essential utility for designers and developers. This guide will explore how these tools work, how to use them effectively, and offer tips for creating stunning text effects.
+
+## What is a CSS Text Shadow Generator?
+
+A **CSS Text Shadow Generator** is a visual tool that allows you to create and preview text shadow effects in real-time. Instead of manually editing CSS values, you use sliders and color pickers to adjust the shadow's properties and immediately see the result. Once you've perfected the look, the tool provides you with the corresponding CSS code to copy and paste into your stylesheet.
+
+The basic syntax for the **text-shadow css** property is:
+\`text-shadow: [horizontal-offset] [vertical-offset] [blur-radius] [color];\`
+
+A generator tool simplifies this by providing intuitive controls for each of these values, and often adds an opacity slider for even more control over the shadow's appearance.
+
+## How to Add Shadows to Your Fonts Using CSS
+
+Using a tool like Toolzen's [**CSS Text Shadow Generator**](/tools/text-shadow-generator) makes applying a **font shadow css** effect incredibly simple.
+
+1.  **Adjust Offsets:** Use the "Horizontal Offset" and "Vertical Offset" sliders to control the position of the shadow relative to the text. Positive values move it right and down, while negative values move it left and up.
+2.  **Set the Blur:** The "Blur Radius" slider controls how soft and spread out the shadow is. A value of \`0\` creates a sharp, hard-edged shadow, while a higher value creates a much softer, more diffuse glow.
+3.  **Choose a Color and Opacity:** Use the color picker to select your shadow's color. A subtle, dark gray often works better than pure black. The opacity slider lets you control how transparent the shadow is, which is key for creating a natural look.
+4.  **Preview and Copy:** The preview text updates instantly with every change. Once you have the desired effect, simply copy the generated CSS from the output box.
+
+## Using Box-Shadow Generators for Text Effects
+
+While \`text-shadow\` is the correct property for text, it's worth noting its close cousin, \`box-shadow\`. A [**box-shadow generator**](/tools/box-shadow-generator) is used for creating shadows on block-level elements like \`divs\` or buttons. The properties are very similar (offset, blur, spread, color), leading some to wonder if you can use a **generator box shadow** for text.
+
+The answer is no—you must use \`text-shadow\` for text. However, the principles are the same, and mastering one will help you understand the other. A common design technique is to match the shadow style on your text with the shadow style on the container element for a cohesive look.
+
+## Tips and Tricks for Perfect Text Shadows
+
+Creating a great **css text shadow** is about subtlety and purpose. Here are some tips to guide you:
+
+*   **For Readability:** The most practical use of \`text-shadow\` is to make text readable on top of a busy background image or a [**CSS gradient**](/tools/gradient-generator). For this, a soft, subtle, dark shadow works best. Try a small blur radius (e.g., \`2px\`) with a semi-transparent black color (\`rgba(0,0,0,0.5)\`). This will create a gentle "lift" that separates the letters from the background.
+*   **The "Letterpress" Effect:** To create a classic, inset letterpress look, use a shadow that is slightly lighter than your background color and positioned just below the text. For example, on a dark gray background, you could use a very subtle white shadow with a \`1px\` vertical offset and no blur.
+*   **Multiple Shadows:** The **text-shadow css** property accepts multiple, comma-separated shadow values. This allows you to create complex effects like glows or 3D text.
+    \`\`\`css
+    /* Example of a glowing effect */
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00f;
+    \`\`\`
+    A good **CSS Text Shadow Generator** will often let you layer multiple shadows visually.
+*   **Avoid Over-the-Top Effects:** A heavy, dark, and hard-edged shadow can make text look dated and difficult to read. Unless you are intentionally creating a stylized, retro look, subtlety is key.
+
+## Frequently Asked Questions
+
+### Can text-shadow be animated?
+Yes! The \`text-shadow\` property is animatable. You can create cool hover effects where a shadow appears or grows when a user mouses over a link or button.
+
+### How does text-shadow impact performance?
+For simple shadows, the performance impact is negligible. However, applying very large, complex, or multiple shadows to a lot of text can be computationally intensive for the browser to render, so use them judiciously on large blocks of text.
+
+### Is text-shadow supported by all browsers?
+Yes, \`text-shadow\` is fully supported by all modern web browsers, including Chrome, Firefox, Safari, and Edge. You can use it without worrying about compatibility issues.
+
+By using a visual **CSS Text Shadow Generator**, you can experiment with all these effects quickly and find the perfect style to enhance your website's typography.
+`
+    },
+    {
         slug: 'css-gradient-generator-online',
         title: 'CSS Gradient Generator: Create Stunning Gradients Online',
         excerpt: 'Learn how a CSS gradient generator can help you create beautiful backgrounds for your website. This guide covers how to use a gradient maker and offers tips for stunning designs.',
@@ -1800,6 +1868,7 @@ Random number generators are fascinating and incredibly useful tools. While true
 ];
 
 export const postMap = new Map(mockPosts.map(post => [post.slug, post]));
+
 
 
 
