@@ -32,6 +32,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/ads.txt',
+        destination: '/ads',
+      },
+      {
         source: '/:path*.amp',
         destination: '/404',
       },
