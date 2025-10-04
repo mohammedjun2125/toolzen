@@ -41,15 +41,6 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: '/ads.txt',
-        destination: '/google_ads.txt',
-        permanent: true,
-      },
-    ]
-  },
 }
 
 module.exports = nextConfig
