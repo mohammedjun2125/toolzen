@@ -142,12 +142,6 @@ export function HomeClient() {
                       );
                     })}
                   </div>
-                  
-                  {/* Ad Placeholder */}
-                  <div className="my-12 h-24 flex items-center justify-center bg-muted/20 rounded-lg">
-                      <span className="text-muted-foreground text-sm">Ad Placeholder</span>
-                  </div>
-
                 </div>
               );
             })}
