@@ -57,6 +57,9 @@ export const metadata: Metadata = {
   verification: {
     google: 'ca-pub-8015189558686269',
   },
+  other: {
+    'google-adsense-account': 'ca-pub-8015189558686269',
+  }
 };
 
 export const viewport: Viewport = {
