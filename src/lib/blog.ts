@@ -254,6 +254,8 @@ For a fast, secure, and free way to create unlimited QR codes, try the [Toolzen 
         author: 'Toolzen Team',
         category: 'Calculators',
         content: `
+<p class="country-note">This guide is applicable for users in the US, UK, Canada, and Australia.</p>
+
 # How to Calculate Loan EMI Quickly (US, UK, CA, AU)
 
 Planning to take out a loan for a new home, car, or personal expense? The most critical number you need to understand is your EMI, or Equated Monthly Installment. This is the fixed amount you will pay to your lender each month. Looking for a fast, free, and private way to figure this out? Toolzen offers a client-side **loan emi calculator online** that lets you calculate your payments without uploading financial data or creating an account. Check out our [Loan EMI Calculator](/tools/loan-emi-calculator) to get started instantly.
