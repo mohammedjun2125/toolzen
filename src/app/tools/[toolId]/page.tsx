@@ -12,6 +12,60 @@ type Props = {
 
 const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
 
+const specificSeoData: { [key: string]: { title: string, description: string, schema: any } } = {
+  'pdf-compressor': {
+    title: 'Compress PDF Online — Fast & Private | Toolzen',
+    description: 'Compress PDF files quickly and privately in your browser. No uploads, 100% client-side, free and easy to use.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen PDF Compressor", "url":"https://www.toolzenweb.com/tools/pdf-compressor", "applicationCategory":"https://schema.org/OnlineTool", "description":"Compress PDF files in your browser quickly and privately — no file upload required.", "operatingSystem":"All", "offers":{ "@type":"Offer", "price":"0", "priceCurrency":"USD" } }
+  },
+  'pdf-to-word-converter': {
+    title: 'PDF to Word Converter Online — Free | Toolzen',
+    description: 'Convert PDF files to Word documents online for free. Secure, fast, and entirely client-side with Toolzen.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen PDF to Word Converter", "url":"https://www.toolzenweb.com/tools/pdf-to-word-converter", "applicationCategory":"https://schema.org/OnlineTool", "description":"Convert PDF files to editable Word documents online securely and privately in your browser.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'image-compressor': {
+    title: 'Image Compressor Online — Reduce Image Size Free',
+    description: 'Compress JPG, PNG, or WebP images online for free. Fast, client-side, and private — no upload required.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Image Compressor", "url":"https://www.toolzenweb.com/tools/image-compressor", "applicationCategory":"https://schema.org/OnlineTool", "description":"Compress images quickly and privately in your browser without uploading to a server.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'image-resizer': {
+    title: 'Image Resizer — Resize JPG, PNG, WebP | Toolzen',
+    description: 'Resize images online instantly. Supports JPG, PNG, WebP. Client-side processing ensures privacy and speed.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Image Resizer", "url":"https://www.toolzenweb.com/tools/image-resizer", "applicationCategory":"https://schema.org/OnlineTool", "description":"Resize images online securely and privately without uploading files to a server.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'qr-code-generator': {
+    title: 'QR Code Generator Online — Free | Toolzen',
+    description: 'Generate QR codes online for free. Fast, client-side, no account required. Perfect for URLs, text, and contact info.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen QR Code Generator", "url":"https://www.toolzenweb.com/tools/qr-code-generator", "applicationCategory":"https://schema.org/OnlineTool", "description":"Create QR codes online instantly and privately with Toolzen’s client-side generator.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'loan-emi-calculator': {
+    title: 'Loan EMI Calculator — Monthly Payment Calculator | Toolzen',
+    description: 'Calculate your loan EMI quickly and easily online. Client-side calculator for accurate monthly payments and interest.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Loan EMI Calculator", "url":"https://www.toolzenweb.com/tools/loan-emi-calculator", "applicationCategory":"https://schema.org/OnlineTool", "description":"Compute loan EMIs online privately and instantly. Toolzen ensures 100% client-side processing.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'currency-converter': {
+    title: 'Currency Converter — Live Rates & Convert | Toolzen',
+    description: 'Convert currencies online with live exchange rates. Fast, private, and client-side conversion. Free to use.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Currency Converter", "url":"https://www.toolzenweb.com/tools/currency-converter", "applicationCategory":"https://schema.org/OnlineTool", "description":"Convert currencies online privately with real-time exchange rates, all processed client-side.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'json-formatter': {
+    title: 'JSON Formatter & Validator | Toolzen',
+    description: 'Format, validate, and beautify JSON online. Client-side tool for fast, private JSON editing. Free to use.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen JSON Formatter", "url":"https://www.toolzenweb.com/tools/json-formatter", "applicationCategory":"https://schema.org/OnlineTool", "description":"Format, validate, and edit JSON online privately in your browser without uploading files.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'password-generator': {
+    title: 'Password Generator — Strong & Customizable | Toolzen',
+    description: 'Generate strong, secure passwords online. Free, private, and client-side tool for custom password creation.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Password Generator", "url":"https://www.toolzenweb.com/tools/password-generator", "applicationCategory":"https://schema.org/OnlineTool", "description":"Create strong passwords online securely and privately with Toolzen’s client-side generator.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
+  'gradient-generator': {
+    title: 'CSS Gradient Generator Online | Toolzen',
+    description: 'Generate CSS gradients online easily. Client-side, instant preview, free and private. Perfect for developers.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen CSS Gradient Generator", "url":"https://www.toolzenweb.com/tools/css-gradient-generator", "applicationCategory":"https://schema.org/OnlineTool", "description":"Create CSS gradients online instantly and privately. Client-side tool for web developers.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  }
+};
+
+
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     'image-compressor': [
         { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
@@ -128,6 +182,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const specificSeo = specificSeoData[tool.id];
+  if (specificSeo) {
+    return {
+      title: specificSeo.title,
+      description: specificSeo.description,
+      alternates: {
+        canonical: `https://www.toolzenweb.com${tool.href}`,
+      },
+      openGraph: {
+        title: specificSeo.title,
+        description: specificSeo.description,
+        url: `https://www.toolzenweb.com${tool.href}`,
+        type: 'website',
+      },
+    };
+  }
+
   const keywords = (seoKeywords.tools as any)[tool.id];
 
   if (!keywords) {
@@ -194,25 +265,31 @@ export default function ToolPage({ params }: Props) {
 
   const faq = toolFaqs[toolId] || [];
 
-  const softwareSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: tool.name,
-    applicationCategory: 'Utilities',
-    operatingSystem: 'Any (Web browser)',
-    description: tool.description,
-    url: `https://www.toolzenweb.com${tool.href}`,
-    offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD'
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '531'
-    }
-  };
+  const specificSeo = specificSeoData[toolId];
+  let schema;
+  if(specificSeo) {
+    schema = specificSeo.schema;
+  } else {
+     schema = {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: tool.name,
+      applicationCategory: 'Utilities',
+      operatingSystem: 'Any (Web browser)',
+      description: tool.description,
+      url: `https://www.toolzenweb.com${tool.href}`,
+      offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD'
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.8',
+        reviewCount: '531'
+      }
+    };
+  }
   
   const faqSchema = faq.length > 0 ? {
       '@context': 'https://schema.org',
@@ -228,8 +305,8 @@ export default function ToolPage({ params }: Props) {
   } : null;
 
   const combinedSchema = faqSchema 
-    ? { ...softwareSchema, mainEntity: faqSchema.mainEntity }
-    : softwareSchema;
+    ? { ...schema, mainEntityOfPage: faqSchema }
+    : schema;
 
 
   return (
