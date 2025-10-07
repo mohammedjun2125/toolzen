@@ -1,4 +1,5 @@
 
+
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
@@ -10,6 +11,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { marked } from 'marked';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 type Props = {
   params: { slug: string };
@@ -70,6 +72,8 @@ export default function BlogPostPage({ params }: Props) {
   }
   
   const parsedContent = marked(post.content);
+
+  const relatedPosts = mockPosts.filter(p => p.category === post.category && p.slug !== post.slug).slice(0, 3);
 
   const faqSchema = post.faq && post.faq.length > 0 ? {
     "@context": "https://schema.org",
@@ -149,6 +153,29 @@ export default function BlogPostPage({ params }: Props) {
             />
 
             </article>
+
+             {relatedPosts.length > 0 && (
+                <section className="related-articles mt-16">
+                    <Card className="bg-card/60 backdrop-blur-lg">
+                        <CardHeader>
+                            <CardTitle>Related Articles</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {relatedPosts.map(relatedPost => (
+                                    <Link href={`/blog/${relatedPost.slug}`} key={relatedPost.slug} className="group">
+                                        <div className="border rounded-lg p-4 h-full transition-all group-hover:bg-muted/50">
+                                            <h3 className="font-semibold">{relatedPost.title}</h3>
+                                            <p className="text-sm text-muted-foreground mt-2 line-clamp-3">{relatedPost.excerpt}</p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
+                </section>
+            )}
+
         </div>
       </main>
       <SiteFooter />

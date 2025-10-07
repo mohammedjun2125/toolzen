@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useRef, ChangeEvent } from 'react';
@@ -259,7 +260,7 @@ export default function PdfCompressor() {
 
             <div className="not-prose mt-8">
                 <h3 className="text-xl font-semibold">Explore More Free PDF Tools</h3>
-                <p>After compressing your file, you may need other tools:</p>
+                <p>After compressing your file, you may need other <Link href="/category/pdf">PDF Tools</Link>. We also offer a full suite of <Link href="/">free online tools</Link> to help with your documents.</p>
                 <div className="flex gap-2 flex-wrap">
                     <Button asChild variant="outline"><Link href="/tools/pdf-merger">Merge PDF</Link></Button>
                     <Button asChild variant="outline"><Link href="/tools/pdf-splitter">Split PDF</Link></Button>

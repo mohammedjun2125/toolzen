@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState } from 'react';
@@ -107,7 +108,7 @@ export default function JsonFormatter() {
         </ol>
         
         <h3>Secure and Private by Design</h3>
-        <p>Many online JSON formatters require you to paste your data, which is then sent to a server for processing. This can be a security risk if your JSON contains sensitive information like API keys, personal data, or authentication tokens. Our tool is 100% client-side. All formatting and validation happen directly in your browser. Your data is never uploaded, guaranteeing its privacy and making it a truly secure **JSON online editor**.</p>
+        <p>Many online JSON formatters require you to paste your data, which is then sent to a server for processing. This can be a security risk if your JSON contains sensitive information like API keys, personal data, or authentication tokens. Our tool is 100% client-side. All formatting and validation happen directly in your browser. Your data is never uploaded, guaranteeing its privacy and making it a truly secure **JSON online editor**. Explore more of our <Link href="/">free online tools</Link> or browse our <Link href="/category/text-data">Text & Data Tools</Link>.</p>
     </article>
     </>
   );

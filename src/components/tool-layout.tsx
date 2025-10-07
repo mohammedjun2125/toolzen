@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { mockPosts } from '@/lib/blog';
 import type { ToolCategoryInfo } from '@/lib/tools';
+import { categoryMap } from '@/lib/tools';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -24,6 +26,8 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
         keywords.some(keyword => post.title.toLowerCase().includes(keyword) || post.content.toLowerCase().includes(keyword))
     ).slice(0, 4);
 
+    const category = categoryMap.get(categoryId);
+
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
              <div className="flex justify-between items-center mb-4">
@@ -33,12 +37,14 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
                         Back to Home
                     </Link>
                 </Button>
-                <Button asChild variant="ghost">
-                    <Link href={`/category/${categoryId}`}>
-                        <Grip className="mr-2 h-4 w-4" />
-                        Back to Category
-                    </Link>
-                </Button>
+                {category && (
+                    <Button asChild variant="ghost">
+                        <Link href={`/category/${categoryId}`}>
+                            <Grip className="mr-2 h-4 w-4" />
+                            Back to {category.name}
+                        </Link>
+                    </Button>
+                )}
             </div>
             <main className="space-y-8">
                 <div className="space-y-2">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, ChangeEvent, useMemo } from 'react';
@@ -8,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRightLeft } from 'lucide-react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 const lengthUnits = { m: 'Meters', km: 'Kilometers', cm: 'Centimeters', mm: 'Millimeters', mi: 'Miles', yd: 'Yards', ft: 'Feet', in: 'Inches' };
 const weightUnits = { kg: 'Kilograms', g: 'Grams', mg: 'Milligrams', lb: 'Pounds', oz: 'Ounces', t: 'Tonnes' };
@@ -148,6 +150,7 @@ export default function UnitConverter() {
                 <li><strong>Convenience:</strong> Access a comprehensive set of conversions—from length and weight to temperature and volume—all in one place. No need to search for separate calculators for each unit type.</li>
                 <li><strong>Privacy-Focused:</strong> All calculations are performed directly in your browser. Your data is never sent to our servers, making it a completely private and secure experience.</li>
             </ul>
+             <p>Explore more of our <Link href="/category/calculators">Online Calculators</Link> or see all of our <Link href="/">free online tools</Link>.</p>
         </div>
       </CardContent>
     </Card>

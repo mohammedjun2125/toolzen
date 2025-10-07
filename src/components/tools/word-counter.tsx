@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -77,7 +78,7 @@ export default function WordCounter() {
         </ul>
         
         <h3>Secure and Private by Design</h3>
-        <p>Your writing is your intellectual property. Many online tools might store or analyze what you paste. Our word counter is a 100% client-side tool. Your text is processed in your browser and is never sent to our servers, guaranteeing your privacy. This makes it a safe tool for professional writers, students, and businesses.</p>
+        <p>Your writing is your intellectual property. Many online tools might store or analyze what you paste. Our word counter is a 100% client-side tool. Your text is processed in your browser and is never sent to our servers, guaranteeing your privacy. This makes it a safe tool for professional writers, students, and businesses. You can explore our other <Link href="/category/text-data">Text & Data Tools</Link> or check out all our <Link href="/">free online tools</Link>.</p>
     </article>
     </>
   );

@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useRef } from 'react';
@@ -9,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Download } from 'lucide-react';
 import QRCode from 'qrcode.react';
 import { seoKeywords } from '@/lib/seo-keywords';
+import Link from 'next/link';
 
 export default function QrCodeGenerator() {
   const [text, setText] = useState('https://www.toolzenweb.com');
@@ -94,7 +96,7 @@ export default function QrCodeGenerator() {
         </ul>
 
         <h3>How to Get the Best Results</h3>
-        <p>To ensure your QR code is easily scannable, make sure there is sufficient contrast between the code and its background. A black code on a white background is the most reliable combination. When printing, ensure the code is large enough for a phone camera to easily capture it—a minimum size of 1x1 inch (2.5x2.5 cm) is a good rule of thumb for most applications.</p>
+        <p>To ensure your QR code is easily scannable, make sure there is sufficient contrast between the code and its background. A black code on a white background is the most reliable combination. When printing, ensure the code is large enough for a phone camera to easily capture it—a minimum size of 1x1 inch (2.5x2.5 cm) is a good rule of thumb for most applications. You can explore our other <Link href="/category/generators">Generators</Link> or check out all our <Link href="/">free online tools</Link>.</p>
     </div>
 
     </>
