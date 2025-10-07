@@ -130,6 +130,18 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           suppressHydrationWarning
         />
+        <Script id="sitemap-ping" strategy="afterInteractive">
+          {`
+            const sitemapUrl = 'https://www.toolzenweb.com/sitemap.xml';
+            const pingUrls = [
+              'https://www.google.com/ping?sitemap=' + sitemapUrl,
+              'https://www.bing.com/ping?sitemap=' + sitemapUrl
+            ];
+            pingUrls.forEach(url => {
+              fetch(url, { method: 'GET', mode: 'no-cors' }).catch(console.error);
+            });
+          `}
+        </Script>
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
         <noscript>
