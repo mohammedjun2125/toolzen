@@ -9,7 +9,6 @@ import { HomeClient } from '@/components/home-client';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Post } from '@/lib/blog';
-import { seoKeywords } from '@/lib/seo-keywords';
 
 const BlogPreview = dynamic<{ posts: Post[] }>(
   () => import('@/components/blog-preview').then(mod => mod.BlogPreview),
@@ -32,27 +31,22 @@ const BlogPreview = dynamic<{ posts: Post[] }>(
 import { mockPosts } from '@/lib/blog';
 
 export default function Home() {
-  const homeKeywords = seoKeywords.tools.home;
-  const exploreKeywords = (seoKeywords.tools as any)['explore-all-tools'];
-
   return (
     
       <div className="flex flex-col min-h-screen bg-background">
         <SiteHeader />
         <main className="flex-1">
-          <section className="w-full py-20 md:py-32 lg:py-40 bg-gradient-to-b from-background to-card/20">
-            <div className="container mx-auto px-4 md:px-6 text-center">
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4">
-                  {homeKeywords.title_keywords.join(' - ')}
-              </h1>
-              <p className="max-w-3xl mx-auto text-lg md:text-xl text-foreground/80 mb-8">
-                  {`A comprehensive suite of ${homeKeywords.meta_keywords.slice(0, 4).join(', ')} and more. All tools are fast, free, secure, and work on the client-side.`}
+          <section className="text-center py-12 md:py-20 lg:py-24 bg-gradient-to-b from-background to-card/20">
+            <div className="container mx-auto px-4 md:px-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">Free, Fast & Private Online Tools</h1>
+              <h2 className="text-xl md:text-2xl text-muted-foreground mb-4">PDF, image, text and developer utilities — client-side, no uploads</h2>
+              <p className="max-w-3xl mx-auto text-foreground/80 mb-6">
+                Toolzen offers a curated collection of free online tools: compress and merge PDFs, resize and convert images,
+                format JSON, generate QR codes, run calculators and more — all processed securely in your browser for maximum privacy and speed.
               </p>
-              <Button asChild size="lg" className="px-8 py-6 text-lg md:px-10 md:py-7">
-                <Link href="#tools">{exploreKeywords.title_keywords[0]}</Link>
+              <Button asChild size="lg">
+                <Link href="#tools">Explore Tools →</Link>
               </Button>
-              
             </div>
           </section>
           

@@ -8,35 +8,28 @@ import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
-import { seoKeywords } from '@/lib/seo-keywords';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 
-const homeKeywords = seoKeywords.tools.home;
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.toolzenweb.com'),
-  title: {
-    default: homeKeywords.title_keywords.join(' - ') + ' | Toolzen',
-    template: '%s | Toolzen',
+  title: 'Toolzen — Free Online Tools: PDF, Image, Text & Dev Utilities',
+  description: 'Toolzen provides free, fast and private online tools — PDF, image, text, calculators and developer utilities. All client-side: no uploads, no accounts.',
+  alternates: {
+    canonical: 'https://www.toolzenweb.com/',
   },
-  description: `Toolzen offers a suite of ${homeKeywords.meta_keywords.join(', ')}. All our tools are fast, free, secure, and work on the client-side.`,
-  keywords: homeKeywords.meta_keywords.concat(homeKeywords.high_cpc),
-  authors: [{ name: 'Toolzen', url: 'https://www.toolzenweb.com' }],
-  creator: 'Toolzen',
-  publisher: 'Toolzen',
   openGraph: {
-    title: homeKeywords.title_keywords.join(' - ') + ' | Toolzen',
-    description: `A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads. Includes ${homeKeywords.meta_keywords.join(', ')}.`,
+    title: 'Toolzen — Free Online Tools',
+    description: 'Compress PDFs, resize images, generate QR codes and more — fast, private, and free. Try our suite of client-side web utilities.',
     siteName: 'Toolzen',
     locale: 'en_US',
     type: 'website',
-    url: 'https://www.toolzenweb.com',
+    url: 'https://www.toolzenweb.com/',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Toolzen - ' + homeKeywords.title_keywords.join(', '),
-    description: `Boost your productivity with a suite of browser-based tools. From image compression to password generation, get it all done without ever leaving your browser. Explore tools for ${homeKeywords.meta_keywords.join(', ')}.`,
+    title: 'Toolzen - Free, Fast & Private Online Tools',
+    description: 'A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads.',
   },
   robots: {
     index: true,
@@ -74,17 +67,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Toolzen',
-    url: 'https://www.toolzenweb.com',
-    description: 'A comprehensive suite of free, fast, and privacy-focused online tools to boost your productivity.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://www.toolzenweb.com/tools/{search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Toolzen",
+    "url": "https://www.toolzenweb.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.toolzenweb.com/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const faqSchema = {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity": [
+      {
+        "@type":"Question",
+        "name":"Are Toolzen tools private?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Most Toolzen utilities run client-side in your browser — files and data are never uploaded to our servers."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need an account to use Toolzen?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"No account or signup required — simply open any tool and start using it instantly."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How do I compress a PDF without losing quality?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Use Toolzen’s PDF Compressor and choose 'Recommended' or 'High Quality' compression. Processing happens entirely in your browser for best results."
+        }
+      }
+    ]
   };
 
   return (
@@ -111,7 +134,12 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          suppressHydrationWarning
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           suppressHydrationWarning
         />
       </head>
