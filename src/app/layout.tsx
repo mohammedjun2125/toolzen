@@ -26,21 +26,9 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.toolzenweb.com/',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Toolzen - Free, Fast & Private Online Tools',
-    description: 'A comprehensive collection of client-side, privacy-first tools for developers, designers, and students. Fast, free, and requires no downloads.',
-  },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   icons: {
     icon: '/favicon.svg',
