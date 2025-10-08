@@ -8,8 +8,9 @@ import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
+import { RouteChangeHandler } from '@/components/route-change-handler';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.toolzenweb.com'),
@@ -101,25 +102,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','G-Q1MVVGE6DC');
-            `,
-          }}
-        />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8015189558686269"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
@@ -130,28 +112,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           suppressHydrationWarning
         />
-        <Script id="sitemap-ping" strategy="afterInteractive">
-          {`
-            const sitemapUrl = 'https://www.toolzenweb.com/sitemap.xml';
-            const pingUrls = [
-              'https://www.google.com/ping?sitemap=' + sitemapUrl,
-              'https://www.bing.com/ping?sitemap=' + sitemapUrl
-            ];
-            pingUrls.forEach(url => {
-              fetch(url, { method: 'GET', mode: 'no-cors' }).catch(console.error);
-            });
-          `}
-        </Script>
       </head>
-      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=G-Q1MVVGE6DC"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -163,6 +125,7 @@ export default function RootLayout({
           <CookieConsent />
         </ThemeProvider>
         <Analytics />
+        <RouteChangeHandler />
       </body>
     </html>
   );
