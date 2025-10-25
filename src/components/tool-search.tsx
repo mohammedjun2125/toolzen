@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { tools } from '@/lib/tools';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { iconMap } from './home-client';
-import { SearchIcon } from 'lucide-react';
+import { SearchIcon, type LucideIcon } from 'lucide-react';
+import { iconMap } from '@/components/icon-map';
 
 export function ToolSearch() {
   const [searchTerm, setSearchTerm] = useState('');

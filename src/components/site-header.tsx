@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, ChevronDown, Puzzle, X } from 'lucide-react';
+import { Menu, ChevronDown, Puzzle } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -13,8 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { categories } from '@/lib/tools';
-import { iconMap } from './home-client';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import { iconMap } from '@/components/icon-map';
 
 export function SiteHeader() {
   const mainNavLinks = [
@@ -79,26 +78,17 @@ export function SiteHeader() {
                   </Link>
                 </SheetClose>
 
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="tools">
-                    <AccordionTrigger className="font-semibold text-lg py-2">Tools</AccordionTrigger>
-                    <AccordionContent>
-                      <div className="flex flex-col gap-1 pl-2">
-                        {categories.map(category => {
-                           const CategoryIcon = iconMap[category.icon];
-                           return (
-                              <SheetClose asChild key={category.id}>
-                               <Link href={`/category/${category.id}`} className="flex items-center gap-3 p-2 rounded-md hover:bg-muted">
-                                  {CategoryIcon && <CategoryIcon className="h-5 w-5 text-primary" />}
-                                  <span className="font-medium">{category.name}</span>
-                              </Link>
-                             </SheetClose>
-                           )
-                        })}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+                {categories.map(category => {
+                   const CategoryIcon = iconMap[category.icon];
+                   return (
+                      <SheetClose asChild key={category.id}>
+                       <Link href={`/category/${category.id}`} className="flex items-center gap-3 p-2 rounded-md hover:bg-muted font-semibold text-lg">
+                          {CategoryIcon && <CategoryIcon className="h-5 w-5 text-primary" />}
+                          <span>{category.name}</span>
+                      </Link>
+                     </SheetClose>
+                   )
+                })}
 
                 {mainNavLinks.map(link => (
                   <SheetClose asChild key={link.href}>

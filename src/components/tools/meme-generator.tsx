@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -77,10 +77,9 @@ export default function MemeGenerator() {
         }
     };
     
-    // Redraw meme whenever image or text changes
-    useState(() => {
+    useEffect(() => {
         if (image) drawMeme();
-    });
+    }, [image, topText, bottomText, drawMeme]);
 
     return (
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
@@ -126,10 +125,6 @@ export default function MemeGenerator() {
                     </div>
                 </div>
                 
-                <Button onClick={drawMeme} variant="secondary" className="w-full">
-                    Update Meme Preview
-                </Button>
-
                 <Button onClick={handleDownload} disabled={!image} className="w-full text-lg py-6">
                     <Download className="mr-2 h-4 w-4" /> Download Meme
                 </Button>

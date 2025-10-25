@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
-import { iconMap } from '@/components/home-client';
+import { iconMap } from '@/components/icon-map';
 import type { Tool, ToolCategoryInfo } from '@/lib/tools';
 import { seoKeywords } from '@/lib/seo-keywords';
 
