@@ -1,6 +1,6 @@
 
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google'
+import { Roboto, Playfair_Display } from 'next/font/google'
 import Script from 'next/script';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
@@ -10,7 +10,19 @@ import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
 import { RouteChangeHandler } from '@/components/route-change-handler';
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const roboto = Roboto({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto',
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair',
+});
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.toolzenweb.com'),
@@ -113,7 +125,7 @@ export default function RootLayout({
           suppressHydrationWarning
         />
       </head>
-      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", roboto.variable, playfairDisplay.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

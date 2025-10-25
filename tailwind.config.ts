@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 const config = {
@@ -19,7 +20,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-roboto)'],
+        serif: ['var(--font-playfair)'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -75,6 +77,15 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+       typography: ({ theme }: { theme: any }) => ({
+        DEFAULT: {
+          css: {
+            'h1, h2, h3, h4, h5, h6': {
+              fontFamily: theme('fontFamily.serif').join(', '),
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
