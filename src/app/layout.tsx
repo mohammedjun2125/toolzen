@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { CookieConsent } from '@/components/cookie-consent';
 import { Analytics } from '@vercel/analytics/react';
 import { RouteChangeHandler } from '@/components/route-change-handler';
+import { AdBanner } from '@/components/ad-banner';
 
 const roboto = Roboto({
   subsets: ['latin'],
