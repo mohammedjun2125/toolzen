@@ -119,6 +119,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           suppressHydrationWarning
         />
+        <Script id="adsterra-popunder" strategy="beforeInteractive">
+          {`
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '//pl27932946.effectivegatecpm.com/38/63/b8/3863b8282ab28a49606fb8918faaa1ce.js';
+            document.head.appendChild(script);
+          `}
+        </Script>
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", roboto.variable, playfairDisplay.variable)}>
         <ThemeProvider
