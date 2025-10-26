@@ -141,6 +141,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
         <RouteChangeHandler />
+        <Script id="adsterra-native-banner" src="//pl27932954.effectivegatecpm.com/32/ac/4f/32ac4f2b10f0f4b676dc4fad57835799.js" strategy="lazyOnload" />
       </body>
     </html>
   );
