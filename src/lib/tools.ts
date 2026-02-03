@@ -68,6 +68,7 @@ export const tools: Tool[] = [
   { id: 'meme-generator', name: 'Meme Generator', description: 'Create your own memes with custom text and images. Upload a picture and add top and bottom text.', href: '/tools/meme-generator', icon: 'bot', category: categoryMap.get('image-media')! },
   
   // PDF Tools (Ordered by popularity)
+  { id: 'pdf-editor', name: 'PDF Editor', description: 'Edit text, add images, and annotate PDF documents directly in your browser. A free, private, and powerful PDF editing tool.', href: '/tools/pdf-editor', icon: 'file-cog', category: categoryMap.get('pdf')! },
   { id: 'pdf-maker', name: 'Image to PDF Converter', description: 'Convert JPG and PNG images into a single PDF document. Fast, free, and completely private.', href: '/tools/pdf-maker', icon: 'file-text', category: categoryMap.get('pdf')! },
   { id: 'pdf-merger', name: 'Merge PDF', description: 'Combine multiple PDF documents into one single file. A secure and free online PDF combiner.', href: '/tools/pdf-merger', icon: 'merge', category: categoryMap.get('pdf')! },
   { id: 'pdf-splitter', name: 'Split PDF', description: 'Extract specific pages from a PDF into a new document. A free and private PDF splitter tool.', href: '/tools/pdf-splitter', icon: 'split', category: categoryMap.get('pdf')! },

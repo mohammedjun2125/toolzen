@@ -109,6 +109,11 @@ export const seoKeywords = {
       "meta_keywords": ["rotate pages in pdf", "rotate pdf document", "pdf rotate online"],
       "high_cpc": ["document manipulation api", "pdf rotation service"]
     },
+    "pdf-editor": {
+      "title_keywords": ["pdf editor online", "edit pdf free", "online pdf editor"],
+      "meta_keywords": ["edit pdf text", "add image to pdf", "annotate pdf online"],
+      "high_cpc": ["adobe acrobat alternative", "pdf editing software"]
+    },
     "pdf-compressor": {
       "title_keywords": ["pdf compressor", "compress pdf online", "reduce pdf size"],
       "meta_keywords": ["shrink pdf", "compress pdf without losing quality", "reduce pdf file size"],
