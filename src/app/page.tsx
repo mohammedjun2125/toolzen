@@ -46,15 +46,19 @@ export default function Home() {
         <main className="flex-1">
           <section className="text-center py-12 md:py-20 lg:py-24">
             <div className="container mx-auto px-4 md:px-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">Free, Fast & Private Online Tools</h1>
-              <h2 className="text-xl md:text-2xl text-muted-foreground mb-4">PDF, image, text and developer utilities — client-side, no uploads</h2>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">E-Commerce Label Crop & PDF Tools</h1>
+               <h2 className="text-xl md:text-2xl text-muted-foreground mb-4">Your Secure Hub for Productivity</h2>
               <p className="max-w-3xl mx-auto text-foreground/80 mb-6">
-                Toolzen offers a curated collection of free online tools: compress and merge PDFs, resize and convert images,
-                format JSON, generate QR codes, run calculators and more — all processed securely in your browser for maximum privacy and speed.
+                Toolzen provides a suite of powerful utilities that run directly in your browser. From cropping e-commerce labels to editing PDFs, your files and data are **never uploaded to our servers**. Experience true privacy and blazing-fast performance, completely free.
               </p>
-              <Button asChild size="lg">
-                <Link href="#tools">Explore Tools →</Link>
-              </Button>
+              <div className="flex justify-center flex-wrap gap-4">
+                  <Button asChild size="lg">
+                    <Link href="#ecommerce">Explore E-commerce Tools →</Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <Link href="#tools">View All Tools</Link>
+                  </Button>
+              </div>
             </div>
           </section>
           

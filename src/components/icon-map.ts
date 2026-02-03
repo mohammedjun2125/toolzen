@@ -5,7 +5,7 @@ import {
   Calendar, Calculator, Lock, FileCode, Braces, Hash, Binary, BookType, Clock, Crop, Percent, Landmark,
   Barcode, Sparkles, Merge, RotateCw, Trash2, Split, Shield, SquarePen, FileScan, FileKey2, Beaker,
   FileCog, Paintbrush, Bot, Sun, Wand, Rows, Columns, MousePointer, UtilityPole, Webhook,
-  NotepadText, CheckCheck, KeyRound, Globe, Component
+  NotepadText, CheckCheck, KeyRound, Globe, Component, ShoppingCart
 } from 'lucide-react';
 
 export const iconMap: { [key: string]: LucideIcon } = {
@@ -54,4 +54,5 @@ export const iconMap: { [key: string]: LucideIcon } = {
   'columns': Columns,
   'clock': Clock,
   'mouse-pointer': MousePointer,
+  'shopping-cart': ShoppingCart,
 };

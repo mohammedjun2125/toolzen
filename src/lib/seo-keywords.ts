@@ -22,6 +22,11 @@ export const seoKeywords = {
       "meta_keywords": ["generate password", "create qr code", "otp generator online", "lorem ipsum generator"],
       "high_cpc": ["authentication as a service", "password manager enterprise"]
     },
+    "ecommerce": {
+        "title_keywords": ["e-commerce tools", "shipping label cropper", "fba tools online"],
+        "meta_keywords": ["crop shipping labels", "amazon fba tools", "flipkart label crop", "generate e-commerce stickers"],
+        "high_cpc": ["e-commerce fulfillment software", "shipping automation tools"]
+    },
     "utilities": {
       "title_keywords": ["web utilities", "dns lookup", "ip lookup", "url encoder decoder"],
       "meta_keywords": ["dns lookup tool", "ip address finder", "url encoder", "base64 encoder decoder"],
@@ -318,6 +323,81 @@ export const seoKeywords = {
       "title_keywords": ["ip lookup tool", "ip address lookup", "find ip location"],
       "meta_keywords": ["ip geolocation", "ip address finder online", "ip lookup tool free"],
       "high_cpc": ["ip geolocation API", "ip intelligence service"]
+    },
+    "other-label-crop": {
+        "title_keywords": ["other label crop", "generic shipping label cropper", "custom label crop"],
+        "meta_keywords": ["crop shipping label", "pdf label crop", "e-commerce label tool"],
+        "high_cpc": ["shipping label software", "e-commerce automation"]
+    },
+    "flipkart-label-crop": {
+        "title_keywords": ["flipkart label crop", "crop flipkart shipping label", "flipkart pdf label tool"],
+        "meta_keywords": ["flipkart label cropper", "process flipkart labels", "online flipkart tool"],
+        "high_cpc": ["flipkart seller tools", "e-commerce shipping solutions"]
+    },
+    "amazon-label-crop": {
+        "title_keywords": ["amazon label crop", "crop amazon shipping label", "amazon seller tool"],
+        "meta_keywords": ["amazon label tool", "crop amazon pdf label", "fba label crop"],
+        "high_cpc": ["amazon seller central tools", "fba prep service"]
+    },
+    "myntra-label-crop": {
+        "title_keywords": ["myntra label crop", "crop myntra shipping label", "myntra seller tool"],
+        "meta_keywords": ["myntra shipping label crop", "process myntra labels", "myntra pdf tool"],
+        "high_cpc": ["myntra partner tools", "fashion e-commerce software"]
+    },
+    "snapdeal-label-crop": {
+        "title_keywords": ["snapdeal label crop", "crop snapdeal shipping label", "snapdeal seller tool"],
+        "meta_keywords": ["snapdeal label cropper", "process snapdeal orders", "snapdeal pdf tool"],
+        "high_cpc": ["snapdeal seller dashboard", "e-commerce logistics"]
+    },
+    "jiomart-label-crop": {
+        "title_keywords": ["jiomart label crop", "crop jiomart shipping label", "jiomart partner tool"],
+        "meta_keywords": ["jiomart label tool", "process jiomart pdf", "jiomart order processing"],
+        "high_cpc": ["jiomart seller services", "reliance retail tools"]
+    },
+    "glowroad-label-crop": {
+        "title_keywords": ["glowroad label crop", "crop glowroad shipping label", "glowroad seller tool"],
+        "meta_keywords": ["glowroad label cropper", "amazon glowroad tool", "glowroad order processing"],
+        "high_cpc": ["social commerce tools", "reseller shipping tools"]
+    },
+    "limeroad-label-crop": {
+        "title_keywords": ["limeroad label crop", "crop limeroad shipping label", "limeroad seller tool"],
+        "meta_keywords": ["limeroad pdf label", "process limeroad orders", "limeroad shipping tool"],
+        "high_cpc": ["fashion marketplace tools", "e-commerce seller utilities"]
+    },
+    "shop101-label-crop": {
+        "title_keywords": ["shop101 label crop", "crop shop101 shipping label", "shop101 reseller tool"],
+        "meta_keywords": ["shop101 label cropper", "process shop101 orders", "shop101 shipping tool"],
+        "high_cpc": ["reselling platform tools", "social e-commerce software"]
+    },
+    "simsim-label-crop": {
+        "title_keywords": ["simsim label crop", "crop simsim shipping label", "simsim video commerce tool"],
+        "meta_keywords": ["simsim label tool", "process simsim orders", "simsim pdf cropper"],
+        "high_cpc": ["video commerce platforms", "influencer selling tools"]
+    },
+    "citymall-label-crop": {
+        "title_keywords": ["citymall label crop", "crop citymall shipping label", "citymall community tool"],
+        "meta_keywords": ["citymall label cropper", "citymall order processing", "community group buying"],
+        "high_cpc": ["group buying platforms", "hyperlocal delivery tools"]
+    },
+    "amazon-fba-box-label-crop": {
+        "title_keywords": ["amazon fba box label crop", "crop fba box label", "fba shipment tool"],
+        "meta_keywords": ["amazon fba label tool", "fba box label generator", "crop fba pdf"],
+        "high_cpc": ["amazon fba prep software", "fba inventory management"]
+    },
+    "flipkart-fbf-box-label-crop": {
+        "title_keywords": ["flipkart fbf box label crop", "crop fbf box label", "flipkart fulfillment tool"],
+        "meta_keywords": ["flipkart fbf label", "flipkart advantage tool", "crop flipkart fbf pdf"],
+        "high_cpc": ["flipkart advantage services", "e-commerce fulfillment india"]
+    },
+    "generate-amazon-fba-sticker": {
+        "title_keywords": ["generate amazon fba sticker", "amazon fba sticker generator", "create fba labels"],
+        "meta_keywords": ["fba sticker maker", "amazon item label generator", "fnsku label generator"],
+        "high_cpc": ["fba label printing service", "amazon inventory labels"]
+    },
+    "generate-label-sticker": {
+        "title_keywords": ["generate label sticker", "shipping label sticker maker", "create product stickers"],
+        "meta_keywords": ["sticker generator online", "product label maker", "custom sticker tool"],
+        "high_cpc": ["custom sticker printing", "label design software"]
     },
     "about": {
       "title_keywords": ["about toolzen", "about us toolzen", "toolzen about page"],
