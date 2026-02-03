@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useCallback, useEffect, ChangeEvent } from 'react';
@@ -12,7 +11,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { saveAs } from 'file-saver';
 import { Progress } from '../ui/progress';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
 
 type Tool = 'select' | 'text' | 'image' | 'draw';
 
