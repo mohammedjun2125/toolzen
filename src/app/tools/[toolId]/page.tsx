@@ -13,6 +13,11 @@ type Props = {
 const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
 
 const specificSeoData: { [key: string]: { title: string, description: string, schema: any } } = {
+  'pdf-editor': {
+    title: 'Free Online PDF Editor — Edit Text, Images & Draw | Toolzen',
+    description: 'A powerful, free online PDF editor that runs in your browser. Edit PDF text, add images, draw, fill forms, and more. 100% private and secure, with no uploads required.',
+    schema: { "@context":"https://schema.org", "@type":"SoftwareApplication", "name":"Toolzen Free PDF Editor", "url":"https://www.toolzenweb.com/tools/pdf-editor", "applicationCategory":"https://schema.org/OnlineTool", "description":"Edit PDF files securely in your browser. Add text, images, drawings, and manage pages for free without uploading files.", "operatingSystem":"All", "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"} }
+  },
   'pdf-compressor': {
     title: 'Compress PDF Online — Fast & Private | Toolzen',
     description: 'Compress PDF files quickly and privately in your browser. No uploads, 100% client-side, free and easy to use.',
@@ -67,6 +72,12 @@ const specificSeoData: { [key: string]: { title: string, description: string, sc
 
 
 const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
+    'pdf-editor': [
+        { question: 'Is this PDF editor really free?', answer: 'Yes, absolutely. Our online PDF editor is 100% free to use with no hidden fees, watermarks, or sign-up requirements. All core features like adding text, images, and drawings are available to everyone.' },
+        { question: 'Are my files secure when I edit them here?', answer: 'Yes. Your privacy is our top priority. This is a client-side tool, which means your PDF files are never uploaded to our servers. All processing and editing happens directly in your web browser on your computer, ensuring your documents remain completely confidential.' },
+        { question: 'Can I edit the existing text in my PDF?', answer: 'This version of the editor focuses on adding new content. You can add new text boxes, images, and drawings anywhere on the document. The ability to directly edit the original text within a PDF is a very complex feature that we are exploring for a future update.' },
+        { question: 'Does the editor work on mobile devices?', answer: 'Yes, our PDF editor is designed to be fully responsive and works on modern browsers across desktops, tablets, and smartphones. You can make edits on the go without needing to install an app.' },
+    ],
     'image-compressor': [
         { question: 'Is my image uploaded to a server?', answer: 'No, all compression is done in your browser. Your images never leave your computer, ensuring 100% privacy and security.' },
         { question: 'What image formats can I compress?', answer: 'Our tool supports JPG, PNG, WEBP, and GIF images. You can optimize any of these formats for free.' },
