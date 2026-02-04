@@ -9,6 +9,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Toolzen | Suggestions & Support',
+  description: 'Get in touch with the Toolzen team. We welcome your questions, feedback, and suggestions for new free online tools.',
+  alternates: {
+    canonical: '/contact',
+  },
+};
 
 export default function ContactPage() {
   return (

@@ -4,6 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Toolzen | Free & Private Online Tools',
+  description: 'Learn about Toolzen\'s mission to provide fast, free, and privacy-focused online utilities that work on the client-side, ensuring your data is never uploaded or stored.',
+  alternates: {
+    canonical: '/about',
+  },
+};
 
 export default function AboutPage() {
   return (

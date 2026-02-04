@@ -25,11 +25,11 @@ const playfairDisplay = Playfair_Display({
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.toolzenweb.com'),
+  metadataBase: new URL('https://toolzenweb.com'),
   title: 'Toolzen — Free Online Tools: PDF, Image, Text & Dev Utilities',
   description: 'Toolzen provides free, fast and private online tools — PDF, image, text, calculators and developer utilities. All client-side: no uploads, no accounts.',
   alternates: {
-    canonical: 'https://www.toolzenweb.com/',
+    canonical: '/',
   },
   openGraph: {
     title: 'Toolzen — Free Online Tools',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: 'Toolzen',
     locale: 'en_US',
     type: 'website',
-    url: 'https://www.toolzenweb.com/',
+    url: 'https://toolzenweb.com/',
   },
   robots: {
     index: true,
@@ -67,10 +67,10 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Toolzen",
-    "url": "https://www.toolzenweb.com",
+    "url": "https://toolzenweb.com",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://www.toolzenweb.com/?s={search_term_string}",
+      "target": "https://toolzenweb.com/?s={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };

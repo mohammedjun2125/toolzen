@@ -7,6 +7,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Disclaimer | Toolzen',
+  description: 'Read the disclaimer for Toolzen. Information is provided for general purposes only. Use of our free online tools is at your own risk.',
+  alternates: {
+    canonical: '/disclaimer',
+  },
+};
 
 export default function DisclaimerPage() {
   return (

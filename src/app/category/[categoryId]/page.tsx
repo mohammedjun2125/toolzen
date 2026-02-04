@@ -29,13 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       keywords: keywords.meta_keywords.concat(keywords.high_cpc),
       alternates: {
-          canonical: `https://www.toolzenweb.com/category/${category.id}`,
+          canonical: `/category/${category.id}`,
       },
       openGraph: {
         title,
         description,
         type: 'website',
-        url: `https://www.toolzenweb.com/category/${category.id}`,
+        url: `/category/${category.id}`,
       },
     };
 }
@@ -61,7 +61,7 @@ export default function CategoryPage({ params }: Props) {
         '@type': 'CollectionPage',
         name: `${category.name} - ${keywords.title_keywords.join(' ')} | Toolzen`,
         description: `Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. All tools are fast, private, and work in your browser.`,
-        url: `https://www.toolzenweb.com/category/${category.id}`,
+        url: `https://toolzenweb.com/category/${category.id}`,
         mainEntity: {
             '@type': 'ItemList',
             itemListElement: categoryTools.map((tool, index) => ({
@@ -70,7 +70,7 @@ export default function CategoryPage({ params }: Props) {
                 item: {
                     '@type': 'SoftwareApplication',
                     name: tool.name,
-                    url: `https://www.toolzenweb.com${tool.href}`,
+                    url: `https://toolzenweb.com${tool.href}`,
                     applicationCategory: category.name,
                     operatingSystem: 'Web',
                     description: tool.description,
