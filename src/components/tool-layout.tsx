@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Grip } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import type { ToolCategoryInfo } from '@/lib/tools';
-import { categoryMap } from '@/lib/tools';
+import { categoryMap, tools } from '@/lib/tools';
 
 type ToolLayoutProps = {
     children: React.ReactNode;
@@ -15,10 +15,17 @@ type ToolLayoutProps = {
     description: string;
     faq: { question: string; answer: string }[];
     categoryId: ToolCategoryInfo['id'];
+    toolId: string;
 };
 
-export function ToolLayout({ children, title, description, faq, categoryId }: ToolLayoutProps) {
+export function ToolLayout({ children, title, description, faq, categoryId, toolId }: ToolLayoutProps) {
     const category = categoryMap.get(categoryId);
+    
+    // Find related tools from the same category, excluding the current one.
+    const relatedTools = tools
+        .filter(t => t.category.id === categoryId && t.id !== toolId)
+        .sort(() => 0.5 - Math.random()) // Shuffle for variety
+        .slice(0, 8); // Show up to 8 related tools
 
     return (
         <div className="w-full max-w-4xl mx-auto py-8 px-4">
@@ -59,6 +66,19 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
                           ))}
                       </Accordion>
                   </div>
+                )}
+
+                {relatedTools.length > 0 && (
+                    <div className="mt-12">
+                        <h2 className="text-2xl font-bold mb-4">Related Tools</h2>
+                        <div className="flex gap-2 flex-wrap">
+                            {relatedTools.map(tool => (
+                                <Button asChild variant="outline" key={tool.id}>
+                                    <Link href={tool.href}>{tool.name}</Link>
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
                 )}
             </main>
         </div>

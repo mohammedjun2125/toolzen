@@ -384,10 +384,9 @@ export default function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
       />
-      <ToolLayout title={toolInfo.name} description={toolInfo.description} faq={faq} categoryId={toolInfo.category.id}>
+      <ToolLayout title={toolInfo.name} description={toolInfo.description} faq={faq} categoryId={toolInfo.category.id} toolId={toolId}>
         <DynamicTool toolId={toolId} />
       </ToolLayout>
     </>
   );
 }
-
