@@ -10,6 +10,7 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { Copy, RefreshCw } from 'lucide-react';
+import Link from 'next/link';
 
 export default function PasswordGenerator() {
   const [password, setPassword] = useState('');
@@ -47,6 +48,7 @@ export default function PasswordGenerator() {
   
   useEffect(() => {
     generatePassword();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [length, includeLowercase, includeUppercase, includeNumbers, includeSymbols]);
 
   const copyToClipboard = () => {
@@ -57,10 +59,11 @@ export default function PasswordGenerator() {
   };
 
   return (
+    <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
         <CardTitle className="text-2xl">Password Generator</CardTitle>
-        <CardDescription>Create strong and secure passwords.</CardDescription>
+        <CardDescription>Create strong, secure, and random passwords to protect your online accounts. This tool works entirely in your browser, ensuring your passwords are never stored or transmitted.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="relative">
@@ -98,5 +101,42 @@ export default function PasswordGenerator() {
         </Button>
       </CardContent>
     </Card>
+    <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
+        <h2 className="text-2xl font-bold">What is a Password Generator?</h2>
+        <p>A Password Generator is a tool that automatically creates strong, random, and unique passwords. In an era where data breaches are common, using simple or reused passwords is a significant security risk. This tool helps you create passwords that are extremely difficult for attackers to guess or crack through brute-force methods, forming the first line of defense for your digital identity.</p>
+
+        <h3 className="text-xl font-bold">How to Use the Password Generator</h3>
+        <ol>
+            <li><strong>Set the Length:</strong> Use the slider to choose your desired password length. For best security, we recommend at least 16 characters.</li>
+            <li><strong>Customize Character Types:</strong> Use the switches to include or exclude uppercase letters, lowercase letters, numbers, and symbols. The more types you include, the stronger the password.</li>
+            <li><strong>Generate and Copy:</strong> The tool automatically generates a new password whenever you change the settings. Click the refresh icon to generate a new one, or click the copy icon to copy the current password to your clipboard.</li>
+        </ol>
+
+        <h3 className="text-xl font-bold">Key Features</h3>
+        <ul>
+            <li><strong>Strong & Secure:</strong> Uses the browser's cryptographically secure random number generator to create truly random passwords.</li>
+            <li><strong>Fully Customizable:</strong> Control the length and character sets to meet any website or application's password requirements.</li>
+            <li><strong>100% Private & Client-Side:</strong> Your passwords are generated entirely in your browser. They are never sent to our servers, stored, or logged.</li>
+            <li><strong>Instant Generation:</strong> Get a new, strong password immediately with no waiting.</li>
+        </ul>
+
+        <h3 className="text-xl font-bold">Common Use Cases</h3>
+        <ul>
+            <li><strong>New Account Sign-ups:</strong> Create a unique, strong password for every new website or service you sign up for.</li>
+            <li><strong>Password Updates:</strong> Regularly update your passwords for critical accounts like email, banking, and social media.</li>
+            <li><strong>Securing Wi-Fi Networks:</strong> Generate a long, random password for your home or office Wi-Fi network to prevent unauthorized access.</li>
+            <li><strong>Application Keys:</strong> Create random strings for use as API keys or secret tokens in software development.</li>
+        </ul>
+
+        <div className="not-prose mt-8">
+            <h3 className="text-xl font-semibold">Related Security Tools</h3>
+            <p>Enhance your online security with our other free, private tools:</p>
+            <div className="flex gap-2 flex-wrap">
+                <Button asChild variant="outline"><Link href="/tools/hash-generator">Hash Generator</Link></Button>
+                <Button asChild variant="outline"><Link href="/tools/otp-generator">OTP Generator</Link></Button>
+            </div>
+        </div>
+    </article>
+    </>
   );
 }

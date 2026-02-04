@@ -97,27 +97,39 @@ export default function DnsLookup() {
             </CardContent>
         </Card>
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-            <h2 className="text-2xl font-bold">What is a DNS Lookup?</h2>
-            <p>A DNS (Domain Name System) lookup is the process of querying the internet's "phonebook" to find the IP address associated with a domain name. When you type a website like "www.google.com" into your browser, your computer performs a **DNS lookup** to find its corresponding IP address (e.g., 172.217.14.228) so it knows where to send the request. Our **free DNS checker tool** lets you perform this lookup manually for any domain and check all its important records.</p>
-            
-            <h3>Understanding Different DNS Records</h3>
-            <p>Our tool can check various types of DNS records, each serving a different purpose for domain health and configuration:</p>
+            <h2 className="text-2xl font-bold">What is the DNS Lookup Tool?</h2>
+            <p>The DNS Lookup Tool is a simple utility that allows you to query the Domain Name System (DNS) to retrieve records for a specific domain. The DNS acts as the internet's phonebook; it translates human-readable domain names (like `www.google.com`) into machine-readable IP addresses (like `172.217.14.228`). This tool lets you manually perform that lookup for any domain and inspect various types of records that are crucial for a website's operation.</p>
+
+            <h3 className="text-xl font-bold">How to Use the DNS Lookup Tool</h3>
+            <ol>
+                <li><strong>Enter a Domain:</strong> Type the domain name you want to investigate into the input field (e.g., `toolzenweb.com`).</li>
+                <li><strong>Select a Record Type:</strong> Choose the type of DNS record you want to check from the dropdown menu (e.g., `A`, `MX`, `TXT`).</li>
+                <li><strong>Click Lookup:</strong> Press the "Lookup" button to send the query. The results will appear below, showing the requested DNS information.</li>
+            </ol>
+
+            <h3 className="text-xl font-bold">Key Features</h3>
             <ul>
-                <li><strong>A Record:</strong> The most basic DNS record. It maps a domain name to an IPv4 address. This is essential for website accessibility.</li>
-                <li><strong>AAAA Record:</strong> Similar to an A record, but it maps a domain to a more modern IPv6 address.</li>
-                <li><strong>CNAME Record:</strong> A Canonical Name record forwards one domain to another. For example, `www.example.com` is often a CNAME pointing to `example.com`.</li>
-                <li><strong>MX Record:</strong> A Mail Exchanger record directs a domain's email to the servers that host its email accounts. This record is crucial for email deliverability.</li>
-                <li><strong>NS Record:</strong> A Name Server record indicates which DNS servers are authoritative for the domain, meaning they hold the actual DNS records.</li>
-                <li><strong>TXT Record:</strong> Allows domain administrators to store text notes. Commonly used for email security verification (SPF, DKIM, DMARC) and domain ownership verification.</li>
-                <li><strong>SOA Record:</strong> The Start of Authority record contains important administrative information about the domain, like the primary name server and an email address for the domain administrator.</li>
+                <li><strong>Comprehensive Record Types:</strong> Check for A, AAAA, CNAME, MX, NS, TXT, and SOA records.</li>
+                <li><strong>Instant Results:</strong> Utilizes Google's fast and reliable public DNS service for quick lookups.</li>
+                <li><strong>Easy to Read:</strong> Presents the raw DNS data in a clean, organized format.</li>
+                <li><strong>100% Private:</strong> Your lookup queries are proxied and not stored, ensuring your activity remains private.</li>
             </ul>
 
-            <h2 className="text-2xl font-bold">Why Use a DNS Lookup Tool?</h2>
+            <h3 className="text-xl font-bold">Common Use Cases</h3>
             <ul>
-                <li>**Technical SEO:** SEO professionals use a **DNS checker** to diagnose technical issues, verify domain configurations, check for proper redirections, and analyze competitor setups.</li>
-                <li>**Troubleshooting:** If a website or email service is down, a **DNS lookup** can help you quickly determine if the problem is with its DNS configuration.</li>
-                <li>**Email Configuration:** When setting up a new email service (like Google Workspace or Microsoft 365), you must verify that your MX and TXT records are pointing correctly to ensure you can send and receive emails.</li>
+                <li><strong>Technical SEO:</strong> SEO professionals use a DNS checker to diagnose technical issues, verify domain configurations, check for proper redirections, and analyze competitor setups.</li>
+                <li><strong>Troubleshooting Website Issues:</strong> If a website is down, a DNS lookup can help determine if the problem is with its IP address configuration (A/AAAA records).</li>
+                <li><strong>Email Deliverability:</strong> When setting up a new email service (like Google Workspace), you must verify that your MX and TXT records are pointing correctly to ensure you can send and receive emails.</li>
+                <li><strong>Security Analysis:</strong> Checking TXT records can reveal security policies like SPF (Sender Policy Framework) and DMARC, which help prevent email spoofing.</li>
             </ul>
+
+            <div className="not-prose mt-8">
+                <h3 className="text-xl font-semibold">Related Tools</h3>
+                <p>Explore our other web utilities for a complete analysis:</p>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/ip-lookup">IP Address Lookup</Link></Button>
+                </div>
+            </div>
         </article>
         </>
     );

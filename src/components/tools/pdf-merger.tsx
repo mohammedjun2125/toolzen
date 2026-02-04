@@ -158,40 +158,41 @@ export default function PdfMerger() {
         </Card>
 
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-            <h2 className="text-2xl font-bold">The Easiest Way to Combine PDF Files for Free</h2>
-            <p>Need to **join multiple PDFs** into a single, organized document? Our **free online PDF merger** is the perfect solution. Whether you're compiling reports, archiving invoices, or submitting a project, this **PDF combiner tool** simplifies the process. Best of all, it's a **client-side PDF tool**, meaning your files are processed securely in your browser and never leave your computer.</p>
+            <h2 className="text-2xl font-bold">What is the PDF Merger Tool?</h2>
+            <p>The PDF Merger is a free online utility that allows you to combine multiple PDF files into one single, organized document. Whether you're compiling reports, archiving invoices, or submitting a project with multiple parts, this tool simplifies the process. It's designed to be fast, secure, and incredibly easy to use, processing all your files directly in your web browser without ever uploading them to a server.</p>
             
-            <h3>Key Features of Our PDF Combiner</h3>
+            <h3 className="text-xl font-bold">How to Use the PDF Merger</h3>
+            <ol>
+                <li><strong>Upload Your PDFs:</strong> Drag and drop your documents into the upload area, or click to select multiple files from your computer.</li>
+                <li><strong>Order Your Files:</strong> The files will be merged in the order they are listed. A future update will allow you to drag and drop to reorder them.</li>
+                <li><strong>Click 'Merge PDFs':</strong> Press the button to start the process. The tool will begin to join the PDFs immediately.</li>
+                <li><strong>Download Your Combined PDF:</strong> Your merged PDF will be ready for download instantly.</li>
+            </o>
+
+            <h3 className="text-xl font-bold">Key Features of Our PDF Combiner</h3>
             <ul>
-                <li><strong>Unlimited Merges:</strong> Combine as many PDF files as you need, with no limit on the number of documents.</li>
-                <li><strong className="flex items-center gap-2"><ShieldCheck size={20} />Total Privacy:</strong> Your files are never uploaded to a server. This **online PDF tool** ensures your confidential documents remain secure on your device.</li>
-                <li><strong className="flex items-center gap-2"><Zap size={20} />Blazing-Fast Speed:</strong> Since there are no uploads, the merging process is incredibly fast. **Combine PDF files free** and in seconds.</li>
-                <li><strong>No Software or Signup:</strong> This is a completely browser-based utility. No installation or registration is needed to use this **free PDF merger**.</li>
+                <li><strong>Unlimited Merges:</strong> Combine as many PDF files as you need in a single session.</li>
+                <li><strong className="flex items-center gap-2"><ShieldCheck size={20} />Total Privacy:</strong> Your files are never uploaded. All merging happens on your device, ensuring your confidential documents remain secure.</li>
+                <li><strong className="flex items-center gap-2"><Zap size={20} />Blazing-Fast Speed:</strong> With no uploads required, the process is incredibly fast.</li>
+                <li><strong>No Software or Signup:</strong> This is a completely browser-based utility. No installation or registration is needed.</li>
             </ul>
 
-            <h2 className="text-2xl font-bold">How to Merge Multiple PDF Files Quickly</h2>
-            <ol>
-                <li><strong>Step 1: Upload Your PDFs:</strong> Drag and drop your documents into the upload area, or click to select multiple files from your computer.</li>
-                <li><strong>Step 2: Order Your Files:</strong> Arrange the PDFs in the exact order you want them to appear in the final document. (Reordering feature coming soon).</li>
-                <li><strong>Step 3: Click 'Merge PDFs':</strong> Press the button to start the process. Our **fast PDF converter** will begin to **join the PDFs** immediately.</li>
-                <li><strong>Step 4: Download Your Combined PDF:</strong> Your merged PDF will be ready for download instantly.</li>
-            </ol>
-
-            <h3>Common Use Cases for Merging PDFs</h3>
+            <h3 className="text-xl font-bold">Common Use Cases for Merging PDFs</h3>
             <ul>
-                <li>**Business:** Combine multiple reports, invoices, or contracts into a single file for easy sharing and archiving.</li>
-                <li>**Academic:** Merge different research papers, chapters, or assignments into one document for submission.</li>
-                <li>**Personal:** Join bank statements, receipts, or legal documents into one organized PDF.</li>
+                <li><strong>Business Reports:</strong> Combine a cover page, executive summary, main body, and appendices into a single, polished report.</li>
+                <li><strong>Academic Submissions:</strong> Merge your essay, bibliography, and any supplementary materials into one file for easy submission.</li>
+                <li>**Financial Archiving:** Join monthly bank statements, credit card bills, and receipts into a single PDF for tax season.</li>
+                <li><strong>Portfolios:</strong> Combine multiple project examples or case studies into a single, comprehensive portfolio document.</li>
             </ul>
 
             <div className="not-prose mt-8">
-                <h3 className="text-xl font-semibold">More Free PDF Tools</h3>
-                <p>After merging, you might need to make other changes. Check out our other tools:</p>
-                <ul className="list-disc list-inside">
-                    <li><Link href="/tools/pdf-splitter" className="text-primary hover:underline">Split PDF</Link> - Need to extract pages from your newly merged file? Use our splitter.</li>
-                    <li><Link href="/tools/add-watermark" className="text-primary hover:underline">Add Watermark to PDF</Link> - Protect your document by adding a text watermark.</li>
-                    <li><Link href="/tools/pdf-compressor" className="text-primary hover:underline">Compress PDF</Link> - Reduce the file size of your merged PDF.</li>
-                </ul>
+                <h3 className="text-xl font-semibold">Related PDF Tools</h3>
+                <p>After merging your file, you may need to make other changes:</p>
+                <div className="flex gap-2 flex-wrap">
+                    <Button asChild variant="outline"><Link href="/tools/pdf-splitter">Split PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/add-watermark">Add Watermark to PDF</Link></Button>
+                    <Button asChild variant="outline"><Link href="/tools/pdf-compressor">Compress PDF</Link></Button>
+                </div>
             </div>
         </article>
         </>

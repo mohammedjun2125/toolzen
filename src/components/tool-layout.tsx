@@ -6,8 +6,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Grip } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
-import { mockPosts } from '@/lib/blog';
 import type { ToolCategoryInfo } from '@/lib/tools';
 import { categoryMap } from '@/lib/tools';
 
@@ -20,12 +18,6 @@ type ToolLayoutProps = {
 };
 
 export function ToolLayout({ children, title, description, faq, categoryId }: ToolLayoutProps) {
-    // Find related articles based on keywords in title
-    const keywords = title.toLowerCase().split(' ').filter(kw => kw.length > 3);
-    const relatedArticles = mockPosts.filter(post => 
-        keywords.some(keyword => post.title.toLowerCase().includes(keyword) || post.content.toLowerCase().includes(keyword))
-    ).slice(0, 4);
-
     const category = categoryMap.get(categoryId);
 
     return (
@@ -53,28 +45,6 @@ export function ToolLayout({ children, title, description, faq, categoryId }: To
                 </div>
                 
                 {children}
-
-                {relatedArticles.length > 0 && (
-                  <section className="related-articles mt-12">
-                      <Card className="bg-card/60 backdrop-blur-lg">
-                          <CardHeader>
-                              <CardTitle>Helpful Guides & Articles</CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                              <ul className="space-y-2">
-                                  {relatedArticles.map(post => (
-                                      <li key={post.slug}>
-                                          <Link href={`/blog/${post.slug}`} className="text-primary hover:underline">
-                                              {post.title}
-                                          </Link>
-                                      </li>
-                                  ))}
-                              </ul>
-                          </CardContent>
-                      </Card>
-                  </section>
-                )}
-
 
                 {faq.length > 0 && (
                   <div className="mt-12">

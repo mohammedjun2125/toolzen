@@ -93,19 +93,42 @@ export default function IpLookup() {
                 </CardContent>
             </Card>
             <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-                <h2 className="text-2xl font-bold">What is an IP Address?</h2>
-                <p>An IP (Internet Protocol) address is a unique numerical label assigned to every device connected to a computer network that uses the Internet Protocol for communication. It serves two main functions: identifying the host or network interface and providing the location of the host in the network. Our **IP address finder** tool lets you instantly get **IP geolocation** details for any public IP address.</p>
-                
-                <h3>Why Use an IP Lookup Tool?</h3>
+                <h2 className="text-2xl font-bold">What is the IP Lookup Tool?</h2>
+                <p>An IP (Internet Protocol) address is a unique numerical label assigned to every device connected to the internet. The IP Lookup tool is a utility that allows you to find the geographical location and other details associated with any public IP address. Upon visiting this page, the tool automatically detects and looks up your own IP address. You can then use the search bar to find information about any other IP address you're curious about.</p>
+
+                <h3 className="text-xl font-bold">How to Use This Tool</h3>
+                <ol>
+                    <li><strong>Automatic Lookup:</strong> Your own IP address is automatically detected and looked up when you load the page.</li>
+                    <li><strong>Manual Lookup:</strong> Enter any valid IPv4 or IPv6 address into the search box.</li>
+                    <li><strong>Get Results:</strong> Click the "Lookup IP" button to see detailed information, including the ISP, location, and timezone.</li>
+                </ol>
+
+                <h3 className="text-xl font-bold">Key Features</h3>
                 <ul>
-                    <li><strong>Content Personalization:</strong> Websites use **IP geolocation** to serve content in the local language or currency, providing a better user experience.</li>
-                    <li><strong>Digital Rights Management:</strong> Streaming services use IP lookups to ensure content is only shown in licensed regions, a common practice in media distribution.</li>
-                    <li><strong>Security Analysis:</strong> Network administrators use an **IP locator** to trace the origin of suspicious traffic, analyze firewall logs, and identify potential cyber threats.</li>
-                    <li><strong>Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience and tailor campaigns.</li>
+                    <li><strong>Automatic IP Detection:</strong> Instantly see the details for your own IP address.</li>
+                    <li><strong>Comprehensive Details:</strong> Get information on the country, city, region, ISP (Internet Service Provider), and timezone.</li>
+                    <li><strong>IPv4 and IPv6 Support:</strong> Look up both older IPv4 addresses and modern IPv6 addresses.</li>
+                    <li><strong>Fast and Private:</strong> Queries are quick and your search history is not stored.</li>
                 </ul>
 
-                <h2 className="text-2xl font-bold">How Accurate is IP Geolocation?</h2>
-                <p>IP-based geolocation is a science of approximation. It is generally very accurate at the country level but becomes less precise at the city level. The accuracy depends on the quality of the geolocation database being used. An **IP address lookup tool** can usually identify the country correctly over 99% of the time, but city-level accuracy may vary. It should not be used for precise location tracking.</p>
+                <h3 className="text-xl font-bold">Common Use Cases</h3>
+                <ul>
+                    <li><strong>Content Personalization:</strong> Websites use IP geolocation to serve content in the local language or currency.</li>
+                    <li><strong>Security Analysis:</strong> Network administrators use an IP locator to trace the origin of suspicious traffic, analyze firewall logs, and identify potential cyber threats.</li>
+                    <li><strong>Marketing and Analytics:</strong> Marketers analyze the geographic distribution of their website visitors to better understand their audience and tailor campaigns.</li>
+                    <li><strong>Verify VPN Connection:</strong> Check if your VPN is working correctly by seeing if your IP address location has changed.</li>
+                </ul>
+                
+                <h3 className="text-xl font-bold">How Accurate is IP Geolocation?</h3>
+                <p>IP-based geolocation is a science of approximation. It is generally very accurate at the country level but becomes less precise at the city level. The accuracy depends on the quality of the geolocation database being used. An IP address lookup tool can usually identify the country correctly over 99% of the time, but city-level accuracy may vary. It should not be used for precise location tracking.</p>
+
+                <div className="not-prose mt-8">
+                    <h3 className="text-xl font-semibold">Related Tools</h3>
+                    <p>Explore other useful developer utilities:</p>
+                    <div className="flex gap-2 flex-wrap">
+                        <Button asChild variant="outline"><Link href="/tools/dns-lookup">DNS Lookup</Link></Button>
+                    </div>
+                </div>
             </article>
         </>
     );

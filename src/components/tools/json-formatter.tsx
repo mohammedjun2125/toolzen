@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { seoKeywords } from '@/lib/seo-keywords';
 
 export default function JsonFormatter() {
-  const [jsonInput, setJsonInput] = useState('');
+  const [jsonInput, setJsonInput] = useState('{"example": "paste your json here"}');
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const { toast } = useToast();
   const toolKeywords = (seoKeywords.tools as any)['json-formatter'];
@@ -87,30 +87,49 @@ export default function JsonFormatter() {
       </CardContent>
     </Card>
     <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-        <h2 className="text-2xl font-bold">What is a JSON Formatter?</h2>
-        <p>A **JSON Formatter** (also known as a **JSON Beautifier** or **JSON Prettifier**) is an essential developer tool that takes messy, unformatted JSON data and transforms it into a clean, indented, human-readable format. For developers working with APIs, configuration files, or any form of structured data, a good formatter is an indispensable utility. It makes debugging easier and understanding complex data structures much faster.</p>
+        <h2 className="text-2xl font-bold">What is a JSON Formatter & Validator?</h2>
+        <p>A JSON Formatter (also known as a "Beautifier" or "Prettifier") is an essential developer tool that takes messy, unformatted JSON data and transforms it into a clean, indented, human-readable format. At the same time, it also acts as a JSON Validator (or "Linter") by parsing the data. If there are any syntax errors, it immediately flags them. This dual function makes it indispensable for anyone working with APIs, configuration files, or other data sources that use JSON.</p>
         
-        <h3>Why This Tool is Also a Powerful JSON Validator</h3>
-        <p>When you click "Format JSON," our tool doesn't just add spaces and line breaks. It first tries to parse the JSON string according to the official JSON specification. This process acts as a **JSON Validator** (or **JSON Linter**). If the parsing fails, it means your JSON is invalid. The tool will immediately alert you to the error, helping you find and fix common issues such as:</p>
-        <ul>
-            <li>Missing commas between key-value pairs.</li>
-            <li>Trailing commas after the last element in an array or object.</li>
-            <li>Using single quotes instead of double quotes for keys and string values.</li>
-            <li>Unescaped characters within strings.</li>
-        </ul>
-
-        <h2 className="text-2xl font-bold">How to Use the JSON Formatter and Validator</h2>
+        <h3 className="text-xl font-bold">How to Use the JSON Formatter and Validator</h3>
         <ol>
-            <li><strong>Paste Your JSON:</strong> Copy your JSON data and paste it into the text area of our **online JSON viewer**.</li>
-            <li><strong>Click Format:</strong> Press the "Format/Validate JSON" button.</li>
-            <li><strong>Review the Output:</strong> If your JSON is valid, it will be instantly beautified. A green checkmark will appear. If it's invalid, you will receive an error message pointing you to the problem, and a red 'X' will appear.</li>
+            <li><strong>Paste Your JSON:</strong> Copy your raw JSON data and paste it into the text area.</li>
+            <li><strong>Format & Validate:</strong> Press the "Format/Validate JSON" button.</li>
+            <li><strong>Review the Output:</strong>
+                <ul>
+                  <li>If your JSON is valid, it will be instantly beautified with proper indentation. A green checkmark will appear to confirm its validity.</li>
+                  <li>If your JSON is invalid, an error message will appear, and the text area will be highlighted in red. This helps you quickly identify issues like missing commas, incorrect quotes, or mismatched brackets.</li>
+                </ul>
+            </li>
             <li><strong>Copy or Clear:</strong> Once formatted, you can easily copy the clean JSON to your clipboard or clear the editor to start over.</li>
         </ol>
+
+        <h3 className="text-xl font-bold">Key Features</h3>
+        <ul>
+            <li><strong>Instant Formatting:</strong> Cleans up minified or messy JSON in a single click.</li>
+            <li><strong>Real-time Validation:</strong> Immediately alerts you to syntax errors.</li>
+            <li><strong>Secure & Private:</strong> 100% client-side processing. Your data is never uploaded to a server, ensuring confidentiality.</li>
+            <li><strong>Simple Interface:</strong> A large text area and clear buttons make the tool easy and efficient to use.</li>
+            <li><strong>Copy & Clear:</strong> Quickly copy the formatted output or clear the editor with convenient buttons.</li>
+        </ul>
+
+        <h3 className="text-xl font-bold">Common Use Cases</h3>
+        <ul>
+            <li><strong>API Development:</strong> Prettify raw API responses to understand their structure and find the data you need.</li>
+            <li><strong>Debugging:</strong> Quickly find and fix syntax errors in your JSON files or data strings.</li>
+            <li><strong>Configuration Files:</strong> Keep `package.json`, `tsconfig.json`, and other configuration files clean and readable.</li>
+            <li><strong>Learning:</strong> A great tool for students and new developers to learn the proper syntax and structure of JSON.</li>
+        </ul>
         
-        <h3>Secure and Private by Design</h3>
-        <p>Many online JSON formatters require you to paste your data, which is then sent to a server for processing. This can be a security risk if your JSON contains sensitive information like API keys, personal data, or authentication tokens. Our tool is 100% client-side. All formatting and validation happen directly in your browser. Your data is never uploaded, guaranteeing its privacy and making it a truly secure **JSON online editor**. Explore more of our <Link href="/">free online tools</Link> or browse our <Link href="/category/text-data">Text & Data Tools</Link>.</p>
+        <div className="not-prose mt-8">
+            <h3 className="text-xl font-semibold">Related Developer Tools</h3>
+            <p>Streamline your workflow with our other text and data utilities:</p>
+            <div className="flex gap-2 flex-wrap">
+                <Button asChild variant="outline"><Link href="/tools/base64-encoder-decoder">Base64 Encoder/Decoder</Link></Button>
+                <Button asChild variant="outline"><Link href="/tools/url-encoder-decoder">URL Encoder/Decoder</Link></Button>
+                <Button asChild variant="outline"><Link href="/tools/hash-generator">Hash Generator</Link></Button>
+            </div>
+        </div>
     </article>
     </>
   );
 }
-

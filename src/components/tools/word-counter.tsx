@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import { seoKeywords } from '@/lib/seo-keywords';
+import { Button } from '../ui/button';
 
 function StatCard({ title, value }: { title: string, value: number }) {
     return (
@@ -58,27 +59,42 @@ export default function WordCounter() {
       </CardContent>
     </Card>
     <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-        <h2 className="text-2xl font-bold">The Essential Writing & SEO Companion Tool</h2>
-        <p>Whether you're an author drafting a novel, a student writing an essay against a strict word limit, or an SEO professional crafting meta descriptions, word count matters. A reliable **online word count tool** is indispensable for ensuring your content meets specific requirements and is optimized for its intended platform. Our free word counter gives you more than just a word count—it provides a comprehensive **text analysis tool** in real-time.</p>
-        
-        <h3>Why Use an Online Word Counter?</h3>
+        <h2 className="text-2xl font-bold">What is the Word Counter?</h2>
+        <p>The Word Counter is an essential online tool for writers, students, marketers, and anyone who works with text. It provides a real-time analysis of your content, instantly calculating not just the number of words, but also characters, sentences, and paragraphs. Whether you're drafting an essay, composing a tweet, or writing a blog post, this tool helps you meet specific length requirements and improve your writing's structure, all securely within your browser.</p>
+
+        <h3 className="text-xl font-bold">How to Use the Word Counter</h3>
+        <ol>
+            <li><strong>Start Typing or Paste Text:</strong> Simply begin typing directly into the text area, or paste your existing content from another source.</li>
+            <li><strong>View Real-Time Stats:</strong> As you type, the counters for words, characters, sentences, and paragraphs will update instantly. There's no need to click a "submit" button.</li>
+            <li><strong>Analyze Your Content:</strong> Use the statistics to refine your writing. Shorten long sentences, break up dense paragraphs, or trim your text to meet character limits.</li>
+        </ol>
+
+        <h3 className="text-xl font-bold">Key Features</h3>
         <ul>
-            <li><strong>Meet Requirements:</strong> Many platforms have strict limits, from Twitter's character count to academic essay length requirements. A **character counter** and **word counter** helps you stay within these boundaries.</li>
-            <li><strong>Improve Readability:</strong> By analyzing sentence and paragraph counts, you can identify overly long sentences or dense blocks of text that might be difficult for readers to digest, thereby improving user engagement.</li>
-            <li><strong>SEO Optimization:</strong> While there's no magic number, content length is a known ranking factor. This tool helps you ensure your articles and blog posts have sufficient depth to be considered authoritative.</li>
-            <li>**Speed and Convenience:** It's faster than opening a heavy word processor. Simply paste your text and get instant stats without any friction.</li>
+            <li><strong>Comprehensive Analysis:</strong> Counts words, characters, sentences, and paragraphs.</li>
+            <li><strong>Real-Time Updates:</strong> All statistics update instantly as you type.</li>
+            <li><strong>Privacy-Focused:</strong> 100% client-side tool. Your text is never sent to our servers.</li>
+            <li><strong>No Limits:</strong> Analyze documents of any size, from a short sentence to a full-length novel.</li>
+            <li><strong>Simple & Fast:</strong> A clean, distraction-free interface that loads quickly and is easy to use.</li>
         </ul>
 
-        <h2 className="text-2xl font-bold">What Our Word Count Tool Measures</h2>
+        <h3 className="text-xl font-bold">Common Use Cases</h3>
         <ul>
-            <li><strong>Words:</strong> The total number of words in your text, perfect for essays and articles.</li>
-            <li><strong>Characters:</strong> The total number of characters, including spaces, crucial for social media posts, meta titles, and descriptions.</li>
-            <li><strong>Sentences:</strong> The number of sentences, helping you gauge the complexity and pacing of your writing.</li>
-            <li><strong>Paragraphs:</strong> The number of paragraphs, which is useful for structuring scannable web content.</li>
+            <li><strong>Academic Writing:</strong> Ensure your essays, research papers, and dissertations meet the required word count.</li>
+            <li><strong>SEO & Content Marketing:</strong> Write blog posts and articles that meet optimal length for search engine ranking. Craft meta titles and descriptions that fit within character limits.</li>
+            <li><strong>Social Media Management:</strong> Compose posts for platforms like X (Twitter) and LinkedIn that adhere to their specific character constraints.</li>
+            <li><strong>Professional Writing:</strong> Check the length and structure of reports, emails, and presentations to ensure they are concise and effective.</li>
         </ul>
         
-        <h3>Secure and Private by Design</h3>
-        <p>Your writing is your intellectual property. Many online tools might store or analyze what you paste. Our word counter is a 100% client-side tool. Your text is processed in your browser and is never sent to our servers, guaranteeing your privacy. This makes it a safe tool for professional writers, students, and businesses. You can explore our other <Link href="/category/text-data">Text & Data Tools</Link> or check out all our <Link href="/">free online tools</Link>.</p>
+        <div className="not-prose mt-8">
+            <h3 className="text-xl font-semibold">Related Text & Data Tools</h3>
+            <p>Enhance your writing and data processing with our other free utilities:</p>
+            <div className="flex gap-2 flex-wrap">
+                <Button asChild variant="outline"><Link href="/tools/case-converter">Case Converter</Link></Button>
+                <Button asChild variant="outline"><Link href="/tools/remove-duplicate-lines">Remove Duplicate Lines</Link></Button>
+                <Button asChild variant="outline"><Link href="/tools/text-to-speech">Text to Speech</Link></Button>
+            </div>
+        </div>
     </article>
     </>
   );
