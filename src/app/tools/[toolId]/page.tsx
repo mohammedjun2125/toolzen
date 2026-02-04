@@ -373,17 +373,20 @@ export default function ToolPage({ params }: Props) {
       }))
   } : null;
 
-  const combinedSchema = faqSchema 
-    ? { ...schema, mainEntityOfPage: faqSchema }
-    : schema;
-
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        suppressHydrationWarning
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          suppressHydrationWarning
+        />
+      )}
       <ToolLayout title={toolInfo.name} description={toolInfo.description} faq={faq} categoryId={toolInfo.category.id} toolId={toolId}>
         <DynamicTool toolId={toolId} />
       </ToolLayout>
