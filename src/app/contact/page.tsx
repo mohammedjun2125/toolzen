@@ -3,12 +3,10 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import type { Metadata } from 'next';
+import { ContactForm } from '@/components/contact-form';
 
 export const metadata: Metadata = {
   title: 'Contact Toolzen | Suggestions & Support',
@@ -50,21 +48,7 @@ export default function ContactPage() {
             <p className="prose dark:prose-invert max-w-none mb-6">
               We'd love to hear from you! Whether you have a question, a suggestion for a new tool, or just want to say hello, feel free to reach out.
             </p>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Your Name" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="your.email@example.com" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Your message..." rows={5} />
-              </div>
-              <Button type="submit" className="w-full">Send Message</Button>
-            </form>
+            <ContactForm />
             <div className="prose dark:prose-invert max-w-none mt-6">
                 <h3 className="mt-6">Or Email Us Directly</h3>
                 <p>
