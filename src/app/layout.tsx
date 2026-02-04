@@ -75,37 +75,6 @@ export default function RootLayout({
     }
   };
 
-  const faqSchema = {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity": [
-      {
-        "@type":"Question",
-        "name":"Are Toolzen tools private?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. Most Toolzen utilities run client-side in your browser — files and data are never uploaded to our servers."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"Do I need an account to use Toolzen?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"No account or signup required — simply open any tool and start using it instantly."
-        }
-      },
-      {
-        "@type":"Question",
-        "name":"How do I compress a PDF without losing quality?",
-        "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Use Toolzen’s PDF Compressor and choose 'Recommended' or 'High Quality' compression. Processing happens entirely in your browser for best results."
-        }
-      }
-    ]
-  };
-
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
@@ -114,11 +83,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-          suppressHydrationWarning
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           suppressHydrationWarning
         />
       </head>
