@@ -39,7 +39,7 @@ export default function WordCounter() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+        <CardTitle className="text-2xl">Online Word Count Tool</CardTitle>
         <CardDescription>Get instant statistics for your text. This **{toolKeywords.meta_keywords.join(', ')}** calculates characters, sentences, and paragraphs in real-time, all securely in your browser.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -60,7 +60,7 @@ export default function WordCounter() {
     </Card>
     <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
         <h2 className="text-2xl font-bold">What is the Word Counter?</h2>
-        <p>The Word Counter is an essential online tool for writers, students, marketers, and anyone who works with text. It provides a real-time analysis of your content, instantly calculating not just the number of words, but also characters, sentences, and paragraphs. Whether you're drafting an essay, composing a tweet, or writing a blog post, this tool helps you meet specific length requirements and improve your writing's structure, all securely within your browser.</p>
+        <p>The Word Counter is an essential **online word count tool** for writers, students, marketers, and anyone who works with text. It provides a real-time analysis of your content, instantly calculating not just the number of words, but also characters, sentences, and paragraphs. Whether you're drafting an essay, composing a tweet, or writing a blog post, this tool helps you meet specific length requirements and improve your writing's structure, all securely within your browser.</p>
 
         <h3 className="text-xl font-bold">How to Use the Word Counter</h3>
         <ol>
@@ -99,3 +99,4 @@ export default function WordCounter() {
     </>
   );
 }
+

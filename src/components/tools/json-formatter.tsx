@@ -57,7 +57,7 @@ export default function JsonFormatter() {
     <>
     <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' & ')}</CardTitle>
+        <CardTitle className="text-2xl">Online JSON Viewer, Formatter & Validator</CardTitle>
         <CardDescription>Paste your JSON data to {toolKeywords.meta_keywords.join(', ')}. This free online JSON viewer and linter works securely in your browser to make debugging easy.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -88,7 +88,7 @@ export default function JsonFormatter() {
     </Card>
     <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
         <h2 className="text-2xl font-bold">What is a JSON Formatter & Validator?</h2>
-        <p>A JSON Formatter (also known as a "Beautifier" or "Prettifier") is an essential developer tool that takes messy, unformatted JSON data and transforms it into a clean, indented, human-readable format. At the same time, it also acts as a JSON Validator (or "Linter") by parsing the data. If there are any syntax errors, it immediately flags them. This dual function makes it indispensable for anyone working with APIs, configuration files, or other data sources that use JSON.</p>
+        <p>A JSON Formatter (also known as a "Beautifier" or "Prettifier") is an essential developer tool that takes messy, unformatted JSON data and transforms it into a clean, indented, human-readable format. At the same time, it also acts as a JSON Validator (or "Linter") by parsing the data. If there are any syntax errors, our **online JSON viewer** immediately flags them. This dual function makes it indispensable for anyone working with APIs, configuration files, or other data sources that use JSON.</p>
         
         <h3 className="text-xl font-bold">How to Use the JSON Formatter and Validator</h3>
         <ol>
@@ -133,3 +133,4 @@ export default function JsonFormatter() {
     </>
   );
 }
+

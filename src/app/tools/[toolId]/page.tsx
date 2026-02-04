@@ -1,4 +1,5 @@
 
+
 import { tools, toolMap } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
@@ -92,7 +93,7 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'Is my generated password saved anywhere?', answer: 'No. The password exists only on your screen and in your computer\'s memory. It is never sent over the internet or stored by our server, making the process completely private.' },
         { question: 'What is the ideal password length?', answer: 'Security experts recommend a minimum of 16 characters for important accounts. The longer and more complex the password, the harder it is to crack. Our tool supports up to 64 characters.' },
         { question: 'Why should I use symbols and numbers?', answer: 'Including different character types (uppercase, lowercase, numbers, symbols) dramatically increases the number of possible combinations, making a brute-force attack exponentially harder. Always include all character types for maximum security.' },
-        { question: 'Should I use a different password for every site?', answer: 'Yes, absolutely. Using a unique password for each online account is one ofthe most important security practices. If one site is breached, a unique password prevents attackers from using the same credentials to access your other accounts.' },
+        { question: 'Should I use a different password for every site?', answer: 'Yes, absolutely. Using a unique password for each online account is one of a an important security practices. If one site is breached, a unique password prevents attackers from using the same credentials to access your other accounts.' },
     ],
     'hash-generator': [
       { question: 'Is my text sent to a server for hashing?', answer: 'No, all hashing is performed in your browser using the Web Crypto API. Your data remains completely private and secure.' },
@@ -113,7 +114,7 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'What does the word counter tool measure?', answer: 'It provides real-time statistics on the number of words, characters (with and without spaces), sentences, and paragraphs in your text.'},
         { question: 'How are words counted?', answer: 'The tool counts words by splitting the text by spaces and other whitespace characters. It is a reliable method for standard English text.'},
         { question: 'Is there a character limit?', answer: 'No, there is no limit to the amount of text you can paste. The tool is designed to handle everything from a short tweet to a full-length novel, with performance depending on your device\'s capabilities.'},
-        { question: 'Why is character count important?', answer: 'Character counts are crucial for social media platforms like X (Twitter), meta descriptions in SEO, and other contexts where space is limited. Our tool helps you stay within these limits.'}
+        { question: 'Why is an online word count tool useful?', answer: 'An online word count tool is crucial for meeting specific requirements for essays, reports, social media posts, and SEO content. It helps writers, students, and professionals ensure their text is the right length and well-structured.'}
     ],
     'percentage-calculator': [
         { question: 'Is this calculator free?', answer: 'Yes, our percentage calculator is completely free and works offline in your browser. All calculations are performed on your device, ensuring your data is private.'},
@@ -183,28 +184,28 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'Can I rotate just one page in a multi-page document?', answer: 'Absolutely. Our tool generates a preview of every page, allowing you to apply rotations to individual pages or all pages at once before downloading the final document.' },
         { question: 'Will rotating the PDF reduce its quality?', answer: 'No, rotating a PDF is a lossless operation. It only changes the orientation metadata for the page. The quality of your text and images will remain exactly the same as the original.' },
         { question: 'What if I rotate a page by mistake?', answer: 'No problem. Each rotation is in 90-degree increments. Simply click the rotate button again until the page returns to its original orientation. The changes are only permanent after you click "Apply Changes & Download".' },
-        { question: 'Can this tool fix a PDF that was scanned upside down?', answer: 'Yes, this is one of its primary uses. You can quickly rotate all pages of a scanned document by 180 degrees to fix its orientation.' }
+        { question: 'How to rotate a PDF permanently?', answer: 'To permanently rotate a PDF, upload your file, use the rotate buttons on the page previews to set the correct orientation, and then click "Apply Changes & Download". The new file will have the rotations saved permanently.' }
     ],
     'pdf-deleter': [
         { question: 'Is deleting pages from my PDF secure?', answer: 'Yes. Our tool is 100% secure as it processes the file directly in your browser. Your PDF is never uploaded to a server, so your confidential information remains completely private.'},
         { question: 'Will deleting pages affect the quality of the remaining pages?', answer: 'Not at all. Deleting pages is a structural change, and it does not re-compress or alter the content of the other pages. The quality of the remaining pages will be identical to the original.'},
         { question: 'Can I recover a page after I delete it?', answer: 'Once you apply the changes and download the new PDF, the deleted pages are gone from that new file. However, your original file remains untouched on your device, so you can always start over if you make a mistake.'},
         { question: 'How many pages can I delete at once?', answer: 'You can select and delete as many pages as you need in a single operation. Simply click on all the pages you wish to remove before clicking the download button.'},
-        { question: 'Can I use this tool to extract pages instead of deleting?', answer: 'This tool is specifically for deleting. To extract pages into a new document, please use our dedicated [PDF Splitter](/tools/pdf-splitter) tool.'}
+        { question: 'How can I remove pages from a PDF for free?', answer: 'Our tool offers a simple and free way to **remove pages from PDF free**. Upload your file, select the pages you don\'t want, and download the new, edited PDF. There are no fees or sign-ups required.'}
     ],
     'pdf-splitter': [
         { question: 'Is splitting my PDF secure?', answer: 'Yes. The tool operates entirely in your browser. Your PDF is never uploaded to our servers, so your data remains completely private and secure.'},
         { question: 'What can I do with the Split PDF tool?', answer: 'You can select one or more pages from a PDF and extract them into a new, separate PDF file. This is perfect for isolating a chapter, a report, or specific pages you need.'},
         { question: 'How do I select multiple pages to extract?', answer: 'Simply click on each page you want to include in the new document. The selected pages will be highlighted. You can click them again to deselect.' },
         { question: 'Will the extracted pages be in order?', answer: 'Yes, the pages in your new PDF will be in the same order as they appeared in the original document.' },
-        { question: 'Can I split one PDF into multiple single-page files?', answer: 'This version of the tool extracts all selected pages into one new file. A feature to split each selected page into an individual file is coming soon!'}
+        { question: 'How do I extract pages from a PDF for free?', answer: 'Our tool allows you to **extract pages from PDF free**. Upload your document, select all the pages you wish to save into a new file, and click the "Extract" button to download your new, smaller PDF.'}
     ],
     'add-watermark': [
       { question: 'Is adding a watermark to my PDF secure?', answer: 'Yes, 100%. The entire process happens in your browser. Your PDF file is never uploaded to a server, so your confidential documents remain completely private.' },
       { question: 'What kind of watermarks can I add?', answer: 'Currently, you can add text-based watermarks. You can customize the text, font size, rotation, and opacity to fit your needs, whether for branding, confidentiality notices, or draft indicators.' },
       { question: 'Will the watermark appear on all pages?', answer: 'Yes, the watermark you configure will be applied consistently to every page of the PDF document.' },
       { question: 'Can I change the color of the watermark?', answer: 'This version uses a standard, semi-transparent grey color for professional results and readability. Custom color options may be added in the future.' },
-      { question: 'Can I add an image watermark?', answer: 'Currently, our tool specializes in adding text-based watermarks. A feature to add image watermarks (like logos) is on our roadmap for future updates!' },
+      { question: 'How do I add a watermark to a PDF without software?', answer: 'Our tool allows you to **add a watermark to a PDF online** directly from your web browser. Simply upload your file, customize your text watermark using the provided controls, and download the finished document without needing to install any software like Adobe Acrobat.' },
     ],
     'pdf-to-word-converter': [
         { question: 'Is this PDF to Word converter free?', answer: 'Yes, our tool is completely free to use. All processing happens in your browser, ensuring your documents remain private.' },
@@ -227,6 +228,20 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'What does `animation-fill-mode` do?', answer: 'The `animation-fill-mode: both;` property is included in the generated code to ensure that the element stays in its final state after the animation completes, rather than snapping back to its original state.' },
         { question: 'Can I create more complex, multi-step animations?', answer: 'This tool is designed for generating simple, common animations. For creating complex, multi-step animations, you would need to write the `@keyframes` rule manually, but you can still use our tool to get the basic structure and properties!' }
     ],
+    'json-formatter': [
+        { question: "What is a JSON Formatter & Validator?", answer: "A JSON Formatter is a tool that takes messy JSON data and makes it readable with proper indentation. A validator checks for syntax errors, like missing commas or brackets. Our tool does both, making it an essential online JSON viewer for developers." },
+        { question: "Is my data safe with this online JSON viewer?", answer: "Yes. Our tool is 100% client-side, meaning your JSON data is never uploaded to a server. All formatting and validation happens in your browser, guaranteeing the privacy of your API keys or other sensitive information." },
+        { question: "How do I use the JSON validator?", answer: "Simply paste your JSON into the text area and click 'Format/Validate'. If the JSON is invalid, a red border will appear, and an error message will describe the problem, helping you to debug it quickly." },
+        { question: "Can this tool handle large JSON files?", answer: "Yes, our tool can handle large JSON strings efficiently. Since it runs in your browser, performance depends on your computer's resources, but it's designed to work well with typical API responses." },
+        { question: "Does this tool support JSON5?", answer: "This tool adheres to the standard JSON specification. It does not support features of JSON5, such as comments, trailing commas, or unquoted keys. It will flag these as errors, helping you create universally compatible JSON." }
+    ],
+    'dns-lookup': [
+        { question: "What does a DNS lookup tool do?", answer: "A DNS lookup tool queries the Domain Name System (DNS) to find the IP address and other records associated with a domain name. It's like a phonebook for the internet, translating a name like 'google.com' into an IP address like '172.217.16.14'." },
+        { question: "How do I check DNS records online?", answer: "To check DNS records online, simply enter the domain you want to query into our tool, select the record type (like A, MX, or TXT), and click 'Lookup'. The tool will display the official records for that domain." },
+        { question: "Why would I need to check an MX record?", answer: "You need to check MX (Mail Exchange) records to diagnose email delivery problems. They tell mail servers where to deliver email for a domain. If they are incorrect, you won't be able to receive emails." },
+        { question: "What is an A record?", answer: "An A record, or 'Address' record, is the most basic type of DNS record. It points a domain or subdomain to an IPv4 address. It's the primary record used to tell a browser where to find a website." },
+        { question: "Is this DNS checker tool free?", answer: "Yes, our DNS lookup tool is completely free to use. You can perform as many lookups as you need to troubleshoot domain issues or investigate domain configurations." }
+    ]
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -354,3 +369,4 @@ export default function ToolPage({ params }: Props) {
     </>
   );
 }
+

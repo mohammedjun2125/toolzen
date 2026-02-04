@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useRef, useCallback, ChangeEvent } from 'react';
@@ -124,7 +125,7 @@ export default function PdfSplitter() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardTitle className="text-2xl">Extract Pages from PDF Free</CardTitle>
                 <CardDescription>Securely **{toolKeywords.meta_keywords.join(', ')}** into a new document. Our **PDF splitter tool free** works in your browser, keeping your files private.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -192,7 +193,7 @@ export default function PdfSplitter() {
         </Card>
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
             <h2 className="text-2xl font-bold">Your Go-To Tool to Split PDF Files Online</h2>
-            <p>Need to isolate a specific chapter, a single report, or just a few important pages from a large PDF? Our **free online PDF splitter** is the tool for you. It allows you to **extract pages from PDF** documents with precision and ease. This **PDF splitter tool free** is designed for speed and security, processing everything directly in your browser so your data never leaves your computer.</p>
+            <p>Need to isolate a specific chapter, a single report, or just a few important pages from a large PDF? Our **free online PDF splitter** is the tool for you. It allows you to **extract pages from PDF free** of charge, with precision and ease. This **PDF splitter tool free** is designed for speed and security, processing everything directly in your browser so your data never leaves your computer.</p>
             
             <h3>Key Features and Benefits</h3>
             <ul>

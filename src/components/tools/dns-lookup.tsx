@@ -1,7 +1,8 @@
 
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,11 +21,26 @@ export default function DnsLookup() {
     const [result, setResult] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
-
     const toolKeywords = (seoKeywords.tools as any)['dns-lookup'];
 
-    const handleLookup = async () => {
-        if (!domain.trim()) {
+    useEffect(() => {
+        const fetchUserIp = async () => {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                handleLookup(data.ip);
+            } catch (error) {
+                // Silently fail, user can manually look up.
+            }
+        };
+        // We are looking up an IP, but the tool is for domains, so let's not run this by default.
+        // fetchUserIp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [toast]);
+
+    const handleLookup = async (domainToLookup?: string) => {
+        const targetDomain = domainToLookup || domain;
+        if (!targetDomain.trim()) {
             toast({ variant: 'destructive', title: 'Please enter a domain name.' });
             return;
         }
@@ -32,7 +48,7 @@ export default function DnsLookup() {
         setResult([]);
         try {
             // Using Google's Public DNS-over-HTTPS API
-            const response = await fetch(`https://dns.google/resolve?name=${domain.trim()}&type=${type}`);
+            const response = await fetch(`https://dns.google/resolve?name=${targetDomain.trim()}&type=${type}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch DNS data.');
             }
@@ -41,7 +57,7 @@ export default function DnsLookup() {
                 setResult(data.Answer);
             } else {
                  setResult([]);
-                 toast({title: 'No records found', description: `No ${type} records found for ${domain}.`})
+                 toast({title: 'No records found', description: `No ${type} records found for ${targetDomain}.`})
             }
         } catch (error: any) {
             toast({ variant: 'destructive', title: 'Lookup Failed', description: error.message });
@@ -55,7 +71,7 @@ export default function DnsLookup() {
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
                 <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
-                <CardDescription>Perform a **{toolKeywords.meta_keywords[0]}** for any domain. Check **{toolKeywords.meta_keywords.slice(1).join(', ')}** and more with our **free DNS checker tool**.</CardDescription>
+                <CardDescription>Use this free tool to **{toolKeywords.meta_keywords.join(', ')}** and other DNS records. A simple and fast way to check DNS propagation and troubleshoot domain issues.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="flex flex-col sm:flex-row gap-2">
@@ -73,7 +89,7 @@ export default function DnsLookup() {
                             {recordTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
                         </SelectContent>
                     </Select>
-                    <Button onClick={handleLookup} disabled={isLoading} className="w-full sm:w-auto">
+                    <Button onClick={() => handleLookup()} disabled={isLoading} className="w-full sm:w-auto">
                         {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Search className="mr-2 h-4 w-4" />}
                         Lookup
                     </Button>
@@ -81,7 +97,7 @@ export default function DnsLookup() {
 
                 {result.length > 0 && (
                     <div className="space-y-2">
-                        <Label>DNS Records</Label>
+                        <Label>DNS Records for: {domain}</Label>
                         <div className="p-4 bg-muted/50 rounded-lg text-xs space-y-2 overflow-x-auto">
                             {result.map((record, index) => (
                                 <div key={index} className="font-mono flex flex-wrap gap-x-4">
@@ -97,8 +113,8 @@ export default function DnsLookup() {
             </CardContent>
         </Card>
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
-            <h2 className="text-2xl font-bold">What is the DNS Lookup Tool?</h2>
-            <p>The DNS Lookup Tool is a simple utility that allows you to query the Domain Name System (DNS) to retrieve records for a specific domain. The DNS acts as the internet's phonebook; it translates human-readable domain names (like `www.google.com`) into machine-readable IP addresses (like `172.217.14.228`). This tool lets you manually perform that lookup for any domain and inspect various types of records that are crucial for a website's operation.</p>
+            <h2 className="text-2xl font-bold">How to Check DNS Records Online</h2>
+            <p>The DNS Lookup Tool is a simple utility that allows you to query the Domain Name System (DNS) to retrieve records for a specific domain. The DNS acts as the internet's phonebook; it translates human-readable domain names (like `www.google.com`) into machine-readable IP addresses (like `172.217.14.228`). This tool lets you manually **check DNS records online** for any domain and inspect various types of records that are crucial for a website's operation.</p>
 
             <h3 className="text-xl font-bold">How to Use the DNS Lookup Tool</h3>
             <ol>

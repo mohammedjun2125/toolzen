@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useRef, useCallback, ChangeEvent } from 'react';
@@ -122,7 +123,7 @@ export default function PdfRotator() {
         <>
         <Card className="w-full shadow-lg rounded-lg bg-card/60 backdrop-blur-lg">
             <CardHeader>
-                <CardTitle className="text-2xl">{toolKeywords.title_keywords.join(' - ')}</CardTitle>
+                <CardTitle className="text-2xl">Rotate PDF Pages Online</CardTitle>
                 <CardDescription>Easily **{toolKeywords.meta_keywords.join(', ')}** clockwise or counterclockwise. Fix the orientation of your PDF documents securely in your browser.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -190,7 +191,7 @@ export default function PdfRotator() {
         </Card>
         <article className="prose dark:prose-invert max-w-none mx-auto mt-12">
             <h2 className="text-2xl font-bold">Instantly Fix PDF Page Orientation</h2>
-            <p>Scanned a document upside down? Is a page in your report sideways? Our **free online PDF rotator** lets you **turn PDF pages** to the correct orientation in seconds. This **PDF editor free** tool works entirely in your browser, ensuring your files are processed quickly and privately without needing to install any software.</p>
+            <p>Scanned a document upside down? Is a page in your report sideways? Our **free online PDF rotator** lets you **turn PDF pages** to the correct orientation in seconds. This **PDF editor free** tool works entirely in your browser, ensuring your files are processed quickly and privately without needing to install any software. Learning **how to rotate PDF pages online** has never been easier.</p>
             
             <h3>Features of Our PDF Page Rotation Tool</h3>
             <ul>
@@ -235,3 +236,4 @@ export default function PdfRotator() {
         </>
     );
 }
+

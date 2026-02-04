@@ -167,7 +167,7 @@ export default function PdfMerger() {
                 <li><strong>Order Your Files:</strong> The files will be merged in the order they are listed. A future update will allow you to drag and drop to reorder them.</li>
                 <li><strong>Click 'Merge PDFs':</strong> Press the button to start the process. The tool will begin to join the PDFs immediately.</li>
                 <li><strong>Download Your Combined PDF:</strong> Your merged PDF will be ready for download instantly.</li>
-            </o>
+            </ol>
 
             <h3 className="text-xl font-bold">Key Features of Our PDF Combiner</h3>
             <ul>
@@ -182,7 +182,7 @@ export default function PdfMerger() {
                 <li><strong>Business Reports:</strong> Combine a cover page, executive summary, main body, and appendices into a single, polished report.</li>
                 <li><strong>Academic Submissions:</strong> Merge your essay, bibliography, and any supplementary materials into one file for easy submission.</li>
                 <li>**Financial Archiving:** Join monthly bank statements, credit card bills, and receipts into a single PDF for tax season.</li>
-                <li><strong>Portfolios:</strong> Combine multiple project examples or case studies into a single, comprehensive portfolio document.</li>
+                <li>**Portfolios:** Combine multiple project examples or case studies into a single, comprehensive portfolio document.</li>
             </ul>
 
             <div className="not-prose mt-8">
