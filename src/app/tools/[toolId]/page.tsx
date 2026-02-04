@@ -6,6 +6,7 @@ import { type Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { ToolLayout } from '@/components/tool-layout';
 import { programmaticToolMap } from '@/lib/tool-programmatic-map';
+import React from 'react';
 
 type Props = {
   params: { toolId: string }
@@ -110,7 +111,7 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
     ],
     'word-counter': [
         { question: 'Does this tool store my text?', answer: 'No, all calculations are done in your browser. Your text is never stored or sent to a server. Your privacy is guaranteed.'},
-        { question: 'What does the word counter tool measure?', answer: 'It provides real-time statistics on the number of words, characters (with and without spaces), sentences, and paragraphs in your text.'},
+        { question: 'What does the online word count tool measure?', answer: 'It provides real-time statistics on the number of words, characters (with and without spaces), sentences, and paragraphs in your text.'},
         { question: 'How are words counted?', answer: 'The tool counts words by splitting the text by spaces and other whitespace characters. It is a reliable method for standard English text.'},
         { question: 'Is there a character limit?', answer: 'No, there is no limit to the amount of text you can paste. The tool is designed to handle everything from a short tweet to a full-length novel, with performance depending on your device\'s capabilities.'},
         { question: 'Why is an online word count tool useful?', answer: 'An online word count tool is crucial for meeting specific requirements for essays, reports, social media posts, and SEO content. It helps writers, students, and professionals ensure their text is the right length and well-structured.'}
@@ -183,7 +184,7 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'Can I rotate just one page in a multi-page document?', answer: 'Absolutely. Our tool generates a preview of every page, allowing you to apply rotations to individual pages or all pages at once before downloading the final document.' },
         { question: 'Will rotating the PDF reduce its quality?', answer: 'No, rotating a PDF is a lossless operation. It only changes the orientation metadata for the page. The quality of your text and images will remain exactly the same as the original.' },
         { question: 'What if I rotate a page by mistake?', answer: 'No problem. Each rotation is in 90-degree increments. Simply click the rotate button again until the page returns to its original orientation. The changes are only permanent after you click "Apply Changes & Download".' },
-        { question: 'How to rotate a PDF permanently?', answer: 'To permanently rotate a PDF, upload your file, use the rotate buttons on the page previews to set the correct orientation, and then click "Apply Changes & Download". The new file will have the rotations saved permanently.' }
+        { question: 'How to rotate PDF pages online?', answer: 'To permanently rotate a PDF, upload your file, use the rotate buttons on the page previews to set the correct orientation, and then click "Apply Changes & Download". The new file will have the rotations saved permanently.' }
     ],
     'pdf-deleter': [
         { question: 'Is deleting pages from my PDF secure?', answer: 'Yes. Our tool is 100% secure as it processes the file directly in your browser. Your PDF is never uploaded to a server, so your confidential information remains completely private.'},
@@ -197,7 +198,7 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
         { question: 'What can I do with the Split PDF tool?', answer: 'You can select one or more pages from a PDF and extract them into a new, separate PDF file. This is perfect for isolating a chapter, a report, or specific pages you need.'},
         { question: 'How do I select multiple pages to extract?', answer: 'Simply click on each page you want to include in the new document. The selected pages will be highlighted. You can click them again to deselect.' },
         { question: 'Will the extracted pages be in order?', answer: 'Yes, the pages in your new PDF will be in the same order as they appeared in the original document.' },
-        { question: 'How do I extract pages from a PDF for free?', answer: 'Our tool allows you to **extract pages from PDF free**. Upload your document, select all the pages you wish to save into a new file, and click the "Extract" button to download your new, smaller PDF.'}
+        { question: 'How do I extract pages from PDF free?', answer: 'Our tool allows you to **extract pages from PDF free**. Upload your document, select all the pages you wish to save into a new file, and click the "Extract" button to download your new, smaller PDF.'}
     ],
     'add-watermark': [
       { question: 'Is adding a watermark to my PDF secure?', answer: 'Yes, 100%. The entire process happens in your browser. Your PDF file is never uploaded to a server, so your confidential documents remain completely private.' },
@@ -302,15 +303,92 @@ export function generateStaticParams() {
   }));
 }
 
+const LoadingComponent = () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" />;
+
+const componentMap: { [key: string]: React.ComponentType<{}> } = {
+  'add-watermark': dynamic(() => import('@/components/tools/add-watermark'), { loading: LoadingComponent }),
+  'age-calculator': dynamic(() => import('@/components/tools/age-calculator'), { loading: LoadingComponent }),
+  'amazon-fba-box-label-crop': dynamic(() => import('@/components/tools/amazon-fba-box-label-crop'), { loading: LoadingComponent }),
+  'amazon-label-crop': dynamic(() => import('@/components/tools/amazon-label-crop'), { loading: LoadingComponent }),
+  'animation-generator': dynamic(() => import('@/components/tools/animation-generator'), { loading: LoadingComponent }),
+  'barcode-generator': dynamic(() => import('@/components/tools/barcode-generator'), { loading: LoadingComponent }),
+  'base64-encoder-decoder': dynamic(() => import('@/components/tools/base64-encoder-decoder'), { loading: LoadingComponent }),
+  'bmi-calculator': dynamic(() => import('@/components/tools/bmi-calculator'), { loading: LoadingComponent }),
+  'border-radius-generator': dynamic(() => import('@/components/tools/border-radius-generator'), { loading: LoadingComponent }),
+  'box-shadow-generator': dynamic(() => import('@/components/tools/box-shadow-generator'), { loading: LoadingComponent }),
+  'case-converter': dynamic(() => import('@/components/tools/case-converter'), { loading: LoadingComponent }),
+  'citymall-label-crop': dynamic(() => import('@/components/tools/citymall-label-crop'), { loading: LoadingComponent }),
+  'color-palette-extractor': dynamic(() => import('@/components/tools/color-palette-extractor'), { loading: LoadingComponent }),
+  'currency-converter': dynamic(() => import('@/components/tools/currency-converter'), { loading: LoadingComponent }),
+  'date-difference-calculator': dynamic(() => import('@/components/tools/date-difference-calculator'), { loading: LoadingComponent }),
+  'discount-calculator': dynamic(() => import('@/components/tools/discount-calculator'), { loading: LoadingComponent }),
+  'dns-lookup': dynamic(() => import('@/components/tools/dns-lookup'), { loading: LoadingComponent }),
+  'domain-generator': dynamic(() => import('@/components/tools/domain-generator'), { loading: LoadingComponent }),
+  'email-extractor': dynamic(() => import('@/components/tools/email-extractor'), { loading: LoadingComponent }),
+  'flexbox-playground': dynamic(() => import('@/components/tools/flexbox-playground'), { loading: LoadingComponent }),
+  'flipkart-fbf-box-label-crop': dynamic(() => import('@/components/tools/flipkart-fbf-box-label-crop'), { loading: LoadingComponent }),
+  'flipkart-label-crop': dynamic(() => import('@/components/tools/flipkart-label-crop'), { loading: LoadingComponent }),
+  'generate-amazon-fba-sticker': dynamic(() => import('@/components/tools/generate-amazon-fba-sticker'), { loading: LoadingComponent }),
+  'generate-label-sticker': dynamic(() => import('@/components/tools/generate-label-sticker'), { loading: LoadingComponent }),
+  'glowroad-label-crop': dynamic(() => import('@/components/tools/glowroad-label-crop'), { loading: LoadingComponent }),
+  'gradient-generator': dynamic(() => import('@/components/tools/gradient-generator'), { loading: LoadingComponent }),
+  'grid-generator': dynamic(() => import('@/components/tools/grid-generator'), { loading: LoadingComponent }),
+  'hash-generator': dynamic(() => import('@/components/tools/hash-generator'), { loading: LoadingComponent }),
+  'image-compressor': dynamic(() => import('@/components/tools/image-compressor'), { loading: LoadingComponent }),
+  'image-converter': dynamic(() => import('@/components/tools/image-converter'), { loading: LoadingComponent }),
+  'image-resizer': dynamic(() => import('@/components/tools/image-resizer'), { loading: LoadingComponent }),
+  'ip-lookup': dynamic(() => import('@/components/tools/ip-lookup'), { loading: LoadingComponent }),
+  'jiomart-label-crop': dynamic(() => import('@/components/tools/jiomart-label-crop'), { loading: LoadingComponent }),
+  'json-formatter': dynamic(() => import('@/components/tools/json-formatter'), { loading: LoadingComponent }),
+  'limeroad-label-crop': dynamic(() => import('@/components/tools/limeroad-label-crop'), { loading: LoadingComponent }),
+  'loan-emi-calculator': dynamic(() => import('@/components/tools/loan-emi-calculator'), { loading: LoadingComponent }),
+  'lorem-ipsum-generator': dynamic(() => import('@/components/tools/lorem-ipsum-generator'), { loading: LoadingComponent }),
+  'markdown-preview': dynamic(() => import('@/components/tools/markdown-preview'), { loading: LoadingComponent }),
+  'meme-generator': dynamic(() => import('@/components/tools/meme-generator'), { loading: LoadingComponent }),
+  'myntra-label-crop': dynamic(() => import('@/components/tools/myntra-label-crop'), { loading: LoadingComponent }),
+  'notes-tool': dynamic(() => import('@/components/tools/notes-tool'), { loading: LoadingComponent }),
+  'other-label-crop': dynamic(() => import('@/components/tools/other-label-crop'), { loading: LoadingComponent }),
+  'otp-generator': dynamic(() => import('@/components/tools/otp-generator'), { loading: LoadingComponent }),
+  'password-generator': dynamic(() => import('@/components/tools/password-generator'), { loading: LoadingComponent }),
+  'pdf-compressor': dynamic(() => import('@/components/tools/pdf-compressor'), { loading: LoadingComponent }),
+  'pdf-deleter': dynamic(() => import('@/components/tools/pdf-deleter'), { loading: LoadingComponent }),
+  'pdf-editor': dynamic(() => import('@/components/tools/pdf-editor'), { loading: LoadingComponent }),
+  'pdf-maker': dynamic(() => import('@/components/tools/pdf-maker'), { loading: LoadingComponent }),
+  'pdf-merger': dynamic(() => import('@/components/tools/pdf-merger'), { loading: LoadingComponent }),
+  'pdf-rotator': dynamic(() => import('@/components/tools/pdf-rotator'), { loading: LoadingComponent }),
+  'pdf-splitter': dynamic(() => import('@/components/tools/pdf-splitter'), { loading: LoadingComponent }),
+  'pdf-to-text': dynamic(() => import('@/components/tools/pdf-to-text'), { loading: LoadingComponent }),
+  'pdf-to-word-converter': dynamic(() => import('@/components/tools/pdf-to-word-converter'), { loading: LoadingComponent }),
+  'percentage-calculator': dynamic(() => import('@/components/tools/percentage-calculator'), { loading: LoadingComponent }),
+  'qr-code-generator': dynamic(() => import('@/components/tools/qr-code-generator'), { loading: LoadingComponent }),
+  'random-number-generator': dynamic(() => import('@/components/tools/random-number-generator'), { loading: LoadingComponent }),
+  'remove-duplicate-lines': dynamic(() => import('@/components/tools/remove-duplicate-lines'), { loading: LoadingComponent }),
+  'shop101-label-crop': dynamic(() => import('@/components/tools/shop101-label-crop'), { loading: LoadingComponent }),
+  'simsim-label-crop': dynamic(() => import('@/components/tools/simsim-label-crop'), { loading: LoadingComponent }),
+  'snapdeal-label-crop': dynamic(() => import('@/components/tools/snapdeal-label-crop'), { loading: LoadingComponent }),
+  'stopwatch': dynamic(() => import('@/components/tools/stopwatch'), { loading: LoadingComponent }),
+  'text-reverser': dynamic(() => import('@/components/tools/text-reverser'), { loading: LoadingComponent }),
+  'text-shadow-generator': dynamic(() => import('@/components/tools/text-shadow-generator'), { loading: LoadingComponent }),
+  'text-to-speech': dynamic(() => import('@/components/tools/text-to-speech'), { loading: LoadingComponent }),
+  'timer': dynamic(() => import('@/components/tools/timer'), { loading: LoadingComponent }),
+  'timezone-converter': dynamic(() => import('@/components/tools/timezone-converter'), { loading: LoadingComponent }),
+  'unit-converter': dynamic(() => import('@/components/tools/unit-converter'), { loading: LoadingComponent }),
+  'url-encoder-decoder': dynamic(() => import('@/components/tools/url-encoder-decoder'), { loading: LoadingComponent }),
+  'username-generator': dynamic(() => import('@/components/tools/username-generator'), { loading: LoadingComponent }),
+  'word-counter': dynamic(() => import('@/components/tools/word-counter'), { loading: LoadingComponent }),
+};
+
+
 const DynamicTool = ({ toolId }: { toolId: string }) => {
   const componentId = programmaticToolMap[toolId as keyof typeof programmaticToolMap] || toolId;
-  const Component = dynamic(
-    () => import(`@/components/tools/${componentId}`),
-    {
-      loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" />,
-    }
-  );
+  const Component = componentMap[componentId];
 
+  if (!Component) {
+    // This case should be handled by the notFound() call in the main component
+    return <LoadingComponent />;
+  }
+  
+  // The loading state is already handled by the dynamic import options
   return <Component />;
 };
 
@@ -320,16 +398,19 @@ export default function ToolPage({ params }: Props) {
   const tool = toolMap.get(toolId);
   
   if (!tool) {
-    // It's a programmatic page without a direct tool entry, which is fine
-    // as long as it's a valid pattern like a converter.
-    if(!toolId.includes('-converter')) {
-       notFound();
-    }
+    // If the toolId is not in our master map, it's a 404.
+    notFound();
   }
 
   const baseToolId = programmaticToolMap[toolId as keyof typeof programmaticToolMap] || toolId;
   const faq = toolFaqs[baseToolId] || [];
-  const toolInfo = tool || { name: toolId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), description: `A free online tool to ${toolId.replace(/-/g, ' ')}.`, category: {id: 'utilities'}};
+  
+  // Create a default toolInfo object for programmatic pages that aren't explicitly in the initial tools list
+  const toolInfo = tool || { 
+      name: toolId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), 
+      description: `A free online tool to ${toolId.replace(/-/g, ' ')}.`, 
+      category: {id: 'utilities'}
+  };
 
 
   const specificSeo = specificSeoData[toolId];
@@ -341,7 +422,7 @@ export default function ToolPage({ params }: Props) {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
       name: toolInfo.name,
-      applicationCategory: 'Utilities',
+      applicationCategory: tool.category.name || 'Utilities', // Use category name from tool
       operatingSystem: 'Any (Web browser)',
       description: toolInfo.description,
       url: `https://www.toolzenweb.com/tools/${toolId}`,
