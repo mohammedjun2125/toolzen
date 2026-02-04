@@ -11,8 +11,6 @@ type Props = {
   params: { toolId: string }
 }
 
-const ComingSoonTool = dynamic(() => import('@/components/tools/coming-soon-tool'));
-
 const specificSeoData: { [key: string]: { title: string, description: string, schema: any } } = {
   'pdf-editor': {
     title: 'Free Online PDF Editor — Edit Text, Images & Draw | Toolzen',
@@ -307,7 +305,7 @@ export function generateStaticParams() {
 const DynamicTool = ({ toolId }: { toolId: string }) => {
   const componentId = programmaticToolMap[toolId as keyof typeof programmaticToolMap] || toolId;
   const Component = dynamic(
-    () => import(`@/components/tools/${componentId}`).catch(() => ComingSoonTool),
+    () => import(`@/components/tools/${componentId}`),
     {
       loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" />,
     }
@@ -346,7 +344,7 @@ export default function ToolPage({ params }: Props) {
       applicationCategory: 'Utilities',
       operatingSystem: 'Any (Web browser)',
       description: toolInfo.description,
-      url: `https://toolzenweb.com/tools/${toolId}`,
+      url: `https://www.toolzenweb.com/tools/${toolId}`,
       offers: {
           '@type': 'Offer',
           price: '0',
