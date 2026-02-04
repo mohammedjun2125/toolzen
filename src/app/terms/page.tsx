@@ -1,6 +1,4 @@
 
-'use client';
-
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +12,19 @@ export const metadata: Metadata = {
   description: 'Read the terms of use for Toolzen. By using our free online tools, you agree to be bound by these terms and conditions.',
   alternates: {
     canonical: '/terms',
+  },
+  openGraph: {
+    title: 'Terms of Use | Toolzen',
+    description: 'Read the terms of use for Toolzen. By using our free online tools, you agree to be bound by these terms and conditions.',
+    url: '/terms',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Terms of Use | Toolzen',
+    description: 'Read the terms of use for Toolzen. By using our free online tools, you agree to be bound by these terms and conditions.',
   },
 };
 

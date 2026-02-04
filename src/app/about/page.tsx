@@ -12,6 +12,19 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/about',
   },
+  openGraph: {
+    title: 'About Toolzen | Free & Private Online Tools',
+    description: 'Learn about Toolzen\'s mission to provide fast, free, and privacy-focused online utilities that work on the client-side, ensuring your data is never uploaded or stored.',
+    url: '/about',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'About Toolzen | Free & Private Online Tools',
+    description: 'Learn about Toolzen\'s mission to provide fast, free, and privacy-focused online utilities that work on the client-side, ensuring your data is never uploaded or stored.',
+  },
 };
 
 export default function AboutPage() {

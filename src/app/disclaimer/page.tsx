@@ -1,6 +1,4 @@
 
-'use client';
-
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +12,19 @@ export const metadata: Metadata = {
   description: 'Read the disclaimer for Toolzen. Information is provided for general purposes only. Use of our free online tools is at your own risk.',
   alternates: {
     canonical: '/disclaimer',
+  },
+  openGraph: {
+    title: 'Disclaimer | Toolzen',
+    description: 'Read the disclaimer for Toolzen. Information is provided for general purposes only. Use of our free online tools is at your own risk.',
+    url: '/disclaimer',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Disclaimer | Toolzen',
+    description: 'Read the disclaimer for Toolzen. Information is provided for general purposes only. Use of our free online tools is at your own risk.',
   },
 };
 

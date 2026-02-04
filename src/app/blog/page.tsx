@@ -1,7 +1,4 @@
 
-
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
@@ -12,6 +9,29 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Toolzen Blog | Guides & Articles',
+  description: 'Guides, tips, and articles on web development, design, online privacy, and how to use our free tools.',
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    title: 'Toolzen Blog | Guides & Articles',
+    description: 'Guides, tips, and articles on web development, design, online privacy, and how to use our free tools.',
+    url: '/blog',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Toolzen Blog | Guides & Articles',
+    description: 'Guides, tips, and articles on web development, design, online privacy, and how to use our free tools.',
+  }
+};
+
 
 export default function BlogIndexPage() {
   const posts = mockPosts;

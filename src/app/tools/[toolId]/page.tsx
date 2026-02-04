@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { ToolLayout } from '@/components/tool-layout';
-import { seoKeywords } from '@/lib/seo-keywords';
 
 type Props = {
   params: { toolId: string }
@@ -194,43 +193,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const specificSeo = specificSeoData[tool.id];
-  if (specificSeo) {
-    return {
-      title: specificSeo.title,
-      description: specificSeo.description,
-      alternates: {
-        canonical: tool.href,
-      },
-      openGraph: {
-        title: specificSeo.title,
-        description: specificSeo.description,
-        url: tool.href,
-        type: 'website',
-      },
-    };
-  }
-
-  const keywords = (seoKeywords.tools as any)[tool.id];
-
-  if (!keywords) {
-    const fallbackTitle = `${tool.name} | Free Online Tool | Toolzen`;
-    const fallbackDescription = `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
-    return {
-      title: fallbackTitle,
-      description: fallbackDescription,
-      alternates: {
-        canonical: tool.href,
-      },
-    }
-  }
-
-  const toolTitle = `${keywords.title_keywords.join(' - ')} | Toolzen`;
-  const toolDescription = `${tool.description} Use our free online tool for ${keywords.meta_keywords.join(', ')}. Fast, secure, and works in your browser.`;
+  
+  const toolTitle = specificSeo 
+    ? specificSeo.title 
+    : `${tool.name} | Free Online Tool | Toolzen`;
+  
+  const toolDescription = specificSeo 
+    ? specificSeo.description
+    : `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
 
   return {
     title: toolTitle,
     description: toolDescription,
-    keywords: keywords.meta_keywords.concat(keywords.high_cpc),
     alternates: {
       canonical: tool.href,
     },
@@ -238,10 +212,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: toolTitle,
         description: toolDescription,
         url: tool.href,
+        siteName: 'Toolzen',
         type: 'website',
+        locale: 'en_US',
     },
     twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title: toolTitle,
         description: toolDescription,
     },

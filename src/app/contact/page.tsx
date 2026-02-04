@@ -1,4 +1,3 @@
-'use client';
 
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -16,6 +15,19 @@ export const metadata: Metadata = {
   description: 'Get in touch with the Toolzen team. We welcome your questions, feedback, and suggestions for new free online tools.',
   alternates: {
     canonical: '/contact',
+  },
+  openGraph: {
+    title: 'Contact Toolzen | Suggestions & Support',
+    description: 'Get in touch with the Toolzen team. We welcome your questions, feedback, and suggestions for new free online tools.',
+    url: '/contact',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Contact Toolzen | Suggestions & Support',
+    description: 'Get in touch with the Toolzen team. We welcome your questions, feedback, and suggestions for new free online tools.',
   },
 };
 

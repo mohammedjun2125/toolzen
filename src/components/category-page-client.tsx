@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { iconMap } from '@/components/icon-map';
 import type { Tool, ToolCategoryInfo } from '@/lib/tools';
-import { seoKeywords } from '@/lib/seo-keywords';
 
 type CategoryPageClientProps = {
     category: ToolCategoryInfo;
@@ -16,7 +15,6 @@ type CategoryPageClientProps = {
 
 export function CategoryPageClient({ category, tools }: CategoryPageClientProps) {
     const CategoryIcon = iconMap[category.icon as keyof typeof iconMap] as React.ElementType;
-    const keywords = (seoKeywords.categories as any)[category.id];
 
     return (
         <>
@@ -29,10 +27,10 @@ export function CategoryPageClient({ category, tools }: CategoryPageClientProps)
             <header className="text-center mb-12">
               {CategoryIcon && <CategoryIcon className="h-16 w-16 text-primary mx-auto mb-4" />}
               <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
-                {category.name} - {keywords.title_keywords.join(', ')}
+                {category.name}
               </h1>
               <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
-                {`Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. All tools are fast, private, and work in your browser.`}
+                {category.description_short}
               </p>
             </header>
 

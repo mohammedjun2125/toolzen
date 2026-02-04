@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CategoryPageClient } from '@/components/category-page-client';
-import { seoKeywords } from '@/lib/seo-keywords';
 
 type Props = {
   params: { categoryId: string }
@@ -18,16 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       return { title: 'Category Not Found' };
     }
     
-    const keywords = (seoKeywords.categories as any)[category.id];
-    const relatedTools = tools.filter(tool => tool.category.id === category.id).slice(0, 3).map(t => t.name).join(', ');
-
-    const title = `${category.name} - ${keywords.title_keywords.join(', ')} | Toolzen`;
-    const description = `Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. Includes ${relatedTools}, and more. All tools are fast, private, and work in your browser.`;
+    const title = `${category.name} | Free Online Tools | Toolzen`;
+    const description = `Explore our suite of ${category.name}. All tools are fast, private, and work in your browser.`;
   
     return {
       title,
       description,
-      keywords: keywords.meta_keywords.concat(keywords.high_cpc),
       alternates: {
           canonical: `/category/${category.id}`,
       },
@@ -36,7 +31,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description,
         type: 'website',
         url: `/category/${category.id}`,
+        siteName: 'Toolzen',
+        locale: 'en_US',
       },
+      twitter: {
+        card: 'summary',
+        title,
+        description,
+      }
     };
 }
   
@@ -54,13 +56,12 @@ export default function CategoryPage({ params }: Props) {
     }
 
     const categoryTools = tools.filter(tool => tool.category.id === category.id);
-    const keywords = (seoKeywords.categories as any)[category.id];
     
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: `${category.name} - ${keywords.title_keywords.join(' ')} | Toolzen`,
-        description: `Explore our suite of ${category.name}: ${keywords.meta_keywords.join(', ')}. All tools are fast, private, and work in your browser.`,
+        name: `${category.name} | Free Online Tools | Toolzen`,
+        description: `Explore our suite of ${category.name}. All tools are fast, private, and work in your browser.`,
         url: `https://toolzenweb.com/category/${category.id}`,
         mainEntity: {
             '@type': 'ItemList',

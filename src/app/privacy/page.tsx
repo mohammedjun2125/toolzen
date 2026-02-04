@@ -1,6 +1,4 @@
 
-'use client';
-
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +12,19 @@ export const metadata: Metadata = {
   description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
   alternates: {
     canonical: '/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | Toolzen',
+    description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
+    url: '/privacy',
+    siteName: 'Toolzen',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy | Toolzen',
+    description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
   },
 };
 
