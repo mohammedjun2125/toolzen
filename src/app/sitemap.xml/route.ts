@@ -4,6 +4,8 @@ import { mockPosts } from '@/lib/blog';
 
 const URL = 'https://www.toolzenweb.com';
 
+export const runtime = 'edge';
+
 function generateSitemap() {
   const lastModified = new Date().toISOString();
 
