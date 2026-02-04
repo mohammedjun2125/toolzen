@@ -42,7 +42,7 @@ export const categories: ToolCategoryInfo[] = Object.entries(categoryInfo).map((
 
 export const categoryMap = new Map(categories.map(c => [c.id, c]));
 
-export const tools: Tool[] = [
+const initialTools: Tool[] = [
   // E-commerce Tools
   { id: 'other-label-crop', name: 'Generic Label Crop', description: 'Crop any shipping label from a PDF or image. A flexible tool for all e-commerce platforms.', href: '/tools/other-label-crop', icon: 'crop', category: categoryMap.get('ecommerce')! },
   { id: 'flipkart-label-crop', name: 'Flipkart Label Crop', description: 'Automatically crop shipping labels from Flipkart. Supports single and multiple labels on a page.', href: '/tools/flipkart-label-crop', icon: 'crop', category: categoryMap.get('ecommerce')! },
@@ -130,6 +130,56 @@ export const tools: Tool[] = [
   { id: 'ip-lookup', name: 'IP Address Lookup', description: 'Find the geolocation of any IP address. Get details like country, city, and ISP instantly.', href: '/tools/ip-lookup', icon: 'mouse-pointer', category: categoryMap.get('utilities')! },
 ];
 
-export const toolMap = new Map(tools.map(tool => [tool.id, tool]));
+// Programmatically generate tool definitions
+const programmaticTools: Tool[] = [];
 
-    
+// Image Conversion Tools
+const imageFormats = ['jpg', 'png', 'webp', 'gif'];
+imageFormats.forEach(from => {
+  imageFormats.forEach(to => {
+    if (from === to) return;
+    const id = `${from}-to-${to}-converter`;
+    programmaticTools.push({
+      id,
+      name: `${from.toUpperCase()} to ${to.toUpperCase()} Converter`,
+      description: `Free online tool to convert ${from.toUpperCase()} images to ${to.toUpperCase()} format. Fast, private, and no uploads required.`,
+      href: `/tools/${id}`,
+      icon: 'component',
+      category: categoryMap.get('image-media')!,
+    });
+  });
+});
+
+// PDF Creation Tools
+['jpg-to-pdf', 'png-to-pdf'].forEach(slug => {
+  const from = slug.split('-')[0].toUpperCase();
+  programmaticTools.push({
+    id: slug,
+    name: `${from} to PDF Converter`,
+    description: `Combine one or more ${from} images into a single PDF document for free.`,
+    href: `/tools/${slug}`,
+    icon: 'file-text',
+    category: categoryMap.get('pdf')!,
+  });
+});
+
+// Currency Conversion Tools
+const currencies = ['USD', 'EUR', 'GBP', 'INR', 'JPY', 'CAD', 'AUD', 'CNY'];
+currencies.forEach(from => {
+  currencies.forEach(to => {
+    if (from === to) return;
+    const id = `${from.toLowerCase()}-to-${to.toLowerCase()}-converter`;
+    programmaticTools.push({
+      id,
+      name: `${from} to ${to} Converter`,
+      description: `Convert ${from} to ${to} with live exchange rates. Free, private, and instant currency conversion.`,
+      href: `/tools/${id}`,
+      icon: 'landmark',
+      category: categoryMap.get('calculators')!,
+    });
+  });
+});
+
+export const tools: Tool[] = [...initialTools, ...programmaticTools];
+
+export const toolMap = new Map(tools.map(tool => [tool.id, tool]));

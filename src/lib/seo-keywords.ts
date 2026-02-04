@@ -54,6 +54,11 @@ export const seoKeywords = {
       "meta_keywords": ["free online tools list", "tool hub", "browse tools online"],
       "high_cpc": ["enterprise tools suite", "productivity tools enterprise"]
     },
+     "programmatic-converter": {
+      "title_keywords": ["free online converter", "file converter", "data converter"],
+      "meta_keywords": ["convert online free", "online conversion tool", "fast and private converter"],
+      "high_cpc": ["enterprise conversion API", "data processing service"]
+    },
     "image-compressor": {
       "title_keywords": ["compress image online", "image compressor free", "reduce image file size"],
       "meta_keywords": ["compress jpg", "png optimizer", "webp compressor"],

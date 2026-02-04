@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { type Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { ToolLayout } from '@/components/tool-layout';
+import { programmaticToolMap } from '@/lib/tool-programmatic-map';
 
 type Props = {
   params: { toolId: string }
@@ -246,33 +247,45 @@ const toolFaqs: { [key:string]: { question: string; answer: string }[] } = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tool = toolMap.get(params.toolId);
+  const toolId = params.toolId;
 
-  if (!tool) {
-    return {
-      title: 'Tool Not Found'
-    }
+  let toolTitle: string;
+  let toolDescription: string;
+  let canonicalUrl: string;
+
+  if (tool) {
+    const specificSeo = specificSeoData[tool.id];
+    toolTitle = specificSeo 
+      ? specificSeo.title 
+      : `${tool.name} | Free Online Tool | Toolzen`;
+    
+    toolDescription = specificSeo 
+      ? specificSeo.description
+      : `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
+    canonicalUrl = tool.href;
+  } else {
+    // Handle programmatic pages
+    const name = toolId.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    toolTitle = `${name} | Free Online Tool | Toolzen`;
+    toolDescription = `Use this free online tool to ${name.toLowerCase()}. Fast, secure, and works entirely in your browser.`;
+    canonicalUrl = `/tools/${toolId}`;
+  }
+  
+  if (!tool && !toolId.includes('-converter')) {
+      return { title: 'Tool Not Found' }
   }
 
-  const specificSeo = specificSeoData[tool.id];
-  
-  const toolTitle = specificSeo 
-    ? specificSeo.title 
-    : `${tool.name} | Free Online Tool | Toolzen`;
-  
-  const toolDescription = specificSeo 
-    ? specificSeo.description
-    : `${tool.description} A fast, free, and privacy-focused online utility from Toolzen that works entirely in your browser.`;
 
   return {
     title: toolTitle,
     description: toolDescription,
     alternates: {
-      canonical: tool.href,
+      canonical: canonicalUrl,
     },
     openGraph: {
         title: toolTitle,
         description: toolDescription,
-        url: tool.href,
+        url: canonicalUrl,
         siteName: 'Toolzen',
         type: 'website',
         locale: 'en_US',
@@ -292,8 +305,9 @@ export function generateStaticParams() {
 }
 
 const DynamicTool = ({ toolId }: { toolId: string }) => {
+  const componentId = programmaticToolMap[toolId as keyof typeof programmaticToolMap] || toolId;
   const Component = dynamic(
-    () => import(`@/components/tools/${toolId}`).catch(() => ComingSoonTool),
+    () => import(`@/components/tools/${componentId}`).catch(() => ComingSoonTool),
     {
       loading: () => <div className="w-full h-96 rounded-lg bg-muted animate-pulse" />,
     }
@@ -308,10 +322,17 @@ export default function ToolPage({ params }: Props) {
   const tool = toolMap.get(toolId);
   
   if (!tool) {
-    notFound();
+    // It's a programmatic page without a direct tool entry, which is fine
+    // as long as it's a valid pattern like a converter.
+    if(!toolId.includes('-converter')) {
+       notFound();
+    }
   }
 
-  const faq = toolFaqs[toolId] || [];
+  const baseToolId = programmaticToolMap[toolId as keyof typeof programmaticToolMap] || toolId;
+  const faq = toolFaqs[baseToolId] || [];
+  const toolInfo = tool || { name: toolId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '), description: `A free online tool to ${toolId.replace(/-/g, ' ')}.`, category: {id: 'utilities'}};
+
 
   const specificSeo = specificSeoData[toolId];
   let schema;
@@ -321,11 +342,11 @@ export default function ToolPage({ params }: Props) {
      schema = {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
-      name: tool.name,
+      name: toolInfo.name,
       applicationCategory: 'Utilities',
       operatingSystem: 'Any (Web browser)',
-      description: tool.description,
-      url: `https://toolzenweb.com${tool.href}`,
+      description: toolInfo.description,
+      url: `https://toolzenweb.com/tools/${toolId}`,
       offers: {
           '@type': 'Offer',
           price: '0',
@@ -363,7 +384,7 @@ export default function ToolPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
       />
-      <ToolLayout title={tool.name} description={tool.description} faq={faq} categoryId={tool.category.id}>
+      <ToolLayout title={toolInfo.name} description={toolInfo.description} faq={faq} categoryId={toolInfo.category.id}>
         <DynamicTool toolId={toolId} />
       </ToolLayout>
     </>
