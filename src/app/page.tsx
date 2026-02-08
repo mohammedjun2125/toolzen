@@ -1,5 +1,4 @@
 
-
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/ca
 import { categories, tools } from '@/lib/tools';
 import { ToolSearch } from '@/components/tool-search';
 import { iconMap } from '@/components/icon-map';
+import { ShieldCheck, Zap, Rabbit } from 'lucide-react';
 
 
 function ToolCategoryNav() {
@@ -18,7 +18,7 @@ function ToolCategoryNav() {
         <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Tool Categories</h2>
             <p className="max-w-2xl mx-auto mt-4 text-muted-foreground">
-                Click a category to jump to the tools you need.
+                From PDF and image utilities to developer tools and calculators, we have a solution for you.
             </p>
         </div>
         <div className="flex justify-center flex-wrap gap-4">
@@ -44,20 +44,47 @@ export default function Home() {
       <div className="flex flex-col min-h-screen bg-background">
         <SiteHeader />
         <main className="flex-1">
-          <section className="text-center py-12 md:py-20 lg:py-24">
+          <section className="text-center py-16 md:py-24 lg:py-32">
             <div className="container mx-auto px-4 md:px-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">E-Commerce Label Crop & PDF Tools</h1>
-               <h2 className="text-xl md:text-2xl text-muted-foreground mb-4">Your Secure Hub for Productivity</h2>
-              <p className="max-w-3xl mx-auto text-foreground/80 mb-6">
-                Toolzen provides a suite of powerful utilities that run directly in your browser. From cropping e-commerce labels to editing PDFs, your files and data are **never uploaded to our servers**. Experience true privacy and blazing-fast performance, completely free.
-              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter font-serif mb-4">Free, Private, and Blazing-Fast Online Tools</h1>
+               <h2 className="text-xl md:text-2xl text-muted-foreground mb-8">Your Secure Hub for Digital Productivity</h2>
+              <div className="max-w-3xl mx-auto text-lg text-foreground/80 mb-10 text-left space-y-4">
+                <p>
+                  Welcome to Toolzen, a comprehensive suite of over 100 high-quality online utilities designed for performance, privacy, and simplicity. In a digital world where your data is a commodity, we take a different approach. Our tools run directly in your browser, which means your files and information are **never uploaded to our servers.** This client-side processing guarantees that your data remains 100% private and secure.
+                </p>
+                <p>
+                  Whether you're a developer needing to format JSON, a student merging PDFs for an assignment, a marketer optimizing images for a campaign, or an e-commerce seller cropping shipping labels, our tools are built to make your work easier and faster. No sign-ups, no tracking, no nonsense—just powerful, free utilities at your fingertips.
+                </p>
+              </div>
               <div className="flex justify-center flex-wrap gap-4">
                   <Button asChild size="lg">
-                    <Link href="#ecommerce">Explore E-commerce Tools →</Link>
+                    <Link href="#tools">Explore All Tools →</Link>
                   </Button>
                   <Button asChild size="lg" variant="outline">
-                    <Link href="#tools">View All Tools</Link>
+                    <Link href="/about">Learn About Our Mission</Link>
                   </Button>
+              </div>
+            </div>
+          </section>
+
+           <section className="py-16 bg-muted/50">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="grid md:grid-cols-3 gap-8 text-center">
+                <div className="flex flex-col items-center">
+                  <ShieldCheck className="h-12 w-12 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">100% Private & Secure</h3>
+                  <p className="text-muted-foreground">Our tools process your files directly in your browser. Nothing is ever uploaded to a server, ensuring your data remains completely confidential.</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Rabbit className="h-12 w-12 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Blazing-Fast Performance</h3>
+                  <p className="text-muted-foreground">By eliminating upload and download times, our client-side tools deliver instant results, making you more productive.</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Zap className="h-12 w-12 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Completely Free, No Signup</h3>
+                  <p className="text-muted-foreground">All our tools are free to use with no hidden fees, watermarks, or registration requirements. Just powerful utilities, available to everyone.</p>
+                </div>
               </div>
             </div>
           </section>

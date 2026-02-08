@@ -9,13 +9,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Toolzen',
-  description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
+  description: 'Read the comprehensive privacy policy for Toolzen. Learn how we protect your data with our commitment to client-side processing and data minimization.',
   alternates: {
     canonical: '/privacy',
   },
   openGraph: {
     title: 'Privacy Policy | Toolzen',
-    description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
+    description: 'Read the comprehensive privacy policy for Toolzen. Learn how we protect your data with our commitment to client-side processing and data minimization.',
     url: '/privacy',
     siteName: 'Toolzen',
     type: 'website',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Privacy Policy | Toolzen',
-    description: 'Read the privacy policy for Toolzen. We are committed to protecting your data with client-side tools that never upload your files.',
+    description: 'Read the comprehensive privacy policy for Toolzen. Learn how we protect your data with our commitment to client-side processing and data minimization.',
   },
 };
 
@@ -41,50 +41,66 @@ export default function PrivacyPage() {
         </Button>
         <Card className="max-w-3xl mx-auto bg-card/60 backdrop-blur-lg">
           <CardHeader>
-            <CardTitle className="text-3xl">Privacy Policy</CardTitle>
+            <CardTitle className="text-3xl font-serif">Privacy Policy</CardTitle>
+            <p className="text-muted-foreground pt-2">Last updated: August 18, 2024</p>
           </CardHeader>
-          <CardContent className="prose dark:prose-invert max-w-none">
+          <CardContent className="prose dark:prose-invert max-w-none text-lg">
             <p>
-              This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
+              Welcome to Toolzen. Your privacy is not just a policy for us; it is the foundation upon which our tools are built. This Privacy Policy outlines our unwavering commitment to protecting your data and explains the types of information we collect and how we use it.
             </p>
 
-            <h3>Interpretation and Definitions</h3>
+            <h3 className="font-serif">The Core Principle: Client-Side Processing</h3>
             <p>
-              The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
-            </p>
-
-            <h3>Client-Side Processing and Data Privacy</h3>
-            <p>
-              A core principle of Toolzen is user privacy. For tools that handle user-submitted files (such as the Image Compressor, PDF Maker, Color Palette Extractor, and E-commerce Label Cropper), all processing is done entirely on the client-side, within your web browser. <strong>Your files are never uploaded, sent to, or stored on our servers.</strong> The data you provide remains on your device.
-            </p>
-            
-            <h3>Advertising and Cookies</h3>
-            <p>
-              We use third-party advertising companies, including Google AdSense, to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+              The most important aspect of our service is **client-side processing**. For every tool on our platform that handles user-submitted files or data (such as our PDF Merger, Image Compressor, Password Generator, etc.), all operations are performed directly in your web browser on your own device.
             </p>
             <ul>
-              <li>Google, as a third-party vendor, uses cookies to serve ads on our site.</li>
-              <li>Google's use of the DART cookie enables it to serve ads to our users based on their visit to our sites and other sites on the Internet.</li>
-              <li>Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy.</li>
+                <li><strong>Your files are never uploaded to our servers.</strong></li>
+                <li><strong>Your data is never stored, logged, or analyzed by us.</strong></li>
+                <li><strong>Your information never leaves your computer.</strong></li>
             </ul>
             <p>
-              We use cookies to get your consent for advertising and to analyze our traffic. By using our website and consenting via our cookie banner, you agree to this use.
+              This means we have no access to the documents you edit, the images you compress, or the passwords you generate. This model provides the highest level of privacy and security possible for an online service.
             </p>
             
-            <h3>Information We Collect</h3>
+            <h3 className="font-serif">Information We Do Collect (Non-Personally Identifiable)</h3>
             <p>
-              We may collect non-personally identifiable information for analytics purposes, such as browser type, language preference, referring site, and the date and time of each visitor request. Our purpose in collecting this information is to better understand how our visitors use the website.
+              To improve our website and provide a better user experience, we collect a minimal amount of non-personally identifiable information. This data is aggregated and cannot be used to identify you individually.
             </p>
-            
-            <h3>Changes to This Privacy Policy</h3>
+            <ul>
+              <li><strong>Analytics Data:</strong> We use Vercel Analytics, a privacy-focused analytics service, to collect anonymous usage data. This includes information like the pages you visit, the country you are visiting from, your device type (desktop/mobile), and browser type. This helps us understand which tools are most popular and how we can improve our service. This data is anonymous and does not track you across different websites.</li>
+              <li><strong>Performance Data:</strong> We may collect anonymous performance metrics to ensure our website is fast and reliable.</li>
+            </ul>
+
+            <h3 className="font-serif">Cookies and Web Storage</h3>
             <p>
-              We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page. We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.
+              We use cookies and browser storage for essential website functionality and to understand user preferences.
+            </p>
+            <ul>
+              <li><strong>Cookie Consent:</strong> We use `localStorage` to remember your consent to our cookie policy, so we don't have to ask you on every visit.</li>
+              <li><strong>Tool-Specific Storage:</strong> Some tools, like our Simple Notes utility, use `localStorage` to save your data on your device so it's available when you return. This data is stored only in your browser and is not accessible to us.</li>
+              <li><strong>Third-Party Cookies (Advertising):</strong> We may use Google AdSense to serve ads on our site. Google uses cookies (including the DART cookie) to serve ads based on a user's prior visits to our website and other websites on the internet. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google's Ads Settings</a>. For more information, please review Google's Privacy Policy.</li>
+            </ul>
+
+            <h3 className="font-serif">Data Security</h3>
+            <p>
+                We are committed to ensuring that our website is secure. We use HTTPS to encrypt all communication between your browser and our server (for loading the website itself). As your files and sensitive data are not transmitted to us, the primary security responsibility rests on keeping your own device secure.
             </p>
 
-            <h3>Contact Us</h3>
-            <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+            <h3 className="font-serif">Your Rights (GDPR & CCPA)</h3>
+            <p>
+                Even though we collect minimal personal data, we respect your rights under privacy regulations like GDPR and CCPA. As we do not store personally identifiable information, requests for data access or deletion are generally not applicable. However, if you have any questions about the anonymous data we collect, you can contact us. You have the right to clear cookies and site data from your browser settings at any time.
+            </p>
+            
+            <h3 className="font-serif">Changes to This Privacy Policy</h3>
+            <p>
+              We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. We encourage you to review this Privacy Policy periodically for any changes.
+            </p>
+
+            <h3 className="font-serif">Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy or our commitment to your privacy, please do not hesitate to contact us:</p>
             <ul>
-              <li>By email: support@toolzenweb.com</li>
+              <li>By email: <a href="mailto:support@toolzenweb.com">support@toolzenweb.com</a></li>
+              <li>Via our <Link href="/contact">Contact Page</Link></li>
             </ul>
           </CardContent>
         </Card>
